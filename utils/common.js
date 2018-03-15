@@ -16,8 +16,8 @@ const config = {
 module.exports = {
   // 获取头像信息
   getHeadInfo(successFun, failFun) {
-    successFun = successFun ? successFun : function () { };
-    failFun = failFun ? failFun : function () { };
+    successFun = typeof (successFun) === 'function' ? successFun : function () { };
+    failFun = typeof (failFun) === 'function' ? failFun : function () { };
     wx.login({
       success: (res) => {
         if (res.code) {
@@ -40,7 +40,7 @@ module.exports = {
       code,
       userInfo;
     wx.login({
-      success: (res) => { //用户给与授权
+      success: (res) => {
         if (res.code) {
           //获取code
           code = res.code;
