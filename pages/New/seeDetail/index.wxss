@@ -1,0 +1,4 @@
+/* pages/New/seeDetail/index.wxss */
+page{
+  background-color: #fff;
+}

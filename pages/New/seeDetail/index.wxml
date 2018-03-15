@@ -1,0 +1,50 @@
+<view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
+  <view class='flex1 aitems-center  fon-30 flex '>
+    <view class='width-135 ca'>所在区域</view>
+    <view class='c2b'>长宁区</view>
+  </view>
+</view>
+
+<view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
+  <view class='flex1 aitems-center  fon-30 flex '>
+    <view class='width-135 ca'>上课星期</view>
+    <view class='c2b'>周一</view>
+  </view>
+</view>
+
+<view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
+  <view class='flex1 aitems-center  fon-30 flex '>
+    <view class='width-135 ca'>时间段</view>
+    <view class='c2b'>上午</view>
+  </view>
+</view>
+
+<view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
+  <view class='flex1 aitems-center  fon-30 flex '>
+    <view class='width-135 ca'>费用区间</view>
+    <view class='c2b'>￥100-￥200 </view>
+  </view>
+</view>
+
+<view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
+  <view class='flex1 aitems-center  fon-30 flex '>
+    <view class='width-135 ca'>上课地址</view>
+    <view class='c2b'>上海市浦东新区张衡路666号 </view>
+  </view>
+</view>
+
+<view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
+  <view class='flex1 aitems-center  fon-30 flex '>
+    <view class='width-135 ca'>学习课程</view>
+    <view class='c2b'>口语一对一 </view>
+  </view>
+</view>
+
+<view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
+  <view class='flex1 aitems-center  fon-30 flex '>
+    <view class='width-135 ca'>其他要求</view>
+    <view class='c2b'> </view>
+  </view>
+</view>
+
+<button class='btn purple-bg margin-t-60 white'>立即沟通</button>

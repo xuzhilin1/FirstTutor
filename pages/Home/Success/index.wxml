@@ -1,0 +1,11 @@
+<!--pages/Home/Success/index.wxml-->
+
+<image class='imgas' src='../../images/successs_03.jpg'></image>
+<view class='fon-42 t-center bold'>恭喜您报名成功！</view>
+<button class='border buns bg-fff btn purple fon-37'>去首页逛逛吧</button>
+
+<button class=' white btn purple-bg fon-37'>去首页逛逛吧</button>
+
+<view class='fon-24 dibu'>
+  点击生成海报分享至朋友圈，截屏并发送至【XX的微信号】即可参与平台抽奖（玩具、书籍、活动券等）
+</view>

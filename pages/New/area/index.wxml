@@ -1,0 +1,8 @@
+<!--pages/New/area/index.wxml-->
+<view class='padding-tb-20 border-b-1 padding-lr-30'>
+ <view class='fon-30 padding-l-20 border-l-2 c2b'>选择上课区域（多选）</view>
+</view>
+<view class='flex  fon-26 padding-lr-30 between warp'>
+    <view wx:for='{{list}}'  data-id='{{index}}' bindtap='XuanZe' wx:key='{{index}}' class='QuKuai {{item.YanSe==true?purple:null}}'>{{item.qu}}</view>
+</view>
+<button class='btn purple-bg margin-t-60 white'>保存</button>

@@ -1,0 +1,12 @@
+/* pages/New/area/index.wxss */
+page{
+  background-color: #fff;
+}
+.QuKuai{
+  width: 150rpx;
+  height: 57rpx;
+  text-align: center;
+  line-height: 57rpx;
+  margin-top: 37rpx;
+  border:1px solid #e0e0e0;
+}

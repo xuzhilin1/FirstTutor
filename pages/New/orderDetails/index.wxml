@@ -1,0 +1,61 @@
+<!-- <view class=' middle-m bg-fff flex aitems-center border-b-1 between padding-lr-30 border-t-1'>
+  <view class='flex fon-36  c2b '>
+    <image class='QiHao' mode='widthFix' src='../../images/qi_03.png'></image>
+    <view>
+      口语一对一
+      <view class=' fon-24 c8 margin-t-10 '>已有5人购买</view>
+    </view>
+  </view>
+  <view class='bold purple'>¥ 200</view>
+</view> -->
+
+  <view class=' middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
+    <view class='flex fon-36  c2b '>
+      <image class='QiHao' mode='widthFix' src='../../images/tuan_06.png'></image>
+     <view>
+        口语一对二
+       <view class='bold bg-fff purple'>¥ 200</view>
+     </view> 
+    </view>
+    <view class='purplea purple fon-24 '>2人团</view>
+  </view>
+  <!--  -->
+
+<view class='margin-t-20'>
+  <view class='flex fon-30 c2b bg-fff  border-t-1 padding-25 aitems-center between'>
+    <view class='flex aitems-center'>
+      <image class='orderimg' src='../../images/ceshi_03.jpg'></image>
+      张忠祥
+      <view class='Tuan border fon-24 purple'>团长</view>
+      <image class='Wen' mode='widthFix' src='../../images/DuiHua_06.png'></image>
+    </view>
+    <view class='flex aitens-center'>
+      <image class='phone' mode='widthFix' src='../../images/phone_06.png'></image>
+      13505145873
+    </view>
+  </view>
+  <view class='flex fon-30 c2b bg-fff  border-t-1 padding-25 aitems-center between'>
+    <view class='flex aitems-center'>
+      <image class='orderimg' src='../../images/ceshi_03.jpg'></image>
+      张忠祥
+      <image class='Wen' mode='widthFix' src='../../images/DuiHua_06.png'></image>
+    </view>
+    <view class='flex aitens-center'>
+      <image class='phone' mode='widthFix' src='../../images/phone_06.png'></image>
+      13505145873
+    </view>
+  </view>
+</view>
+<view class='padding-25 bg-fff flex aitems-center fon-26 border-t-1 border-b-1'>
+  <image mode='widthFix' class='address' src='../../images/adddress_14.png'></image>
+  上课地址：上海市浦东新区张衡路666弄2号楼201室
+</view>
+
+<view class='padding-25 margin-t-20 fon-24 border-t-1 border-b-1 bg-fff'>
+  <view class='margin-b-20'>订单号：56516224</view>
+  <view class='margin-b-20'>下单时间：2017-08-17 12:25:21</view>
+  <view class='margin-b-20'>支付时间：2017-08-17 12:28:13</view>
+  <view class='margin-b-20'>上课时间段：周一 / 上午</view>
+  <view class='margin-b-20'>课程时长：2小时</view>
+  <view class='margin-b-20'>上课时间：9:00-11:00</view>
+</view>

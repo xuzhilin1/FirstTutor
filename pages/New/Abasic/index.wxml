@@ -1,0 +1,66 @@
+<view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
+  <view class='flex1 aitems-center  fon-30 flex '>
+    <view class='width-100'>姓名</view>
+    <input class='ca' value='Emily'></input>
+  </view>
+</view>
+
+<view class='flex height-85 border-b-1 padding-lr-30  between aitems-center'>
+  <picker class='flex1' value="{{index}}" range="{{array}}" bindchange="bindPickerChange">
+    <view class='flex picker aitems-center '>
+      <view class="fon-30 flex aitems-center yanse ">
+        <view class='width-100'> 性别 </view>
+        <view class='ca'>{{array[index]}}</view>
+      </view>
+    </view>
+  </picker>
+  <image mode='widthFix' style='width:20rpx;' src='../../images/jian_13.png'></image>
+</view>
+
+<view class='flex height-85 border-b-1 padding-lr-30  between aitems-center'>
+  <picker class='flex1' value='1990-01-01' bindchange="bindDateChange" mode="date">
+    <view class='flex picker aitems-center '>
+      <view class="fon-30 flex aitems-center yanse ">
+        <view class='width-100'> 年龄 </view>
+        <view class='ca'>{{date}}</view>
+      </view>
+    </view>
+  </picker>
+  <image mode='widthFix' style='width:20rpx;' src='../../images/jian_13.png'></image>
+</view>
+
+
+<view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
+  <view class='flex1 aitems-center  fon-30 flex '>
+    <view class='width-100'>微信</view>
+    <input class='ca' value='emily888'></input>
+  </view>
+</view>
+
+<view class='flex height-85 border-b-1 padding-lr-30  between aitems-center'>
+  <picker class='flex1' value="{{index1}}" range="{{GuoJia}}" bindchange="bindPickerChange1">
+    <view class='flex picker aitems-center '>
+      <view class="fon-30 flex aitems-center yanse ">
+        <view class='width-100'> 国籍 </view>
+        <view class='ca'>{{GuoJia[index1]}}</view>
+      </view>
+    </view>
+  </picker>
+  <image mode='widthFix' style='width:20rpx;' src='../../images/jian_13.png'></image>
+</view>
+
+<view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
+  <view class='flex1 aitems-center  fon-30 flex '>
+    <view class='width-100'>大学</view>
+    <input class='ca' value='利兹大学'></input>
+  </view>
+</view>
+
+<view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
+  <view class='flex1 aitems-center  fon-30 flex '>
+    <view class='width-100'>简洁</view>
+    <input class='ca' placeholder='最多填写40个字符' value=''></input>
+  </view>
+</view>
+
+<button class='btn purple-bg margin-t-60 white'>保存</button>

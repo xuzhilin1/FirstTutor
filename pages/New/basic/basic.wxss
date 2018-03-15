@@ -1,0 +1,4 @@
+/* pages/New/basic/basic.wxss */
+page{
+  background-color: #fff;
+}

@@ -1,0 +1,24 @@
+/* pages/Home/Success/index.wxss */
+page{
+  background-color: #fff;
+}
+.imgas{
+  width: 263rpx;
+  height: 251rpx;
+  display: block;
+  margin:187rpx auto 52rpx auto;
+}
+.buns{
+  margin-top: 50rpx;
+  margin-bottom: 30rpx;
+}
+.btn{
+  height: 80rpx;
+  line-height: 80rpx;
+}
+.dibu{
+  width: 90%;
+  margin:30rpx auto;
+  color: #4c4c4c;
+}
+

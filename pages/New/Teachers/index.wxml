@@ -1,0 +1,3 @@
+<!--pages/New/Teachers/index.wxml-->
+<textarea maxlength='1000' class='texteare bg-fff' placeholder-class='c9 fon-26' placeholder='请填写教师介绍，最多不超过1000个字符'></textarea>
+<button class='btn purple-bg margin-t-60 white'>保存</button>

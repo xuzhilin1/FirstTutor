@@ -1,0 +1,29 @@
+/* pages/Home/comments/index.wxss */
+
+.textarea{
+  width: 100%;
+  height: 353rpx;
+  background-color: #fff;
+  padding:30rpx;
+}
+
+
+.xing{
+  position: relative;
+  top: -14rpx;
+  left: 30rpx;
+}
+.star-image {
+  position: absolute;
+  top: 0rpx;
+  width: 30rpx;
+  height: 30rpx;
+  src: "../../images/normal.png";
+}
+
+.item {
+  position: absolute;
+  top: 0rpx;
+  width: 30rpx;
+  height: 30rpx;
+}

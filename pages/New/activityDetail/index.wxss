@@ -1,0 +1,35 @@
+/* pages/New/activityDetail/index.wxss */
+.slide-image{
+  width: 100%;
+  height: 350rpx;
+}
+.swiper{
+  height: 350rpx;
+}
+.middle-middle{
+  padding:30rpx;
+}
+.baomi{
+ width: 120rpx
+}
+.imgs-s{
+margin-right: 20rpx;
+  width: 35rpx;
+}
+.img-rrr{
+  width: 15rpx;
+}
+.DIZHi{
+  padding:20rpx 30rpx;
+}
+.JieShu{
+  height: 80rpx;
+  line-height: 80rpx;
+  background-color: #979797;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  
+}

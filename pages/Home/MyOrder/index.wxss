@@ -1,0 +1,29 @@
+/* pages/New/CourseManagement/index.wxss */
+.QiHao{
+  width: 42rpx;
+  margin-right: 14rpx;
+}
+.middle-m{
+  padding-top: 30rpx;
+  padding-bottom: 40rpx;
+}
+.AnNiu{
+  padding:13rpx 20rpx;
+
+  text-align: center;
+  margin: 14rpx 0;
+  margin-left: 10rpx;
+}
+.purplea{
+  background-color: #e8f0ff;
+  width: 93rpx;
+  height: 42rpx;
+  line-height: 42rpx;
+  text-align: center;
+  border-radius: 5px;
+}
+.xiaoTou{
+  width: 45rpx;
+  height: 45rpx;
+  border-radius: 50%;
+}

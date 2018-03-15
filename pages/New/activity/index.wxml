@@ -1,0 +1,34 @@
+<!--pages/New/activity/index.wxml-->
+<view class='outer margin-b-20 bg-fff'>
+  <view class='flex between'>
+    <image class='imga' src='../../images/DE_03.jpg'></image>
+    <view class='flex1'>
+      <view class='fon-30 XianZhi c2b'>十名外教，集体讲课，带你从头开始学英语！</view>
+      <view class='fon-24 margin-t-20 green'>进行中</view>
+    </view>
+  </view>
+  <view class='flex between margin-t-20 aitems-center'>
+    <view class='flex aitems-center fon-24 c8'>
+      <image class='address' mode='widthFix' src='../../images/newaddress_07.png'></image>
+      上海     2018-03-25  12:00
+    </view>
+    <view bindtap='ChaKan' class='detail fon-24 purple border'>查看详情</view>
+  </view>
+</view>
+
+<view class='outer margin-b-20 bg-fff'>
+  <view class='flex between'>
+    <image class='imga' src='../../images/DE_03.jpg'></image>
+    <view class='flex1'>
+      <view class='fon-30 XianZhi c2b'>十名外教，集体讲课，带你从头开始学英语！</view>
+      <view class='fon-24 margin-t-20 green'>进行中</view>
+    </view>
+  </view>
+  <view class='flex between margin-t-20 aitems-center'>
+    <view class='flex aitems-center fon-24 c8'>
+      <image class='address' mode='widthFix' src='../../images/newaddress_07.png'></image>
+      上海     2018-03-25  12:00
+    </view>
+    <view class='detail fon-24 purple border'>查看详情</view>
+  </view>
+</view>

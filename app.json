@@ -1,0 +1,58 @@
+{
+  "pages": [
+    "pages/New/index/index",
+    "pages/Home/MyOrder/index",
+    "pages/Home/comments/index",
+    "pages/Home/Mycomments/index",
+    "pages/Home/immediately/index",
+    "pages/Home/Success/index",
+    "pages/Home/Home/index",
+    
+    "pages/New/activity/index",
+    "pages/New/activityDetail/index",
+    "pages/New/seeDetail/index",
+    "pages/New/NeedSee/index",
+    "pages/New/OrderCheck/index",
+    "pages/New/ClassTime/index",
+    "pages/New/ReleaseCourse/index",
+    "pages/New/OrdeRreview/index",
+    "pages/New/orderDetails/index",
+    "pages/New/CourseManagement/index",
+    "pages/New/area/index",
+    "pages/New/basic/basic",
+    "pages/New/Teachers/index",
+    "pages/New/qualification/index",
+    "pages/New/Abasic/index",
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/New/Online/index"
+    
+  ],
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#000",
+    "navigationBarTitleText": "Wafer Quick Start",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#848383",
+    "selectedColor": "#7c99d0",
+    "backgroundColor": "#fff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/Home/Home/index",
+        "text": "首页",
+        "iconPath": "pages/images/KAN_16.png",
+        "selectedIconPath": "pages/images/LO_13.png"
+      },
+      {
+        "pagePath": "pages/New/index/index",
+        "text": "我",
+        "iconPath": "pages/images/TE_13.png",
+        "selectedIconPath": "pages/images/KAN_13.png"
+      }
+    ]
+  }
+}

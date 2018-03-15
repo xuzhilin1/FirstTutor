@@ -1,0 +1,29 @@
+<view class='top bg-fff flex center  aitems-center margin-b-20 border-b-1'>
+  <view>
+    <image class='avatarUrl' src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+    <view class='flex aitems-center center'>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+      <image mode='widthFix' class='Guan' src='../../images/guan_03.png'></image>
+    </view>
+  </view>
+</view>
+<!--  学生  -->
+<view wx:if='{{idType===1}}' class='fon-32 ffoter bg-fff '>
+  <view wx:for="{{studentList}}" wx:key='{{index}}' data-url='{{item.luJin}}' bindtap='GoXie' class='flex lasta between height-102  padding-lr-30 border-t-1 aitems-center'>
+    <view class='flex  aitems-center'>
+      <image mode='widthFix' style='width:64rpx; margin-right:20rpx' src='{{item.url}}'></image>
+      {{item.title}}
+    </view>
+    <image mode='widthFix' style='width:21rpx;' src='../../images/jian_13.png'></image>
+  </view>
+</view>
+<!--  导师  -->
+<view wx:if='{{idType===2}}' class='fon-32 ffoter bg-fff '>
+  <view wx:for="{{teacherList}}" wx:key='{{index}}' data-url='{{item.luJin}}' bindtap='GoXie' class='flex lasta between height-102  padding-lr-30 border-t-1 aitems-center'>
+    <view class='flex  aitems-center'>
+      <image mode='widthFix' style='width:64rpx; margin-right:20rpx' src='{{item.url}}'></image>
+      {{item.title}}
+    </view>
+    <image mode='widthFix' style='width:21rpx;' src='../../images/jian_13.png'></image>
+  </view>
+</view>
