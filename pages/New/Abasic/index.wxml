@@ -1,16 +1,16 @@
 <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
   <view class='flex1 aitems-center  fon-30 flex '>
     <view class='width-100'>姓名</view>
-    <input class='ca' value='Emily'></input>
+    <input bindinput='bindUserName' class='ca' value='{{userName}}'></input>
   </view>
 </view>
 
 <view class='flex height-85 border-b-1 padding-lr-30  between aitems-center'>
-  <picker class='flex1' value="{{index}}" range="{{array}}" bindchange="bindPickerChange">
+  <picker class='flex1' value="{{sexIndex}}" range="{{sexArray}}" bindchange="bindSexChange">
     <view class='flex picker aitems-center '>
       <view class="fon-30 flex aitems-center yanse ">
         <view class='width-100'> 性别 </view>
-        <view class='ca'>{{array[index]}}</view>
+        <view class='ca'>{{sexArray[sexIndex]}}</view>
       </view>
     </view>
   </picker>
@@ -18,11 +18,11 @@
 </view>
 
 <view class='flex height-85 border-b-1 padding-lr-30  between aitems-center'>
-  <picker class='flex1' value='1990-01-01' bindchange="bindDateChange" mode="date">
+  <picker class='flex1' value='1990-01-01' bindchange="bindAgeChange" mode="date">
     <view class='flex picker aitems-center '>
       <view class="fon-30 flex aitems-center yanse ">
         <view class='width-100'> 年龄 </view>
-        <view class='ca'>{{date}}</view>
+        <view class='ca'>{{age}}</view>
       </view>
     </view>
   </picker>
@@ -33,16 +33,16 @@
 <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
   <view class='flex1 aitems-center  fon-30 flex '>
     <view class='width-100'>微信</view>
-    <input class='ca' value='emily888'></input>
+    <input bindinput='bindWeChat' class='ca' value='{{weChat}}'></input>
   </view>
 </view>
 
 <view class='flex height-85 border-b-1 padding-lr-30  between aitems-center'>
-  <picker class='flex1' value="{{index1}}" range="{{GuoJia}}" bindchange="bindPickerChange1">
+  <picker class='flex1' value="{{nationalityIndex}}" range="{{nationalityArray}}" bindchange="bindNationalityChange">
     <view class='flex picker aitems-center '>
       <view class="fon-30 flex aitems-center yanse ">
         <view class='width-100'> 国籍 </view>
-        <view class='ca'>{{GuoJia[index1]}}</view>
+        <view class='ca'>{{nationalityArray[nationalityIndex]}}</view>
       </view>
     </view>
   </picker>
@@ -52,15 +52,15 @@
 <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
   <view class='flex1 aitems-center  fon-30 flex '>
     <view class='width-100'>大学</view>
-    <input class='ca' value='利兹大学'></input>
+    <input bindinput='bindSchool' class='ca' value='{{school}}'></input>
   </view>
 </view>
 
 <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
   <view class='flex1 aitems-center  fon-30 flex '>
-    <view class='width-100'>简洁</view>
-    <input class='ca' placeholder='最多填写40个字符' value=''></input>
+    <view class='width-100'>简介</view>
+    <input bindinput='bindSynopsis' class='ca' placeholder='最多填写40个字符' value='{{synopsis}}' maxlength='40'></input>
   </view>
 </view>
 
-<button class='btn purple-bg margin-t-60 white'>保存</button>
+<button bindtap='submit' class='btn purple-bg margin-t-60 white'>保存</button>

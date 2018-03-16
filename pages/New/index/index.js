@@ -4,42 +4,50 @@ const $common = require('../../../utils/common.js');
 Page({
   data: {
     userInfo: {},
-    idType: 2, //1 学生 2 导师 0 未知
+    idType: 2, //1 学生 2 导师 0 未知,
+    vip: true, //是否vip
     teacherList: [{
-        url: '../../images/LI_03.png',
-        title: " 基本资料",
-        luJin: '../basic/basic'
-      },
-      {
-        url: '../../images/LI_06.png',
-        title: " 课程管理",
-        luJin: '../CourseManagement/index'
-      },
-      {
-        url: '../../images/LI_08.png',
-        title: " 需求查看",
-        luJin: '../NeedSee/index'
-      },
-      {
-        url: '../../images/LI_10.png',
-        title: " 订单查看",
-        luJin: '../OrderCheck/index'
-      },
-      {
-        url: '../../images/LI_12.png',
-        title: " 点评管理",
-        luJin: '../OrdeRreview/index'
-      },
-      {
-        url: '../../images/LI_14.png',
-        title: " 活动通知",
-        luJin: '../activity/index'
-      },
-      {
-        url: '../../images/LI_16.jpg',
-        title: " 在线沟通",
-        luJin: '../Online/index'
-      }],
+      isShow: true,
+      url: '../../images/LI_03.png',
+      title: " 基本资料",
+      luJin: '../basic/basic'
+    },
+    {
+      isShow: true,
+      url: '../../images/LI_06.png',
+      title: " 课程管理",
+      luJin: '../CourseManagement/index'
+    },
+    {
+      isShow: false,
+      url: '../../images/LI_08.png',
+      title: " 需求查看",
+      luJin: '../NeedSee/index'
+    },
+    {
+      isShow: true,
+      url: '../../images/LI_10.png',
+      title: " 订单查看",
+      luJin: '../OrderCheck/index'
+    },
+    {
+      isShow: true,
+      url: '../../images/LI_12.png',
+      title: " 点评管理",
+      luJin: '../OrdeRreview/index'
+    },
+    {
+      isShow: true,
+      url: '../../images/LI_14.png',
+      title: " 活动通知",
+      luJin: '../activity/index'
+    },
+    {
+      isShow: true,
+      url: '../../images/LI_16.jpg',
+      title: " 在线沟通",
+      luJin: '../Online/index'
+    }],
     studentList: [{
       url: '../../images/LI_10.png',
       title: " 我的订单",
@@ -78,13 +86,22 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // $common.getHeadInfo(
-    //   function (res) {
-    //     this.setData({
-    //       userInfo: res
-    //     })
-    //   }.bind(this)
-    // );
+    //获取用户头像，昵称
+    $common.getHeadInfo(
+      function (res) {
+        this.setData({
+          userInfo: res
+        })
+      }.bind(this)
+    );
+    let teacherList = this.data.teacherList;
+    let vip = true;
+    //vip才能查看需求
+    teacherList[2].isShow = vip ? true : false;
+    this.setData({
+      vip: vip,
+      teacherList: teacherList
+    });
     $common.getOpenid();
   },
 

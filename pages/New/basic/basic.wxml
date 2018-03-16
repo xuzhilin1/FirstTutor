@@ -1,19 +1,19 @@
 <!--pages/New/basic/basic.wxml-->
-<view wx:for="{{list}}" bindtap='GoXie' data-id='{{item.url}}' class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
+<view wx:for="{{pagesList}}" wx:key='{{index}}' bindtap='GoXie' data-id='{{item.url}}' class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
   <view class='flex1 aitems-center  fon-30 flex '>
     <view class='width-135'>{{item.ZiLiao}}</view>
     <view class='ca'>{{item.Types}}</view>
   </view>
-   <image mode='widthFix' style='width:21rpx;' src='../../images/jian_13.png'></image>
+  <image mode='widthFix' style='width:21rpx;' src='../../images/jian_13.png'></image>
 </view>
 
 <!--  -->
 <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
   <view class='flex1 aitems-center  fon-30 flex '>
     <view class='width-135'>联系电话</view>
-    <input class='ca' value='13501874254'></input>
+    <input bindinput='bindPhone' class='ca' type='number' maxlength='11' value='{{phone}}' placeholder='未填写'></input>
   </view>
 </view>
 <!--  -->
 
-<button class='btn purple-bg margin-t-60 white'>保存</button>
+<button bindtap='submit' class='btn purple-bg margin-t-60 white'>保存</button>

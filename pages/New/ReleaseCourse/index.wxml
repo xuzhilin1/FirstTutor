@@ -1,11 +1,9 @@
-
-
 <view class='flex height-85 border-b-1 padding-lr-30  between aitems-center'>
-  <picker class='flex1' value="{{index}}" range="{{array}}" bindchange="bindPickerChange">
+  <picker class='flex1' value="{{courseTypeIndex}}" range="{{courseType}}" bindchange="bindCourseType">
     <view class='flex picker aitems-center '>
       <view class="fon-30 flex aitems-center yanse ">
         <view class='width-135'> 课程类型 </view>
-        <view class='ca'>{{array[index]}}</view>
+        <view class='ca'>{{courseType[courseTypeIndex]}}</view>
       </view>
     </view>
   </picker>
@@ -15,32 +13,32 @@
 <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
   <view class='flex1 aitems-center  fon-30 flex '>
     <view class='width-135'>课程名称</view>
-    <input class='ca' value='英语口语一对二'></input>
+    <input bindinput='bindCourseName' class='ca' value='{{courseName}}'></input>
   </view>
 </view>
 
 <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
   <view class='flex1 aitems-center  fon-30 flex '>
-    <view class='width-135'>课程总价</view>
-    <input class='ca' value='400'></input>
+    <view class='width-135'>{{courseTypeIndex!=0?"课程总价":"课程价格"}}</view>
+    <input bindinput='bindCourseAllPrice' class='ca' value='{{courseAllPrice}}'></input>
   </view>
 </view>
 
-<view wx:if="{{index!=1}}" class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
+<view wx:if="{{courseTypeIndex!==0}}" class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
   <view class='flex1 aitems-center  fon-30 flex '>
     <view class='width-135'>上课人数</view>
     <input class='ca' value='2'></input>
   </view>
 </view>
 
-<view wx:if="{{index!=1}}"  class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
+<view wx:if="{{courseTypeIndex!==0}}" class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
   <view class='flex1 aitems-center  fon-30 flex '>
-    <view class='width-135'>学院单价</view>
+    <view class='width-135'>学员单价</view>
     <input class='ca' value='200'></input>
   </view>
 </view>
 
-<view  class='flex height-85 border-b-1 padding-lr-30  between aitems-center'>
+<view class='flex height-85 border-b-1 padding-lr-30  between aitems-center'>
   <picker class='flex1' value="{{index1}}" range="{{GuoJia}}" bindchange="bindPickerChange1">
     <view class='flex picker aitems-center '>
       <view class="fon-30 flex aitems-center yanse ">
@@ -55,7 +53,7 @@
 <view bindtap='ShiJian' class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
   <view class='flex1 aitems-center  fon-30 flex '>
     <view class='width-135'>时间段</view>
-   <view class='ca'>待完善</view>
+    <view class='ca'>待完善</view>
   </view>
   <image mode='widthFix' style='width:20rpx;' src='../../images/jian_13.png'></image>
 </view>

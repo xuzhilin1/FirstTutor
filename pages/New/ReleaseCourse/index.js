@@ -1,18 +1,32 @@
-// pages/New/Abasic/index.js
+const $common = require('../../../utils/common.js');
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-    array: ['一对二', '一对一','一对三'],
+    courseType: ['一对一', '一对二', '一对三'],
+    courseTypeIndex: 0,
+    courseName: '英语口语一对一',
+    courseAllPrice: '400',
     date: '1990-01-01',
-    index: 1,
     index1: 1,
-    GuoJia: ['2', '1.5','1']
+    GuoJia: ['2', '1.5', '1']
+  },
+  bindCourseType(e) { //课程类型
+    let value = e.detail.value;
+    this.setData({
+      courseTypeIndex: value
+    })
+  },
+  bindCourseName(e) { //课程名称
+    this.setData({
+      courseName: e.detail.value
+    })
+  },
+  bindCourseAllPrice(e) { //课程总价
+    this.setData({
+      courseAllPrice: e.detail.value
+    })
   },
   // 选择时间
-  ShiJian:function(){
+  ShiJian: function () {
     wx.navigateTo({
       url: '../ClassTime/index',
     })
@@ -23,13 +37,7 @@ Page({
   onLoad: function (options) {
 
   },
-  //普通选择
-  bindPickerChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      index: e.detail.value
-    })
-  },
+
   bindPickerChange1: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({

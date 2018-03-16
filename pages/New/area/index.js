@@ -1,95 +1,81 @@
-// pages/New/area/index.js
+const $common = require('../../../utils/common.js');
+const $static = require('../../../utils/static.js');
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-    purple:'purple-bg white',
-    list:[
-      {
-        qu: '长宁区',
-        YanSe:true
-      }, {
-        qu: '浦东新区',
-        YanSe: ''
-      },
-      {
-        qu: '徐汇区',
-        YanSe: ''
-      },
-      {
-        qu: '普陀区',
-        YanSe: ''
-      },
-      {
-        qu: '闵行区',
-        YanSe: ''
-      },
-    ]
+    purple: 'purple-bg white',
+    pageList: $static.areaShanghai,
+    pageSelect: [],
+  },
+  bindChange: function (e) { //切换，选择
+    let index = e.currentTarget.dataset.index,
+      pageSelect = this.data.pageSelect;
+    pageSelect[index] = !pageSelect[index]
+    this.setData({
+      pageSelect: pageSelect
+    })
+  },
+  submit() { //保存按钮
+    let pageSelect = this.data.pageSelect,
+      isSelect = false;
+    pageSelect.forEach(function (target) {
+      target && (isSelect = true);
+    })
+    if (!isSelect) {
+      $common.showModal('请选择上课区域');
+      return;
+    }
+    //发送请求
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
-  
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+
   },
-  XuanZe:function(e) {
-    console.log(e)
-    var id = e.currentTarget.dataset.id
-    var list=this.data.list
-    list[id].YanSe = !list[id].YanSe
-    this.setData({
-      list:list
-    })
-  },
+
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+
   }
 })

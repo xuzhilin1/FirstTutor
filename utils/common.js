@@ -8,12 +8,40 @@ const data = {
   // TheLablePath: "D:\wwwroot\kcbweb\cert\apiclient_cert.p12",
   TitleName: ""
 };
+// 正则手机号码
+const phoneReg = /^1[34578]\d{9}$/;
 const host = "1-zhao.com";
 const config = {
   //获取用户Openid
   GetOrSetOpenid: `http://wj.${host}/LittleProgram/UserInfo/GetSaveUserOpenId`,
 }
 module.exports = {
+  phoneReg: phoneReg,
+  //模态弹窗
+  showModal(content, showCancel, success, confirmText, title) {
+    title = title ? title : '提示';
+    showCancel = showCancel ? true : false;
+    confirmText = confirmText ? confirmText : '确定';
+    success = success ? success : function (res) { };
+    wx.showModal({
+      title: title,
+      content: content,
+      showCancel: showCancel,
+      confirmText: confirmText,
+      success: success
+    });
+  },
+  //从本地相册选择图片或使用相机拍照
+  chooseImage(success, count) {
+    count = parseInt(count) ? count : 9;
+    success = success ? success : function (res) { };
+    wx.chooseImage({
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+      count: count,
+      success: success,
+    })
+  },
   // 获取头像信息
   getHeadInfo(successFun, failFun) {
     successFun = typeof (successFun) === 'function' ? successFun : function () { };
@@ -58,7 +86,6 @@ module.exports = {
                     code: code,
                     nickName: userInfo.nickName,
                     avaUrl: userInfo.avatarUrl,
-                    // mchid: data.MchId
                   },
                   header: {
                     'content-type': 'application/json'
@@ -66,10 +93,12 @@ module.exports = {
                   method: 'post',
                   success: function (res) {
                     console.log(res)
-                    // if (res.data.result) {
-                    //   dingwei();
-                    //   wx.setStorageSync('openid', res.data.openid);
-                    // }
+                    if (res.data.result) {
+                      //保存openid
+                      wx.setStorageSync('openid', res.data.openid);
+                      //保存用户类型
+                      wx.setStorageSync('userType', res.data.userType);
+                    }
                   },
                   fail: function (res) {
                     console.log(res);
