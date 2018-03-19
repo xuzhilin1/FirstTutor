@@ -1,4 +1,5 @@
 const $common = require('../../../utils/common.js');
+const app = getApp();
 Page({
   data: {
     pagesData: [{
@@ -8,7 +9,7 @@ Page({
       fgtType: 2, //1 拼团 2 单独购买
       corClaNum: 1, //上课人数，1-3
       corTitle: '口语一对一', //课程名称
-      fgtAttCount: 0,
+      fgtAttCount: 0, //拼团成功团数
     }, {
       corCanView: true, //是否通过审核
       corCreateOn: '2017-08-06 13:31', //发布时间
@@ -16,7 +17,7 @@ Page({
       fgtType: 1, //1 拼团 2 单独购买
       corClaNum: 2, //上课人数，1-3
       corTitle: '口语一对二', //课程名称
-      fgtAttCount: 2,
+      fgtAttCount: 2,//拼团成功团数
     }, {
       corCanView: false, //是否通过审核
       corCreateOn: '2017-08-06 13:31', //发布时间
@@ -24,7 +25,7 @@ Page({
       fgtType: 2, //1 拼团 2 单独购买
       corClaNum: 1, //上课人数，1-3
       corTitle: '口语一对一', //课程名称
-      fgtAttCount: 0, //成功拼团
+      fgtAttCount: 0, //拼团成功团数
     }]
   },
   bindDelete(e) {
@@ -40,9 +41,30 @@ Page({
       }
     }.bind(this));
   },
+  reviseReleaseCourse(e) { //修改课程
+    let index = e.currentTarget.dataset.index,
+      pagesData = this.data.pagesData;
+    wx.navigateTo({
+      url: '../ReleaseCourse/index?status=1',
+    })
+  },
   releaseCourse() { //创建课程
     wx.navigateTo({
-      url: '../ReleaseCourse/index',
+      url: '../ReleaseCourse/index?status=0',
+    })
+  },
+  groupList(e) { //成功拼团
+    let index = e.currentTarget.dataset.index,
+      pagesData = this.data.pagesData;
+    wx.navigateTo({
+      url: '../GroupList/index',
+    })
+  },
+  orderDetails(e) { //查看课程
+    let index = e.currentTarget.dataset.index,
+      pagesData = this.data.pagesData;
+    wx.navigateTo({
+      url: '../orderDetails/index?isGroup=0',
     })
   },
   /**

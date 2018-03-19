@@ -1,0 +1,88 @@
+<view class='big-outer'><!--pages/Home/Groupsuccess/index.wxml-->
+<view class=''>
+  <view class=' middle-m padding-lr-30 bg-fff  flex aitems-center between  border-t-1'>
+    <view class='flex fon-36  c2b '>
+      <image class='QiHao' mode='widthFix' src='../../images/tuan_06.png'></image>
+      <view>
+        口语一对一
+        <view class='bold bg-fff margin-t-10 purple'>¥ 200</view>
+      </view>
+    </view>
+    <view class='fon-24 '>
+      <view class='c8'>已有6人参与</view>
+      <view class='purplea purple margin-t-10'>2人团</view>
+    </view>
+  </view>
+  <view class='flex aitems-center height-85 padding-lr-30 bg-fff border-t-1 fon-30 c2b '>
+    课程时长   <view class='ca margin-l-20'>2小时</view> 
+  </view>
+  <view class='flex aitems-center height-85  padding-lr-30 bg-fff border-t-1 fon-30 c2b '>
+   上课时间   <view class='ca margin-l-20'> 9:00-11:00</view> 
+  </view>
+</view>
+<view class='flex border-b-1 border-t-1 aitems-center bg-fff border-b padding-lr-30 padding-tb-20'>
+  <image class='touXiang margin-r-20' src='../../images/ren_03.png'></image>
+  <view class='flex1'>
+    <view class='fon-26 margin-b-10 flex aitems-center '>
+      Emily
+      <image class='HuangGuan margin-l-10' mode='widthFix' src='../../images/guan_03.png'></image>
+      <view class='zonga'>
+        <view class='di'>
+          <image wx:for="{{listq}}" class='img-xing' mode='widthFix' src='../../images/xingxing_03.jpg'></image>
+        </view>
+        <view class='di di2'>
+          <image wx:for="{{listq}}" wx:if="{{item.index<=3}}" class='img-xing' mode='widthFix' src='../../images/xing_14.jpg'></image>
+        </view>
+      </view>
+    </view>
+    <view class='fon-24 c8'>英式发音 / 喜欢旅游 / 明星老师</view>
+  </view>
+</view>
+
+
+<view  class='flex bg-fff margin-t-20 border-t-1 height-85 padding-lr-30 aitems-center border-b-1 between'>
+  <view class='flex1 aitems-center  fon-30 flex '>
+    <view class='width-100'>姓名</view>
+    <input class='ca'  placeholder-class='ca' placeholder='请输入姓名'></input>
+  </view>
+</view>
+
+<view  class='flex bg-fff  height-85 padding-lr-30 aitems-center border-b-1 between'>
+  <view class='flex1 aitems-center  fon-30 flex '>
+    <view class='width-100'>手机</view>
+    <input class='ca' placeholder-class='ca' placeholder='请输入手机号'></input>
+  </view>
+</view>
+
+<view  class='flex bg-fff  height-85 padding-lr-30 aitems-center border-b-1 between'>
+  <view class='flex1 aitems-center  fon-30 flex '>
+    <view class='width-135'>上课时间</view>
+    <view  class='ca'>（请设置上课开始时间）</view>
+  </view>
+   <image mode='widthFix' style='width:20rpx;' src='../../images/jian_13.png'></image>
+</view>
+
+<view  class='flex bg-fff  height-85 padding-lr-30 aitems-center border-b-1 between'>
+  <view class='flex1 aitems-center  fon-30 flex '>
+    <view class='width-135'>上课地址</view>
+    <input class='ca' placeholder-class='ca' placeholder='（默认线下协商）'></input>
+  </view>
+</view>
+
+<view class='height-85 flex margin-t-20 border-t-1 aitems-center bg-fff  border-b-1  padding-lr-30'>
+ <view class='fon-30 padding-l-20 border-l-2 c2b'>订金说明</view>
+</view>
+<view class='padding-lr-30 fon-24 border-b-1 c88 bg-fff padding-tb-40'>
+平台预收课程费用20%作为订金，剩余费用学生扣除订金后支付
+给外教。
+</view>
+
+
+<view class='footer flex between'>
+  <view class='fon-26 cs flex bg-fff center aitems-center'>
+      <view class='margin-r-20'>支付订金</view>
+      <view class='fon-30 bold purple'> ¥30</view>
+  </view>
+  <view bindtap='TiJiao' class='white fon-32 cs  purple-bg'>提交订单</view>
+</view>
+</view>

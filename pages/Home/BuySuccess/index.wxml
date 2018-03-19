@@ -1,0 +1,22 @@
+<image class='imgas' mode='widthFix' src='../../images/lian_03.jpg'></image>
+<view class='fon-42 t-center bold'>恭喜您，购买成功！</view>
+<button bindtap='XinXi' class='border buns bg-fff btn purple fon-37'>查看拼团信息</button>
+
+<button bindtap='Dakiam' class=' white btn purple-bg fon-37'>点击生成海报</button>
+
+<view class='fon-24 dibu'>
+  点击生成海报分享至朋友圈，截屏并发送至【XX的微信号】即可参与平台抽奖（玩具、书籍、活动券等）
+</view>
+
+ <view hidden='{{kuana}}' class='model'>
+    <view class='modle-main'>
+      <image class='img-haibao' src='../../images/imga_05.jpg'></image>
+      <button bindtap='Toposter' class='btoon purple-bg'>保存海报</button>
+    </view>
+
+    <view>
+      <view bindtap='ganBin' class='t-center'>
+        <icon type="cancel" color='#fff' size="30" />
+      </view>
+    </view>
+  </view>

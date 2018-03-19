@@ -1,0 +1,104 @@
+/* pages/Home/SpellGroup/index.wxss */
+.QiHao{
+  width: 42rpx;
+  margin-right: 14rpx;
+}
+.middle-m{
+  padding-top: 30rpx;
+  padding-bottom: 40rpx;
+}
+.AnNiu{
+  padding:13rpx 20rpx;
+
+  text-align: center;
+  margin: 14rpx 0;
+  margin-left: 10rpx;
+}
+.purplea{
+  background-color: #e8f0ff;
+  width: 93rpx;
+  height: 42rpx;
+  line-height: 42rpx;
+  text-align: center;
+}
+.zonga{
+  position: relative;
+  min-width: 255rpx;
+  margin-top: 30rpx;
+  margin-left: 15rpx;
+}
+.img-m{
+  height: 300rpx;
+  width: 100%;
+  display: block;
+  border-radius: 10rpx;
+}
+.img-xing{
+  width: 25rpx;
+  margin-left: 10rpx;
+}
+.di{
+  position: absolute;
+  z-index: 10;
+  left: 0;
+  bottom: 0;
+}
+.di2{
+  position: absolute;
+  z-index: 90;
+  left: 0;
+  bottom: 0;
+}
+.phone{
+  width: 26rpx;
+  margin-right: 10rpx;
+}
+.padding-25{
+  padding:25rpx 30rpx 25rpx 30rpx;
+}
+.address{
+  width: 26rpx;
+  margin-right: 25rpx;
+}
+
+/*框  */
+.Kuang{
+  width: 100%;
+  min-height: 378rpx;
+  background-color: #e8f0ff;
+  padding-top: 45rpx;
+    position: relative;
+}
+.btn{
+  width: 100%;
+}
+.Soa{
+  width: 95rpx;
+  height: 95rpx;
+  border-radius: 50%;
+  display: block;
+}
+.waiceng{
+  position: relative;
+  margin: 0 10rpx;
+}
+.tuanZhang{
+  width: 70rpx;
+  height: 23rpx;
+  text-align: center;
+  line-height: 23rpx;
+  border-radius: 20rpx;
+  position: absolute;
+  left: 10rpx;
+  bottom: -5rpx;
+}
+.text1{
+    width: 0;
+    height: 0;
+    border-right: 20rpx solid transparent;
+    border-bottom: 20rpx solid #e8f0ff;
+    border-left: 20rpx solid transparent;
+    position: absolute;
+    left: 48%;
+    top: -20rpx;
+}

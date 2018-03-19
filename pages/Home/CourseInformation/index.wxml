@@ -1,0 +1,146 @@
+<!--pages/Home/CourseInformation/index.wxml-->
+
+
+<view class='big-outer'>
+  <view class=''>
+    <view class=' middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
+      <view class='flex fon-36  c2b '>
+        <image class='QiHao' mode='widthFix' src='../../images/tuan_06.png'></image>
+        <view>
+          口语一对一
+          <view class='c8 margin-t-20 fon-24'>已有6人参与</view>
+
+        </view>
+      </view>
+      <view class='fon-30 '>
+        <view class='bold bg-fff margin-t-10 purple'>¥ 200</view>
+      </view>
+    </view>
+  </view>
+  <view class='flex aitems-center height-85 padding-lr-30 bg-fff border-t-1 fon-30 c2b '>
+    课程时长
+    <view class='ca margin-l-20'>2小时</view>
+  </view>
+
+
+  <view class='flex border-t-1 aitems-center bg-fff border-b padding-lr-30 padding-tb-20'>
+    <image class='touXiang margin-r-20' src='../../images/ren_03.png'></image>
+    <view class='flex1'>
+      <view class='fon-26 margin-b-10 flex aitems-center '>
+        Emily
+        <image class='HuangGuan margin-l-10' mode='widthFix' src='../../images/guan_03.png'></image>
+        <view class='zonga'>
+          <view class='di'>
+            <image wx:for="{{listq}}" class='img-xing' mode='widthFix' src='../../images/xingxing_03.jpg'></image>
+          </view>
+          <view class='di di2'>
+            <image wx:for="{{listq}}" wx:if="{{item.index<=3}}" class='img-xing' mode='widthFix' src='../../images/xing_14.jpg'></image>
+          </view>
+        </view>
+      </view>
+      <view class='fon-24 c8'>英式发音 / 喜欢旅游 / 明星老师</view>
+    </view>
+  </view>
+<!--一对多  -->
+  <view class='bg-fff padding-b-20 border-t-1 margin-t-20 padding-lr-30'>
+        <view class='height-85 fon-26 border-b-1 flex between aitems-center'>
+            <view class='flex c2b aitems-center'>
+              支付开团邀请1人参团，人数不足自动退款
+               <view class='ca margin-l-20'>详细规则</view>
+            </view>
+           <image class='Jian' mode='widthFix' src='../../images/jos_03.jpg'></image>
+        </view>
+        <view>
+          <view class='fon-26 padding-tb-20 c2b'>以下小伙伴正在发起拼团，您可以直接参与：</view>
+          <view class='flex ssea aitems-center between'>
+                <view class='flex between flex1 aitems-center'>
+                  <image class='xiaoTou' src='../../images/ren_03.png'></image>
+                  <view class='fon-30'>保持微笑2005</view>
+                  <view class='fon-26 Cans flex1 purple'>
+                    <view class='Cans'>还剩1人成团</view>
+                    <view class='ca Cans'>截止02-23 12:25</view>
+                  </view>
+                </view>
+                <view class='white purple-bg CanRu fon-30'>去参团</view>
+          </view>
+        </view>
+  </view>
+<!--end  -->
+  <view class='bg-fff padding-b-20 margin-t-20'>
+
+    <view class='padding-tb-20 margin-b-20 border-b-1 padding-lr-30'>
+      <view class='fon-30 padding-l-20 border-l-2 c2b'>选择上课时间</view>
+    </view>
+    <view class='flex  fon-24 padding-lr-30 between warp'>
+      <view wx:for='{{list}}' wx:key='{{index}}' class='QuKuai c8'>{{item}}</view>
+    </view>
+
+
+    <view class='flex  fon-26 padding-lr-30 between warp'>
+      <view wx:for='{{list1}}' data-id='{{index}}' bindtap='XuanZe' wx:key='{{index}}' class='QuKuai QuKuaia {{item.YanSe==true?purple:null}}'>{{item.qu}}</view>
+    </view>
+
+    <view class='flex padding-lr-30  margin-t-20'>
+      <view class='flex zhushi'>
+        <view class='Zhu white purple-bg fon-20'>注</view>
+        <view class='flex1 fon-22'>
+          <view class='margin-b-10'>上午：课程区间9-12点；下午1：课程区间12-15点；</view>
+          <view class='margin-b-10'>下午2:课程区间15-18点；晚上：课程区间18-21点；</view>
+          <view class='margin-b-10'>具体时间自行商量，时间表仅供参考</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class='height-85 flex aitems-center bg-fff margin-t-20 border-b-1 padding-lr-30'>
+    <view class='fon-30 padding-l-20 border-l-2 c2b'>课程介绍</view>
+  </view>
+  <view class='padding-lr-30 bg-fff fon-24 padding-tb-20'>
+    Hello my name is Emily I am a teacher with English I am from England I have over 25 years teaching experience,now I am teaching students from 5 to 18 years of age
+  </view>
+
+  <view class='height-85 flex margin-t-20 border-t-1 aitems-center bg-fff  border-b-1  padding-lr-30'>
+    <view class='fon-30 padding-l-20 border-l-2 c2b'>订金说明</view>
+  </view>
+  <view class='padding-lr-30 fon-24  c88 bg-fff padding-tb-40'>
+    平台预收课程费用20%作为订金，剩余费用学生扣除订金后支付 给外教。
+  </view>
+
+
+  <!-- <view class='footer flex border-t-1 between'>
+    <view class='fon-26 cs flex bg-fff center aitems-center'>
+      <view class='margin-r-20'>支付订金</view>
+      <view class='fon-30 bold purple'> ¥30</view>
+    </view>
+    <view class='white fon-32 cs  purple-bg'>提交订单</view>
+  </view> -->
+
+  <view class='footer1 bg-fff flex border-t-1  aitems-center between'>
+    <view class='flex border-r-1 center aitems-center KuanDU'>
+      <view class='fon-20 c88 gaoDU'>
+        <image class='fangZI' mode='widthFix' src='../../images/fangzi_07.png'></image>
+        首页
+      </view>
+    </view>
+    <view class='flex center aitems-center KuanDU'>
+      <view class='fon-20 c88 gaoDU'>
+        <image class='fangZI' mode='widthFix' src='../../images/zixun_09.png'></image>
+        咨询
+      </view>
+    </view>
+    <view class='DanDUMai  flex aitems-center center'>
+            <view class='purple fon-26 t-center'>
+                  <view>￥300.00</view>
+                  <view>单独购买</view>
+            </view>
+    </view>
+
+    <view bindtap='QueRen' class='flex1 DanDUMaia purple-bg white flex aitems-center center'>
+            <view class=' fon-26 t-center'>
+                  <view>￥300.00</view>
+                  <view>两人拼团</view>
+            </view>
+    </view>
+  </view>
+
+</view>

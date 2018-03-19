@@ -13,7 +13,11 @@ Page({
       { index: 4 },
     ]
   },
-
+  DianPing:function(){
+    wx.navigateTo({
+      url: '../comments/index',
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

@@ -18,58 +18,54 @@
 </view>
 
 <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
-  <view class='flex1 aitems-center  fon-30 flex '>
+  <view class='flex1 aitems-center  fon-30 flex page-box'>
     <view class='width-135'>{{courseTypeIndex!=0?"课程总价":"课程价格"}}</view>
-    <input bindinput='bindCourseAllPrice' class='ca' value='{{courseAllPrice}}'></input>
+    <text>¥</text>
+    <input type='digit' bindinput='bindCourseAllPrice' class='ca' value='{{courseAllPrice}}'></input>
   </view>
 </view>
 
 <view wx:if="{{courseTypeIndex!==0}}" class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
   <view class='flex1 aitems-center  fon-30 flex '>
     <view class='width-135'>上课人数</view>
-    <input class='ca' value='2'></input>
+    <input class='ca' value='{{courseNumPeople}}' disabled='disabled'></input>
   </view>
 </view>
 
 <view wx:if="{{courseTypeIndex!==0}}" class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
-  <view class='flex1 aitems-center  fon-30 flex '>
+  <view class='flex1 aitems-center  fon-30 flex page-box'>
     <view class='width-135'>学员单价</view>
-    <input class='ca' value='200'></input>
+    <text>¥</text>
+    <input class='ca' value='{{coursePrice}}' disabled='disabled'></input>
   </view>
 </view>
 
 <view class='flex height-85 border-b-1 padding-lr-30  between aitems-center'>
-  <picker class='flex1' value="{{index1}}" range="{{GuoJia}}" bindchange="bindPickerChange1">
+  <picker class='flex1' value="{{durationIndex}}" range="{{duration}}" bindchange="bindDuration">
     <view class='flex picker aitems-center '>
       <view class="fon-30 flex aitems-center yanse ">
         <view class='width-135'> 课程时长 </view>
-        <view class='ca'>{{GuoJia[index1]}}</view>
+        <view class='ca'>{{duration[durationIndex]}}小时</view>
       </view>
     </view>
   </picker>
   <image mode='widthFix' style='width:20rpx;' src='../../images/jian_13.png'></image>
 </view>
 
-<view bindtap='ShiJian' class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
+<view bindtap='classTime' class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
   <view class='flex1 aitems-center  fon-30 flex '>
     <view class='width-135'>时间段</view>
-    <view class='ca'>待完善</view>
+    <view class='ca'>{{timeDuration?timeDuration:"待完善"}}</view>
   </view>
   <image mode='widthFix' style='width:20rpx;' src='../../images/jian_13.png'></image>
 </view>
 
-
-
-
-
-
-
-<view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
+<view bindtap='teachers' class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
   <view class='flex1 aitems-center  fon-30 flex '>
     <view class='width-135'>课程介绍</view>
-    <view class='ca'>待完善</view>
+    <view class='ca'>{{courseIntroduce?courseIntroduce:"待完善"}}</view>
   </view>
   <image mode='widthFix' style='width:20rpx;' src='../../images/jian_13.png'></image>
 </view>
 
-<button class='btn purple-bg margin-t-60 white'>保存</button>
+<button bindtap='submit' class='btn purple-bg margin-t-60 white'>保存</button>

@@ -18,7 +18,12 @@ Page({
       { index: 4 },
     ]
   },
-
+  // 外教
+  WaiJiao:function(){
+    wx.navigateTo({
+      url: '../teachersInformation/index',
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

@@ -29,19 +29,3 @@ page{
   display: block;
   border-radius: 10rpx;
 }
-.img-xing{
-  width: 25rpx;
-  margin-left: 10rpx;
-}
-.di{
-  position: absolute;
-  z-index: 10;
-  left: 0;
-  bottom: 0;
-}
-.di2{
-  position: absolute;
-  z-index: 90;
-  left: 0;
-  bottom: 0;
-}

@@ -1,0 +1,29 @@
+<!--pages/Home/activity/index.wxml-->
+<view bindtap='HuoDong' class='bg-fff padding-b-20 margin-t-20'>
+    <image class='INg' src='../../images/DE_03.jpg'></image>
+    <view class='padding-lr-30 fon-32 padding-tb-20 XianZhi'>
+      十名外教，集体讲课，带你从头开始学英语！
+    </view>
+    <view class='flex between padding-lr-30 aitems-center'>
+    <view class='flex aitems-center fon-24 c8'>
+      <image class='address' mode='widthFix' src='../../images/newaddress_07.png'></image>
+      上海     2018-03-25  12:00
+    </view>
+    <view bindtap='ChaKan' class='detail fon-24 '>立即报名</view>
+  </view>
+</view>
+
+
+<view class='bg-fff padding-b-20 margin-t-20'>
+    <image class='INg' src='../../images/DE_03.jpg'></image>
+    <view class='padding-lr-30 fon-32 padding-tb-20 XianZhi'>
+      十名外教，集体讲课，带你从头开始学英语！
+    </view>
+    <view class='flex between padding-lr-30 aitems-center'>
+    <view class='flex aitems-center fon-24 c8'>
+      <image class='address' mode='widthFix' src='../../images/newaddress_07.png'></image>
+      上海     2018-03-25  12:00
+    </view>
+    <view bindtap='ChaKan' class='detail fon-24 '>立即报名</view>
+  </view>
+</view>

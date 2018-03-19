@@ -1,0 +1,101 @@
+<!--pages/Home/foreignTeacher/index.wxml-->
+<view class='padding-lr-30 margin-t-20 '>
+  <view class='flex  top aitems-center'>
+    <image class='img-top' mode='widthFix' src='../../images/SEARCH_03.JPG'></image>
+    <input class='flex1 fon-26' placeholder-class='fon-26' placeholder='课程名称'></input>
+  </view>
+</view>
+
+<view class='flex fon-26 padding-tb-20 padding-lr-30  border-t-1 border-b-1 margin-t-20  between aitems-center'>
+  <view class='flex aitems-center'>
+    <view>
+      <picker class=' flex' value="{{index}}" range="{{array}}" bindchange="bindPickerChange">
+        <view class='flex picker aitems-center '>
+          <view class="fon-26 flex aitems-center yanse ">
+            <view class='c72'>{{array[index]}}</view>
+             <image mode='widthFix' class='xia margin-l-10' src='../../images/xia_07.jpg'></image>
+          </view>
+        </view>
+      </picker>
+    </view>
+  </view>
+   
+    <view class='flex aitems-center'>
+    <view>
+      <picker class=' flex' value="{{index1}}" range="{{array1}}" bindchange="bindPickerChange1">
+        <view class='flex picker aitems-center '>
+          <view class="fon-26 flex aitems-center yanse ">
+            <view class='c72'>{{array1[index1]}}</view>
+             <image mode='widthFix' class='xia margin-l-10' src='../../images/xia_07.jpg'></image>
+          </view>
+        </view>
+      </picker>
+    </view>
+  </view>
+
+      <view class='flex aitems-center'>
+    <view>
+      <picker class=' flex' value="{{index2}}" range="{{array2}}" bindchange="bindPickerChange2">
+        <view class='flex picker aitems-center '>
+          <view class="fon-26 flex aitems-center yanse ">
+            <view class='c72'>{{array2[index2]}}</view>
+             <image mode='widthFix' class='xia margin-l-10' src='../../images/xia_07.jpg'></image>
+          </view>
+        </view>
+      </picker>
+    </view>
+  </view>
+        <view class='flex aitems-center'>
+    <view>
+      <picker class=' flex' value="{{index3}}" range="{{array3}}" bindchange="bindPickerChange3">
+        <view class='flex picker aitems-center '>
+          <view class="fon-26 flex aitems-center yanse ">
+            <view class='c72'>{{array3[index3]}}</view>
+             <image mode='widthFix' class='xia margin-l-10' src='../../images/xia_07.jpg'></image>
+          </view>
+        </view>
+      </picker>
+    </view>
+  </view>
+</view>
+
+<view class='flex border-b-1 aitems-center  padding-lr-30 padding-tb-20'>
+    <image class='touXiang margin-r-20' src='../../images/ren_03.png'></image>
+    <view class='flex1'>
+      <view class='fon-26 margin-b-10 flex aitems-center '>
+        Emily
+        <image class='HuangGuan margin-l-10' mode='widthFix' src='../../images/guan_03.png'></image>
+        <view class='zonga'>
+          <view class='di'>
+            <image wx:for="{{listq}}" class='img-xing' mode='widthFix' src='../../images/hui_07.png'></image>
+          </view>
+         <view class='di flex di2'>
+            <view class='flex aitems-center img-xing' wx:for="{{listq}}">
+              <image data-index='{{index}}' wx:if="{{index<4.5}}" class='banXin' mode='widthFix' src='../../images/BanXIn_03.png'></image>
+              <image data-index='{{index}}' wx:if="{{index+0.5<4.5}}" class='banXin' mode='widthFix' src='../../images/xingr_03.png'></image>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class='fon-24 c8'>英式发音 / 喜欢旅游 / 明星老师</view>
+    </view>
+  </view>
+
+  <view class='flex border-b-1 aitems-center  padding-lr-30 padding-tb-20'>
+    <image class='touXiang margin-r-20' src='../../images/ren_03.png'></image>
+    <view class='flex1'>
+      <view class='fon-26 margin-b-10 flex aitems-center '>
+        Emily
+        <image class='HuangGuan margin-l-10' mode='widthFix' src='../../images/guan_03.png'></image>
+        <view class='zonga'>
+          <view class='di'>
+            <image wx:for="{{listq}}" class='img-xing' mode='widthFix' src='../../images/xingxing_03.jpg'></image>
+          </view>
+          <view class='di di2'>
+            <image wx:for="{{listq}}" wx:if="{{item.index<=3}}" class='img-xing' mode='widthFix' src='../../images/xing_14.jpg'></image>
+          </view>
+        </view>
+      </view>
+      <view class='fon-24 c8'>英式发音 / 喜欢旅游 / 明星老师</view>
+    </view>
+  </view>

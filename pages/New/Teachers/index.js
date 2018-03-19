@@ -1,8 +1,10 @@
-// pages/New/Teachers/index.js
 const $common = require('../../../utils/common.js');
+const app = getApp();
 Page({
   data: {
-    input: ''
+    input: '',
+    placeholder: '',
+    status: 0,
   },
   bindInput(e) {
     this.setData({
@@ -17,12 +19,35 @@ Page({
     }
     // 发送请求
   },
+  init() {
+    let status = this.data.status;
+    let placeholder = '',
+      titleText = "";
+    switch (status) {
+      case 0: //教师介绍
+        placeholder = '请填写教师介绍，最多不超过1000个字符';
+        titleText = '教师介绍';
+        break;
+      case 1:  //课程介绍
+        placeholder = '请填写课程介绍，最多不超过1000个字符';
+        titleText = '课程介绍'
+        break;
+    }
+    wx.setNavigationBarTitle({
+      title: titleText,
+    });
+    this.setData({
+      placeholder: placeholder
+    })
+  },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      status: parseInt(options.status)
+    })
   },
 
   /**
@@ -36,7 +61,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.init();
   },
 
   /**

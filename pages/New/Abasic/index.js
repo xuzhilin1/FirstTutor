@@ -1,14 +1,17 @@
 // pages/New/Abasic/index.js
 const $common = require('../../../utils/common.js');
+const $static = require('../../../utils/static.js');
+const app = getApp();
 Page({
   data: {
+    status: 0,
     userName: 'Emily',
     sexArray: ['女', '男'],
     sexIndex: 1,
     age: '1983-11-16',
     weChat: 'emily888',
-    nationalityIndex: 1,
-    nationalityArray: ['英国', '美国'],
+    nationalityIndex: 0,
+    nationalityArray: $static.country,
     school: '利兹大学',
     synopsis: '',
   },
@@ -72,14 +75,41 @@ Page({
       $common.showModal('请填写您的简介');
       return;
     }
+    let status = this.data.status;
+    if (status === 0) {//申请外教资格
+      wx.redirectTo({
+        url: '../../Home/Success/index?status=0',
+      })
+    } else if (status === 1) {//外教基本资料
+
+    }
     //发送请求
+  },
+  init() {
+    let status = this.data.status;
+    let titleText = '';
+    switch (status) {
+      case 0: //申请外教资格
+        titleText = '申请FirstTutor外教资格';
+        break;
+      case 1: //外教基本资料
+        titleText = '基本资料';
+        break;
+    }
+    wx.setNavigationBarTitle({
+      title: titleText,
+    })
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    let status = options.status;
+    if (!status) return;
+    this.setData({
+      status: parseInt(status)
+    })
   },
 
 
@@ -95,7 +125,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.init();
   },
 
   /**

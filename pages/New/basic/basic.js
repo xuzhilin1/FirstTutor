@@ -1,16 +1,17 @@
 const $common = require('../../../utils/common.js');
+const app = getApp();
 Page({
   data: {
     pagesList: [
       {
         ZiLiao: '基本资料',
         Types: '待完善',
-        url: '../Abasic/index'
+        url: '../Abasic/index?status=1'
       },
       {
         ZiLiao: '教师介绍',
         Types: '已填写',
-        url: '../Teachers/index'
+        url: '../Teachers/index?status=0'
       },
       {
         ZiLiao: '教师资质',
@@ -43,16 +44,17 @@ Page({
     let phone = this.data.phone;
     if (!$common.phoneReg.test(phone)) {
       $common.showModal('请填写正确的手机号');
+      return;
     }
   },
-  // 跳转
-  GoXie: function (e) {
-    console.log(e)
-    var idx = e.currentTarget.dataset.id
+
+  jump(e) {// 跳转
+    let url = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: idx,
+      url: url,
     })
   },
+
   /**
    * 生命周期函数--监听页面加载
    */

@@ -8,11 +8,14 @@
         Emily
         <image class='HuangGuan margin-l-10' mode='widthFix' src='../../images/guan_03.png'></image>
         <view class='zonga'>
-          <view class='di'>
-            <image wx:for="{{listq}}" class='img-xing' mode='widthFix' src='../../images/xingxing_03.jpg'></image>
+            <view class='di'>
+            <image wx:for="{{listq}}" class='img-xing' mode='widthFix' src='../../images/hui_07.png'></image>
           </view>
-          <view class='di di2'>
-            <image wx:for="{{listq}}" wx:if="{{item.index<=3}}" class='img-xing' mode='widthFix' src='../../images/xing_14.jpg'></image>
+          <view class='di flex di2'>
+            <view class='flex aitems-center img-xing' wx:for="{{listq}}">
+              <image data-index='{{index}}' wx:if="{{index<4.5}}" class='banXin' mode='widthFix' src='../../images/BanXIn_03.png'></image>
+              <image data-index='{{index}}' wx:if="{{index+0.5<4.5}}" class='banXin' mode='widthFix' src='../../images/xingr_03.png'></image>
+            </view>
           </view>
         </view>
       </view>
@@ -21,7 +24,7 @@
   </view>
   <view class='flex padding-lr-30 padding-tb-20 between aitems-center'>
     <view class='fon-26 ca'>未点评</view>
-    <view class='fon-24 kundu purple-bg white'>立即点评</view>
+    <view bindtap='DianPing' class='fon-24 kundu purple-bg white'>立即点评</view>
   </view>
   </view>
 

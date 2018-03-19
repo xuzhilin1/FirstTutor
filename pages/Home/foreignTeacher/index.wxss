@@ -1,0 +1,29 @@
+/* pages/Home/foreignTeacher/index.wxss */
+page{
+  background-color: #fff;
+}
+.top{
+  border-radius: 20px;
+  background-color: #f7f7f7;
+  padding: 0 20rpx;
+}
+.img-top{
+  width: 30rpx;
+  margin-right: 20rpx;
+}
+.xia{
+  width: 24rpx;
+
+}
+.zonga{
+  position: relative;
+  min-width: 255rpx;
+  margin-top: 30rpx;
+  margin-left: 15rpx;
+}
+.img-m{
+  height: 300rpx;
+  width: 100%;
+  display: block;
+  border-radius: 10rpx;
+}

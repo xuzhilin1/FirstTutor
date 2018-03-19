@@ -1,18 +1,22 @@
 /* pages/New/ClassTime/index.wxss */
-page{
+
+page {
   background-color: #fff;
 }
-.QuKuai{
+
+.QuKuai {
   width: 90rpx;
   height: 50rpx;
   line-height: 50rpx;
   text-align: center;
 }
-.QuKuaia{
-  border:1px solid #e0e0e0;
+
+.QuKuaia {
+  border: 1px solid #e0e0e0;
   margin-top: 20rpx;
 }
-.Zhu{
+
+.Zhu {
   width: 29rpx;
   height: 29rpx;
   border-radius: 50%;
@@ -21,9 +25,11 @@ page{
   margin-right: 20rpx;
 }
 
-.zhushi{
-  padding:18rpx;
+.zhushi {
+  padding: 18rpx;
   background-color: #ececec;
   width: 100%;
- 
+}
+.no-btn{
+  background: #ececec;
 }

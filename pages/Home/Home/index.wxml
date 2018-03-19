@@ -25,6 +25,28 @@
 </view>
 
 <view class='border-b-1'>
+  <view bindtap='WaiJiao' class='flex border-t-1 aitems-center  padding-lr-30 padding-tb-20'>
+    <image class='touXiang margin-r-20' src='../../images/ren_03.png'></image>
+    <view class='flex1'>
+      <view class='fon-26 margin-b-10 flex aitems-center '>
+        Emily
+        <image class='HuangGuan margin-l-10' mode='widthFix' src='../../images/guan_03.png'></image>
+        <view class='zonga'>
+          <view class='di'>
+            <image wx:for="{{listq}}" class='img-xing' mode='widthFix' src='../../images/hui_07.png'></image>
+          </view>
+          <view class='di flex di2'>
+            <view class='flex aitems-center img-xing' wx:for="{{listq}}">
+              <image data-index='{{index}}' wx:if="{{index<4.5}}" class='banXin' mode='widthFix' src='../../images/BanXIn_03.png'></image>
+              <image data-index='{{index}}' wx:if="{{index+0.5<4.5}}" class='banXin' mode='widthFix' src='../../images/xingr_03.png'></image>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class='fon-24 c8'>英式发音 / 喜欢旅游 / 明星老师</view>
+    </view>
+  </view>
+
   <view class='flex border-t-1 aitems-center  padding-lr-30 padding-tb-20'>
     <image class='touXiang margin-r-20' src='../../images/ren_03.png'></image>
     <view class='flex1'>
@@ -33,10 +55,13 @@
         <image class='HuangGuan margin-l-10' mode='widthFix' src='../../images/guan_03.png'></image>
         <view class='zonga'>
           <view class='di'>
-            <image wx:for="{{listq}}" class='img-xing' mode='widthFix' src='../../images/xingxing_03.jpg'></image>
+            <image wx:for="{{listq}}" class='img-xing' mode='widthFix' src='../../images/hui_07.png'></image>
           </view>
-          <view class='di di2'>
-            <image wx:for="{{listq}}" wx:if="{{item.index<=3}}" class='img-xing' mode='widthFix' src='../../images/xing_14.jpg'></image>
+          <view class='di flex di2'>
+            <view class='flex aitems-center img-xing' wx:for="{{listq}}">
+              <image data-index='{{index}}' wx:if="{{index<4.5}}" class='banXin' mode='widthFix' src='../../images/BanXIn_03.png'></image>
+              <image data-index='{{index}}' wx:if="{{index+0.5<4.5}}" class='banXin' mode='widthFix' src='../../images/xingr_03.png'></image>
+            </view>
           </view>
         </view>
       </view>
@@ -44,23 +69,4 @@
     </view>
   </view>
 
-   <view class='flex border-t-1 aitems-center  padding-lr-30 padding-tb-20'>
-    <image class='touXiang margin-r-20' src='../../images/ren_03.png'></image>
-    <view class='flex1'>
-      <view class='fon-26 margin-b-10 flex aitems-center '>
-        Emily
-        <image class='HuangGuan margin-l-10' mode='widthFix' src='../../images/guan_03.png'></image>
-        <view class='zonga'>
-          <view class='di'>
-            <image wx:for="{{listq}}" class='img-xing' mode='widthFix' src='../../images/xingxing_03.jpg'></image>
-          </view>
-          <view class='di di2'>
-            <image wx:for="{{listq}}" wx:if="{{item.index<=3}}" class='img-xing' mode='widthFix' src='../../images/xing_14.jpg'></image>
-          </view>
-        </view>
-      </view>
-      <view class='fon-24 c8'>英式发音 / 喜欢旅游 / 明星老师</view>
-    </view>
-  </view>
-  
 </view>

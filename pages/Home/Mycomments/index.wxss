@@ -5,22 +5,7 @@
   margin-top: 30rpx;
   margin-left: 15rpx;
 }
-.img-xing{
-  width: 25rpx;
-  margin-left: 10rpx;
-}
-.di{
-  position: absolute;
-  z-index: 10;
-  left: 0;
-  bottom: 0;
-}
-.di2{
-  position: absolute;
-  z-index: 90;
-  left: 0;
-  bottom: 0;
-}
+
 .kundu{
   width: 141rpx;
   height: 50rpx;
