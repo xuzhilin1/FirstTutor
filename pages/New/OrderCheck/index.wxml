@@ -1,20 +1,13 @@
-<!--pages/New/OrderCheck/index.wxml-->
-<view wx:for='{{pagesData}}' wx:key='{{key}}' class='margin-t-20'>
+<!--  导师  -->
+
+<view wx:if='{{userType===2}}' wx:for='{{pagesData}}' wx:key='{{index}}' class='margin-t-20'>
   <view class='flex fon-26 border-t-1 bg-f9 c8 height-75 between padding-lr-30 aitems-center'>
     <view>{{item.isGroup?"一对多":"一对一"}}</view>
     <view wx:if='{{!item.isGroup}}'>购买时间：{{item.paymentTime}}</view>
     <view wx:if='{{item.isGroup}}'>成团时间：{{item.groupTime}}</view>
   </view>
-  <!--  一对一  -->
-  <view wx:if='{{item.isGroup}}' class=' middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
-    <view class='flex fon-36  c2b '>
-      <image class='QiHao' mode='widthFix' src='../../images/qi_03.png'></image>
-      {{item.name}}
-    </view>
-    <view class='bold purple'>¥ 200</view>
-  </view>
   <!--  一对多  -->
-  <view wx:if='{{!item.isGroup}}' class=' middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
+  <view wx:if='{{item.isGroup}}' class='middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
     <view class='flex fon-36  c2b '>
       <image class='QiHao' mode='widthFix' src='../../images/tuan_06.png'></image>
       <view>
@@ -24,9 +17,58 @@
     </view>
     <view class='purplea purple fon-24 '>{{item.groupNum}}人团</view>
   </view>
+  <!--  一对一  -->
+  <view wx:if='{{!item.isGroup}}' class='middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
+    <view class='flex fon-36  c2b '>
+      <image class='QiHao' mode='widthFix' src='../../images/qi_03.png'></image>
+      {{item.name}}
+    </view>
+    <view class='bold purple'>¥ {{item.price}}</view>
+  </view>
+
   <view class='flex fon-24 border-t-1 border-b-1 padding-lr-30  aitems-center bg-fff between'>
     <view class='fon-26 c8'>上课时间：{{item.courseTime}}</view>
     <view bindtap='orderDetail' data-index='{{index}}' class='border AnNiu white purple-bg'>{{item.isGroup?"拼团详情":"订单详情"}}</view>
+  </view>
+</view>
 
+<!--  学生  -->
+
+<view wx:if='{{userType!==2}}' wx:for='{{SPagesData}}' wx:key='{{index}}' class='margin-t-20'>
+  <view class='flex fon-26 border-t-1 bg-f9 c8 height-75 between padding-lr-30 aitems-center'>
+    <view>{{item.num}}</view>
+    <view class='color-block'>{{item.status}}</view>
+  </view>
+  <!--  一对多  -->
+  <view wx:if='{{item.isGroup}}' class='middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
+    <view class='flex fon-36  c2b '>
+      <image class='QiHao' mode='widthFix' src='../../images/tuan_06.png'></image>
+      <view>
+        {{item.name}}
+        <view class='purple price'>¥{{item.price}}</view>
+      </view>
+    </view>
+    <view class='box-right'>
+      <view class='c8 fon-24 margin-t-10 box-right-num'>已有{{item.PaymentNum}}参与</view>
+      <view class='purplea purple fon-24'>{{item.groupNum}}人团</view>
+    </view>
+  </view>
+  <!--  一对一  -->
+  <view wx:if='{{!item.isGroup}}' class='middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
+    <view>
+      <view class='flex fon-36  c2b '>
+        <image class='QiHao' mode='widthFix' src='../../images/qi_03.png'></image>
+        {{item.name}}
+      </view>
+      <view class='c8 fon-24 margin-t-10 num-margin-l'>已有{{item.PaymentNum}}人购买</view>
+    </view>
+    <view class='bold purple'>¥ {{item.price}}</view>
+  </view>
+
+  <view class='flex fon-24 border-t-1 border-b-1 padding-lr-30  aitems-center bg-fff between'>
+    <view class='fon-26 color-block'>实付款：¥{{item.actualPrice}}</view>
+    <view bindtap='orderDetail' data-index='{{index}}' class='border AnNiu white purple-bg'>邀请好友</view>
+    <view bindtap='orderDetail' data-index='{{index}}' class='border AnNiu white purple-bg'>查看详情</view>
+    <view bindtap='orderDetail' data-index='{{index}}' class='border AnNiu white purple-bg'>删除订单</view>
   </view>
 </view>

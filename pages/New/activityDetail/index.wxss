@@ -1,28 +1,45 @@
 /* pages/New/activityDetail/index.wxss */
-.slide-image{
+
+.slide-image {
   width: 100%;
   height: 350rpx;
 }
-.swiper{
+
+.swiper {
   height: 350rpx;
 }
-.middle-middle{
-  padding:30rpx;
+
+.header {
+  height: 350rpx;
 }
-.baomi{
- width: 120rpx
+
+.header image {
+  width: 100%;
+  height: 100%;
 }
-.imgs-s{
-margin-right: 20rpx;
+
+.middle-middle {
+  padding: 30rpx;
+}
+
+.baomi {
+  width: 120rpx;
+}
+
+.imgs-s {
+  margin-right: 20rpx;
   width: 35rpx;
 }
-.img-rrr{
+
+.img-rrr {
   width: 15rpx;
 }
-.DIZHi{
-  padding:20rpx 30rpx;
+
+.DIZHi {
+  padding: 20rpx 30rpx;
 }
-.JieShu{
+
+.JieShu {
   height: 80rpx;
   line-height: 80rpx;
   background-color: #979797;
@@ -31,5 +48,22 @@ margin-right: 20rpx;
   bottom: 0;
   width: 100%;
   text-align: center;
-  
+}
+
+.context {
+  padding: 0 40rpx 20rpx;
+  background: #fff;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 24rpx;
+}
+
+.context-title {
+  font-weight: bold;
+  width: 100%;
+  padding: 20rpx 0 10rpx 0;
+}
+
+.context-list {
+  line-height: 36rpx;
 }

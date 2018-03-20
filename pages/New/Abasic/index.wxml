@@ -1,16 +1,16 @@
 <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
   <view class='flex1 aitems-center  fon-30 flex '>
     <view class='width-100'>姓名</view>
-    <input bindinput='bindUserName' class='ca' value='{{userName}}'></input>
+    <input bindinput='bindUserName' class='ca' value='{{userName}}' placeholder='未填写'></input>
   </view>
 </view>
 
 <view class='flex height-85 border-b-1 padding-lr-30  between aitems-center'>
-  <picker class='flex1' value="{{sexIndex}}" range="{{sexArray}}" bindchange="bindSexChange">
+  <picker class='flex1' range-key='sex' value="{{sexIndex}}" range="{{sexArray}}" bindchange="bindSexChange">
     <view class='flex picker aitems-center '>
       <view class="fon-30 flex aitems-center yanse ">
         <view class='width-100'> 性别 </view>
-        <view class='ca'>{{sexArray[sexIndex]}}</view>
+        <view class='ca'>{{sexArray[sexIndex].sex}}</view>
       </view>
     </view>
   </picker>
@@ -33,16 +33,16 @@
 <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
   <view class='flex1 aitems-center  fon-30 flex '>
     <view class='width-100'>微信</view>
-    <input bindinput='bindWeChat' class='ca' value='{{weChat}}'></input>
+    <input bindinput='bindWeChat' class='ca' value='{{weChat}}' placeholder='未填写'></input>
   </view>
 </view>
 
 <view class='flex height-85 border-b-1 padding-lr-30  between aitems-center'>
-  <picker class='flex1' range-key='text' value="{{nationalityIndex}}" range="{{nationalityArray}}" bindchange="bindNationalityChange">
+  <picker class='flex1' range-key='NalName' value="{{nationalityIndex}}" range="{{nationalityArray}}" bindchange="bindNationalityChange">
     <view class='flex picker aitems-center '>
       <view class="fon-30 flex aitems-center yanse ">
         <view class='width-100'> 国籍 </view>
-        <view class='ca'>{{nationalityArray[nationalityIndex].text}}</view>
+        <view class='ca'>{{nationalityArray[nationalityIndex].NalName}}</view>
       </view>
     </view>
   </picker>
@@ -52,7 +52,7 @@
 <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
   <view class='flex1 aitems-center  fon-30 flex '>
     <view class='width-100'>大学</view>
-    <input bindinput='bindSchool' class='ca' value='{{school}}'></input>
+    <input bindinput='bindSchool' class='ca' value='{{school}}' placeholder='未填写'></input>
   </view>
 </view>
 

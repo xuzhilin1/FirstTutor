@@ -1,7 +1,5 @@
 // 静态数据
 module.exports = {
-  //世界各国
-  country: require('./country.js'),
   //上海区域
   areaShanghai: [{
     id: 1,

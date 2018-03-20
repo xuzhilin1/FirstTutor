@@ -1,18 +1,23 @@
 // pages/New/Abasic/index.js
 const $common = require('../../../utils/common.js');
-const $static = require('../../../utils/static.js');
 const app = getApp();
 Page({
   data: {
-    status: 0,
-    userName: 'Emily',
-    sexArray: ['女', '男'],
+    status: 0, //0 外教资格申请 1 外教基本资料 
+    userName: '',
+    sexArray: [{
+      id: 0,
+      sex: '女'
+    }, {
+      id: 1,
+      sex: '男'
+    }],
     sexIndex: 1,
     age: '1983-11-16',
-    weChat: 'emily888',
+    weChat: '',
     nationalityIndex: 0,
-    nationalityArray: $static.country,
-    school: '利兹大学',
+    nationalityArray: [],
+    school: '',
     synopsis: '',
   },
   bindUserName(e) { //姓名
@@ -52,13 +57,12 @@ Page({
   },
   submit() { //保存按钮
     let userName = this.data.userName,
-      sex = this.data.sexArray[this.data.sexIndex],
+      sex = this.data.sexArray[this.data.sexIndex].id,
       age = this.data.age,
       weChat = this.data.weChat,
-      nationality = this.data.nationalityArray[this.data.nationalityIndex],
+      nationality = this.data.nationalityArray[this.data.nationalityIndex].NalId,
       school = this.data.school,
       synopsis = this.data.synopsis;
-    console.log(userName, sex, age, weChat, nationality, school, synopsis);
     if (userName.trim().length <= 0) {
       $common.showModal('请填写您的姓名');
       return;
@@ -75,15 +79,64 @@ Page({
       $common.showModal('请填写您的简介');
       return;
     }
-    let status = this.data.status;
-    if (status === 0) {//申请外教资格
-      wx.redirectTo({
-        url: '../../Home/Success/index?status=0',
-      })
-    } else if (status === 1) {//外教基本资料
-
+    let openid = wx.getStorageSync('openid');
+    console.log(openid);
+    if (openid === null || openid === '') { //没有openid，获取
+      $common.getOpenid();
+      return;
     }
-    //发送请求
+    this.requestSaveData(userName, sex, age, weChat, school, nationality, synopsis);
+  },
+  requestSaveData(TeaName, TeaGender, TeaAge, TeaWeChat, TeaUniversity, TeaNaLityId, TeaAbstract) { //发送请求
+    console.log(TeaName, TeaGender, TeaAge, TeaWeChat, TeaUniversity, TeaNaLityId, TeaAbstract);
+    $common.request(
+      "POST",
+      $common.config.ApplyForForeEdu,
+      {
+        TeaOpenId: wx.getStorageSync('openid'),
+        TeaName: TeaName,
+        TeaGender: TeaGender,
+        TeaAge: this.countAge(TeaAge),
+        TeaWeChat: TeaWeChat,
+        TeaUniversity: TeaUniversity,
+        TeaNaLityId: TeaNaLityId,
+        TeaAbstract: TeaAbstract
+      },
+      function (res) {
+        console.log(res);
+        if (res.data.res && res.data.resType == 5) {
+          let status = this.data.status;
+          if (status === 0) {//申请外教资格
+            wx.redirectTo({
+              url: '../../Home/Success/index?status=0',
+            })
+          } else if (status === 1) {//外教基本资料
+
+          }
+        } else {
+          switch (res.data.resType) {
+            case 1:
+              $common.showModal('参数有误');
+              break;
+            case 2:
+              $common.showModal('openid非法');
+              break;
+            case 3:
+              $common.showModal('该外教已注册');
+              break;
+            case 4:
+              $common.showModal('注册失败');
+              break;
+          }
+        }
+      }.bind(this)
+    )
+  },
+  countAge(TAge) { //计算年龄
+    let date = new Date(),
+      TY = parseInt(TAge.split('-')[0]),
+      nowY = parseInt(date.getFullYear());
+    return nowY - TY;
   },
   init() {
     let status = this.data.status;
@@ -100,25 +153,37 @@ Page({
       title: titleText,
     })
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
+  getCountryInfo() { //获取国籍信息
+    $common.request("POST",
+      $common.config.GetCountryInfos,
+      null,
+      function (res) {
+        if (res.data.res) {
+          this.setData({
+            nationalityArray: res.data.nationList
+          })
+        } else {
+          $common.showModal('获取国籍信息失败，请重新获取', true, function (res) {
+            if (res.confirm) {
+              //用户点击确定，重新请求国籍信息
+              this.getCountryInfo();
+            }
+          }.bind(this));
+        }
+      }.bind(this));
+  },
   onLoad: function (options) {
     let status = options.status;
     if (!status) return;
     this.setData({
       status: parseInt(status)
-    })
+    });
+
   },
-
-
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
   onReady: function () {
-
+    //判断并获取openId
+    $common.getOpenid();
+    this.getCountryInfo();
   },
 
   /**

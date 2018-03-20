@@ -1,34 +1,17 @@
 <!--pages/New/activity/index.wxml-->
-<view class='outer margin-b-20 bg-fff'>
+<view wx:for='{{pagesData}}' wx:key='{{index}}' class='outer margin-b-20 bg-fff'>
   <view class='flex between'>
-    <image class='imga' src='../../images/DE_03.jpg'></image>
+    <image class='imga' src='{{item.image}}'></image>
     <view class='flex1'>
-      <view class='fon-30 XianZhi c2b'>十名外教，集体讲课，带你从头开始学英语！</view>
-      <view class='fon-24 margin-t-20 green'>进行中</view>
+      <view class='fon-30 XianZhi c2b'>{{item.context}}</view>
+      <view class='fon-24 margin-t-20 green'>{{item.status===0?"进行中":"已结束"}}</view>
     </view>
   </view>
   <view class='flex between margin-t-20 aitems-center'>
     <view class='flex aitems-center fon-24 c8'>
       <image class='address' mode='widthFix' src='../../images/newaddress_07.png'></image>
-      上海     2018-03-25  12:00
+      {{item.address}} {{item.time}}
     </view>
-    <view bindtap='ChaKan' class='detail fon-24 purple border'>查看详情</view>
-  </view>
-</view>
-
-<view class='outer margin-b-20 bg-fff'>
-  <view class='flex between'>
-    <image class='imga' src='../../images/DE_03.jpg'></image>
-    <view class='flex1'>
-      <view class='fon-30 XianZhi c2b'>十名外教，集体讲课，带你从头开始学英语！</view>
-      <view class='fon-24 margin-t-20 green'>进行中</view>
-    </view>
-  </view>
-  <view class='flex between margin-t-20 aitems-center'>
-    <view class='flex aitems-center fon-24 c8'>
-      <image class='address' mode='widthFix' src='../../images/newaddress_07.png'></image>
-      上海     2018-03-25  12:00
-    </view>
-    <view class='detail fon-24 purple border'>查看详情</view>
+    <view bindtap='activityDetail' data-index='{{index}}' class='detail fon-24 purple border'>查看详情</view>
   </view>
 </view>

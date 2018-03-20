@@ -1,6 +1,7 @@
 // pages/New/OrderCheck/index.js
 Page({
   data: {
+    userType: 2, // 1 学生 2 导师
     pagesData: [{
       name: '口语一对多',
       isGroup: true,
@@ -20,6 +21,26 @@ Page({
       PaymentNum: 5,
       groupNum: 2,
     }],
+    //学生列表
+    SPagesData: [{
+      isGroup: true,
+      name: '口语一对二',
+      price: '150',
+      actualPrice: '150.00',
+      groupNum: 2,
+      PaymentNum: 6,
+      num: '一对二',
+      status: '拼团中，还差1人成团',
+    }, {
+      isGroup: false,
+      name: '口语一对一',
+      price: '200',
+      actualPrice: '200.00',
+      groupNum: 2,
+      PaymentNum: 6,
+      num: '一对一',
+      status: '已支付',
+    }],
   },
   orderDetail(e) {  // 看详情
     let index = e.currentTarget.dataset.index,
@@ -28,19 +49,28 @@ Page({
       url: '../orderDetails/index',
     })
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
+  init() {
+    // let userType = parseInt(wx.getStorageSync('userType'));
+    let userType = 1;
+    this.setData({
+      userType: userType
+    })
+    let context = '';
+    if (userType === 2) { //导师
+      context = '订单查看';
+    } else {
+      context = '我的订单';
+    }
+    wx.setNavigationBarTitle({
+      title: context
+    })
+  },
+
   onLoad: function (options) {
 
   },
-
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
   onReady: function () {
-
+    this.init();
   },
 
   /**

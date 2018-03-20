@@ -4,7 +4,7 @@ const $common = require('../../../utils/common.js');
 Page({
   data: {
     userInfo: {},
-    idType: 2, //1 学生 2 导师 0 未知,
+    userType: 1, //1 学生 2 导师 0 未知,
     vip: true, //是否vip
     teacherList: [{
       isShow: true,
@@ -48,52 +48,48 @@ Page({
       title: " 在线沟通",
       luJin: '../Online/index'
     }],
+    //学生
     studentList: [{
       url: '../../images/LI_10.png',
       title: " 我的订单",
-      luJin: '../basic/basic'
+      luJin: '../OrderCheck/index'
     },
     {
       url: '../../images/LI_06.png',
       title: " 学习需求",
-      luJin: '../CourseManagement/index'
+      luJin: '../NeedSee/index'
     },
     {
       url: '../../images/LI_14.png',
       title: " 我报名的活动",
-      luJin: '../NeedSee/index'
+      luJin: '../activity/index'
     },
     {
       url: '../../images/LI_12.png',
       title: " 我的点评",
-      luJin: '../OrderCheck/index'
+      luJin: '../OrdeRreview/index'
     },
     {
       url: '../../images/LI_16.jpg',
       title: " 在线沟通",
-      luJin: '../OrdeRreview/index'
+      luJin: '../Online/index'
     }],
   },
-  // 跳转
-  GoXie: function (e) {
-    console.log(e)
-    let url = e.currentTarget.dataset.url;
-    wx.navigateTo({
-      url: url,
-    })
-  },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    //获取用户头像，昵称
-    $common.getHeadInfo(
-      function (res) {
+  init() {
+    let openid = wx.getStorageSync('openid');
+    if (openid === null || openid === '') {
+      $common.getOpenid(function () {
         this.setData({
-          userInfo: res
+          userInfo: wx.getStorageSync('userInfo'),
+          userType: wx.getStorageSync('userType'),
         })
-      }.bind(this)
-    );
+      }.bind(this));
+      return;
+    }
+    this.setData({
+      userInfo: wx.getStorageSync('userInfo'),
+      userType: wx.getStorageSync('userType'),
+    })
     let teacherList = this.data.teacherList;
     let vip = true;
     //vip才能查看需求
@@ -102,14 +98,26 @@ Page({
       vip: vip,
       teacherList: teacherList
     });
-    $common.getOpenid();
+  },
+  jump(e) {  // 跳转
+    let openid = wx.getStorageSync('openid');
+    if (openid === null || openid === '') {
+      $common.showModal('我们需要您的个人信息', false, function () {
+        $common.getOpenid();
+      }.bind(this));
+      return;
+    }
+    let url = e.currentTarget.dataset.url;
+    wx.navigateTo({
+      url: url,
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
+  onLoad: function (options) {
 
+  },
+  onReady: function () {
+    this.init();
   },
 
   /**

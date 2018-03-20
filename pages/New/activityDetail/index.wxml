@@ -1,40 +1,51 @@
 <view class='big-outer'>
-<swiper class='swiper' indicator-dots="{{true}}" indicator-active-color="#fff" indicator-color="#ccc" autoplay="{{true}}">
+  <!-- <swiper class='swiper' indicator-dots="{{true}}" indicator-active-color="#fff" indicator-color="#ccc" autoplay="{{true}}">
   <block wx:for="{{imgUrls}}">
     <swiper-item>
       <image src="{{item}}" class="slide-image" />
     </swiper-item>
   </block>
-</swiper>
-<view class='middle-middle bg-fff'>
-  <view class='fon-32 margin-b-20'>从零开始学美语，听说读写，全面升级</view>
-  <view class='fon-24 c8'>已报名100人 / 不限制人数</view>
-</view>
-
-<view class='border-t-1'>
- <view class='flex border-b-1 bg-fff DIZHi aitems-center  between '>
-    <view class='flex aitems-center '>
-      <image mode='widthFix' class='imgs-s' src='../../images/time_03.png'></image>
-      <view class='fon-24 baomi c8'>活动时间</view>
-      <view class='fon-24 XianZhi1'>12-26  17:00 至 12-26  20:00</view>
-    </view>
-   
+ </swiper> -->
+  <view class='header'>
+    <image src='{{image}}'></image>
   </view>
-  <view class='flex border-b-1 bg-fff DIZHi aitems-center  between '>
-    <view class='flex aitems-center '>
-      <image mode='widthFix' class='imgs-s' src='../../images/add_06.png'></image>
-      <view class='fon-24 baomi c8'>活动地址</view>
-      <view class='fon-24 XianZhi1'>上海市浦东新区张衡路666号</view>
-    </view>
-    <image mode='widthFix' class='img-rrr' src='../../images/jian_13.png'></image>
+  <view class='middle-middle bg-fff'>
+    <view class='fon-32 margin-b-20'>{{context}}</view>
+    <view class='fon-24 c8'>已报名{{enrollNum}}人 / 不限制人数</view>
   </view>
-</view>
-<!--  -->
-<view class='padding-tb-20 bg-fff margin-t-20 border-t-1 border-b-1 padding-lr-30'>
- <view class='fon-30 padding-l-20 border-l-2 c2b'>活动介绍</view>
-</view>
 
-<!--  -->
-<view class='footer white fon-30 JieShu'>活动已结束</view>
+  <view class='border-t-1'>
+    <view class='flex border-b-1 bg-fff DIZHi aitems-center  between '>
+      <view class='flex aitems-center '>
+        <image mode='widthFix' class='imgs-s' src='../../images/time_03.png'></image>
+        <view class='fon-24 baomi c8'>活动时间</view>
+        <view class='fon-24 XianZhi1'>{{startTime}} 至 {{endTime}}</view>
+      </view>
 
+    </view>
+    <view bindtap='openLocation' class='flex border-b-1 bg-fff DIZHi aitems-center  between '>
+      <view class='flex aitems-center '>
+        <image mode='widthFix' class='imgs-s' src='../../images/add_06.png'></image>
+        <view class='fon-24 baomi c8'>活动地址</view>
+        <view class='fon-24 XianZhi1'>{{address}}</view>
+      </view>
+      <image mode='widthFix' class='img-rrr' src='../../images/jian_13.png'></image>
+    </view>
+  </view>
+  <!--  -->
+  <view class='padding-tb-20 bg-fff margin-t-20 border-t-1 border-b-1 padding-lr-30'>
+    <view class='fon-30 padding-l-20 border-l-2 c2b'>活动介绍</view>
+  </view>
+
+
+  <view class='context'>
+    <black wx:for='{{introduce}}' wx:key='{{index}}'>
+      <view class='context-title purple'>
+        {{item.title}}
+      </view>
+      <view class='context-list c8' wx:for='{{item.list}}' wx:key='{{index}}'>{{item}}</view>
+    </black>
+  </view>
+  <!--  -->
+  <view wx:if='{{status===1}}' class='footer white fon-30 JieShu'>活动已结束</view>
 </view>

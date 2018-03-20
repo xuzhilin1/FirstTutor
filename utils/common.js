@@ -1,4 +1,4 @@
-//本地存储 code userInfo openid
+//本地存储 userInfo openid userType
 const data = {
   //adminsid:"1490463872",
   //appid: "wx978aabc5088a48c3",
@@ -13,10 +13,29 @@ const phoneReg = /^1[34578]\d{9}$/;
 const host = "1-zhao.com";
 const config = {
   //获取用户Openid
-  GetOrSetOpenid: `http://wj.${host}/LittleProgram/UserInfo/GetSaveUserOpenId`,
+  GetSaveUserOpenId: `http://wj.${host}/LittleProgram/UserInfo/GetSaveUserOpenId`,
+  //获取国家信息
+  GetCountryInfos: `http://wj.${host}/LittleProgram/Nationality/GetCountryInfos`,
+  //外教提交申请
+  ApplyForForeEdu: `http://wj.${host}/LittleProgram/ForeignTea/ApplyForForeEdu`,
 }
 module.exports = {
+  config: config,
   phoneReg: phoneReg,
+  //请求数据
+  request(method, url, data, success, fail, complete) {
+    fail = typeof (fail) === 'function' ? fail : function () { };
+    complete = typeof (complete) === 'function' ? complete : function () { };
+    wx.request({
+      url: url,
+      data: data,
+      method: method,
+      header: { 'content-type': 'application/json' },
+      success: success,
+      fail: fail,
+      complete: complete
+    })
+  },
   //模态弹窗
   showModal(content, showCancel, success, confirmText, title) {
     title = title ? title : '提示';
@@ -42,28 +61,16 @@ module.exports = {
       success: success,
     })
   },
-  // 获取头像信息
-  getHeadInfo(successFun, failFun) {
-    successFun = typeof (successFun) === 'function' ? successFun : function () { };
-    failFun = typeof (failFun) === 'function' ? failFun : function () { };
-    wx.login({
-      success: (res) => {
-        if (res.code) {
-          wx.getUserInfo({
-            success: (res) => { //用户授权成功
-              wx.setStorageSync('userInfo', res.userInfo);
-              successFun(res.userInfo);
-            },
-            fail: (res) => { //拒绝授权
-              failFun();
-            }
-          })
-        }
-      }
+  openLocation(latitude, longitude, scale) {  //查看位置
+    scale = scale ? parseInt(scale) : scale;
+    wx.openLocation({
+      latitude: latitude,
+      longitude: longitude,
+      scale: scale
     })
   },
   //获取openid
-  getOpenid() {
+  getOpenid(callback) {
     let openid,
       code,
       userInfo;
@@ -72,52 +79,42 @@ module.exports = {
         if (res.code) {
           //获取code
           code = res.code;
-          wx.setStorageSync('code', code);
           openid = wx.getStorageSync('openid');
           if (openid === null || openid === '') {
             wx.getUserInfo({
               success: (res) => {
                 userInfo = res.userInfo;
                 wx.setStorageSync("userInfo", userInfo);//本地存储个人信息
-                console.log(code, userInfo, data.mchid);
                 wx.request({
-                  url: config.GetOrSetOpenid,
+                  url: config.GetSaveUserOpenId,
                   data: {
                     code: code,
                     nickName: userInfo.nickName,
                     avaUrl: userInfo.avatarUrl,
                   },
-                  header: {
-                    'content-type': 'application/json'
-                  },
-                  method: 'post',
-                  success: function (res) {
-                    console.log(res)
-                    if (res.data.result) {
+                  header: { 'content-type': 'application/json' },
+                  method: 'POST',
+                  success: (res) => {
+                    if (res.data.res) {
                       //保存openid
                       wx.setStorageSync('openid', res.data.openid);
                       //保存用户类型
                       wx.setStorageSync('userType', res.data.userType);
+                      callback();
                     }
                   },
-                  fail: function (res) {
-                    console.log(res);
-                  },
-                  complete: function (res) {
-                    console.log(res);
-                  }
-
+                  fail: function (res) { },
+                  complete: function (res) { }
                 })
+
               }
             })
           } else {
-            console.log('获取用户登录态失败！' + res.errMsg)
+            console.log('openid已获取' + res.errMsg)
           }
         }
       },
-      fail: () => { //用户不予授权
-        console.log('用户不予授权')
-      }
+      fail() { }
     })
   },
 

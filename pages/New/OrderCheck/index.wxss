@@ -1,24 +1,50 @@
 /* pages/New/OrderCheck/index.wxss */
-.QiHao{
+
+.QiHao {
   width: 42rpx;
   margin-right: 14rpx;
 }
-.middle-m{
+
+.middle-m {
   padding-top: 30rpx;
   padding-bottom: 40rpx;
 }
-.AnNiu{
-  padding:13rpx 20rpx;
 
+.AnNiu {
+  padding: 13rpx 20rpx;
   text-align: center;
   margin: 14rpx 0;
   margin-left: 10rpx;
 }
-.purplea{
+
+.purplea {
   background-color: #e8f0ff;
   width: 93rpx;
   height: 42rpx;
   line-height: 42rpx;
   text-align: center;
   border-radius: 5px;
+}
+
+.color-block {
+  color: #353535;
+}
+
+.price {
+  font-weight: bold;
+}
+
+.box-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-end;
+}
+
+.box-right .box-right-num {
+  margin-bottom: 10rpx;
+}
+
+.num-margin-l {
+  margin-left: 54rpx;
 }
