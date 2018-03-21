@@ -10,8 +10,16 @@
       <view class='purplea purple fon-32 bold'>¥{{item.minPrice}} - ¥{{item.maxPrice}}</view>
     </view>
     <view class='flex fon-24 border-t-1 border-b-1 padding-lr-30  aitems-center bg-fff between'>
-      <view class='fon-26 c8'>{{item.browse}}人浏览</view>
-      <view bindtap='seeDetail' data-index='{{index}}' class='border AnNiu white purple-bg'>立即沟通</view>
+      <view class='fon-26 c8'>
+        <text class='text-type'>{{item.type?"已审核":"待审核"}}</text> {{item.browse}}人浏览
+      </view>
+      <view class='list-footer'>
+        <view bindtap='bindDelete' data-index='{{index}}' class='border purple AnNiu'>删除</view>
+        <view bindtap='seeDetail' data-index='{{index}}' class='border AnNiu white purple-bg'>修改需求</view>
+      </view>
     </view>
+  </view>
+  <view bindtap='seeDetailS' class='footer'>
+    发布需求
   </view>
 </view>

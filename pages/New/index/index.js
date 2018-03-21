@@ -52,12 +52,12 @@ Page({
     studentList: [{
       url: '../../images/LI_10.png',
       title: " 我的订单",
-      luJin: '../OrderCheck/index'
+      luJin: '../OrderCheckS/index'
     },
     {
       url: '../../images/LI_06.png',
       title: " 学习需求",
-      luJin: '../NeedSee/index'
+      luJin: '../NeedSeeS/index'
     },
     {
       url: '../../images/LI_14.png',
@@ -67,7 +67,7 @@ Page({
     {
       url: '../../images/LI_12.png',
       title: " 我的点评",
-      luJin: '../OrdeRreview/index'
+      luJin: '../OrdeRreviewS/index'
     },
     {
       url: '../../images/LI_16.jpg',
@@ -98,6 +98,9 @@ Page({
       vip: vip,
       teacherList: teacherList
     });
+    // this.setData({
+    //   userType: 2
+    // })
   },
   jump(e) {  // 跳转
     let openid = wx.getStorageSync('openid');

@@ -295,6 +295,10 @@ page {
   margin-bottom: 20rpx;
 }
 
+.margin-r-10 {
+  margin-right: 14rpx;
+}
+
 .border-R-0 {
   border-right: 0 !important;
 }
@@ -310,6 +314,10 @@ page {
 }
 
 /*宽度  */
+
+.width-150 {
+  width: 150rpx;
+}
 
 .width-135 {
   width: 135rpx;

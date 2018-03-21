@@ -36,7 +36,7 @@
             <image wx:for="{{listq}}" class='img-xing' mode='widthFix' src='../../images/hui_07.png'></image>
           </view>
           <view class='di flex di2'>
-            <view class='flex aitems-center img-xing' wx:for="{{listq}}">
+            <view class='flex aitems-center img-xing' wx:for="{{listq}}" wx:key='{{index}}'>
               <image data-index='{{index}}' wx:if="{{index<4.5}}" class='banXin' mode='widthFix' src='../../images/BanXIn_03.png'></image>
               <image data-index='{{index}}' wx:if="{{index+0.5<4.5}}" class='banXin' mode='widthFix' src='../../images/xingr_03.png'></image>
             </view>

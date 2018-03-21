@@ -41,7 +41,7 @@ module.exports = {
     title = title ? title : '提示';
     showCancel = showCancel ? true : false;
     confirmText = confirmText ? confirmText : '确定';
-    success = success ? success : function (res) { };
+    success = typeof (success) === 'function' ? success : function (res) { };
     wx.showModal({
       title: title,
       content: content,
@@ -50,10 +50,24 @@ module.exports = {
       success: success
     });
   },
+  //拍摄视频或从手机相册中选视频
+  chooseVideo(success) {
+    success = typeof (success) === 'function' ? success : function (res) { };
+    wx.chooseVideo({
+      sourceType: ['album', 'camera'],
+      compressed: true,
+      maxDuration: 60,
+      camera: 'back',
+      success: success,
+      complete: function (res) {
+        console.log(res);
+      }
+    })
+  },
   //从本地相册选择图片或使用相机拍照
   chooseImage(success, count) {
     count = parseInt(count) ? count : 9;
-    success = success ? success : function (res) { };
+    success = typeof (success) === 'function' ? success : function (res) { };
     wx.chooseImage({
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
@@ -61,7 +75,8 @@ module.exports = {
       success: success,
     })
   },
-  openLocation(latitude, longitude, scale) {  //查看位置
+  //查看位置
+  openLocation(latitude, longitude, scale) {
     scale = scale ? parseInt(scale) : scale;
     wx.openLocation({
       latitude: latitude,
@@ -71,6 +86,7 @@ module.exports = {
   },
   //获取openid
   getOpenid(callback) {
+    callback = typeof (callback) === 'function' ? callback : function (res) { };
     let openid,
       code,
       userInfo;

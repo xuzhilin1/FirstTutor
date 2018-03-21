@@ -49,10 +49,30 @@ Page({
   },
 
   jump(e) {// 跳转
-    let url = e.currentTarget.dataset.id
+    let url = e.currentTarget.dataset.url,
+      index = e.currentTarget.dataset.index;
+    if (index == 3) {
+      this.uploadPhoto();
+      return;
+    } else if (index == 4) {
+      this.uploadVideo();
+      return;
+    }
     wx.navigateTo({
       url: url,
     })
+  },
+  uploadPhoto() { //上传证件照
+    $common.chooseImage(function (res) {
+      let image = res.tempFilePaths[0];
+      console.log(res.tempFilePaths[0]);
+    }.bind(this), 1);
+  },
+  uploadVideo() { //上传上课视频
+    $common.chooseVideo(function (res) {
+      let url = res.tempFilePath;//文件路径
+      console.log(res);
+    }.bind(this));
   },
 
   /**

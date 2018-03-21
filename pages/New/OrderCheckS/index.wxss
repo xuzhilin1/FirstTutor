@@ -46,7 +46,7 @@
 }
 
 .num-margin-l {
-  margin-left: 54rpx;
+  margin-left: 60rpx;
 }
 
 .btn-box {
@@ -60,4 +60,29 @@
 
 .btn-box::after {
   border: none;
+}
+
+.info {
+  width: 100%;
+  display: flex;
+  padding: 10rpx 30rpx;
+  background: #fff;
+  border-top: 1px solid #e0e0e0;
+  font-size: 26rpx;
+  justify-content: space-between;
+  box-sizing: border-box;
+  align-items: center;
+  color: #353535;
+}
+
+.info-name {
+  display: flex;
+  align-items: center;
+}
+
+.info-image {
+  width: 46rpx;
+  height: 46rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
 }

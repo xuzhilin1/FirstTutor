@@ -1,38 +1,41 @@
-// pages/New/OrderCheck/index.js
 const $common = require('../../../utils/common.js');
+const app = getApp();
 Page({
   data: {
-   
-    pagesData: [{
-      name: '口语一对多',
-      isGroup: true,
-      paymentTime: '2017-08-06 13:31',
-      groupTime: '2017-08-06 13:31',
-      price: '200',
-      courseTime: '周二上午/9:00-11:00',
-      PaymentNum: 5,
-      groupNum: 2,
-    }, {
-      name: '口语一对一',
-      isGroup: false,
-      paymentTime: '2017-08-06 13:31',
-      groupTime: '2017-08-06 13:31',
-      price: '200',
-      courseTime: '周二上午/9:00-11:00',
-      PaymentNum: 5,
-      groupNum: 2,
-    }],
+    input: '',
+    scoure: 0,
   },
-  orderDetail(e) {  // 看详情
-    let index = e.currentTarget.dataset.index,
-      pagesData = this.data.pagesData;
-    wx.navigateTo({
-      url: '../orderDetails/index',
+  bindScoure(e) { //评分
+    this.setData({
+      scoure: parseInt(e.currentTarget.dataset.index + 1)
     })
   },
+  bindInput(e) {
+    this.setData({
+      input: e.detail.value
+    })
+  },
+  submit() {
+    let input = this.data.input,
+      scoure = this.data.scoure;
+    if (scoure <= 0) {
+      $common.showModal('请给该外教打分');
+      return;
+    }
+    if (input.trim().length <= 0) {
+      $common.showModal('请填写外教介绍');
+      return;
+    }
+    // 发送请求
+  },
+
   onLoad: function (options) {
 
   },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
   onReady: function () {
 
   },
@@ -41,7 +44,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.init();
   },
 
   /**
