@@ -99,6 +99,7 @@ module.exports = {
           if (openid === null || openid === '') {
             wx.getUserInfo({
               success: (res) => {
+                console.log(res);
                 userInfo = res.userInfo;
                 wx.setStorageSync("userInfo", userInfo);//本地存储个人信息
                 wx.request({
@@ -111,6 +112,7 @@ module.exports = {
                   header: { 'content-type': 'application/json' },
                   method: 'POST',
                   success: (res) => {
+                    
                     if (res.data.res) {
                       //保存openid
                       wx.setStorageSync('openid', res.data.openid);
@@ -120,7 +122,7 @@ module.exports = {
                     }
                   },
                   fail: function (res) { },
-                  complete: function (res) { }
+                  complete: function (res) { console.log(res); }
                 })
 
               }

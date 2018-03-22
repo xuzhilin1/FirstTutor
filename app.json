@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/Home/foreignTeacher/index",
     "pages/Home/Home/index",
     "pages/Home/CourseInformation/index",
     "pages/Home/teachersInformation/index",
@@ -34,7 +35,6 @@
     "pages/Home/sureOrder/index",
     "pages/Home/SpellingRules/index",
     "pages/Home/SpellGroup/index",
-    "pages/Home/foreignTeacher/index",
     "pages/Home/Learningneeds/index",
     "pages/Home/orderdetail/index",
     "pages/Home/Learning/index",

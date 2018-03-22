@@ -1,101 +1,97 @@
 <!--pages/Home/foreignTeacher/index.wxml-->
-<view class='padding-lr-30 margin-t-20 '>
-  <view class='flex  top aitems-center'>
-    <image class='img-top' mode='widthFix' src='../../images/SEARCH_03.JPG'></image>
-    <input class='flex1 fon-26' placeholder-class='fon-26' placeholder='课程名称'></input>
+<!--  header  -->
+<view class='search-box'>
+  <view class='search'>
+    <image class='img-top' src='../../images/search_03.jpg'></image>
+    <input bindinput='bindInput' value='{{input}}' class='flex1 fon-26' placeholder-class='fon-26' placeholder='课程名称'></input>
   </view>
 </view>
-
+<!--  table  -->
 <view class='flex fon-26 padding-tb-20 padding-lr-30  border-t-1 border-b-1 margin-t-20  between aitems-center'>
+  <!--  区域  -->
   <view class='flex aitems-center'>
     <view>
-      <picker class=' flex' value="{{index}}" range="{{array}}" bindchange="bindPickerChange">
+      <picker class=' flex' value="{{areaIndex}}" range="{{areaList}}" range-key='area' bindchange="bindAreaChange">
         <view class='flex picker aitems-center '>
           <view class="fon-26 flex aitems-center yanse ">
-            <view class='c72'>{{array[index]}}</view>
-             <image mode='widthFix' class='xia margin-l-10' src='../../images/xia_07.jpg'></image>
+            <view class='c72'>{{areaIndex===-1?"区域":areaList[areaIndex].area}}</view>
+            <image mode='widthFix' class='xia margin-l-10' src='../../images/xia_07.jpg'></image>
           </view>
         </view>
       </picker>
     </view>
   </view>
-   
-    <view class='flex aitems-center'>
+  <!--  商圈  -->
+  <view class='flex aitems-center'>
     <view>
-      <picker class=' flex' value="{{index1}}" range="{{array1}}" bindchange="bindPickerChange1">
+      <picker class=' flex' value="{{courseTypeIndex}}" range="{{courseTypeList}}" bindchange="bindCourseType">
         <view class='flex picker aitems-center '>
           <view class="fon-26 flex aitems-center yanse ">
-            <view class='c72'>{{array1[index1]}}</view>
-             <image mode='widthFix' class='xia margin-l-10' src='../../images/xia_07.jpg'></image>
+            <view class='c72'>{{courseTypeIndex===-1?"商圈":courseTypeList[courseTypeIndex]}}</view>
+            <image mode='widthFix' class='xia margin-l-10' src='../../images/xia_07.jpg'></image>
           </view>
         </view>
       </picker>
     </view>
   </view>
-
-      <view class='flex aitems-center'>
+  <!-- 时间段 -->
+  <view class='flex aitems-center'>
     <view>
-      <picker class=' flex' value="{{index2}}" range="{{array2}}" bindchange="bindPickerChange2">
+      <picker class=' flex' value="{{timeIndex}}" range="{{timeList}}" bindchange="bindTimeChange">
         <view class='flex picker aitems-center '>
           <view class="fon-26 flex aitems-center yanse ">
-            <view class='c72'>{{array2[index2]}}</view>
-             <image mode='widthFix' class='xia margin-l-10' src='../../images/xia_07.jpg'></image>
+            <view class='c72'>{{timeIndex===-1?"时间段":timeList[timeIndex]}}</view>
+            <image mode='widthFix' class='xia margin-l-10' src='../../images/xia_07.jpg'></image>
           </view>
         </view>
       </picker>
     </view>
   </view>
-        <view class='flex aitems-center'>
+  <!--  价格区间  -->
+  <view class='flex aitems-center'>
     <view>
-      <picker class=' flex' value="{{index3}}" range="{{array3}}" bindchange="bindPickerChange3">
+      <picker mode='multiSelector' class=' flex' value="{{priceIndex}}" range="{{priceList}}" bindchange="bindPriceChange">
         <view class='flex picker aitems-center '>
           <view class="fon-26 flex aitems-center yanse ">
-            <view class='c72'>{{array3[index3]}}</view>
-             <image mode='widthFix' class='xia margin-l-10' src='../../images/xia_07.jpg'></image>
+            <view class='c72'>{{priceIndex[0]===-1?"价格区间":priceList[0][priceIndex[0]] + '-' + priceList[1][priceIndex[1]]}}</view>
+            <image mode='widthFix' class='xia margin-l-10' src='../../images/xia_07.jpg'></image>
           </view>
         </view>
       </picker>
     </view>
   </view>
 </view>
-
-<view class='flex border-b-1 aitems-center  padding-lr-30 padding-tb-20'>
-    <image class='touXiang margin-r-20' src='../../images/ren_03.png'></image>
-    <view class='flex1'>
-      <view class='fon-26 margin-b-10 flex aitems-center '>
-        Emily
-        <image class='HuangGuan margin-l-10' mode='widthFix' src='../../images/guan_03.png'></image>
-        <view class='zonga'>
-          <view class='di'>
-            <image wx:for="{{listq}}" class='img-xing' mode='widthFix' src='../../images/hui_07.png'></image>
-          </view>
-         <view class='di flex di2'>
-            <view class='flex aitems-center img-xing' wx:for="{{listq}}">
-              <image data-index='{{index}}' wx:if="{{index<4.5}}" class='banXin' mode='widthFix' src='../../images/BanXIn_03.png'></image>
-              <image data-index='{{index}}' wx:if="{{index+0.5<4.5}}" class='banXin' mode='widthFix' src='../../images/xingr_03.png'></image>
+<!--  list  -->
+<view bindtap='teacherInfo' data-index='{{index}}' wx:for='{{listData}}' wx:key='{{index}}' class='list border-b-1'>
+  <view class='flex aitems-center padding-lr-30 padding-tb-20 bg-fff teacher-box'>
+    <view class='teacher-l'>
+      <image class='touXiang margin-r-20 touxiang-image' src='{{item.image}}'></image>
+      <view class='flex1'>
+        <view class='fon-26 margin-b-10 flex aitems-center '>
+          {{item.userName}}
+          <!-- <image class='HuangGuan margin-l-10' mode='widthFix' src='{{item.country}}'></image> -->
+          <image wx:if='{{item.isVip}}' class='HuangGuan margin-l-10' mode='widthFix' src='../../images/guan_03.png'></image>
+          <!--  星星  -->
+          <view class='score'>
+            <view class='score-all'>
+              <image wx:for="{{5}}" wx:key='{{index}}' class='score-list' mode='widthFix' src='../../images/hui_07.png'></image>
+            </view>
+            <view class='score-score'>
+              <view class='score-list' wx:for="{{5}}" wx:for-item='value' wx:for-index='key' wx:key='{{index}}'>
+                <!--  整星  -->
+                <image wx:if="{{item.listq - 0.5 > key ? key <= item.listq : key < item.listq - 1}}" class='score-img' src='../../images/xian_05.png'></image>
+                <!--  半星  -->
+                <image wx:if="{{item.listq - 0.5 > key ? false : key < item.listq }}" class='score-image' src='../../images/BanXIn_03.png'></image>
+              </view>
             </view>
           </view>
         </view>
-      </view>
-      <view class='fon-24 c8'>英式发音 / 喜欢旅游 / 明星老师</view>
-    </view>
-  </view>
-
-  <view class='flex border-b-1 aitems-center  padding-lr-30 padding-tb-20'>
-    <image class='touXiang margin-r-20' src='../../images/ren_03.png'></image>
-    <view class='flex1'>
-      <view class='fon-26 margin-b-10 flex aitems-center '>
-        Emily
-        <image class='HuangGuan margin-l-10' mode='widthFix' src='../../images/guan_03.png'></image>
-        <view class='zonga'>
-          <view class='di'>
-            <image wx:for="{{listq}}" class='img-xing' mode='widthFix' src='../../images/xingxing_03.jpg'></image>
-          </view>
-          <view class='di di2'>
-            <image wx:for="{{listq}}" wx:if="{{item.index<=3}}" class='img-xing' mode='widthFix' src='../../images/xing_14.jpg'></image>
-          </view>
+        <view class='fon-24 c8'>
+          <black wx:for='{{item.userList}}' wx:key='{{index}}'>
+            <text wx:if='{{index!=0}}'>/</text>{{item}}
+          </black>
         </view>
       </view>
-      <view class='fon-24 c8'>英式发音 / 喜欢旅游 / 明星老师</view>
     </view>
   </view>
+</view>

@@ -65,15 +65,20 @@ Page({
     }],
     allComment: false
   },
+  getViewTop() { //获取目标节点的位置
+
+  },
   bindNavbar(e) { //nav滚动页面
     let index = parseInt(e.currentTarget.dataset.index),
       navbarList = this.data.navbarList;
     if (index === 0) return;
     let id = navbarList[index].id;
+    console.log(id);
     let query = wx.createSelectorQuery(); //获取节点
     query.select(`#${id}`).boundingClientRect();
     query.selectViewport().scrollOffset();
     query.exec(function (res) {
+      console.log(res[0].top, res[1].scrollTop);
       wx.pageScrollTo({ //滚动条
         scrollTop: res[0].top,
         duration: 300
@@ -104,7 +109,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    this.getViewTop();
   },
 
   /**
