@@ -7,7 +7,8 @@ Page({
     //   'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
     //   'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'
     // ],
-    status: 1,
+    status: 0, //1 活动已结束 0 活动未结束
+    isSign: 0, // 1 立即报名活动 0 我的活动查看
     image: '../../images/DE_03.jpg',
     context: '从零开始学英语，听说读写，全面升级',
     presonNum: "infinity",
@@ -32,12 +33,19 @@ Page({
   openLocation() { //查看地址所在位置
     $common.openLocation(this.data.latitude, this.data.longitude);
   },
+  activitySign() {
+    wx.navigateTo({
+      url: '../../Home/activitySign/index',
+    })
+  },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      isSign: parseInt(options.isSign)
+    })
   },
 
   /**

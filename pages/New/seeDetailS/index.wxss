@@ -16,7 +16,7 @@ page {
 
 .list-textArea {
   box-sizing: border-box;
-  height: 100rpx;
+  height: 100%;
   width: 100%;
 }
 

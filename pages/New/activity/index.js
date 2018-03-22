@@ -26,7 +26,7 @@ Page({
     let index = e.currentTarget.dataset.index,
       pagesData = this.data.pagesData;
     wx.navigateTo({
-      url: '../activityDetail/index',
+      url: '../activityDetail/index?isSign=0',
     })
   },
   onLoad: function (options) {

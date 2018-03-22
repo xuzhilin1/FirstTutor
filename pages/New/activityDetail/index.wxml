@@ -48,4 +48,5 @@
   </view>
   <!--  -->
   <view wx:if='{{status===1}}' class='footer white fon-30 JieShu'>活动已结束</view>
+  <view bindtap='activitySign' wx:if='{{isSign===1&&status===0}}' class='footer white fon-30 JieShu footer-btn'>立即报名</view>
 </view>

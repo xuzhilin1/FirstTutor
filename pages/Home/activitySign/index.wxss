@@ -1,0 +1,23 @@
+.JieShu {
+  height: 80rpx;
+  line-height: 80rpx;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.footer-btn {
+  background-color: #7c99d0;
+}
+
+.box-box {
+  width: 110rpx;
+}
+
+.list-textArea {
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+}

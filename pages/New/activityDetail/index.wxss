@@ -67,3 +67,7 @@
 .context-list {
   line-height: 36rpx;
 }
+
+.footer-btn {
+  background-color: #7c99d0;
+}

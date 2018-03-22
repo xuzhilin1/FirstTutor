@@ -2,7 +2,7 @@
   <view wx:for='{{pagesData}}' wx:key='{{index}}' class='list margin-t-20'>
     <view class='flex aitems-center padding-lr-30 padding-tb-20 bg-fff teacher-box'>
       <view class='teacher-l'>
-        <image class='touXiang margin-r-20' src='{{item.image}}'></image>
+        <image class='touXiang margin-r-20 touxiang-image' src='{{item.image}}'></image>
         <view class='flex1'>
           <view class='fon-26 margin-b-10 flex aitems-center '>
             {{item.userName}}

@@ -98,9 +98,9 @@ Page({
       vip: vip,
       teacherList: teacherList
     });
-    // this.setData({
-    //   userType: 2
-    // })
+    this.setData({
+      userType: 2
+    })
   },
   jump(e) {  // 跳转
     let openid = wx.getStorageSync('openid');
