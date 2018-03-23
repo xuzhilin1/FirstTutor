@@ -8,6 +8,7 @@ Page({
     userList: ['美式发音', '经验丰富', '3年+教龄'],
     isVip: true,
     listq: 3.5,
+    sex: 0, // 0  女 1 男
     phone: 13456789789,
     isPhone: false,
     areaList: ['长宁区', '徐汇区'],
@@ -65,38 +66,42 @@ Page({
     }],
     allComment: false
   },
-  getViewTop() { //获取目标节点的位置
-
-  },
   bindNavbar(e) { //nav滚动页面
     let index = parseInt(e.currentTarget.dataset.index),
       navbarList = this.data.navbarList;
     if (index === 0) return;
     let id = navbarList[index].id;
-    console.log(id);
-    let query = wx.createSelectorQuery(); //获取节点
-    query.select(`#${id}`).boundingClientRect();
-    query.selectViewport().scrollOffset();
-    query.exec(function (res) {
-      console.log(res[0].top, res[1].scrollTop);
-      wx.pageScrollTo({ //滚动条
-        scrollTop: res[0].top,
-        duration: 300
+    let Hquery = wx.createSelectorQuery();
+    Hquery.select('#_headerTop').boundingClientRect();
+    Hquery.exec(function (res) {
+      let HTop = Math.abs(res[0].top); //本页面第一个元素与屏幕的距离
+      console.log(HTop);
+      let query = wx.createSelectorQuery(); //获取节点
+      query.select(`#${id}`).boundingClientRect();
+      query.exec(function (res) {
+        //res[0].top  获取的是目标节点到屏幕顶端的距离
+        wx.pageScrollTo({ //滚动条
+          scrollTop: HTop + res[0].top,
+          duration: 300
+        })
       })
-    })
+    });
   },
   lookAllComment() { //查看全部评论
     this.setData({
       allComment: true
     })
   },
-
   courseInfo(e) {
     let index = e.currentTarget.dataset.index,
       courseList = this.data.courseList;
+    console.log(courseList[index]);
     wx.navigateTo({
-      url: '../CourseInformation/index',
+      url: '../CourseInformation/index?isGroup=' + courseList[index].isGroup
     })
+  },
+  getListData() {
+
   },
   /**
    * 生命周期函数--监听页面加载
@@ -109,7 +114,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    this.getViewTop();
+    this.getListData();
   },
 
   /**

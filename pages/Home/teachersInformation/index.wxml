@@ -1,6 +1,6 @@
 <view>
   <!--  teacher userInfo  -->
-  <view class='ZuiShang'>
+  <view id='_headerTop' class='ZuiShang'>
     <image class='bg-image' src='../../images/bg-all_02.jpg'></image>
     <view class='white flex aitems-center padding-lr-30 padding-tb-20 teacher-box header-box'>
       <view class='teacher-l'>
@@ -8,8 +8,9 @@
         <view class='flex1'>
           <view class='fon-26 margin-b-10 flex aitems-center '>
             {{userName}}
-            <image class='HuangGuan margin-l-10' mode='widthFix' src='../../images/nv_03.png'></image>
-            <image wx:if='{{isVip}}' class='HuangGuan margin-l-10' mode='widthFix' src='../../images/guan_03.png'></image>
+            <image wx:if='{{sex===1}}' class='HuangGuan margin-l-10' mode='widthFix' src='../../images/nan.png'></image>
+            <image wx:if='{{sex===0}}' class='HuangGuan margin-l-10' mode='widthFix' src='../../images/nv.png'></image>
+            <image wx:if='{{isVip}}' class='HuangGuan margin-l-10' mode='widthFix' src='../../images/guan.png'></image>
             <!--  星星  -->
             <view class='score'>
               <view class='score-all'>

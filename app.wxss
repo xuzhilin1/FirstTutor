@@ -253,6 +253,10 @@ page {
   padding-left: 20rpx;
 }
 
+.padding-l-30 {
+  padding-left: 30rpx;
+}
+
 /*marging  */
 
 .margin-t-20 {

@@ -30,6 +30,7 @@ page {
   background-color: #ececec;
   width: 100%;
 }
-.no-btn{
+
+.no-btn {
   background: #ececec;
 }

@@ -92,11 +92,11 @@ page {
 
 /*滚动条不显示 */
 
-::-webkit-scrollbar {
+ ::-webkit-scrollbar {
   width: 0;
   height: 0;
   color: transparent;
-}
+} 
 
 .navbar {
   flex: none;

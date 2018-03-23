@@ -1,27 +1,7 @@
 <!--pages/Home/SpellingRules/index.wxml-->
-<view class='padding-tb-20  padding-lr-30 '>
+<view wx:for='{{pagesData}}' wx:key='{{index}}' class='padding-tb-20  padding-lr-30 '>
   <view class='fon-26'>
-    <view class='fon-30 margin-b-20'> 一、拼团有效期</view>
-    拼团有效期是字开团时刻起24小时内，如果距离活动结束时间小于24小时，则以活动结束时间为准。
-  </view>
-</view>
-
-<view class='padding-tb-20  padding-lr-30 '>
-  <view class='fon-26'>
-    <view class='fon-30 margin-b-20'> 二、拼团成功</view>
-    拼团有效期内，支付的用户达到参团人数，则拼团成功。
-  </view>
-</view>
-
-<view class='padding-tb-20  padding-lr-30 '>
-  <view class='fon-26'>
-    <view class='fon-30 margin-b-20'> 三、拼团失败</view>
-    拼团有效期后，未达成相应参团人数的团，则该团失败。 拼团失败的订单，系统会在1-7个工作日内处理退款，系统处理后1-10个工作日内原路退回至原支付账户中。
-  </view>
-</view>
-<view class='padding-tb-20  padding-lr-30 '>
-  <view class='fon-26'>
-    <view class='fon-30 margin-b-20'> 四、等待成团中如何退款？</view>
-   拼团有效期后，未达成相应参团人数的要求，则该团失败，系统会自动退款
+    <view class='fon-30 margin-b-20'>{{item.title}}</view>
+    <view wx:for='{{item.context}}'>{{item}}</view>
   </view>
 </view>

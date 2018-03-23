@@ -104,12 +104,12 @@ Page({
   },
   jump(e) {  // 跳转
     let openid = wx.getStorageSync('openid');
-    if (openid === null || openid === '') {
-      $common.showModal('我们需要您的个人信息', false, function () {
-        $common.getOpenid();
-      }.bind(this));
-      return;
-    }
+    // if (openid === null || openid === '') {
+    //   $common.showModal('我们需要您的个人信息', false, function () {
+    //     $common.getOpenid();
+    //   }.bind(this));
+    //   return;
+    // }
     let url = e.currentTarget.dataset.url;
     wx.navigateTo({
       url: url,
@@ -120,7 +120,29 @@ Page({
 
   },
   onReady: function () {
-    this.init();
+    // this.init();
+    let code;
+    wx.login({
+      success: (res) => {
+        if (res.code) {
+          //获取code
+          code = res.code;
+            wx.getUserInfo({
+              success: (res) => {
+                console.log(res);
+               let userInfo = res.userInfo;
+                wx.setStorageSync("userInfo", userInfo);//本地存储个人信息
+                this.setData({
+                  userInfo: wx.getStorageSync('userInfo'),
+                  userType: wx.getStorageSync('userType'),
+                })
+              }
+            })
+         
+        }
+      },
+      fail() { }
+    })
   },
 
   /**
