@@ -1,104 +1,262 @@
 /* pages/Home/SpellGroup/index.wxss */
-.QiHao{
+
+.QiHao {
   width: 42rpx;
   margin-right: 14rpx;
 }
-.middle-m{
+
+.middle-m {
   padding-top: 30rpx;
   padding-bottom: 40rpx;
 }
-.AnNiu{
-  padding:13rpx 20rpx;
 
+.AnNiu {
+  padding: 13rpx 20rpx;
   text-align: center;
   margin: 14rpx 0;
   margin-left: 10rpx;
 }
-.purplea{
+
+.purplea {
   background-color: #e8f0ff;
   width: 93rpx;
   height: 42rpx;
   line-height: 42rpx;
   text-align: center;
 }
-.zonga{
+
+.zonga {
   position: relative;
   min-width: 255rpx;
   margin-top: 30rpx;
   margin-left: 15rpx;
 }
-.img-m{
+
+.img-m {
   height: 300rpx;
   width: 100%;
   display: block;
   border-radius: 10rpx;
 }
-.img-xing{
+
+.img-xing {
   width: 25rpx;
   margin-left: 10rpx;
 }
-.di{
+
+.di {
   position: absolute;
   z-index: 10;
   left: 0;
   bottom: 0;
 }
-.di2{
+
+.di2 {
   position: absolute;
   z-index: 90;
   left: 0;
   bottom: 0;
 }
-.phone{
+
+.phone {
   width: 26rpx;
   margin-right: 10rpx;
 }
-.padding-25{
-  padding:25rpx 30rpx 25rpx 30rpx;
+
+.padding-25 {
+  padding: 25rpx 30rpx 25rpx 30rpx;
 }
-.address{
+
+.address {
   width: 26rpx;
   margin-right: 25rpx;
 }
 
 /*框  */
-.Kuang{
+
+.Kuang {
   width: 100%;
   min-height: 378rpx;
   background-color: #e8f0ff;
   padding-top: 45rpx;
-    position: relative;
+  position: relative;
 }
-.btn{
+
+.btn {
   width: 100%;
 }
-.Soa{
+
+.Soa {
   width: 95rpx;
   height: 95rpx;
   border-radius: 50%;
   display: block;
 }
-.waiceng{
+
+.waiceng {
   position: relative;
   margin: 0 10rpx;
 }
-.tuanZhang{
+
+.tuanZhang {
   width: 70rpx;
   height: 23rpx;
-  text-align: center;
-  line-height: 23rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 20rpx;
   position: absolute;
   left: 10rpx;
   bottom: -5rpx;
 }
-.text1{
-    width: 0;
-    height: 0;
-    border-right: 20rpx solid transparent;
-    border-bottom: 20rpx solid #e8f0ff;
-    border-left: 20rpx solid transparent;
-    position: absolute;
-    left: 48%;
-    top: -20rpx;
+
+.text1 {
+  width: 0;
+  height: 0;
+  border-right: 20rpx solid transparent;
+  border-bottom: 20rpx solid #e8f0ff;
+  border-left: 20rpx solid transparent;
+  position: absolute;
+  left: 48%;
+  top: -20rpx;
+}
+
+/*  评分  */
+
+.score {
+  position: relative;
+  display: flex;
+}
+
+.score-all {
+  display: flex;
+}
+
+.score-score {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.score-list {
+  width: 26rpx;
+  height: 26rpx;
+  margin-left: 6rpx;
+  display: flex;
+}
+
+.score-img {
+  width: 100%;
+  height: 100%;
+}
+
+.score-image {
+  height: 100%;
+  width: 50%;
+}
+
+.teacher-box {
+  display: flex;
+  justify-content: space-between;
+}
+
+.teacher-l {
+  display: flex;
+  align-items: center;
+}
+
+.teacher-chat {
+  width: 40rpx;
+}
+
+/*  评分 end  */
+
+.view-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.core {
+  position: relative;
+  padding-top: 40rpx;
+}
+
+.group-fail-title {
+  font-size: 32rpx;
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.group-fail-context {
+  font-size: 26rpx;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40rpx;
+}
+
+.group-success-title {
+  font-size: 32rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  margin-bottom: 40rpx;
+}
+
+.group-success-title image {
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 10rpx;
+  border-radius: 50%;
+}
+
+.groupSuccess {
+  padding: 40rpx 30rpx;
+}
+
+.image-radius {
+  border-radius: 50%;
+}
+
+.btn-radius {
+  border-radius: 6rpx;
+}
+
+.btn-fa {
+  margin: 40rpx 0;
+}
+
+.orderimg {
+  height: 70rpx;
+  width: 70rpx;
+  margin-right: 20rpx;
+}
+
+.Tuan {
+  width: 75rpx;
+  height: 38rpx;
+  line-height: 38rpx;
+  text-align: center;
+  margin-left: 15rpx;
+  border-radius: 5px;
+}
+
+.wen {
+  border: 1px dashed #7c99d0;
+  border-radius: 50%;
+  background: #fff;
+  color: #7c99d0;
+  font-weight: bold;
+  width: 95rpx;
+  height: 95rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  font-size: 50rpx;
+  padding-left: 14rpx;
 }

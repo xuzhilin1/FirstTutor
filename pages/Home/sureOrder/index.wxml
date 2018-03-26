@@ -1,5 +1,4 @@
 <view class='big-outer'>
-
   <view class=''>
     <!-- 一对一 -->
     <view wx:if='{{!isGroup}}' class=' middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
@@ -97,7 +96,7 @@
   <view wx:if='{{isGroupHead}}' class='flex bg-fff  height-85 padding-lr-30 aitems-center border-b-1 between'>
     <view class='flex1 aitems-center  fon-30 flex list-box'>
       <view class='width-150'>上课时间</view>
-      <picker bindchange='bindTimeChange' class='list-input' value='{{timeIndex}}' range='{{timeList}}' mode='multiSelector'>
+      <picker bindchange='bindTimeChange' class='list-input' value='{{timeIndex}}' range='{{timeList}}'>
         <input disabled='disabled' value='{{startCourseTime}}' type='text' class='ca list-box-inpu' placeholder-class='ca' placeholder='（请设置上课开始时间）'></input>
       </picker>
     </view>

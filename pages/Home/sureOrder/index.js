@@ -21,12 +21,17 @@ Page({
     courseAddress: '上海市浦东新区张衡路666号',
     studentName: '',
     studentPhone: '',
-    timeList: [
-      ['9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', "19:00", '20:00', '21:00'],
-      ['9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', "19:00", '20:00', '21:00'],
-    ],
-    timeIndex: [0, 1],
+    timeList: [],
+    timeIndex: -1,
 
+  },
+  initCourseTimeData() { //初始化上课时间数据
+    let courseLong = this.data.courseLong,
+      startCourseStage = this.data.startCourseStage;
+    let arr = ["9:00", '10:00'];
+    this.setData({
+      timeList: arr
+    })
   },
   bindStudentName(e) { //姓名
     this.setData({
@@ -40,8 +45,9 @@ Page({
   },
   bindTimeChange(e) { //上课时间切换
     let timeIndex = e.detail.value,
-      timeList = this.data.timeList,
-      startCourseTime = `${timeList[0][timeIndex[0]]}-${timeList[1][timeIndex[1]]}`;
+      timeList = this.data.timeList[timeIndex].split(':')[0],
+      courseLong = this.data.courseLong,
+      startCourseTime = `${timeList}:00-${parseInt(timeList) + courseLong}:00`;
     this.setData({
       timeIndex: timeIndex,
       startCourseTime: startCourseTime
@@ -84,7 +90,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    this.initCourseTimeData();
   },
 
   /**
