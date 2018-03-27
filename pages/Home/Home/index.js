@@ -1,13 +1,47 @@
 const $common = require('../../../utils/common.js');
 Page({
   data: {
-    imgUrls: [
-      'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-      'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-      'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'
-    ],
-    activity: '../../images/ceshia_10.jpg',
+    banList: [],
+    activity: {},
     listData: [],
+  },
+  getBannerData() { //获取轮播图数据
+    $common.request(
+      "POST",
+      $common.config.GetBannerImgs,
+      null,
+      function (res) {
+        if (res.data.res) {
+          let banList = res.data.banList;
+          this.setData({
+            banList: banList
+          })
+        } else {
+          // this.getBannerData();
+        }
+      }.bind(this),
+      null, function (res) {
+        console.log(res);
+      }
+    );
+  },
+  getActivity() { //获取最新活动
+    $common.request(
+      "POST",
+      $common.config.GetLastestAtyInfo,
+      null,
+      function (res) {
+        if (res.data.res) {
+          this.setData({
+            activity: res.data.activity
+          })
+        } else {
+          // this.getActivity();
+        }
+      }.bind(this), null, function (res) {
+        console.log(res);
+      }
+    );
   },
   getListData() {
     let arr = [{
@@ -43,18 +77,21 @@ Page({
       url: '../teachersInformation/index',
     })
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
+  init() { //进入页面初始化
+    let openid = wx.getStorageSync('openid');
+    if (openid === null || openid === '') {
+      $common.getOpenid(); //获取用户信息及openid；
+      return;
+    }
+  },
+  onLoad(options) {
 
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
+  onReady() {
+    this.getBannerData();
+    this.getActivity();
     this.getListData();
+    this.init();
   },
 
   /**
@@ -81,14 +118,15 @@ Page({
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function (res) {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function (res) {
+    console.log(111);
   },
 
   /**

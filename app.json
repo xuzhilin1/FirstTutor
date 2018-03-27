@@ -1,8 +1,10 @@
 {
   "pages": [
     "pages/Home/Home/index",
-    "pages/Home/sureOrder/index",
+    "pages/New/index/index",
+    "pages/Home/SpellGroup/index",
     "pages/Home/CourseInformation/index",
+    "pages/Home/sureOrder/index",
     "pages/Home/activity/index",
     "pages/Home/activitySign/index",
     "pages/Home/Success/index",
@@ -15,7 +17,6 @@
     "pages/Home/Learningneeds/index",
     "pages/Home/SpellingRules/index",
     "pages/Home/Groupsuccess/index",
-    "pages/Home/SpellGroup/index",
     "pages/Home/teachersInformation/index",
     "pages/Home/BuySuccess/index",
     "pages/New/orderDetailsS/index",
@@ -23,7 +24,6 @@
     "pages/New/GroupList/index",
     "pages/New/releaseRemark/index",
     "pages/New/NeedSeeS/index",
-    "pages/New/index/index",
     "pages/New/OrdeRreviewS/index",
     "pages/New/ClassTime/index",
     "pages/New/ReleaseCourse/index",

@@ -1,4 +1,4 @@
-//本地存储 userInfo openid userType
+//本地存储 userInfo openid userType teacherStatus
 const data = {
   //adminsid:"1490463872",
   //appid: "wx978aabc5088a48c3",
@@ -12,12 +12,24 @@ const data = {
 const phoneReg = /^1[34578]\d{9}$/;
 const host = "1-zhao.com";
 const config = {
+  /*
+    首页
+   */
+  //获取首页banner图片列表
+  GetBannerImgs: `http://wj.${host}/LittleProgram/SystemSetup/GetBannerImgs`,
+  //获取首页最新活动
+  GetLastestAtyInfo: `http://wj.${host}/LittleProgram/Activity/GetLastestAtyInfo`,
+  /*
+    我的
+   */
   //获取用户Openid
   GetSaveUserOpenId: `http://wj.${host}/LittleProgram/UserInfo/GetSaveUserOpenId`,
   //获取国家信息
   GetCountryInfos: `http://wj.${host}/LittleProgram/Nationality/GetCountryInfos`,
   //外教提交申请
   ApplyForForeEdu: `http://wj.${host}/LittleProgram/ForeignTea/ApplyForForeEdu`,
+  //获取外教状态信息 是否vip...
+  GetForTeaStatus: `http://wj.${host}/LittleProgram/ForeignTea/GetForTeaStatus`,
 }
 module.exports = {
   config: config,
@@ -84,7 +96,7 @@ module.exports = {
       scale: scale
     })
   },
-  //获取openid
+  //获取openid以及个人头像等信息
   getOpenid(callback) {
     callback = typeof (callback) === 'function' ? callback : function (res) { };
     let openid,
@@ -112,7 +124,6 @@ module.exports = {
                   header: { 'content-type': 'application/json' },
                   method: 'POST',
                   success: (res) => {
-                    
                     if (res.data.res) {
                       //保存openid
                       wx.setStorageSync('openid', res.data.openid);
@@ -124,7 +135,7 @@ module.exports = {
                   fail: function (res) { },
                   complete: function (res) { console.log(res); }
                 })
-
+                callback();
               }
             })
           } else {

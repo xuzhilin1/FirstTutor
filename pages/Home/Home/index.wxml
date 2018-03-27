@@ -1,7 +1,7 @@
 <swiper class='swiper bg-fff' indicator-dots="{{true}}" indicator-active-color="#fff" indicator-color="#ccc" autoplay="{{true}}" circular='{{true}}'>
-  <block wx:for="{{imgUrls}}" wx:key='{{index}}'>
+  <block wx:for="{{banList}}" wx:key='{{index}}'>
     <swiper-item>
-      <image src="{{item}}" class="slide-image" />
+      <image src="http://wj.1-zhao.com/BannerImgs/{{item.BanImgName}}" class="slide-image" />
     </swiper-item>
   </block>
 </swiper>
@@ -13,7 +13,7 @@
   </view>
 </view>
 <view class='padding-lr-30 bg-fff'>
-  <image class='img-m' src='{{activity}}'></image>
+  <image class='img-m' src='http://wj.1-zhao.com/AtyImages/{{activity.AtyImgPath}}'></image>
 </view>
 
 <view class='bg-fff'>

@@ -5,7 +5,7 @@ Page({
   data: {
     userInfo: {},
     userType: 1, //1 学生 2 导师 0 未知,
-    vip: true, //是否vip
+    vip: false, //是否vip
     teacherList: [{
       isShow: true,
       url: '../../images/LI_03.png',
@@ -75,41 +75,57 @@ Page({
       luJin: '../Online/index'
     }],
   },
+  getIsVip(callback) {//获取外教是否为vip
+    $common.request(
+      "POST",
+      $common.config.GetForTeaStatus,
+      { openId: wx.getStorageSync('openid') },
+      function (res) {
+        if (res.data.res) {
+          console.log(res);
+          wx.setStorageSync("teacherStatus", res.data);
+          let vip = res.data.teaAddV ? res.data.teaAddV : false; //vip才能查看需求
+          let teacherList = this.data.teacherList;
+          teacherList[2].isShow = vip ? true : false;
+          this.setData({
+            vip: vip,
+            teacherList: teacherList
+          });
+        }
+        //////////
+        this.setData({
+          userType: 2
+        })
+        //////////
+      }.bind(this));
+    return;
+  },
   init() {
     let openid = wx.getStorageSync('openid');
     if (openid === null || openid === '') {
       $common.getOpenid(function () {
+        this.getIsVip();
         this.setData({
           userInfo: wx.getStorageSync('userInfo'),
           userType: wx.getStorageSync('userType'),
-        })
+        });
       }.bind(this));
       return;
     }
+    this.getIsVip();
     this.setData({
       userInfo: wx.getStorageSync('userInfo'),
       userType: wx.getStorageSync('userType'),
-    })
-    let teacherList = this.data.teacherList;
-    let vip = true;
-    //vip才能查看需求
-    teacherList[2].isShow = vip ? true : false;
-    this.setData({
-      vip: vip,
-      teacherList: teacherList
     });
-    this.setData({
-      userType: 2
-    })
   },
   jump(e) {  // 跳转
     let openid = wx.getStorageSync('openid');
-    // if (openid === null || openid === '') {
-    //   $common.showModal('我们需要您的个人信息', false, function () {
-    //     $common.getOpenid();
-    //   }.bind(this));
-    //   return;
-    // }
+    if (openid === null || openid === '') {
+      $common.showModal('我们需要您的个人信息', false, function () {
+        $common.getOpenid();
+      }.bind(this));
+      return;
+    }
     let url = e.currentTarget.dataset.url;
     wx.navigateTo({
       url: url,
@@ -120,29 +136,30 @@ Page({
 
   },
   onReady: function () {
-    // this.init();
-    let code;
-    wx.login({
-      success: (res) => {
-        if (res.code) {
-          //获取code
-          code = res.code;
-            wx.getUserInfo({
-              success: (res) => {
-                console.log(res);
-               let userInfo = res.userInfo;
-                wx.setStorageSync("userInfo", userInfo);//本地存储个人信息
-                this.setData({
-                  userInfo: wx.getStorageSync('userInfo'),
-                  userType: wx.getStorageSync('userType'),
-                })
-              }
-            })
-         
-        }
-      },
-      fail() { }
-    })
+    this.init();
+
+    // let code;
+    // wx.login({
+    //   success: (res) => {
+    //     if (res.code) {
+    //       //获取code
+    //       code = res.code;
+    //         wx.getUserInfo({
+    //           success: (res) => {
+    //             console.log(res);
+    //            let userInfo = res.userInfo;
+    //             wx.setStorageSync("userInfo", userInfo);//本地存储个人信息
+    //             this.setData({
+    //               userInfo: wx.getStorageSync('userInfo'),
+    //               userType: wx.getStorageSync('userType'),
+    //             })
+    //           }
+    //         })
+
+    //     }
+    //   },
+    //   fail() { }
+    // })
   },
 
   /**

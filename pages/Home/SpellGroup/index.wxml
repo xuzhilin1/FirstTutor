@@ -62,7 +62,7 @@
     <view class='bold fon-30  t-center'>还差
       <text class='fon-48 bold purple'> 1</text> 人，快喊小伙伴一起拼团吧
     </view>
-    <view class='fon-24 t-center margin-t-50 c40'>剩余 07:40:06 结束</view>
+    <view class='fon-24 t-center margin-t-50 c40'>剩余 {{countDown}} 结束</view>
     <view class='bold fon-30  t-center'>已有2人参加，
       <text class='fon-30 bold purple'>拼团成功</text>
     </view>
