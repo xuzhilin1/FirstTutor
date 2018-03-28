@@ -1,6 +1,8 @@
 {
   "pages": [
     "pages/Home/Home/index",
+    "pages/Home/teachersInformation/index",
+    "pages/Home/foreignTeacher/index",
     "pages/New/index/index",
     "pages/Home/SpellGroup/index",
     "pages/Home/CourseInformation/index",
@@ -9,7 +11,6 @@
     "pages/Home/activitySign/index",
     "pages/Home/Success/index",
     "pages/Home/Mycomments/index",
-    "pages/Home/foreignTeacher/index",
     "pages/Home/orderdetail/index",
     "pages/Home/comments/index",
     "pages/Home/MyOrder/index",
@@ -17,7 +18,6 @@
     "pages/Home/Learningneeds/index",
     "pages/Home/SpellingRules/index",
     "pages/Home/Groupsuccess/index",
-    "pages/Home/teachersInformation/index",
     "pages/Home/BuySuccess/index",
     "pages/New/orderDetailsS/index",
     "pages/New/OrderCheck/index",
@@ -48,8 +48,9 @@
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#000",
-    "navigationBarTitleText": "Wafer Quick Start",
-    "navigationBarTextStyle": "white"
+    "navigationBarTitleText": "FirstTutor",
+    "navigationBarTextStyle": "white",
+    "enablePullDownRefresh": true
   },
   "tabBar": {
     "color": "#848383",

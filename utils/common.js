@@ -19,6 +19,21 @@ const config = {
   GetBannerImgs: `http://wj.${host}/LittleProgram/SystemSetup/GetBannerImgs`,
   //获取首页最新活动
   GetLastestAtyInfo: `http://wj.${host}/LittleProgram/Activity/GetLastestAtyInfo`,
+  // 获取首页推荐外教
+  GetRecomForTeas: `http://wj.${host}/LittleProgram/ForeignTea/GetRecomForTeas`,
+  //获取外教的详细信息
+  GetForeignTeaInfo: `http://wj.${host}/LittleProgram/ForeignTea/GetForeignTeaInfo`,
+  //找外教-详情页，获取外交发布课程信息
+  GetCourInfosByTeaId: `http://wj.${host}/LittleProgram/Course/GetCourInfosByTeaId`,
+  //找外教-详情页，获取某外教评论内容
+  GetReviewInfoByTeaId: `http://wj.${host}/LittleProgram/Review/GetReviewInfoByTeaId`,
+  /*
+    找外教
+   */
+  //获取找外教中商圈信息
+  GetTradingAreaInfos: `http://wj.${host}/LittleProgram/TradingArea/GetTradingAreaInfos`,
+  //找外教搜索页接口
+  FindForeignTea: `http://wj.${host}/LittleProgram/ForeignTea/FindForeignTea`,
   /*
     我的
    */

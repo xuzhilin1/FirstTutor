@@ -1,17 +1,11 @@
 const $common = require('../../../utils/common.js');
+const $static = require('../../../utils/static.js');
 Page({
   data: {
-    userName: 'Emily',
-    image: '../../images/ren_03.png',
-    country: '英国',
-    school: '利兹大学',
-    userList: ['美式发音', '经验丰富', '3年+教龄'],
-    isVip: true,
-    listq: 3.5,
-    sex: 0, // 0  女 1 男
-    phone: 13456789789,
-    isPhone: false,
-    areaList: ['长宁区', '徐汇区'],
+    teaId: null,   //教师id
+    teaInfo: {}, //教师信息
+    allAreaList: $static.areaShanghai,
+    areaList: [],
     navbarList: [{
       id: '_course',
       context: '提供课程'
@@ -22,49 +16,14 @@ Page({
       id: '_evaluate',
       context: '历史评价'
     }],
-    courseList: [{
-      isGroup: false,
-      title: '口语一对一',
-      price: '200',
-      paymentNum: 5,
-    }, {
-      isGroup: true,
-      title: '口语一对二',
-      price: '200',
-      paymentNum: 5,
-    }],
-    teacherIntroduce: [
-      "Hello my name is Emily",
-      "I am a teacher with English",
-      "I am from England",
-      "I have over 25 years teaching  experience, now i am teaching students from 5 to 18 years of age"
-    ],
-    src: "http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400",
-    aptitude: [
-      "../../images/imga_05.jpg",
-    ],
-    comment: [{
-      image: '../../images/ren_03.png',
-      userName: '马蒂斯',
-      time: '8月5日 22：21',
-      context: '这个外教非常好，给个赞'
-    }, {
-      image: '../../images/ren_03.png',
-      userName: '马蒂斯',
-      time: '8月5日 22：21',
-      context: '这个外教非常好，给个赞'
-    }, {
-      image: '../../images/ren_03.png',
-      userName: '马蒂斯',
-      time: '8月5日 22：21',
-      context: '这个外教非常好，给个赞'
-    }, {
-      image: '../../images/ren_03.png',
-      userName: '马蒂斯',
-      time: '8月5日 22：21',
-      context: '这个外教非常好，给个赞'
-    }],
-    allComment: false
+    courseList: [], //课程列表
+    qualifInfo: [], //外教资质图片
+    pageIndex: 1,
+    pageSize: 5,
+    comment: [], //评论
+    totalCount: 0, //共计多少条评论
+    allComment: false,
+    listenCallbackNum: 0, //本页面三个接口，监听请求全部完成
   },
   bindNavbar(e) { //nav滚动页面
     let index = parseInt(e.currentTarget.dataset.index),
@@ -75,7 +34,6 @@ Page({
     Hquery.select('#_headerTop').boundingClientRect();
     Hquery.exec(function (res) {
       let HTop = Math.abs(res[0].top); //本页面第一个元素与屏幕的距离
-      console.log(HTop);
       let query = wx.createSelectorQuery(); //获取节点
       query.select(`#${id}`).boundingClientRect();
       query.exec(function (res) {
@@ -100,13 +58,131 @@ Page({
       url: '../CourseInformation/index?isGroup=' + courseList[index].isGroup
     })
   },
-  getListData() {
-
+  resetArea() { //重置上课区域
+    let TeaClassArea = this.data.teaInfo.TeaClassArea.split(',');
+    let allAreaList = this.data.allAreaList;
+    let arr = [];
+    for (let i = 0, len = TeaClassArea.length; i < len; i++) {
+      for (let j = 0, l = allAreaList.length; j < l; j++) {
+        if (allAreaList[j].id == TeaClassArea[i]) {
+          arr.push(allAreaList[j]);
+        }
+      }
+    }
+    this.setData({
+      areaList: arr
+    })
   },
+  getTeacherData() { //获取本页面教师信息
+    $common.request(
+      "POST",
+      $common.config.GetForeignTeaInfo,
+      {
+        teaId: this.data.teaId,
+        openId: wx.getStorageSync('openid')
+      },
+      (res) => {
+        if (res.data.res) {
+          this.setData({
+            teaInfo: res.data.teaInfo,
+            qualifInfo: res.data.qualifInfo
+          });
+          this.resetArea();
+        } else {
+          $common.showModal('未知错误，请稍后重试');
+        }
+      },
+      (res) => {
+        $common.showModal('亲~网络不给力哦，请稍后重试');
+      },
+      (res) => {
+        this.addListenCallbackNum();
+        this.stopModal();
+      }
+    )
+  },
+  getCourseData() { //获取外教发布课程的信息
+    $common.request(
+      "POST",
+      $common.config.GetCourInfosByTeaId,
+      {
+        teaId: this.data.teaId,
+      },
+      (res) => {
+        if (res.data.res) {
+          this.setData({
+            courseList: res.data.courList
+          })
+        }
+      },
+      (res) =>{
+
+      },
+      (res) => {
+        this.addListenCallbackNum();
+        this.stopModal();
+      }
+    )
+  },
+  getCommentData() { //获取评论
+    $common.request(
+      "POST",
+      $common.config.GetReviewInfoByTeaId,
+      {
+        teaId: this.data.teaId,
+        pageIndex: this.data.pageIndex,
+        pageSize: this.data.pageSize
+      },
+      (res) => {
+        if (res.data.res) {
+          this.setData({
+            comment: res.data.rewList,
+            totalCount: res.data.totalCount
+          })
+        }
+      },
+      (res) => {
+
+      },
+      (res) => {
+        console.log(res);
+        this.addListenCallbackNum();
+        this.stopModal();
+      },
+    )
+  },
+  addListenCallbackNum() {
+    let num = parseInt(this.data.listenCallbackNum);
+    num++;
+    this.setData({
+      listenCallbackNum: num
+    })
+  },
+  stopModal() { //停止页面的各种加载状态
+    let num = parseInt(this.data.listenCallbackNum);
+    if (num >= 3) { //本页面有三个接口
+      wx.hideLoading();
+      wx.stopPullDownRefresh();
+      this.setData({
+        listenCallbackNum: 0
+      })
+    }
+  },
+  init() {
+    wx.showLoading({ title: '努力加载中...' });
+    this.getTeacherData();
+    this.getCourseData();
+    this.getCommentData();
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      teaId: options.data
+    });
+    this.init();
 
   },
 
@@ -114,7 +190,6 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    this.getListData();
   },
 
   /**
@@ -142,7 +217,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.init();
   },
 
   /**

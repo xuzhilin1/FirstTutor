@@ -12,7 +12,7 @@
     <image class='imgs' src='../../images/LS_05.jpg'></image>
   </view>
 </view>
-<view class='padding-lr-30 bg-fff'>
+<view bindtap='activityDetail' class='padding-lr-30 bg-fff'>
   <image class='img-m' src='http://wj.1-zhao.com/AtyImages/{{activity.AtyImgPath}}'></image>
 </view>
 
@@ -27,12 +27,11 @@
 <view bindtap='teacherInfo' data-index='{{index}}' wx:for='{{listData}}' wx:key='{{index}}' class='list border-t-1'>
   <view class='flex aitems-center padding-lr-30 padding-tb-20 bg-fff teacher-box'>
     <view class='teacher-l'>
-      <image class='touXiang margin-r-20 touxiang-image' src='{{item.image}}'></image>
+      <image class='touXiang margin-r-20 touxiang-image' src='{{item.TeaAvaUrl}}'></image>
       <view class='flex1'>
         <view class='fon-26 margin-b-10 flex aitems-center '>
-          {{item.userName}}
-          <image class='HuangGuan margin-l-10' mode='widthFix' src='{{item.country}}'></image>
-          <image wx:if='{{item.isVip}}' class='HuangGuan margin-l-10' mode='widthFix' src='../../images/guan_03.png'></image>
+          {{item.TeaName}}
+          <image wx:if='{{item.TeaAddV==1}}' class='HuangGuan margin-l-10' mode='widthFix' src='../../images/guan_03.png'></image>
           <!--  星星  -->
           <view class='score'>
             <view class='score-all'>
@@ -41,17 +40,15 @@
             <view class='score-score'>
               <view class='score-list' wx:for="{{5}}" wx:for-item='value' wx:for-index='key' wx:key='{{index}}'>
                 <!--  整星  -->
-                <image wx:if="{{item.listq - 0.5 > key ? key <= item.listq : key < item.listq - 1}}" class='score-img' src='../../images/xian_05.png'></image>
+                <image wx:if="{{item.RewScore - 0.5 > key ? key <= item.RewScore : key < item.RewScore - 1}}" class='score-img' src='../../images/xian_05.png'></image>
                 <!--  半星  -->
-                <image wx:if="{{item.listq - 0.5 > key ? false : key < item.listq }}" class='score-image' src='../../images/BanXIn_03.png'></image>
+                <image wx:if="{{item.RewScore - 0.5 > key ? false : key < item.RewScore }}" class='score-image' src='../../images/BanXIn_03.png'></image>
               </view>
             </view>
           </view>
         </view>
         <view class='fon-24 c8'>
-          <black wx:for='{{item.userList}}' wx:key='{{index}}'>
-            <text wx:if='{{index!=0}}'>/</text>{{item}}
-          </black>
+          {{item.TeaAbstract}}
         </view>
       </view>
     </view>
