@@ -17,7 +17,19 @@ Page({
       $common.showModal('请填写教师介绍');
       return;
     }
-    // 发送请求
+    let status = this.data.status;
+    console.log(status)
+    switch (status) {
+      case 0: //教师介绍
+
+        break;
+      case 1:  //课程介绍
+        app.globalData.releaseCourse.courseIntroduce = input;
+        wx.navigateTo({
+          url: '../ReleaseCourse/index',
+        })
+        break;
+    }
   },
   init() {
     let status = this.data.status;

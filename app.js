@@ -34,5 +34,13 @@ App({
   },
   globalData: {
     userInfo: null,
+    releaseCourse: { //教师发布课程
+      courseIntroduce: '', //课程介绍
+      courseTime: [], //上课时间段
+      courseTypeIndex: 0, //课程类型下标,
+      courseName: '', //课程名称
+      courseAllPrice: '', //课程价格
+      courseDurationIndex: 0, //课程时长下标
+    },
   }
 })

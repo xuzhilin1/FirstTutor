@@ -1,37 +1,31 @@
 // pages/Home/CourseInformation/index.js
+const $common = require('../../../utils/common.js');
 Page({
   data: {
-    isGroup: true,
-    courseName: '口语一对一',
-    price: 200,
-    partackNum: 6,
-    courseLong: 2,
-    userName: 'Emily',
-    image: '../../images/ren_03.png',
-    userList: ['英式发音', '喜欢旅游', '明星老师'],
-    isVip: true,
-    country: '../../images/guan_03.png',
-    listq: 3.5,
-    groupNum: 2,
-    personNum: 5,
-    weekList: ['周一', '周二', '周三', '周四', '周五', '周六', '周末'],
-    timeList: [],
     purple: 'purple-bg white',
-    teacherIntroduce: [
-      "Hello my name is Emily",
-      "I am a teacher with English",
-      "I am from England",
-      "I have over 25 years teaching  experience, now i am teaching students from 5 to 18 years of age"
-    ],
+
+
+
+
     groupPersonName: '保持微笑2005',
     groupPersonImage: '../../images/ren_03.png',
     groupPersonNum: 1,
     groupPersonTime: '02-23 12:25',
+
+    courId: null, //课程id
+    teaId: null, //教师id
+    teaDep: 0, //收取定金百分比
+    listenCallbackNum: 0,
+    tea: {}, //教师信息列表
+    course: {}, //课程信息
+    timeTables: [], //选择上课时间列表
+    weekList: ['周一', '周二', '周三', '周四', '周五', '周六', '周末'],
+    timeList: [], // 页面展示上课时间表 
   },
-  initPageData() { //初始化页面数据
+  initPageData() { //初始化上课时间
     //周几就用数字1234567代替，时间段就用1（上午），2（下午1），3（下午2），4（晚上）代替
     let arr = [];
-    for (let i = 0; i < 28; i++) {
+    for (let i = 0; i < 28; i++) { //0不可选 1可选 2 选中
       if (i < 7) {
         arr.push({
           timeName: '上午',
@@ -42,21 +36,21 @@ Page({
       if (i < 14) {
         arr.push({
           timeName: '下午1',
-          timeType: 1,
+          timeType: 0,
         });
         continue;
       }
       if (i < 21) {
         arr.push({
           timeName: '下午2',
-          timeType: 1,
+          timeType: 0,
         });
         continue;
       }
       if (i < 28) {
         arr.push({
           timeName: '晚上',
-          timeType: 1,
+          timeType: 0,
         });
         continue;
       }
@@ -109,16 +103,148 @@ Page({
   chatTeacher() { //咨询 ， 与老师交流
 
   },
-  onLoad: function (options) {
-    if (options.isGroup) {
-      let isGroup = false;
-      options.isGroup === 'false' && (isGroup = false);
-      options.isGroup === 'true' && (isGroup = true);
+  getCourseAndTeacherInfo() { //获取课程和教师信息
+    $common.request(
+      "POST",
+      $common.config.GetCourseInfo,
+      {
+        courId: this.data.courId,
+        teaId: this.data.teaId
+      },
+      (res) => {
+        if (res.data.res) {
+          let course = res.data.course;
+          switch (course.CorLenOfCla) {
+            case 1:
+              course.courseTimeLong = 1; //1小时
+              break;
+            case 2:
+              course.courseTimeLong = 1.5; //1.5小时
+              break;
+            case 3:
+              course.courseTimeLong = 2; //2小时
+              break;
+          }
+          this.setData({
+            course: course,
+            tea: res.data.tea
+          })
+        } else {
+          switch (res.data.errType) {
+            case 1:
+              //未知错误
+              break;
+            case 2:
+              //课程不存在
+              break;
+          }
+        }
+      },
+      (res) => {
+        $common.showModal('亲~网络不给力哦，请稍后重试');
+      },
+      (res) => {
+        this.addListenCallbackNum();
+        this.stopModal();
+      }
+    );
+  },
+  getCourTime() { //根据课程ID获取课程的上课时间
+    $common.request(
+      "POST",
+      $common.config.GetTimeTableInfos,
+      {
+        courId: this.data.courId,
+        teaId: this.data.teaId
+      },
+      (res) => {
+        if (res.data.res) {
+          this.setData({
+            teaDep: res.data.teaDep,
+            timeTables: res.data.timeTables
+          });
+          this.updateTimeList();
+        } else {
+          switch (res.data.errType) {
+            case 1:
+              //未知错误
+              break;
+            case 2:
+              //未设置课程时间
+              break;
+          }
+        }
+      },
+      (res) => {
+        $common.showModal('亲~网络不给力哦，请稍后重试');
+      },
+      (res) => {
+        this.addListenCallbackNum();
+        this.stopModal();
+      }
+    );
+  },
+  updateTimeList() { //刷新时间列表
+    let timeTables = this.data.timeTables,
+      timeList = this.data.timeList;
+    timeTables.forEach(function (target, index) {
+      let week = target.TimAfw,//周几
+        time = target.TimClaTime; //上午、下午1、下午2、晚上
+      //改时间段已被购买，或不向学生展示
+      if (target.TimBePurch === 1 || target.TimCanUse === 0) { return }
+      let arr = [];
+      switch (time) {
+        case 1:
+          arr = [0, 1, 2, 3, 4, 5, 6];
+          break;
+        case 2:
+          arr = [7, 8, 9, 10, 11, 12, 13];
+          break;
+        case 3:
+          arr = [14, 15, 16, 17, 18, 19, 20];
+          break;
+        case 4:
+          arr = [21, 22, 23, 24, 25, 26, 27];
+          break;
+      }
+      let nowIndex = arr[week - 1]; //当前所改变的数组下标
+      timeList[nowIndex].timeType = 1;
+    });
+    this.setData({
+      timeList: timeList
+    })
+  },
+  addListenCallbackNum() {
+    let num = parseInt(this.data.listenCallbackNum);
+    num++;
+    this.setData({
+      listenCallbackNum: num
+    })
+  },
+  stopModal() { //停止页面的各种加载状态
+    let num = parseInt(this.data.listenCallbackNum);
+    if (num >= 2) { //本页面有两个接口
+      wx.hideLoading();
+      wx.stopPullDownRefresh();
       this.setData({
-        isGroup: isGroup
+        listenCallbackNum: 0
       })
     }
+  },
+  init() {
+    wx.showLoading({ title: '努力加载中...' });
+    this.getCourseAndTeacherInfo();
+    this.getCourTime();
+  },
+  onLoad: function (options) {
+    let courId = options.courId,
+      teaId = options.teaId;
+    this.setData({
+      courId: courId,
+      teaId: teaId
+    })
     this.initPageData();
+    this.init();
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -152,7 +278,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.init();
   },
 
   /**
@@ -166,6 +292,9 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: 'FirstTutor',
+      path: '/pages/Home/Home/index'
+    }
   }
 })

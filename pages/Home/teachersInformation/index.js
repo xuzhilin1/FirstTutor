@@ -19,7 +19,7 @@ Page({
     courseList: [], //课程列表
     qualifInfo: [], //外教资质图片
     pageIndex: 1,
-    pageSize: 5,
+    pageSize: 5, //分页，每页多少条
     comment: [], //评论
     totalCount: 0, //共计多少条评论
     allComment: false,
@@ -46,17 +46,29 @@ Page({
     });
   },
   lookAllComment() { //查看全部评论
+    let totalCount = parseInt(this.data.totalCount); //所有的评论个数
     this.setData({
-      allComment: true
+      pageSize: totalCount,  //使一次性请求到所有的评论
     })
+    this.getCommentData(true);
   },
   courseInfo(e) {
     let index = e.currentTarget.dataset.index,
       courseList = this.data.courseList;
-    console.log(courseList[index]);
     wx.navigateTo({
-      url: '../CourseInformation/index?isGroup=' + courseList[index].isGroup
+      url: '../CourseInformation/index?courId=' + courseList[index].CorId + '&teaId=' + this.data.teaId
     })
+  },
+  timeStamp(time) { //时间戳转换为日期
+    let date = new Date(parseInt(time)),
+      y = date.getFullYear(),
+      m = date.getMonth() + 1,
+      d = date.getDate(),
+      h = date.getHours(),
+      f = date.getMinutes();
+    h < 10 && (h = '0' + h);
+    f < 10 && (f = '0' + f);
+    return `${m}月${d}日 ${h}:${f}`;
   },
   resetArea() { //重置上课区域
     let TeaClassArea = this.data.teaInfo.TeaClassArea.split(',');
@@ -115,7 +127,7 @@ Page({
           })
         }
       },
-      (res) =>{
+      (res) => {
 
       },
       (res) => {
@@ -124,7 +136,11 @@ Page({
       }
     )
   },
-  getCommentData() { //获取评论
+  getCommentData(isLook) { //获取评论
+    isLook = typeof isLook === 'undefined' ? false : true; //是否为点击查看所有评论进入
+    if (isLook) {
+      wx.showLoading({ title: '努力加载中...' });
+    }
     $common.request(
       "POST",
       $common.config.GetReviewInfoByTeaId,
@@ -135,17 +151,33 @@ Page({
       },
       (res) => {
         if (res.data.res) {
+          let arr = res.data.rewList;
+          arr.forEach(function (target, index) {
+            let str = target.RewCreateOn,
+              str1 = str.replace("/Date(", ''),
+              time = str1.replace(')/', '');
+            arr[index].showTime = this.timeStamp(time);
+          }.bind(this));
           this.setData({
-            comment: res.data.rewList,
-            totalCount: res.data.totalCount
+            comment: arr,
+            totalCount: res.data.totalCount,
+            pageSize: 5
           })
+          if (isLook) {
+            this.setData({
+              allComment: true //请求成功让按钮消失
+            })
+          }
         }
       },
       (res) => {
 
       },
       (res) => {
-        console.log(res);
+        if (isLook) {
+          wx.hideLoading();
+          return;
+        }
         this.addListenCallbackNum();
         this.stopModal();
       },
@@ -183,7 +215,6 @@ Page({
       teaId: options.data
     });
     this.init();
-
   },
 
   /**
@@ -231,6 +262,9 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: 'FirstTutor',
+      path: '/pages/Home/Home/index'
+    }
   }
 })

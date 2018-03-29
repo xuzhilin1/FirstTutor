@@ -1,4 +1,4 @@
-//本地存储 userInfo openid userType teacherStatus
+//本地存储 userInfo openid userType teacherStatusInfo
 const data = {
   //adminsid:"1490463872",
   //appid: "wx978aabc5088a48c3",
@@ -15,6 +15,8 @@ const config = {
   /*
     首页
    */
+  //获取学生状态，注册学生
+  RisStudent: `http://wj.${host}/LittleProgram/Student/RisStudent`,
   //获取首页banner图片列表
   GetBannerImgs: `http://wj.${host}/LittleProgram/SystemSetup/GetBannerImgs`,
   //获取首页最新活动
@@ -27,6 +29,11 @@ const config = {
   GetCourInfosByTeaId: `http://wj.${host}/LittleProgram/Course/GetCourInfosByTeaId`,
   //找外教-详情页，获取某外教评论内容
   GetReviewInfoByTeaId: `http://wj.${host}/LittleProgram/Review/GetReviewInfoByTeaId`,
+  //课程信息，获取课程信息与外教信息(2018-03-29)
+  GetCourseInfo: `http://wj.${host}/LittleProgram/Course/GetCourseInfo`,
+  //课程信息，根据课程ID获取课程的上课时间(2018-03-29)
+  GetTimeTableInfos: `http://wj.${host}/LittleProgram/TimeTable/GetTimeTableInfos`,
+  //
   /*
     找外教
    */
@@ -45,6 +52,47 @@ const config = {
   ApplyForForeEdu: `http://wj.${host}/LittleProgram/ForeignTea/ApplyForForeEdu`,
   //获取外教状态信息 是否vip...
   GetForTeaStatus: `http://wj.${host}/LittleProgram/ForeignTea/GetForTeaStatus`,
+  //外教--我的课程，课程列表(2018-03 - 29)
+  GetMyCourInfos: `http://wj.${host}/LittleProgram/Course/GetMyCourInfos`,
+  //外教-我的课程-发布新课程
+  ReleaseCourse: `http://wj.${host}/LittleProgram/Course/ReleaseCourse`,
+  //我的-获取用户类型
+  GetUserType: `http://wj.${host}/LittleProgram/UserInfo/GetUserType`,
+}
+const wxGetUserInfo = function (code, userInfo, callback, callback2) {
+  wx.getUserInfo({
+    success: (res) => {
+      console.log(res);
+      let userInfo = res.userInfo;
+      wx.setStorageSync("userInfo", userInfo);//本地存储个人信息
+      wx.request({
+        url: config.GetSaveUserOpenId,
+        data: {
+          code: code,
+          nickName: userInfo.nickName,
+          avaUrl: userInfo.avatarUrl,
+        },
+        header: { 'content-type': 'application/json' },
+        method: 'POST',
+        success: (res) => {
+          if (res.data.res) {
+            //保存openid
+            wx.setStorageSync('openid', res.data.openid);
+            //保存用户类型
+            wx.setStorageSync('userType', res.data.userType);
+            callback();
+            callback2();
+          }
+        },
+        fail: function (res) { },
+        complete: function (res) { console.log(res); }
+      })
+      callback();
+    },
+    complete: (res) => {
+      console.log(res);
+    }
+  })
 }
 module.exports = {
   config: config,
@@ -112,8 +160,9 @@ module.exports = {
     })
   },
   //获取openid以及个人头像等信息
-  getOpenid(callback) {
+  getOpenid(callback, callback2) {
     callback = typeof (callback) === 'function' ? callback : function (res) { };
+    callback2 = typeof (callback2) === 'function' ? callback2 : function (res) { };
     let openid,
       code,
       userInfo;
@@ -124,33 +173,26 @@ module.exports = {
           code = res.code;
           openid = wx.getStorageSync('openid');
           if (openid === null || openid === '') {
-            wx.getUserInfo({
+            // 可以通过 wx.getSetting 先查询一下用户是否授权了 "scope.record" 这个 scope
+            wx.getSetting({
               success: (res) => {
-                console.log(res);
-                userInfo = res.userInfo;
-                wx.setStorageSync("userInfo", userInfo);//本地存储个人信息
-                wx.request({
-                  url: config.GetSaveUserOpenId,
-                  data: {
-                    code: code,
-                    nickName: userInfo.nickName,
-                    avaUrl: userInfo.avatarUrl,
-                  },
-                  header: { 'content-type': 'application/json' },
-                  method: 'POST',
-                  success: (res) => {
-                    if (res.data.res) {
-                      //保存openid
-                      wx.setStorageSync('openid', res.data.openid);
-                      //保存用户类型
-                      wx.setStorageSync('userType', res.data.userType);
-                      callback();
+                if (res.authSetting['scope.userInfo']) {
+                  //已经授权，可以直接调用getUserInfo获取头像昵称，不会弹框
+                  wxGetUserInfo(code, userInfo, callback, callback2).bind(this);
+                } else {
+                  //尚未授权
+                  console.log(232323);
+                  wx.authorize({
+                    scope: 'scope.userInfo',
+                    success: (res) => {
+                      console.log(res);
+                      wxGetUserInfo(code, userInfo, callback, callback2).bind(this);
+                    },
+                    complete: (res) => {
+                      console.log(res);
                     }
-                  },
-                  fail: function (res) { },
-                  complete: function (res) { console.log(res); }
-                })
-                callback();
+                  })
+                }
               }
             })
           } else {

@@ -1,4 +1,6 @@
 // pages/New/ClassTime/index.js
+const $common = require('../../../utils/common.js');
+const app = getApp();
 Page({
   data: {
     purple: 'purple-bg white',
@@ -16,13 +18,15 @@ Page({
     })
   },
   initPageData() { //初始化页面数据
-  //周几就用数字1234567代替，时间段就用1（上午），2（下午1），3（下午2），4（晚上）代替
+    //周几就用数字1234567代替，时间段就用1（上午），2（下午1），3（下午2），4（晚上）代替
     let arr = [];
     for (let i = 0; i < 28; i++) {
       if (i < 7) {
         arr.push({
           timeName: '上午',
-          timeType: 0,
+          timeType: 1,
+          TimClaTime: 1,
+          TimAfw: i + 1
         });
         continue;
       }
@@ -30,6 +34,8 @@ Page({
         arr.push({
           timeName: '下午1',
           timeType: 1,
+          TimClaTime: 2,
+          TimAfw: i - 7 + 1
         });
         continue;
       }
@@ -37,6 +43,8 @@ Page({
         arr.push({
           timeName: '下午2',
           timeType: 1,
+          TimClaTime: 3,
+          TimAfw: i - 14 + 1
         });
         continue;
       }
@@ -44,6 +52,8 @@ Page({
         arr.push({
           timeName: '晚上',
           timeType: 1,
+          TimClaTime: 4,
+          TimAfw: i - 21 + 1
         });
         continue;
       }
@@ -54,7 +64,24 @@ Page({
   },
   submit() {
     let timeList = this.data.timeList;
-    //发送请求
+    console.log(timeList);
+    let arr = [];
+    timeList.forEach(function (target, index) {
+      if (target.timeType === 2) {
+        arr.push({
+          TimAfw: target.TimAfw,
+          TimClaTime: target.TimClaTime
+        })
+      }
+    });
+    if (arr.length <= 0) {
+      $common.showModal('请选择上可时间');
+      return;
+    }
+    app.globalData.releaseCourse.courseTime = arr;
+    wx.navigateTo({
+      url: '../ReleaseCourse/index',
+    })
   },
 
   /**

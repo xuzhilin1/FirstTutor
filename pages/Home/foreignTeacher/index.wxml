@@ -92,3 +92,6 @@
     </view>
   </view>
 </view>
+<view wx:if='{{listData.length<=0}}' class='noData'>
+  暂无数据
+</view>

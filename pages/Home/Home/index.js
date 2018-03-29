@@ -119,9 +119,12 @@ Page({
   getOpenId() { //获取openid
     let openid = wx.getStorageSync('openid');
     if (openid === null || openid === '') {
-      $common.getOpenid(); //获取用户信息及openid；
+      $common.getOpenid(null, () =>{
+        this.getOpenId();
+      }); //获取用户信息及openid；
       return;
     }
+    this.studentRegister(); 
   },
   addListenCallbackNum() {
     let num = parseInt(this.data.listenCallbackNum);
@@ -139,6 +142,47 @@ Page({
         listenCallbackNum: 0
       })
     }
+  },
+  studentRegister() { //学生注册
+    $common.request(
+      "POST",
+      $common.config.RisStudent,
+      {
+        openId: wx.getStorageSync('openid')
+      },
+      (res) => {
+        if (res.data.res) {
+          switch (res.data.rtnType) {
+            case 1: 
+            //注册成功
+            break;
+            case 2:
+            //改账号被禁用,无法访问程序,
+            break;
+            case 3:
+            //账户正常
+            break;
+          }
+        } else {
+          switch (res.data.errType) {
+            case 1:
+              //发生异常
+              break;
+            case 2:
+              //openId错误
+              break;
+            case 3:
+              //未知错误
+              break;
+          }
+        }
+      },
+      (res) => {
+
+      },
+      (res) => {
+      }
+    );
   },
   onLoad(options) {
     this.getOpenId();

@@ -13,7 +13,7 @@
 <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
   <view class='flex1 aitems-center  fon-30 flex '>
     <view class='width-135'>课程名称</view>
-    <input bindinput='bindCourseName' class='ca' value='{{courseName}}'></input>
+    <input bindinput='bindCourseName' class='ca' value='{{courseName}}' placeholder='请填写课程名称'></input>
   </view>
 </view>
 
@@ -21,7 +21,7 @@
   <view class='flex1 aitems-center  fon-30 flex page-box'>
     <view class='width-135'>{{courseTypeIndex!=0?"课程总价":"课程价格"}}</view>
     <text>¥</text>
-    <input type='digit' bindinput='bindCourseAllPrice' class='ca' value='{{courseAllPrice}}'></input>
+    <input type='digit' maxlength='10' placeholder='0' bindinput='bindCourseAllPrice' class='ca' value='{{courseAllPrice}}'></input>
   </view>
 </view>
 
@@ -45,7 +45,7 @@
     <view class='flex picker aitems-center '>
       <view class="fon-30 flex aitems-center yanse ">
         <view class='width-135'> 课程时长 </view>
-        <view class='ca'>{{duration[durationIndex]}}小时</view>
+        <view class='ca'>{{duration[courseDurationIndex]}}小时</view>
       </view>
     </view>
   </picker>
@@ -55,7 +55,7 @@
 <view bindtap='classTime' class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
   <view class='flex1 aitems-center  fon-30 flex '>
     <view class='width-135'>时间段</view>
-    <view class='ca'>{{timeDuration?timeDuration:"待完善"}}</view>
+    <view class='ca'>{{courseTime.length>0?"已完善":"待完善"}}</view>
   </view>
   <image mode='widthFix' style='width:20rpx;' src='../../images/jian_13.png'></image>
 </view>
@@ -63,7 +63,7 @@
 <view bindtap='teachers' class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
   <view class='flex1 aitems-center  fon-30 flex '>
     <view class='width-135'>课程介绍</view>
-    <view class='ca'>{{courseIntroduce?courseIntroduce:"待完善"}}</view>
+    <view class='ca'>{{isCourseIntroduce?"已完善":"待完善"}}</view>
   </view>
   <image mode='widthFix' style='width:20rpx;' src='../../images/jian_13.png'></image>
 </view>

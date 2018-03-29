@@ -83,7 +83,7 @@ Page({
       function (res) {
         if (res.data.res) {
           console.log(res);
-          wx.setStorageSync("teacherStatus", res.data);
+          wx.setStorageSync("teacherStatusInfo", res.data);
           let vip = res.data.teaAddV ? res.data.teaAddV : false; //vip才能查看需求
           let teacherList = this.data.teacherList;
           teacherList[2].isShow = vip ? true : false;
@@ -92,31 +92,54 @@ Page({
             teacherList: teacherList
           });
         }
-        //////////
-        this.setData({
-          userType: 2
-        })
-        //////////
       }.bind(this));
-    return;
   },
   init() {
     let openid = wx.getStorageSync('openid');
     if (openid === null || openid === '') {
       $common.getOpenid(function () {
-        this.getIsVip();
-        this.setData({
-          userInfo: wx.getStorageSync('userInfo'),
-          userType: wx.getStorageSync('userType'),
-        });
+        this.getMyStatus();
       }.bind(this));
       return;
     }
-    this.getIsVip();
-    this.setData({
-      userInfo: wx.getStorageSync('userInfo'),
-      userType: wx.getStorageSync('userType'),
-    });
+    this.getMyStatus();
+  },
+  getMyStatus() { //获取我的用户类型
+    $common.request(
+      "POST",
+      $common.config.GetUserType,
+      {
+        openId: wx.getStorageSync('openid')
+      },
+      (res) => {
+        if (res.data.res) {
+          let userType = res.data.userType;
+          this.setData({
+            userInfo: wx.getStorageSync('userInfo'),
+            userType: userType
+          });
+          if (userType != 2) { return } //用户身份不是外教，不用获取是否vip
+          this.getIsVip();
+        } else {
+          switch (res.data.errType) {
+            case 1:
+              //参数不对
+              break;
+            case 2:
+              //异常
+              break;
+            case 3:
+              //未知错误
+              break;
+          }
+        }
+      },
+      (res) => {
+        $common.showModal('亲~网络不给力哦，请稍后重试');
+      },
+      (res) => {
+      }
+    )
   },
   jump(e) {  // 跳转
     let openid = wx.getStorageSync('openid');
@@ -137,29 +160,6 @@ Page({
   },
   onReady: function () {
     this.init();
-
-    // let code;
-    // wx.login({
-    //   success: (res) => {
-    //     if (res.code) {
-    //       //获取code
-    //       code = res.code;
-    //         wx.getUserInfo({
-    //           success: (res) => {
-    //             console.log(res);
-    //            let userInfo = res.userInfo;
-    //             wx.setStorageSync("userInfo", userInfo);//本地存储个人信息
-    //             this.setData({
-    //               userInfo: wx.getStorageSync('userInfo'),
-    //               userType: wx.getStorageSync('userType'),
-    //             })
-    //           }
-    //         })
-
-    //     }
-    //   },
-    //   fail() { }
-    // })
   },
 
   /**
@@ -187,7 +187,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.init();
   },
 
   /**
@@ -201,6 +201,9 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: 'FirstTutor',
+      path: '/pages/Home/Home/index'
+    }
   }
 })

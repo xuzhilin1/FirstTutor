@@ -26,7 +26,12 @@ Page({
       corClaNum: 1, //上课人数，1-3
       corTitle: '口语一对一', //课程名称
       fgtAttCount: 0, //拼团成功团数
-    }]
+    }],
+
+
+    pageIndex: 1,
+    pageSize: 5,
+    isUpload: true,
   },
   bindDelete(e) {
     let index = e.currentTarget.dataset.index,
@@ -67,11 +72,74 @@ Page({
       url: '../orderDetails/index?isGroup=0',
     })
   },
+  getCourseList(isBottom) { //获取课程列表
+    isBottom = typeof isBottom === 'undefined' ? false : true; //上拉加载
+    let teaId = wx.getStorageSync('teacherStatusInfo').teaId;
+    let pageIndex = this.data.pageIndex,
+      pageSize = this.data.pageSize;
+    let isUpload = this.data.isUpload;
+    if (!isUpload) return; //是否可以执行加载
+    $common.request(
+      "POST",
+      $common.config.GetMyCourInfos,
+      {
+        teaId: teaId,
+        pageIndex: pageIndex,
+        pageSize: this.data.pageSize
+      },
+      (res) => {
+        if (res.data.res) {
+          let courInfos;
+          if (isBottom) { //上拉加载
+            courInfos = this.data.courInfos;
+            let arr = res.data.courInfos;
+            pageIndex++;
+            if (arr.length >= pageSize) { //剩余数量不足一页
+              isUpload = false;
+            }
+            arr.forEach(function (target, index) {
+              courInfos.push(target);
+            });
+          } else {
+            pageIndex = 1;
+            courInfos = res.data.courInfos;
+            isUpload = true;
+          }
+          this.setData({
+            courInfos: courInfos,
+            pageIndex: pageIndex,
+            isUpload: isUpload
+          })
+        } else {
+          switch (res.data.errType) {
+            case 1:
+              //未知错误
+              $common.showModal('未知错误');
+              break;
+            case 2:
+              //未设置课程
+              $common.showModal('你还没有发布课程');
+              break;
+          }
+        }
+      },
+      (res) => {
+        $common.showModal('亲~网络不给力哦，请稍后重试');
+      },
+      (res) => {
+        console.log(res);
+      }
+    )
+  },
+  init() {
+
+    this.getCourseList();
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.init();
   },
 
   /**
@@ -113,13 +181,16 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    this.getCourseList(true);
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: 'FirstTutor',
+      path: '/pages/Home/Home/index'
+    }
   }
 })

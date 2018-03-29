@@ -105,18 +105,16 @@
           <image class='touxiang' src='{{item.UserAvaUrl}}'></image>
           <view class='flex1 comment-info'>
             <view class='fon-24 margin-b-10'>{{item.UserNickName}}</view>
-            <view class='fon-24 margin-b-10 c8'>{{item.RewCreateOn}}</view>
+            <view class='fon-24 margin-b-10 c8'>{{item.showTime}}</view>
           </view>
         </view>
         <view class='fon-26 comment'>{{item.RewComment}}</view>
       </view>
-      <view bindtap='lookAllComment' wx:if='{{comment.length>2&&!allComment}}' class='fon-24 padding-tb-20 c8'>
+      <view bindtap='lookAllComment' wx:if='{{totalCount>2&&!allComment}}' class='fon-24 padding-tb-20 c8'>
         展开全部{{totalCount}}条评论
       </view>
     </view>
   </view>
-
-
   <view class='footer fon-30 white purple-bg'>咨询老师</view>
 
 </view>

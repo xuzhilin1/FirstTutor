@@ -76,8 +76,6 @@ Page({
           this.setData({
             tradList: res.data.taList
           })
-        } else {
-          $common.showModal('未知错误，请稍后重试');
         }
       }
     );
@@ -126,7 +124,9 @@ Page({
         $common.showModal('亲~网络不给力哦，请稍后重试');
       },
       (res) => {
+        console.log(res);
         wx.hideLoading();
+        wx.stopPullDownRefresh();
       },
     )
   },
@@ -138,8 +138,6 @@ Page({
       arr1.push(modalArr[i]);
       arr2.push(modalArr[i]);
     }
-    // arr1.pop();
-    // arr2.shift();
     this.setData({
       priceList: [arr1, arr2],
     })
