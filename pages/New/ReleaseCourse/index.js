@@ -92,17 +92,6 @@ Page({
       $common.showModal('请填写课程介绍');
       return;
     }
-    //发送请求
-    console.log(
-      courseTypeIndex + 1,
-      courseName,
-      courseAllPrice,
-      courseDurationIndex + 1,
-      courseIntroduce,
-      courseTypeIndex + 1,
-      courseTime
-      )
-    // return;
     this.releaseCourse(
       courseTypeIndex + 1,
       courseName,
@@ -131,7 +120,18 @@ Page({
       },
       (res) => {
         if (res.data.res) {
-
+          wx.showToast({
+            title: '发布成功',
+            icon: 'success',
+            duration: 2000,
+            success: (res) => {
+              setTimeout(function () {
+                wx.navigateBack({
+                  delta: 1
+                }, 2000);
+              })
+            }
+          })
         } else {
           switch (res.data.errType) {
             case 1:
@@ -147,10 +147,9 @@ Page({
         }
       },
       (res) => {
-
+        $common.showModal('亲~网络不给力哦，请稍后重试');
       },
       (res) => {
-        console.log(res);
       }
     )
   },

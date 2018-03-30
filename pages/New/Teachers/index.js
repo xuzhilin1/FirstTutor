@@ -21,15 +21,24 @@ Page({
     console.log(status)
     switch (status) {
       case 0: //教师介绍
-
+        app.globalData.teacherFor.TeaDescript = input;
+        wx.navigateBack({
+          delta: 1,
+        })
         break;
       case 1:  //课程介绍
         app.globalData.releaseCourse.courseIntroduce = input;
-        wx.navigateTo({
-          url: '../ReleaseCourse/index',
+        wx.navigateBack({
+          delta: 1,
         })
         break;
     }
+  },
+  teacherIntroduceContext() { //教师介绍添加内容
+    let TeaDescript = app.globalData.teacherFor.TeaDescript;
+    this.setData({
+      input: TeaDescript,
+    })
   },
   init() {
     let status = this.data.status;
@@ -39,6 +48,7 @@ Page({
       case 0: //教师介绍
         placeholder = '请填写教师介绍，最多不超过1000个字符';
         titleText = '教师介绍';
+        this.teacherIntroduceContext();
         break;
       case 1:  //课程介绍
         placeholder = '请填写课程介绍，最多不超过1000个字符';

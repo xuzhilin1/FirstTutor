@@ -12,13 +12,15 @@ Page({
       id: 1,
       sex: '男'
     }],
-    sexIndex: 1,
+    sexIndex: 0,
     age: '1983-11-16',
     weChat: '',
     nationalityIndex: 0,
     nationalityArray: [],
     school: '',
     synopsis: '',
+    teacherFor: {}, //教师基本资料
+    TeaNaLityId: -1, //国籍id
   },
   bindUserName(e) { //姓名
     this.setData({
@@ -61,6 +63,7 @@ Page({
       age = this.data.age,
       weChat = this.data.weChat,
       nationality = this.data.nationalityArray[this.data.nationalityIndex].NalId,
+      TeaNation = this.data.nationalityArray[this.data.nationalityIndex].NalName,
       school = this.data.school,
       synopsis = this.data.synopsis;
     if (userName.trim().length <= 0) {
@@ -79,8 +82,24 @@ Page({
       $common.showModal('请填写您的简介');
       return;
     }
+    let status = this.data.status;
+    if (status === 1) { //外教基本资料，暂存为全局变量
+      let teacherFor = this.data.teacherFor;
+      teacherFor.TeaName = userName;
+      teacherFor.TeaGender = sex;
+      teacherFor.TeaAge = this.countAge(age);
+      teacherFor.TeaWeChat = weChat;
+      teacherFor.TeaNaLityId = nationality;
+      teacherFor.TeaNation = TeaNation,
+        teacherFor.TeaUniversity = school;
+      teacherFor.TeaAbstract = synopsis;
+      app.globalData.teacherFor = teacherFor;
+      wx.navigateBack({
+        delta: 1
+      })
+      return;
+    }
     let openid = wx.getStorageSync('openid');
-    console.log(openid);
     if (openid === null || openid === '') { //没有openid，获取
       $common.getOpenid();
       return;
@@ -88,7 +107,6 @@ Page({
     this.requestSaveData(userName, sex, age, weChat, school, nationality, synopsis);
   },
   requestSaveData(TeaName, TeaGender, TeaAge, TeaWeChat, TeaUniversity, TeaNaLityId, TeaAbstract) { //发送请求
-    console.log(TeaName, TeaGender, TeaAge, TeaWeChat, TeaUniversity, TeaNaLityId, TeaAbstract);
     $common.request(
       "POST",
       $common.config.ApplyForForeEdu,
@@ -138,15 +156,47 @@ Page({
       nowY = parseInt(date.getFullYear());
     return nowY - TY;
   },
+  setTeaNaLityId() { //控制国籍id
+    let TeaNaLityId = this.data.TeaNaLityId;
+    if (TeaNaLityId === -1) return;
+    let nationalityArray = this.data.nationalityArray;
+    let nationalityIndex = 0;
+    for (let i = 0, len = nationalityArray.length; i < len; i++) {
+      if (nationalityArray[i].NalId == TeaNaLityId) {
+        nationalityIndex = i;
+        break;
+      }
+    }
+    this.setData({
+      nationalityIndex: nationalityIndex
+    })
+  },
+  initTeacherInfo() { //初始化教师基本信息
+    let teacherFor = app.globalData.teacherFor;
+    this.setData({
+      teacherFor: teacherFor,
+      userName: teacherFor.TeaName,
+      sexIndex: teacherFor.TeaGender,
+      age: teacherFor.TeaAge,
+      weChat: teacherFor.TeaWeChat,
+      TeaNaLityId: teacherFor.TeaNaLityId,
+      school: teacherFor.TeaUniversity,
+      synopsis: teacherFor.TeaAbstract
+    });
+    this.setTeaNaLityId();
+  },
   init() {
     let status = this.data.status;
     let titleText = '';
     switch (status) {
       case 0: //申请外教资格
         titleText = '申请FirstTutor外教资格';
+        //判断并获取openId
+        $common.getOpenid();
         break;
       case 1: //外教基本资料
         titleText = '基本资料';
+        this.initTeacherInfo();
         break;
     }
     wx.setNavigationBarTitle({
@@ -162,6 +212,7 @@ Page({
           this.setData({
             nationalityArray: res.data.nationList
           })
+          this.setTeaNaLityId();
         } else {
           $common.showModal('获取国籍信息失败，请重新获取', true, function (res) {
             if (res.confirm) {
@@ -178,11 +229,8 @@ Page({
     this.setData({
       status: parseInt(status)
     });
-
   },
   onReady: function () {
-    //判断并获取openId
-    $common.getOpenid();
     this.getCountryInfo();
   },
 

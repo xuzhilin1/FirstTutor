@@ -2,6 +2,8 @@ const $common = require('../../../utils/common.js');
 const $static = require('../../../utils/static.js');
 Page({
   data: {
+    srcImg: $common.srcImg,
+    srcVideo: $common.srcVideo,
     teaId: null,   //教师id
     teaInfo: {}, //教师信息
     allAreaList: $static.areaShanghai,

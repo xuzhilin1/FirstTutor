@@ -1,4 +1,14 @@
 /* pages/New/basic/basic.wxss */
-page{
+
+page {
   background-color: #fff;
+}
+
+.zxx_text_overflow {
+  width: 60%;
+  box-sizing: border-box;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  overflow: hidden;
 }

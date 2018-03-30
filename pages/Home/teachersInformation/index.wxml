@@ -84,14 +84,14 @@
       <view class='fon-30 padding-l-20 border-l-2 c2b'>外教视频</view>
     </view>
     <view wx:if='{{teaInfo.TeaAudio}}' class='sepa bg-fff'>
-      <video class='video' src="http://wj.1-zhao.com/QuaLifAudios/{{teaInfo.TeaAudio}}" controls></video>
+      <video class='video' src="{{srcVideo}}{{teaInfo.TeaAudio}}" controls></video>
     </view>
     <!--  外教资质  -->
     <view class='padding-tb-20 bg-fff margin-t-20  border-b-1 border-t-1 padding-lr-30'>
       <view class='fon-30 padding-l-20 border-l-2 c2b'>外教资质</view>
     </view>
     <view class='bg-fff zizhi-box'>
-      <image wx:for='{{qualifInfo}}' wx:key='{{index}}' class='img-ziZhi' mode='widthFix' src='http://wj.1-zhao.com/QualifImgs/{{item}}'></image>
+      <image wx:for='{{qualifInfo}}' wx:key='{{index}}' class='img-ziZhi' mode='widthFix' src='{{srcImg}}{{item}}'></image>
     </view>
   </view>
   <!-- 最新评论 -->

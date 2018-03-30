@@ -1,32 +1,32 @@
 <view class='big-outer'>
-  <view wx:for='{{pagesData}}' wx:key='{{index}}' class='margin-t-20'>
+  <view wx:for='{{courInfos}}' wx:key='{{index}}' class='margin-t-20'>
     <view class='flex fon-26 border-t-1 bg-f9 c8 height-75 between padding-lr-30 aitems-center'>
-      <view>{{item.corCanView?"已审核":"审核未通过"}}</view>
-      <view>发布时间：{{item.corCreateOn}}</view>
+      <view>{{item.CorCanView==1?"已审核":"审核未通过"}}</view>
+      <view>发布时间：{{item.showTime}}</view>
     </view>
     <!--  单独购买  -->
-    <view wx:if='{{item.fgtType===2}}' class=' middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
+    <view wx:if='{{item.CorType==1}}' class=' middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
       <view class='flex fon-36  c2b '>
         <image class='QiHao' mode='widthFix' src='../../images/qi_03.png'></image>
-        {{item.corTitle}}
+        {{item.CorTitle}}
       </view>
-      <view class='bold purple'>¥ {{item.corPrice}}</view>
+      <view class='bold purple'>¥{{item.CorPrice}}</view>
     </view>
     <!--  拼团  -->
-    <view wx:if='{{item.fgtType===1}}' class=' middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
+    <view wx:if='{{item.CorType!=1}}' class=' middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
       <view class='flex fon-36  c2b '>
         <image class='QiHao' mode='widthFix' src='../../images/tuan_06.png'></image>
         <view>
-          {{item.corTitle}}
-          <view class='bold bg-fff purple'>¥ {{item.corPrice}}</view>
+          {{item.CorTitle}}
+          <view class='bold bg-fff purple'>¥{{item.CorPrice}}</view>
         </view>
       </view>
-      <view class='purplea purple fon-24 '>2人团</view>
+      <view class='purplea purple fon-24 '>{{item.CorType}}人团</view>
     </view>
     <view class='flex fon-24 border-t-1 border-b-1 padding-lr-30 aitems-center bg-fff j-right'>
       <view bindtap='bindDelete' data-index='{{index}}' class='purple AnNiu border'>删除课程</view>
-      <view bindtap='groupList' data-index='{{index}}' wx:if='{{item.fgtType===1}}' class='border AnNiu white purple-bg'>成功拼团 {{item.fgtAttCount}}</view>
-      <view bindtap='orderDetails' data-index='{{index}}' wx:if='{{item.corCanView&&item.fgtType!==1}}' class='border AnNiu white purple-bg'>查看课程</view>
+      <view bindtap='groupList' data-index='{{index}}' wx:if='{{item.CorType!=1&&item.CorCanView==1}}' class='border AnNiu white purple-bg'>成功拼团 {{item.fgtAttCount}}</view>
+      <view bindtap='orderDetails' data-index='{{index}}' wx:if='{{item.CorCanView==1&&item.CorType==1}}' class='border AnNiu white purple-bg'>查看课程</view>
       <view bindtap='reviseReleaseCourse' data-index='{{index}}' wx:if='{{!item.corCanView}}' class='border AnNiu white purple-bg'>修改课程</view>
     </view>
   </view>

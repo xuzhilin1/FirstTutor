@@ -1,9 +1,10 @@
 {
   "pages": [
-    "pages/New/ReleaseCourse/index",
+    "pages/New/basic/basic",
     "pages/Home/Home/index",
     "pages/New/index/index",
     "pages/New/CourseManagement/index",
+    "pages/New/ReleaseCourse/index",
     "pages/Home/teachersInformation/index",
     "pages/Home/foreignTeacher/index",
     "pages/Home/SpellGroup/index",
@@ -38,7 +39,6 @@
     "pages/New/activity/index",
     "pages/New/activityDetail/index",
     "pages/New/Online/index",
-    "pages/New/basic/basic",
     "pages/New/OrderCheckS/index",
     "pages/New/NeedSee/index",
     "pages/New/seeDetail/index",

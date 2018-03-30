@@ -1,6 +1,6 @@
 <!--pages/New/qualification/index.wxml-->
 <view class='top flex warp bg-fff'>
-  <image wx:for="{{imageList}}" wx:key='{{index}}' class='img' src='{{item}}'></image>
+  <image wx:for="{{imageList}}" wx:key='{{index}}' class='img' src='{{item.QfsCreateOn?srcImg:""}}{{item.QfsPicName}}'></image>
   <image wx:if='{{imageCount>0}}' class='ZiPian' bindtap='bindImage' src='../../images/tupian_03.jpg'></image>
 </view>
 <button bindtap='submit' class='btn purple-bg margin-t-60 white'>保存</button>

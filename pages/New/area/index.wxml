@@ -3,7 +3,7 @@
   <view class='fon-30 padding-l-20 border-l-2 c2b'>选择上课区域（多选）</view>
 </view>
 <view class='flex  fon-26 padding-lr-30 between warp'>
-  <view wx:for='{{pageList}}' data-index='{{index}}' bindtap='bindChange' wx:key='{{index}}' class='QuKuai {{pageSelect[index]?purple:null}}'>{{item.area}}</view>
+  <view wx:for='{{pageList}}' data-index='{{index}}' bindtap='bindChange' wx:key='{{index}}' class='QuKuai {{item.isShow?purple:null}}'>{{item.area}}</view>
 </view>
 <view wx:for='{{list}}' wx:key='{{index}}'>{{item}}</view>
 <button bindtap='submit' class='btn purple-bg margin-t-60 white'>保存</button>

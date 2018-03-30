@@ -1,4 +1,10 @@
-//本地存储 userInfo openid userType teacherStatusInfo
+/*
+   本地存储 userInfo openid userType teacherStatusInfo
+   图片限制类型 .gif|.jpg|.jpeg|.png
+   视频限制类型".mp4|.rmvb|.flv|.wmv|.mov|.avi";
+   外教资质图片链接：http://wj.1-zhao.com/QualifImgs/
+   外教视频链接：http://wj.1-zhao.com/QuaLifAudios/
+*/
 const data = {
   //adminsid:"1490463872",
   //appid: "wx978aabc5088a48c3",
@@ -11,6 +17,8 @@ const data = {
 // 正则手机号码
 const phoneReg = /^1[34578]\d{9}$/;
 const host = "1-zhao.com";
+const srcImg = 'http://wj.1-zhao.com/QualifImgs/';
+const srcVideo = 'http://wj.1-zhao.com/QuaLifAudios/';
 const config = {
   /*
     首页
@@ -58,6 +66,12 @@ const config = {
   ReleaseCourse: `http://wj.${host}/LittleProgram/Course/ReleaseCourse`,
   //我的-获取用户类型
   GetUserType: `http://wj.${host}/LittleProgram/UserInfo/GetUserType`,
+  //外教--我的--获取基本信息(2018-03-29)
+  GetForTeaDetailInfo: `http://wj.${host}/LittleProgram/ForeignTea/GetForTeaDetailInfo`,
+  //外教，我的--上传文件(2018-03-30)
+  UpLoadForTeaFile: `http://wj.${host}/LittleProgram/FileOpera/UpLoadForTeaFile`,
+  // 外教--我的--修改基本资料提交(2018-03-30)
+  AlterForTeaBaseInfo: `http://wj.${host}/LittleProgram/ForeignTea/AlterForTeaBaseInfo`,
 }
 const wxGetUserInfo = function (code, userInfo, callback, callback2) {
   wx.getUserInfo({
@@ -97,6 +111,8 @@ const wxGetUserInfo = function (code, userInfo, callback, callback2) {
 module.exports = {
   config: config,
   phoneReg: phoneReg,
+  srcImg: srcImg,
+  srcVideo: srcVideo,
   //请求数据
   request(method, url, data, success, fail, complete) {
     fail = typeof (fail) === 'function' ? fail : function () { };
@@ -135,7 +151,7 @@ module.exports = {
       camera: 'back',
       success: success,
       complete: function (res) {
-        console.log(res);
+
       }
     })
   },
@@ -171,36 +187,40 @@ module.exports = {
         if (res.code) {
           //获取code
           code = res.code;
-          openid = wx.getStorageSync('openid');
-          if (openid === null || openid === '') {
-            // 可以通过 wx.getSetting 先查询一下用户是否授权了 "scope.record" 这个 scope
-            wx.getSetting({
-              success: (res) => {
-                if (res.authSetting['scope.userInfo']) {
-                  //已经授权，可以直接调用getUserInfo获取头像昵称，不会弹框
-                  wxGetUserInfo(code, userInfo, callback, callback2).bind(this);
-                } else {
-                  //尚未授权
-                  console.log(232323);
-                  wx.authorize({
-                    scope: 'scope.userInfo',
-                    success: (res) => {
-                      console.log(res);
-                      wxGetUserInfo(code, userInfo, callback, callback2).bind(this);
-                    },
-                    complete: (res) => {
-                      console.log(res);
+          // openid = wx.getStorageSync('openid');
+          // if (openid === null || openid === '') {
+          // 可以通过 wx.getSetting 先查询一下用户是否授权了 "scope.userInfo" 这个 scope
+          wx.getSetting({
+            success: (res) => {
+              if (res.authSetting['scope.userInfo']) {
+                //已经授权，可以直接调用getUserInfo获取头像昵称，不会弹框
+                wxGetUserInfo(code, userInfo, callback, callback2);
+              } else {
+                //尚未授权
+                wx.openSetting({ 
+                  success: (res) => {
+                    console.log(res);
+                    if (res.authSetting['scope.userInfo']) {
+                      wxGetUserInfo(code, userInfo, callback, callback2);
                     }
-                  })
-                }
+                  }
+                });
+                // wx.authorize({
+                //   scope: 'scope.userInfo',
+                //   success: (res) => {
+                //     console.log(res);
+                //     wxGetUserInfo(code, userInfo, callback, callback2);
+                //   },
+                //   complete: (res) => {
+                //     console.log(res);
+                //   }
+                // })
               }
-            })
-          } else {
-            console.log('openid已获取' + res.errMsg)
-          }
+            }
+          })
+          // }
         }
-      },
-      fail() { }
+      }
     })
   },
 

@@ -32,6 +32,7 @@ Page({
     pageIndex: 1,
     pageSize: 5,
     isUpload: true,
+    courInfos: [], //页面数据
   },
   bindDelete(e) {
     let index = e.currentTarget.dataset.index,
@@ -72,6 +73,19 @@ Page({
       url: '../orderDetails/index?isGroup=0',
     })
   },
+  timeStamp(time) { //时间戳转换为日期
+    let date = new Date(parseInt(time)),
+      y = date.getFullYear(),
+      m = date.getMonth() + 1,
+      d = date.getDate(),
+      h = date.getHours(),
+      f = date.getMinutes();
+    m < 10 && (m = '0' + m);
+    d < 10 && (d = '0' + d);
+    h < 10 && (h = '0' + h);
+    f < 10 && (f = '0' + f);
+    return `${y}-${m}-${d} ${h}:${f}`;
+  },
   getCourseList(isBottom) { //获取课程列表
     isBottom = typeof isBottom === 'undefined' ? false : true; //上拉加载
     let teaId = wx.getStorageSync('teacherStatusInfo').teaId;
@@ -79,6 +93,7 @@ Page({
       pageSize = this.data.pageSize;
     let isUpload = this.data.isUpload;
     if (!isUpload) return; //是否可以执行加载
+    wx.showLoading({ title: '努力加载中...' });
     $common.request(
       "POST",
       $common.config.GetMyCourInfos,
@@ -105,6 +120,12 @@ Page({
             courInfos = res.data.courInfos;
             isUpload = true;
           }
+          courInfos.forEach(function (target, index) {
+            let str = target.CorCreateOn,
+              str1 = str.replace("/Date(", ''),
+              time = str1.replace(')/', '');
+            courInfos[index].showTime = this.timeStamp(time);
+          }.bind(this));
           this.setData({
             courInfos: courInfos,
             pageIndex: pageIndex,
@@ -127,19 +148,19 @@ Page({
         $common.showModal('亲~网络不给力哦，请稍后重试');
       },
       (res) => {
-        console.log(res);
+        wx.hideLoading();
+        wx.stopPullDownRefresh();
       }
     )
   },
   init() {
-
     this.getCourseList();
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.init();
+
   },
 
   /**
@@ -153,7 +174,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.init();
   },
 
   /**
@@ -174,7 +195,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.init();
   },
 
   /**
