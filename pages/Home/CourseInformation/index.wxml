@@ -26,7 +26,6 @@
       <view class='fon-24 margin-b-10 ca'>已有{{course.BuyCount}}人参与</view>
       <view class='purplea purple fon-24 '>{{course.CorClaNum}}人团</view>
     </view>
-
   </view>
   <!-- 课程时长 -->
   <view class='flex aitems-center height-85 padding-lr-30 bg-fff border-t-1 fon-30 c2b '>
@@ -130,7 +129,7 @@
   <view wx:if='{{course.CorType==1}}' class='footer flex border-t-1 between'>
     <view class='fon-26 cs flex bg-fff aitems-center padding-l-30'>
       <view class='margin-r-10'>支付订金</view>
-      <view class='fon-30 bold purple'> ¥{{course.CorPrice}}</view>
+      <view class='fon-30 bold purple'> ¥{{course.paymentPrice}}</view>
     </view>
     <view bindtap='sureOrder' class='white fon-32 cs purple-bg'>立即购买</view>
   </view>
@@ -148,15 +147,15 @@
         咨询
       </view>
     </view>
-    <view bindtap='alonePayment' class='DanDUMai  flex aitems-center center'>
+    <view bindtap='sureOrder' class='DanDUMai  flex aitems-center center'>
       <view class='purple fon-26 t-center'>
-        <view>¥{{course.CorPrice}}</view>
+        <view>¥{{course.paymentPrice}}</view>
         <view>单独购买</view>
       </view>
     </view>
-    <view bindtap='fightGroup' class='flex1 DanDUMaia purple-bg white flex aitems-center center'>
+    <view bindtap='sureOrder' class='flex1 DanDUMaia purple-bg white flex aitems-center center'>
       <view class=' fon-26 t-center'>
-        <view>¥{{course.CorGroupPrice}}</view>
+        <view>¥{{course.paymentPriceS}}</view>
         <view>{{course.CorClaNum}}人拼团</view>
       </view>
     </view>

@@ -17,3 +17,10 @@
 <!--  -->
 
 <button bindtap='submit' class='btn purple-bg margin-t-60 white'>保存</button>
+
+<!-- <view class='message'>
+  <view class='message-box'>
+    <progress percent="20" show-info='{{false}}' stroke-width='6' color='#7c99d0' />
+    <view class='message-text'>正在上传...</view>
+  </view>
+</view> -->

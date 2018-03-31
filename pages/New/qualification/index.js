@@ -7,6 +7,48 @@ Page({
     imageCount: 5,
     srcImg: $common.srcImg,
   },
+  deleteImg(e) { //删除图片
+    let index = e.currentTarget.dataset.index,
+      imageList = this.data.imageList;
+    console.log(index, imageList);
+    let thisData = imageList[index];
+    $common.showModal('确定删除?', true, (res) => {
+      if (res.cancel) return;
+      if (thisData.QfsCreateOn) { //保存到数据库的图片，调用接口删除
+        $common.request(
+          "POST",
+          $common.config.DeleteForTeaFile,
+          {
+            fileType: 2,
+            fileName: thisData.QfsPicName,
+          },
+          (res) => {
+            if (res.data.res) {
+              imageList.splice(index, 1);
+              this.setData({
+                imageList: imageList,
+                imageCount: 5 - imageList.length
+              })
+              app.globalData.teacherFor.TeaQualif = imageList;
+            }
+          },
+          (res) => {
+
+          },
+          (res) => {
+            console.log(res);
+          }
+        )
+      } else { //并未保存过，直接本地删除
+        imageList.splice(index, 1);
+        this.setData({
+          imageList: imageList,
+          imageCount: 5 - imageList.length
+        })
+        app.globalData.teacherFor.TeaQualif = imageList;
+      }
+    })
+  },
   bindImage() { //选择照片
     let imageList = this.data.imageList,
       imageCount = this.data.imageCount;
@@ -33,7 +75,7 @@ Page({
       return;
     }
     console.log(imageList);
-    return;
+
     wx.showLoading({ title: '正在上传' });
     let data = {
       url: imageList,
@@ -45,6 +87,10 @@ Page({
   },
   uploadFun(data) {
     if (data.url[data.i].QfsCreateOn) {
+      data.arr.push({
+        QfsPicName: data.url[data.i].QfsPicName,
+        sqlUpload: true
+      });
       data.i++;
       this.uploadFun(data);
       return;
@@ -61,7 +107,7 @@ Page({
         if (resData.res) {
           data.arr.push({
             QfsPicName: resData.imgNames[0],
-            QfsCreateOn: true
+            sqlUpload: true
           });
         } else { }
       },

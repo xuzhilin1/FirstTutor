@@ -72,6 +72,12 @@ const config = {
   UpLoadForTeaFile: `http://wj.${host}/LittleProgram/FileOpera/UpLoadForTeaFile`,
   // 外教--我的--修改基本资料提交(2018-03-30)
   AlterForTeaBaseInfo: `http://wj.${host}/LittleProgram/ForeignTea/AlterForTeaBaseInfo`,
+  //外教基本资料修改--删除上传文件
+  DeleteForTeaFile: `http://wj.${host}/LittleProgram/FileOpera/DeleteForTeaFile`,
+  //学生--查看课程详情--获取某课程拼团中的团订单(2018-03-30)
+  GetCorGroupInfos: `http://wj.${host}/LittleProgram/CorOpenGroup/GetCorGroupInfos`,
+  //订单页--获取用户名与手机号(2018-03-30)
+  GetUserNamePhone: `http://wj.${host}/LittleProgram/Student/GetUserNamePhone`,
 }
 const wxGetUserInfo = function (code, userInfo, callback, callback2) {
   wx.getUserInfo({
@@ -197,7 +203,7 @@ module.exports = {
                 wxGetUserInfo(code, userInfo, callback, callback2);
               } else {
                 //尚未授权
-                wx.openSetting({ 
+                wx.openSetting({
                   success: (res) => {
                     console.log(res);
                     if (res.authSetting['scope.userInfo']) {

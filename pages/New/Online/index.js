@@ -20,6 +20,12 @@ Page({
       pagesData: arr
     })
   },
+  onlineChart(e) { //进入到聊天页面
+    let index = e.currentTarget.dataset.index;
+    wx.navigateTo({
+      url: '../onlineChart/index',
+    })
+  },
   onLoad: function (options) {
 
   },
@@ -67,6 +73,9 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: 'FirstTutor',
+      path: '/pages/Home/Home/index'
+    }
   }
 })

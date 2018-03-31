@@ -68,10 +68,34 @@ Page({
     this.setData({
       timeList: timeList
     })
+    this.countPayment();
+  },
+  countPayment() { //计算支付金额
+    let timeList = this.data.timeList,
+      course = this.data.course;
+    let num = 0;
+    for (let i = 0, len = timeList.length; i < len; i++) {
+      if (timeList[i].timeType === 2) {
+        num++;
+      }
+    }
+    course.paymentPrice = num * course.CorPrice;
+    course.paymentPriceS = num * course.CorGroupPrice;
+    this.setData({
+      course: course
+    })
   },
   sureOrder() { //立即购买
+    let course = this.data.course,
+      timeList = this.data.timeList,
+      tea = this.data.tea;
+    let flage = course.CorType == 1 ? course.paymentPrice <= 0 ? false : true : course.paymentPriceS <= 0 ? false : true;
+    if (!flage) {
+      $common.showModal('请选择上课时间');
+      return;
+    }
     wx.navigateTo({
-      url: '../sureOrder/index',
+      url: '../sureOrder/index?tea=' + JSON.stringify(tea) + '&course=' + JSON.stringify(course) + '&timeList=' + JSON.stringify(timeList) + '&teaDep=' + this.data.teaDep,
     })
   },
   spellingRules() { //详细规则
@@ -114,6 +138,8 @@ Page({
       (res) => {
         if (res.data.res) {
           let course = res.data.course;
+          course.paymentPrice = 0; //单人购买需支付的价格
+          course.paymentPriceS = 0; //拼团购买需支付的价格
           switch (course.CorLenOfCla) {
             case 1:
               course.courseTimeLong = 1; //1小时
@@ -129,6 +155,26 @@ Page({
             course: course,
             tea: res.data.tea
           })
+          if (course.CorType != 1) { //一对多页面 
+            $common.request(
+              "POST",
+              $common.config.GetCorGroupInfos,
+              {
+                courId: this.data.courId,
+              },
+              (res) => {
+                if (res.data.res) {
+
+                }
+              },
+              (res) => {
+
+              },
+              (res) => {
+                console.log(res);
+              }
+            )
+          }
         } else {
           switch (res.data.errType) {
             case 1:

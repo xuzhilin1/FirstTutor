@@ -187,7 +187,7 @@ Page({
       let url = res.tempFilePath;//文件路径
       console.log(url);
       wx.showLoading({ title: '正在上传' });
-      wx.uploadFile({
+      const uploadTask = wx.uploadFile({
         url: $common.config.UpLoadForTeaFile,
         filePath: url,
         name: 'file',
@@ -225,11 +225,17 @@ Page({
         complete: (res) => {
           wx.hideLoading();
         }
+      });
+      uploadTask.onProgressUpdate((res) => {
+        console.log('上传进度', res.progress)
+        console.log('已经上传的数据长度', res.totalBytesSent)
+        console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend)
       })
     }.bind(this));
   },
   getTeacherDetail() { //获取教师基本信息
     app.globalData.teacherFor = [];
+    wx.showLoading({ title: '努力加载中...' });
     $common.request(
       "POST",
       $common.config.GetForTeaDetailInfo,
@@ -259,6 +265,8 @@ Page({
       },
       (res) => {
         console.log(res);
+        wx.hideLoading();
+        wx.stopPullDownRefresh();
       }
     )
   },

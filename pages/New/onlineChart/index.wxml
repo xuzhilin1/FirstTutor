@@ -1,0 +1,36 @@
+<!--pages/New/onlineChart/index.wxml-->
+<view class='wrapper'>
+  <view class='core' wx:for='{{listData}}' wx:key='{{index}}'>
+     <view wx:if='{{item.isTime}}' class='core-time'>
+      {{item.time}}
+    </view> 
+    <view wx:if='{{item.chartType}}' class='core-me'>
+      <view class='core-box-me'>
+        <view class='core-chart'>
+          {{item.chartContext}}
+        </view>
+        <view class='core-right'>
+          <view class='core-right-1'></view>
+          <view class='core-right-2'></view>
+        </view>
+      </view>
+      <image class='core-image' src='{{myImage}}'></image>
+    </view>
+    <view wx:if='{{!item.chartType}}' class='core-you'>
+      <image class='core-image' src='{{youImage}}'></image>
+      <view class='core-box-you'>
+        <view class='core-left'>
+          <view class='core-left-1'></view>
+          <view class='core-left-2'></view>
+        </view>
+        <view class='core-chart'>
+          {{item.chartContext}}
+        </view>
+      </view>
+    </view>
+  </view>
+  <view id='wrap'></view>
+  <view class='footer'>
+    <input bindconfirm='confirm' value='{{value}}' confirm-hold='{{false}}' adjust-position='{{true}}' confirm-type='send' cursor-spacing='{{18}}' type='text' placeholder='请输入...' placeholder-class='placeholder'></input>
+  </view>
+</view>

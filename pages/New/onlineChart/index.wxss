@@ -1,0 +1,155 @@
+/* pages/New/onlineChart/index.wxss */
+
+view {
+  box-sizing: border-box;
+}
+
+.wrapper {
+  position: relative;
+  top: 0;
+  left: 0;
+  padding-bottom: 100rpx;
+  box-sizing: border-box;
+}
+
+.core {
+  width: 100%;
+  padding: 0 30rpx;
+  margin-bottom: 50rpx;
+   margin-top: 50rpx; 
+}
+
+.core-time {
+  display: flex;
+  justify-content: center;
+  font-size: 26rpx;
+  color: #939393;
+  margin-bottom: 50rpx;
+}
+
+.core-me {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  padding-left: 46rpx;
+}
+
+.core-box-me {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.core-box-you {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.core-image {
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+
+.core-chart {
+  background-color: #b2d3fb;
+  font-size: 26rpx;
+  border-radius: 10rpx;
+  padding: 20rpx 40rpx;
+  color: #4f4f4f;
+  max-width: 90%;
+}
+
+.core-right {
+  width: 40rpx;
+  height: 70rpx;
+  background: #b2d3fb;
+  overflow: hidden;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.core-right-1 {
+  width: 70rpx;
+  height: 70rpx;
+  position: absolute;
+  top: -46rpx;
+  left: -20rpx;
+  background-color: #f5f6f9;
+  transform: rotateZ(74deg);
+}
+
+.core-right-2 {
+  width: 70rpx;
+  height: 70rpx;
+  position: absolute;
+  top: 24rpx;
+  left: 4rpx;
+  background-color: #f5f6f9;
+  transform: rotateZ(40deg);
+}
+
+.core-you {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  padding-right: 46rpx;
+}
+
+.core-you .core-chart {
+  background: #fff;
+}
+
+.core-left {
+  width: 40rpx;
+  height: 70rpx;
+  background: #fff;
+  overflow: hidden;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.core-left-1 {
+  width: 70rpx;
+  height: 70rpx;
+  position: absolute;
+  top: -46rpx;
+  left: -20rpx;
+  background-color: #f5f6f9;
+  transform: rotateZ(-74deg);
+}
+
+.core-left-2 {
+  width: 70rpx;
+  height: 70rpx;
+  position: absolute;
+  top: 30rpx;
+  left: -30rpx;
+  background-color: #f5f6f9;
+  transform: rotateZ(-46deg);
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100rpx;
+  background: #ededed;
+  padding: 16rpx 30rpx;
+}
+
+.footer input {
+  width: 100%;
+  box-sizing: border-box;
+  height: 100%;
+  border: 1px solid #acadca;
+  border-radius: 10rpx;
+  background: #fff;
+  padding: 0 20rpx;
+  font-size: 26rpx;
+}

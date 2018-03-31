@@ -1,8 +1,9 @@
 {
   "pages": [
     "pages/New/basic/basic",
-    "pages/Home/Home/index",
     "pages/New/index/index",
+    "pages/New/onlineChart/index",
+    "pages/Home/Home/index",
     "pages/New/CourseManagement/index",
     "pages/New/ReleaseCourse/index",
     "pages/Home/teachersInformation/index",

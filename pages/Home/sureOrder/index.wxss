@@ -63,6 +63,13 @@
   width: 50%;
 }
 
+.week-time {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 60%;
+}
+
 /*  评分  */
 
 .score {
@@ -135,6 +142,7 @@
 .list-input {
   width: 90%;
 }
-.list-box-inpu{
+
+.list-box-inpu {
   width: 100%;
 }

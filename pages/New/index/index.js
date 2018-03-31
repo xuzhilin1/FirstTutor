@@ -3,6 +3,7 @@ const app = getApp();
 const $common = require('../../../utils/common.js');
 Page({
   data: {
+    isPageShow: false, //页面初始不显示
     userInfo: {},
     userType: 1, //1 学生 2 导师 0 未知,
     vip: false, //是否vip
@@ -95,6 +96,7 @@ Page({
       }.bind(this));
   },
   init() {
+    wx.showLoading({ title: '努力加载中...' });
     let openid = wx.getStorageSync('openid');
     if (openid === null || openid === '') {
       $common.getOpenid(function () {
@@ -116,7 +118,8 @@ Page({
           let userType = res.data.userType;
           this.setData({
             userInfo: wx.getStorageSync('userInfo'),
-            userType: userType
+            userType: userType,
+            isPageShow: true,
           });
           if (userType != 2) { return } //用户身份不是外教，不用获取是否vip
           this.getIsVip();
@@ -138,6 +141,8 @@ Page({
         $common.showModal('亲~网络不给力哦，请稍后重试');
       },
       (res) => {
+        wx.hideLoading();
+        wx.stopPullDownRefresh();
       }
     )
   },
