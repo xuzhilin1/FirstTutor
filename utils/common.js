@@ -15,7 +15,7 @@ const data = {
   // TheLablePath: "D:\wwwroot\kcbweb\cert\apiclient_cert.p12",
   TitleName: ""
 };
-const host = "http://wj.1-zhao.com";
+const host = "https://wj.1-zhao.com";
 // 正则手机号码
 const phoneReg = /^1[34578]\d{9}$/;
 const srcImg = `${host}/QualifImgs/`;
@@ -43,7 +43,10 @@ const config = {
   GetCourseInfo: `${host}/LittleProgram/Course/GetCourseInfo`,
   //课程信息，根据课程ID获取课程的上课时间(2018-03-29)
   GetTimeTableInfos: `${host}/LittleProgram/TimeTable/GetTimeTableInfos`,
-  //
+  // 学生-订单页外教信息获取（2018-04-02）
+  GetOrderForTeaInfo: `${host}/LittleProgram/ForeignTea/GetOrderForTeaInfo`,
+  //购买课程--订单填写页--获取订单信息（2018-03-30）
+  GetOrderInfos: `${host}/LittleProgram/CorOpenGroup/GetOrderInfos`,
   /*
     找外教
    */
@@ -80,13 +83,23 @@ const config = {
   GetCorGroupInfos: `${host}/LittleProgram/CorOpenGroup/GetCorGroupInfos`,
   //订单页--获取用户名与手机号(2018-03-30)
   GetUserNamePhone: `${host}/LittleProgram/Student/GetUserNamePhone`,
+  //外教-删除课程信息
+  DeleteCourse: `${host}/LittleProgram/Course/DeleteCourse`,
+  //外教-修改课程-获取信息(2018-04-02)
+  AlterCourseGet: `${host}/LittleProgram/Course/AlterCourseGet`,
+  //外教-修改课程信息(2018-04-02)
+  AlterCourse: `${host}/LittleProgram/Course/AlterCourse`,
 }
 const wxGetUserInfo = function (code, userInfo, callback, callback2) {
+  let openid = wx.getStorageSync('openid');
+  if (openid) return;
   wx.getUserInfo({
     success: (res) => {
       console.log(res);
       let userInfo = res.userInfo;
       wx.setStorageSync("userInfo", userInfo);//本地存储个人信息
+      let openid = wx.getStorageSync('openid');
+      if (openid) return;
       wx.request({
         url: config.GetSaveUserOpenId,
         data: {
@@ -105,14 +118,48 @@ const wxGetUserInfo = function (code, userInfo, callback, callback2) {
             callback();
             callback2();
           }
-        },
-        fail: function (res) { },
-        complete: function (res) { console.log(res); }
+        }
       })
       callback();
     },
-    complete: (res) => {
-      console.log(res);
+    fail: failFun(code, userInfo, callback, callback2)
+  })
+}
+const failFun = function (code, userInfo, callback, callback2) {
+  let openid = wx.getStorageSync('openid');
+  if (openid) return;
+  // 可以通过 wx.getSetting 先查询一下用户是否授权了 "scope.userInfo" 这个 scope
+  wx.getSetting({
+    success: (res) => {
+      if (res.authSetting['scope.userInfo']) {
+        //已经授权，可以直接调用getUserInfo获取头像昵称，不会弹框
+        wxGetUserInfo(code, userInfo, callback, callback2);
+      } else {
+        //尚未授权
+        wx.authorize({ //该方法 检查是否授权 
+          scope: 'scope.userInfo',
+          success: (res) => {
+            wxGetUserInfo(code, userInfo, callback, callback2);
+          },
+          fail: () => {
+            wx.showModal({
+              title: '提示',
+              content: '我们需要获取您的信息，是否授权？',
+              success: (res) => {
+                if (res.confirm) {
+                  wx.openSetting({ //调起设置授权界面
+                    success: (res) => {
+                      if (res.authSetting['scope.userInfo']) {
+                        wxGetUserInfo(code, userInfo, callback, callback2);
+                      }
+                    }
+                  });
+                }
+              }
+            })
+          }
+        })
+      }
     }
   })
 }
@@ -198,44 +245,7 @@ module.exports = {
           code = res.code;
           openid = wx.getStorageSync('openid');
           if (openid === null || openid === '') {
-            // 可以通过 wx.getSetting 先查询一下用户是否授权了 "scope.userInfo" 这个 scope
-            wx.getSetting({
-              success: (res) => {
-                console.log(res);
-                if (res.authSetting['scope.userInfo']) {
-                  //已经授权，可以直接调用getUserInfo获取头像昵称，不会弹框
-                  wxGetUserInfo(code, userInfo, callback, callback2);
-                } else {
-                  //尚未授权
-                  wx.authorize({ //该方法 检查是否授权 
-                    scope: 'scope.userInfo',
-                    success: (res) => {
-                      wxGetUserInfo(code, userInfo, callback, callback2);
-                    },
-                    fail: (res) => {
-                      wx.showModal({
-                        title: '提示',
-                        content: '我们需要获取您的信息，是否授权？',
-                        success: (res) => {
-                          if (res.confirm) {
-                            console.log(res);
-                            wx.openSetting({ //调起设置授权界面
-                              success: (res) => {
-                                if (res.authSetting['scope.userInfo']) {
-                                  wxGetUserInfo(code, userInfo, callback, callback2);
-                                }
-                              }
-                            });
-                          }
-                        }
-                      })
-                    },
-                    complete: (res) => {
-                    }
-                  })
-                }
-              }
-            })
+            wxGetUserInfo(code, userInfo, callback, callback2);
           }
         }
       }

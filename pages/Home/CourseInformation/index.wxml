@@ -19,7 +19,7 @@
       <image class='QiHao' mode='widthFix' src='../../images/tuan_06.png'></image>
       <view>
         {{course.CorTitle}}
-        <view class='bold bg-fff purple'>¥{{course.CorPrice}}</view>
+        <view class='bold bg-fff purple'>¥{{course.CorBuyPrice}}</view>
       </view>
     </view>
     <view class='right-box'>
@@ -64,7 +64,7 @@
     </view>
   </view>
   <!--  参团  -->
-  <view wx:if='{{course.CorType!=1}}' class='bg-fff padding-b-20 border-t-1 margin-t-20 padding-lr-30'>
+  <view wx:if='{{course.CorType!=1&&fgtList.TeaNickName}}' class='bg-fff padding-b-20 border-t-1 margin-t-20 padding-lr-30'>
     <view class='height-85 fon-26 border-b-1 flex between aitems-center'>
       <view class='flex c2b aitems-center group-little'>
         <text>支付开团邀请{{course.CorClaNum - 1}}人参团，人数不足自动退款</text>
@@ -123,13 +123,13 @@
     <view class='fon-30 padding-l-20 border-l-2 c2b'>订金说明</view>
   </view>
   <view class='padding-lr-30 fon-24  c88 bg-fff padding-tb-40'>
-    平台预收课程费用{{teaDep}}%作为订金，剩余费用学生扣除订金后支付给外教。
+    平台预收课程费用{{tea.TeaDepositPer}}%作为订金，剩余费用学生扣除订金后支付给外教。
   </view>
   <!--  footer    一对一  -->
   <view wx:if='{{course.CorType==1}}' class='footer flex border-t-1 between'>
     <view class='fon-26 cs flex bg-fff aitems-center padding-l-30'>
       <view class='margin-r-10'>支付订金</view>
-      <view class='fon-30 bold purple'> ¥{{course.paymentPrice}}</view>
+      <view class='fon-30 bold purple'> ¥{{course.CorPrice}}</view>
     </view>
     <view bindtap='sureOrder' class='white fon-32 cs purple-bg'>立即购买</view>
   </view>
@@ -141,7 +141,7 @@
         首页
       </view>
     </view>
-    <view bindtap='chatTeacher' class='flex center aitems-center KuanDU'>
+    <view bindtap='alonePayment' class='flex center aitems-center KuanDU'>
       <view class='fon-20 c88 gaoDU'>
         <image class='fangZI' mode='widthFix' src='../../images/zixun_09.png'></image>
         咨询
@@ -149,13 +149,13 @@
     </view>
     <view bindtap='sureOrder' class='DanDUMai  flex aitems-center center'>
       <view class='purple fon-26 t-center'>
-        <view>¥{{course.paymentPrice}}</view>
+        <view>¥{{course.CorPrice}}</view>
         <view>单独购买</view>
       </view>
     </view>
-    <view bindtap='sureOrder' class='flex1 DanDUMaia purple-bg white flex aitems-center center'>
+    <view bindtap='fightGroup' class='flex1 DanDUMaia purple-bg white flex aitems-center center'>
       <view class=' fon-26 t-center'>
-        <view>¥{{course.paymentPriceS}}</view>
+        <view>¥{{course.CorGroupPrice}}</view>
         <view>{{course.CorClaNum}}人拼团</view>
       </view>
     </view>

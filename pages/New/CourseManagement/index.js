@@ -2,73 +2,90 @@ const $common = require('../../../utils/common.js');
 const app = getApp();
 Page({
   data: {
-    // pagesData: [{
-    //   corCanView: true, //是否通过审核
-    //   corCreateOn: '2017-08-06 13:31', //发布时间
-    //   corPrice: '200', // 课程价格
-    //   fgtType: 2, //1 拼团 2 单独购买
-    //   corClaNum: 1, //上课人数，1-3
-    //   corTitle: '口语一对一', //课程名称
-    //   fgtAttCount: 0, //拼团成功团数
-    // }, {
-    //   corCanView: true, //是否通过审核
-    //   corCreateOn: '2017-08-06 13:31', //发布时间
-    //   corPrice: '200', // 课程价格
-    //   fgtType: 1, //1 拼团 2 单独购买
-    //   corClaNum: 2, //上课人数，1-3
-    //   corTitle: '口语一对二', //课程名称
-    //   fgtAttCount: 2,//拼团成功团数
-    // }, {
-    //   corCanView: false, //是否通过审核
-    //   corCreateOn: '2017-08-06 13:31', //发布时间
-    //   corPrice: '200', // 课程价格
-    //   fgtType: 2, //1 拼团 2 单独购买
-    //   corClaNum: 1, //上课人数，1-3
-    //   corTitle: '口语一对一', //课程名称
-    //   fgtAttCount: 0, //拼团成功团数
-    // }],
-
-
     pageIndex: 1,
     pageSize: 5,
-    isUpload: true,
     courInfos: [], //页面数据
   },
-  bindDelete(e) {
+  bindDelete(e) { //删除课程 
     let index = e.currentTarget.dataset.index,
-      pagesData = this.data.pagesData;
+      courInfos = this.data.courInfos;
     $common.showModal('确定删除该课程？', true, function (res) {
       if (res.confirm) {
         //发请求后删除
-        pagesData.splice(index, 1);
-        this.setData({
-          pagesData: pagesData
-        });
+        $common.request(
+          "POST",
+          $common.config.DeleteCourse,
+          {
+            corId: courInfos[index].CorId
+          },
+          (res) => {
+            if (res.data.res) {
+              courInfos.splice(index, 1);
+              this.setData({
+                courInfos: courInfos
+              });
+            } else {
+              switch (res.data.errType) {
+                case 1:
+                  $common.showModal('参数有误');
+                  break;
+                case 2:
+                  $common.showModal('未知错误');
+                  break;
+                case 3:
+                  $common.showModal('有人报名，不可删除');
+                  break;
+              }
+            }
+          },
+          (res) => {
+            $common.showModal('亲~网络不给力哦，请稍后重试');
+          },
+          (res) => {
+            console.log(res);
+          }
+        )
       }
     }.bind(this));
   },
   reviseReleaseCourse(e) { //修改课程
     let index = e.currentTarget.dataset.index,
-      pagesData = this.data.pagesData;
+      courInfos = this.data.courInfos;
+    app.globalData.releaseCourse = {
+      courseIntroduce: '', //课程介绍
+      courseTime: [], //上课时间段
+      courseTypeIndex: 0, //课程类型下标,
+      courseName: '', //课程名称
+      courseAllPrice: '', //课程价格
+      courseDurationIndex: 0, //课程时长下标
+    }
     wx.navigateTo({
-      url: '../ReleaseCourse/index?status=1',
+      url: '../ReleaseCourse/index?status=1&CorId=' + courInfos[index].CorId,
     })
   },
   releaseCourse() { //创建课程
+    app.globalData.releaseCourse = {
+      courseIntroduce: '', //课程介绍
+      courseTime: [], //上课时间段
+      courseTypeIndex: 0, //课程类型下标,
+      courseName: '', //课程名称
+      courseAllPrice: '', //课程价格
+      courseDurationIndex: 0, //课程时长下标
+    }
     wx.navigateTo({
       url: '../ReleaseCourse/index?status=0',
     })
   },
   groupList(e) { //成功拼团
     let index = e.currentTarget.dataset.index,
-      pagesData = this.data.pagesData;
+      courInfos = this.data.courInfos;
     wx.navigateTo({
       url: '../GroupList/index',
     })
   },
   orderDetails(e) { //查看课程
     let index = e.currentTarget.dataset.index,
-      pagesData = this.data.pagesData;
+      courInfos = this.data.courInfos;
     wx.navigateTo({
       url: '../orderDetails/index?isGroup=0',
     })
@@ -86,14 +103,10 @@ Page({
     f < 10 && (f = '0' + f);
     return `${y}-${m}-${d} ${h}:${f}`;
   },
-  getCourseList(isBottom) { //获取课程列表
-    isBottom = typeof isBottom === 'undefined' ? false : true; //上拉加载
+  getCourseList() { //获取课程列表
     let teaId = wx.getStorageSync('teacherStatusInfo').teaId;
     let pageIndex = this.data.pageIndex,
       pageSize = this.data.pageSize;
-    let isUpload = this.data.isUpload;
-    if (!isUpload) return; //是否可以执行加载
-    wx.showLoading({ title: '努力加载中...' });
     $common.request(
       "POST",
       $common.config.GetMyCourInfos,
@@ -104,32 +117,27 @@ Page({
       },
       (res) => {
         if (res.data.res) {
-          let courInfos;
-          if (isBottom) { //上拉加载
-            courInfos = this.data.courInfos;
-            let arr = res.data.courInfos;
+          console.log(res);
+          let courInfos = this.data.courInfos;
+          let arr = res.data.courInfos;
+          if (arr.length >= pageSize) {
             pageIndex++;
-            if (arr.length >= pageSize) { //剩余数量不足一页
-              isUpload = false;
-            }
-            arr.forEach(function (target, index) {
-              courInfos.push(target);
-            });
-          } else {
-            pageIndex = 1;
-            courInfos = res.data.courInfos;
-            isUpload = true;
           }
-          courInfos.forEach(function (target, index) {
-            let str = target.CorCreateOn,
+          for (let i = 0, len = arr.length; i < len; i++) {
+            let str = arr[i].CorCreateOn,
               str1 = str.replace("/Date(", ''),
               time = str1.replace(')/', '');
-            courInfos[index].showTime = this.timeStamp(time);
-          }.bind(this));
+            arr[i].showTime = this.timeStamp(time); //时间戳转换为时间
+            courInfos.push(arr[i]);
+          }
+          let hash = {};
+          let newArr = arr.reduce(function (item, next) {//数组依据CorId去重
+            hash[next.CorId] ? '' : hash[next.CorId] = true && item.push(next);
+            return item
+          }, []);
           this.setData({
-            courInfos: courInfos,
+            courInfos: newArr,
             pageIndex: pageIndex,
-            isUpload: isUpload
           })
         } else {
           switch (res.data.errType) {
@@ -154,6 +162,12 @@ Page({
     )
   },
   init() {
+    this.setData({
+      pageIndex: 1,
+      pageSize: 5,
+      courInfos: [],
+    })
+    wx.showLoading({ title: '努力加载中...' });
     this.getCourseList();
   },
   /**
@@ -167,14 +181,14 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    this.init();
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.init();
   },
 
   /**
@@ -202,7 +216,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    this.getCourseList(true);
+    this.getCourseList();
   },
 
   /**

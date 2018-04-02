@@ -207,21 +207,21 @@ Page({
     $common.request("POST",
       $common.config.GetCountryInfos,
       null,
-      function (res) {
+      (res) => {
         if (res.data.res) {
           this.setData({
             nationalityArray: res.data.nationList
           })
           this.setTeaNaLityId();
         } else {
-          $common.showModal('获取国籍信息失败，请重新获取', true, function (res) {
+          $common.showModal('获取国籍信息失败，请重新获取', true, (res) => {
             if (res.confirm) {
               //用户点击确定，重新请求国籍信息
               this.getCountryInfo();
             }
-          }.bind(this));
+          });
         }
-      }.bind(this));
+      });
   },
   onLoad: function (options) {
     let status = options.status;
@@ -232,6 +232,7 @@ Page({
   },
   onReady: function () {
     this.getCountryInfo();
+  
   },
 
   /**

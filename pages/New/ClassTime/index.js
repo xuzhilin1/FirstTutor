@@ -83,6 +83,21 @@ Page({
       delta: 1,
     })
   },
+  init() {
+    let courseTime = app.globalData.releaseCourse.courseTime;
+    let timeList = this.data.timeList;
+    console.log(courseTime);
+    for (let i = 0, len = courseTime.length; i < len; i++) {
+      for (let j = 0, l = timeList.length; j < l; j++) {
+        if (courseTime[i].TimAfw === timeList[j].TimAfw && courseTime[i].TimClaTime === timeList[j].TimClaTime) {
+          timeList[j].timeType = 2;
+        }
+      }
+    }
+    this.setData({
+      timeList: timeList
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -101,7 +116,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.init();
   },
 
   /**

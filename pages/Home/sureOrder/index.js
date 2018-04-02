@@ -2,7 +2,7 @@ const $common = require('../../../utils/common.js');
 Page({
   //页面分为两种情况，1，单独购买 = 团长购买 2，团员购买
   data: {
-    isGroupHead: true, //true团长, false 团员
+    isGroupHead: 1, //1 开团, 0 参团
 
     startCourseTime: '', //上课时间
     courseAddress: '上海市浦东新区张衡路666号', //上课 地址
@@ -15,7 +15,6 @@ Page({
     course: {}, //课程信息
     teaDep: 0, //收取定金百分比
     timeListData: [], //上课时间段数据
-
   },
   initCourseTimeData() { //初始化上课时间数据
     let course = this.data.course,
@@ -45,29 +44,8 @@ Page({
     }
     arr = arr.join('|');
     course.weekTime = arr;
-    // let timeList = [];
-    // let courseLong = course.courseTimeLong;
-    // for (let i = 0, len = array.length; i < len; i++) {
-    //   switch (array.timeName) {
-    //     case '上午':
-    //       timeList.push("9:00", '10:00', "11:00");
-    //       break;
-    //     case '下午1':
-    //       timeList.push("12:00", '13:00', "14:00");
-    //       break;
-    //     case '下午2':
-    //       timeList.push("15:00", '16:00', "17:00");
-    //       break;
-    //     case '下午3':
-    //       timeList.push("18:00", '19:00', "20:00");
-    //       break;
-    //   }
-    // }
-
-
     this.setData({
       course: course,
-      // timeList: timeList
     })
   },
   bindStudentName(e) { //姓名
@@ -83,9 +61,6 @@ Page({
   bindTimeChange(e) { //上课时间切换
     let timeIndex = e.detail.value,
       timeList = this.data.timeList;
-      // timeList = this.data.timeList[timeIndex].split(':')[0],
-      // courseLong = this.data.courseLong,
-      // startCourseTime = `${timeList}:00-${parseInt(timeList) + courseLong}:00`;
     this.setData({
       timeIndex: timeIndex,
       startCourseTime: timeList[timeIndex]
@@ -117,12 +92,30 @@ Page({
       url: '../BuySuccess/index',
     })
   },
-  init() {
+  getNameAndPhone() { //获取姓名和手机号
     $common.request(
       'POST',
       $common.config.GetUserNamePhone,
       {
         openId: wx.getStorageSync('openid')
+      },
+      (res) => {
+        if (res.data.res) {
+          let data = res.data.nameP;
+          this.setData({
+            studentName: data[0],
+            studentPhone: data[1]
+          })
+        }
+      }
+    )
+  },
+  getTeacherInfo() { //获取外教基本信息
+    $common.request(
+      "POST",
+      $common.config.GetOrderForTeaInfo,
+      {
+        corId: this.data.course.CorId
       },
       (res) => {
 
@@ -135,14 +128,45 @@ Page({
       }
     )
   },
+  getOrderInfo() { //获取订单 信息
+    let course = this.data.course;
+    // return;
+    $common.request(
+      "POST",
+      $common.config.GetOrderInfos,
+      {
+        corId: course.CorId,
+        orderType: 2,
+        groupType: null,
+        cogId: null
+      },
+      (res) => {
+
+      },
+      (res) => {
+
+      },
+      (res) => {
+        console.log(res);
+      }
+    )
+  },
+  init() {
+    this.getNameAndPhone();
+    this.getTeacherInfo();
+    this.getOrderInfo();
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options);
     let tea = JSON.parse(options.tea),
       course = JSON.parse(options.course),
       teaDep = JSON.parse(options.teaDep),
       timeListData = JSON.parse(options.timeList);
+    let isGroup = parseInt(options.isGroup); // 1 团购 2 单买
+    let isGroupHead = parseInt(options.isGroup); // 1 开团 2 参团
     this.setData({
       tea: tea,
       course: course,
@@ -183,7 +207,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.init();
   },
 
   /**

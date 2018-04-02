@@ -40,6 +40,16 @@ Page({
       input: TeaDescript,
     })
   },
+  courseIntroduceContext() { //课程介绍添加内容
+    let courseIntroduce = app.globalData.releaseCourse.courseIntroduce;
+    let input = '';
+    if (courseIntroduce.trim().length > 0) {
+      input = courseIntroduce;
+    }
+    this.setData({
+      input: input,
+    })
+  },
   init() {
     let status = this.data.status;
     let placeholder = '',
@@ -52,7 +62,8 @@ Page({
         break;
       case 1:  //课程介绍
         placeholder = '请填写课程介绍，最多不超过1000个字符';
-        titleText = '课程介绍'
+        titleText = '课程介绍';
+        this.courseIntroduceContext();
         break;
     }
     wx.setNavigationBarTitle({

@@ -35,11 +35,11 @@
       上课时间段
       <view class='ca margin-l-20 week-time'>{{course.weekTime}}</view>
     </view>
-    <view wx:if='{{!isGroupHead}}' class='flex aitems-center height-85  padding-lr-30 bg-fff border-t-1 fon-30 c2b '>
+    <view wx:if='{{isGroupHead === 0}}' class='flex aitems-center height-85  padding-lr-30 bg-fff border-t-1 fon-30 c2b '>
       上课时间
       <view class='ca margin-l-20'>{{startCourseTime}}</view>
     </view>
-    <view wx:if='{{!isGroupHead}}' class='flex aitems-center height-85  padding-lr-30 bg-fff border-t-1 fon-30 c2b'>
+    <view wx:if='{{isGroupHead === 0}}' class='flex aitems-center height-85  padding-lr-30 bg-fff border-t-1 fon-30 c2b'>
       上课地点
       <view class='ca margin-l-20'>{{courseAddress}}</view>
     </view>
@@ -90,7 +90,7 @@
     </view>
   </view>
   <!-- 选择上课时间段 -->
-  <view wx:if='{{isGroupHead}}' class='flex bg-fff  height-85 padding-lr-30 aitems-center border-b-1 between'>
+  <view wx:if='{{isGroupHead === 1}}' class='flex bg-fff  height-85 padding-lr-30 aitems-center border-b-1 between'>
     <view class='flex1 aitems-center  fon-30 flex list-box'>
       <view class='width-150'>上课时间</view>
       <picker bindchange='bindTimeChange' class='list-input' value='{{timeIndex}}' range='{{timeList}}'>
@@ -100,7 +100,7 @@
     <image mode='widthFix' style='width:20rpx;' src='../../images/jian_13.png'></image>
   </view>
   <!--  上课地址  -->
-  <view wx:if='{{isGroupHead}}' class='flex bg-fff  height-85 padding-lr-30 aitems-center border-b-1 between'>
+  <view wx:if='{{isGroupHead === 1}}' class='flex bg-fff  height-85 padding-lr-30 aitems-center border-b-1 between'>
     <view class='flex1 aitems-center  fon-30 flex list-box'>
       <view class='width-150'>上课地址</view>
       <input bindinput='bindCourseAddress' value='{{courseAddress}}' type='text' class='ca list-input' placeholder-class='ca' placeholder='（默认线下协商）'></input>

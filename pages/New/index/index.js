@@ -95,7 +95,6 @@ Page({
       }.bind(this));
   },
   init() {
-    wx.showLoading({ title: '努力加载中...' });
     let openid = wx.getStorageSync('openid');
     if (openid === null || openid === '') {
       $common.getOpenid(function () {
@@ -103,6 +102,7 @@ Page({
       }.bind(this));
       return;
     }
+    wx.showLoading({ title: '努力加载中...' });
     this.getMyStatus();
   },
   getMyStatus() { //获取我的用户类型

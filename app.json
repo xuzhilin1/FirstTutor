@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/New/index/index",
     "pages/Home/Home/index",
+    "pages/New/index/index",
+    "pages/New/Abasic/index",
     "pages/New/CourseManagement/index",
     "pages/New/basic/basic",
     "pages/New/qualification/index",
@@ -36,7 +37,6 @@
     "pages/New/area/index",
     "pages/New/seeDetailS/index",
     "pages/New/OrdeRreview/index",
-    "pages/New/Abasic/index",
     "pages/New/activity/index",
     "pages/New/activityDetail/index",
     "pages/New/Online/index",

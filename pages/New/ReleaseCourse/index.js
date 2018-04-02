@@ -14,6 +14,7 @@ Page({
     courseAllPrice: '', //课程价格
     duration: ['1', '1.5', '2'],
     courseDurationIndex: 0, //课程时长下标
+    CorId: false, //课程id
   },
   bindCourseType(e) { //课程类型
     let value = parseInt(e.detail.value);
@@ -92,15 +93,74 @@ Page({
       $common.showModal('请填写课程介绍');
       return;
     }
-    this.releaseCourse(
-      courseTypeIndex + 1,
-      courseName,
-      courseAllPrice,
-      courseDurationIndex + 1,
-      courseIntroduce,
-      courseTypeIndex + 1,
-      courseTime
-    );
+    if (this.data.status === 0) {
+      this.releaseCourse(
+        courseTypeIndex + 1,
+        courseName,
+        courseAllPrice,
+        courseDurationIndex + 1,
+        courseIntroduce,
+        courseTypeIndex + 1,
+        courseTime
+      );
+    } else if (this.data.status === 1) {
+      this.reviseCourse(
+        courseTypeIndex + 1,
+        courseName,
+        courseAllPrice,
+        courseDurationIndex + 1,
+        courseIntroduce,
+        courseTypeIndex + 1,
+        courseTime
+      );
+    }
+  },
+  reviseCourse(CorType, CorTitle, CorPrice, CorLenOfCla, CorDescript, CorClaNum, timeTables) { //修改课程
+    $common.request(
+      "POST",
+      $common.config.AlterCourse,
+      {
+        newCour: {
+          CorId: this.data.CorId,
+          CorType: CorType,
+          CorTitle: CorTitle,
+          CorPrice: CorPrice,
+          CorLenOfCla: CorLenOfCla,
+          CorDescript: CorDescript,
+          CorClaNum: CorClaNum
+        },
+        timeTables: timeTables
+      },
+      (res) => {
+        if (res.data.res) {
+          wx.showToast({
+            title: '修改成功',
+            icon: 'success',
+            duration: 2000,
+            success: (res) => {
+              wx.navigateBack({
+                delta: 1
+              })
+            }
+          })
+        } else {
+          switch (res.data.errType) {
+            case 1:
+              $common.showModal('参数不正确');
+              break;
+            case 2:
+              $common.showModal('未知错误');
+              break;
+          }
+        }
+      },
+      (res) => {
+        $common.showModal('亲~网络不给力哦，请稍后重试');
+      },
+      (res) => {
+        console.log(res);
+      }
+    )
   },
   releaseCourse(CorType, CorTitle, CorPrice, CorLenOfCla, CorDescript, CorClaNum, timeTables) { //发布课程请求
     $common.request(
@@ -125,10 +185,8 @@ Page({
             icon: 'success',
             duration: 2000,
             success: (res) => {
-              setTimeout(function () {
-                wx.navigateBack({
-                  delta: 1
-                }, 2000);
+              wx.navigateBack({
+                delta: 1
               })
             }
           })
@@ -153,6 +211,61 @@ Page({
       }
     )
   },
+
+  getAlterCourse() { //修改课程，获取课程信息
+    wx.showLoading({ title: '努力加载中...' });
+    let CorId = this.data.CorId;
+    $common.request(
+      "POST",
+      $common.config.AlterCourseGet,
+      {
+        corId: CorId
+      },
+      (res) => {
+        if (res.data.res) {
+          let data = res.data.course;
+          let data1 = res.data.courTims;
+          let arr = [];
+          for (let i = 0, len = data1.length; i < len; i++) {
+            arr.push({
+              TimAfw: data1[i].TimAfw,
+              TimClaTime: data1[i].TimClaTime
+            })
+          }
+          app.globalData.releaseCourse = {
+            courseIntroduce: data.CorDescript, //课程介绍
+            courseTime: arr, //上课时间段
+            courseTypeIndex: data.CorType - 1, //课程类型下标,
+            courseName: data.CorTitle, //课程名称
+            courseAllPrice: data.CorPrice, //课程价格
+            courseDurationIndex: data.CorLenOfCla - 1, //课程时长下标
+          }
+          this.setData({
+            courseNumPeople: data.CorType
+          })
+          this.init();
+          this.changePrice();
+        } else {
+          switch (res.data.errType) {
+            case 1:
+              $common.showModal('参数有误');
+              break;
+            case 2:
+              $common.showModal('未知错误');
+              break;
+          }
+        }
+      },
+      (res) => {
+        $common.showModal('亲~网络不给力哦，请稍后重试');
+      },
+      (res) => {
+        console.log(res);
+        wx.hideLoading();
+        wx.stopPullDownRefresh();
+      }
+    )
+  },
   init() {
     let appData = app.globalData.releaseCourse,
       courseIntroduce = appData.courseIntroduce, //课程介绍
@@ -162,6 +275,7 @@ Page({
       courseAllPrice = appData.courseAllPrice, //课程价格
       courseDurationIndex = appData.courseDurationIndex; //课程时长下标
     let isCourseIntroduce = false; //课程介绍是否完善
+    console.log(courseIntroduce);
     if (courseIntroduce.trim().length > 0) {
       isCourseIntroduce = true;
     }
@@ -179,21 +293,24 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let status = this.data.status;
+    let status = options.status ? parseInt(options.status) : 0;
+    let CorId = options.CorId ? parseInt(options.CorId) : false;
     let titleText = '';
+    this.setData({
+      status: parseInt(options.status),
+      CorId: CorId
+    })
     switch (status) {
       case 0: //发布课程
         titleText = '发布课程';
         break;
       case 1: //修改课程
         titleText = '修改课程';
+        this.getAlterCourse();
         break;
     }
     wx.setNavigationBarTitle({
       title: titleText,
-    })
-    this.setData({
-      status: parseInt(options.status)
     })
   },
 
@@ -230,7 +347,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    this.init();
+    this.getAlterCourse();
   },
 
   /**

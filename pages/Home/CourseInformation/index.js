@@ -4,16 +4,8 @@ Page({
   data: {
     purple: 'purple-bg white',
 
-
-
-
-    groupPersonName: '保持微笑2005',
-    groupPersonImage: '../../images/ren_03.png',
-    groupPersonTime: '02-23 12:25',
-
     courId: null, //课程id
     teaId: null, //教师id
-    teaDep: 0, //收取定金百分比
     listenCallbackNum: 0,
     tea: {}, //教师信息列表
     course: {}, //课程信息
@@ -64,38 +56,32 @@ Page({
       timeList = this.data.timeList;
     //0 无法选中 1 未选 2 已选
     if (timeList[index].timeType === 0) return;
-    timeList[index].timeType = timeList[index].timeType === 1 ? 2 : 1;
-    this.setData({
-      timeList: timeList
-    })
-    this.countPayment();
-  },
-  countPayment() { //计算支付金额
-    let timeList = this.data.timeList,
-      course = this.data.course;
-    let num = 0;
     for (let i = 0, len = timeList.length; i < len; i++) {
       if (timeList[i].timeType === 2) {
-        num++;
+        timeList[i].timeType = 1;
       }
     }
-    course.paymentPrice = num * course.CorPrice;
-    course.paymentPriceS = num * course.CorGroupPrice;
+    timeList[index].timeType = 2;
     this.setData({
-      course: course
+      timeList: timeList
     })
   },
   sureOrder() { //立即购买
     let course = this.data.course,
       timeList = this.data.timeList,
       tea = this.data.tea;
-    let flage = course.CorType == 1 ? course.paymentPrice <= 0 ? false : true : course.paymentPriceS <= 0 ? false : true;
+    let flage = false;
+    for (let i = 0, len = timeList.length; i < len; i++) {
+      if (timeList[i].timeType === 2) {
+        flage = true;
+      }
+    }
     if (!flage) {
       $common.showModal('请选择上课时间');
       return;
     }
     wx.navigateTo({
-      url: '../sureOrder/index?tea=' + JSON.stringify(tea) + '&course=' + JSON.stringify(course) + '&timeList=' + JSON.stringify(timeList) + '&teaDep=' + this.data.teaDep,
+      url: '../sureOrder/index?isGroup=' + 2 + '&tea=' + JSON.stringify(tea) + '&course=' + JSON.stringify(course) + '&timeList=' + JSON.stringify(timeList) + '&teaDep=' + tea.TeaDepositPer,
     })
   },
   spellingRules() { //详细规则
@@ -110,17 +96,43 @@ Page({
   },
   goJoinGroup() { //去参团
     wx.navigateTo({
-      url: '../sureOrder/index',
+      url: '../sureOrder/index?isGroupHead=' + 2,
     })
   },
   alonePayment() { //单独购买
+    let course = this.data.course,
+      timeList = this.data.timeList,
+      tea = this.data.tea;
+    let flage = false;
+    for (let i = 0, len = timeList.length; i < len; i++) {
+      if (timeList[i].timeType === 2) {
+        flage = true;
+      }
+    }
+    if (!flage) {
+      $common.showModal('请选择上课时间');
+      return;
+    }
     wx.navigateTo({
-      url: '../sureOrder/index',
+      url: '../sureOrder/index?isGroup=' + 2,
     })
   },
   fightGroup() { //多人拼团
+    let course = this.data.course,
+      timeList = this.data.timeList,
+      tea = this.data.tea;
+    let flage = false;
+    for (let i = 0, len = timeList.length; i < len; i++) {
+      if (timeList[i].timeType === 2) {
+        flage = true;
+      }
+    }
+    if (!flage) {
+      $common.showModal('请选择上课时间');
+      return;
+    }
     wx.navigateTo({
-      url: '../sureOrder/index',
+      url: '../sureOrder/index?isGroupHead=' + 1,
     })
   },
 
@@ -164,7 +176,9 @@ Page({
               },
               (res) => {
                 if (res.data.res) {
+                  console.log(res);
                   let fgtList = res.data.fgtList[0];
+                  if (!fgtList) return;
                   let str = fgtList.FgtEndTime.replace('/Date(', '');
                   str = str.replace(')/', '');
                   fgtList.countDown = this.timeStamp(str);
@@ -225,7 +239,6 @@ Page({
       (res) => {
         if (res.data.res) {
           this.setData({
-            teaDep: res.data.teaDep,
             timeTables: res.data.timeTables
           });
           this.updateTimeList();
