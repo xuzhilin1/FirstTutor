@@ -4,6 +4,7 @@
    视频限制类型".mp4|.rmvb|.flv|.wmv|.mov|.avi";
    外教资质图片链接：http://wj.1-zhao.com/QualifImgs/
    外教视频链接：http://wj.1-zhao.com/QuaLifAudios/
+   上传文件暂存地址:http://wj.1-zhao.com/ImgCatch/
 */
 const data = {
   //adminsid:"1490463872",
@@ -14,70 +15,71 @@ const data = {
   // TheLablePath: "D:\wwwroot\kcbweb\cert\apiclient_cert.p12",
   TitleName: ""
 };
+const host = "http://wj.1-zhao.com";
 // 正则手机号码
 const phoneReg = /^1[34578]\d{9}$/;
-const host = "1-zhao.com";
-const srcImg = 'http://wj.1-zhao.com/QualifImgs/';
-const srcVideo = 'http://wj.1-zhao.com/QuaLifAudios/';
+const srcImg = `${host}/QualifImgs/`;
+const srcUploadImg = `${host}/ImgCatch/`;
+const srcVideo = `${host}/QuaLifAudios/`;
 const config = {
   /*
     首页
    */
   //获取学生状态，注册学生
-  RisStudent: `http://wj.${host}/LittleProgram/Student/RisStudent`,
+  RisStudent: `${host}/LittleProgram/Student/RisStudent`,
   //获取首页banner图片列表
-  GetBannerImgs: `http://wj.${host}/LittleProgram/SystemSetup/GetBannerImgs`,
+  GetBannerImgs: `${host}/LittleProgram/SystemSetup/GetBannerImgs`,
   //获取首页最新活动
-  GetLastestAtyInfo: `http://wj.${host}/LittleProgram/Activity/GetLastestAtyInfo`,
+  GetLastestAtyInfo: `${host}/LittleProgram/Activity/GetLastestAtyInfo`,
   // 获取首页推荐外教
-  GetRecomForTeas: `http://wj.${host}/LittleProgram/ForeignTea/GetRecomForTeas`,
+  GetRecomForTeas: `${host}/LittleProgram/ForeignTea/GetRecomForTeas`,
   //获取外教的详细信息
-  GetForeignTeaInfo: `http://wj.${host}/LittleProgram/ForeignTea/GetForeignTeaInfo`,
+  GetForeignTeaInfo: `${host}/LittleProgram/ForeignTea/GetForeignTeaInfo`,
   //找外教-详情页，获取外交发布课程信息
-  GetCourInfosByTeaId: `http://wj.${host}/LittleProgram/Course/GetCourInfosByTeaId`,
+  GetCourInfosByTeaId: `${host}/LittleProgram/Course/GetCourInfosByTeaId`,
   //找外教-详情页，获取某外教评论内容
-  GetReviewInfoByTeaId: `http://wj.${host}/LittleProgram/Review/GetReviewInfoByTeaId`,
+  GetReviewInfoByTeaId: `${host}/LittleProgram/Review/GetReviewInfoByTeaId`,
   //课程信息，获取课程信息与外教信息(2018-03-29)
-  GetCourseInfo: `http://wj.${host}/LittleProgram/Course/GetCourseInfo`,
+  GetCourseInfo: `${host}/LittleProgram/Course/GetCourseInfo`,
   //课程信息，根据课程ID获取课程的上课时间(2018-03-29)
-  GetTimeTableInfos: `http://wj.${host}/LittleProgram/TimeTable/GetTimeTableInfos`,
+  GetTimeTableInfos: `${host}/LittleProgram/TimeTable/GetTimeTableInfos`,
   //
   /*
     找外教
    */
   //获取找外教中商圈信息
-  GetTradingAreaInfos: `http://wj.${host}/LittleProgram/TradingArea/GetTradingAreaInfos`,
+  GetTradingAreaInfos: `${host}/LittleProgram/TradingArea/GetTradingAreaInfos`,
   //找外教搜索页接口
-  FindForeignTea: `http://wj.${host}/LittleProgram/ForeignTea/FindForeignTea`,
+  FindForeignTea: `${host}/LittleProgram/ForeignTea/FindForeignTea`,
   /*
     我的
    */
   //获取用户Openid
-  GetSaveUserOpenId: `http://wj.${host}/LittleProgram/UserInfo/GetSaveUserOpenId`,
+  GetSaveUserOpenId: `${host}/LittleProgram/UserInfo/GetSaveUserOpenId`,
   //获取国家信息
-  GetCountryInfos: `http://wj.${host}/LittleProgram/Nationality/GetCountryInfos`,
+  GetCountryInfos: `${host}/LittleProgram/Nationality/GetCountryInfos`,
   //外教提交申请
-  ApplyForForeEdu: `http://wj.${host}/LittleProgram/ForeignTea/ApplyForForeEdu`,
+  ApplyForForeEdu: `${host}/LittleProgram/ForeignTea/ApplyForForeEdu`,
   //获取外教状态信息 是否vip...
-  GetForTeaStatus: `http://wj.${host}/LittleProgram/ForeignTea/GetForTeaStatus`,
+  GetForTeaStatus: `${host}/LittleProgram/ForeignTea/GetForTeaStatus`,
   //外教--我的课程，课程列表(2018-03 - 29)
-  GetMyCourInfos: `http://wj.${host}/LittleProgram/Course/GetMyCourInfos`,
+  GetMyCourInfos: `${host}/LittleProgram/Course/GetMyCourInfos`,
   //外教-我的课程-发布新课程
-  ReleaseCourse: `http://wj.${host}/LittleProgram/Course/ReleaseCourse`,
+  ReleaseCourse: `${host}/LittleProgram/Course/ReleaseCourse`,
   //我的-获取用户类型
-  GetUserType: `http://wj.${host}/LittleProgram/UserInfo/GetUserType`,
+  GetUserType: `${host}/LittleProgram/UserInfo/GetUserType`,
   //外教--我的--获取基本信息(2018-03-29)
-  GetForTeaDetailInfo: `http://wj.${host}/LittleProgram/ForeignTea/GetForTeaDetailInfo`,
+  GetForTeaDetailInfo: `${host}/LittleProgram/ForeignTea/GetForTeaDetailInfo`,
   //外教，我的--上传文件(2018-03-30)
-  UpLoadForTeaFile: `http://wj.${host}/LittleProgram/FileOpera/UpLoadForTeaFile`,
+  UpLoadForTeaFile: `${host}/LittleProgram/FileOpera/UpLoadForTeaFile`,
   // 外教--我的--修改基本资料提交(2018-03-30)
-  AlterForTeaBaseInfo: `http://wj.${host}/LittleProgram/ForeignTea/AlterForTeaBaseInfo`,
+  AlterForTeaBaseInfo: `${host}/LittleProgram/ForeignTea/AlterForTeaBaseInfo`,
   //外教基本资料修改--删除上传文件
-  DeleteForTeaFile: `http://wj.${host}/LittleProgram/FileOpera/DeleteForTeaFile`,
+  DeleteForTeaFile: `${host}/LittleProgram/FileOpera/DeleteForTeaFile`,
   //学生--查看课程详情--获取某课程拼团中的团订单(2018-03-30)
-  GetCorGroupInfos: `http://wj.${host}/LittleProgram/CorOpenGroup/GetCorGroupInfos`,
+  GetCorGroupInfos: `${host}/LittleProgram/CorOpenGroup/GetCorGroupInfos`,
   //订单页--获取用户名与手机号(2018-03-30)
-  GetUserNamePhone: `http://wj.${host}/LittleProgram/Student/GetUserNamePhone`,
+  GetUserNamePhone: `${host}/LittleProgram/Student/GetUserNamePhone`,
 }
 const wxGetUserInfo = function (code, userInfo, callback, callback2) {
   wx.getUserInfo({
@@ -118,6 +120,7 @@ module.exports = {
   config: config,
   phoneReg: phoneReg,
   srcImg: srcImg,
+  srcUploadImg: srcUploadImg,
   srcVideo: srcVideo,
   //请求数据
   request(method, url, data, success, fail, complete) {
@@ -193,38 +196,47 @@ module.exports = {
         if (res.code) {
           //获取code
           code = res.code;
-          // openid = wx.getStorageSync('openid');
-          // if (openid === null || openid === '') {
-          // 可以通过 wx.getSetting 先查询一下用户是否授权了 "scope.userInfo" 这个 scope
-          wx.getSetting({
-            success: (res) => {
-              if (res.authSetting['scope.userInfo']) {
-                //已经授权，可以直接调用getUserInfo获取头像昵称，不会弹框
-                wxGetUserInfo(code, userInfo, callback, callback2);
-              } else {
-                //尚未授权
-                wx.openSetting({
-                  success: (res) => {
-                    console.log(res);
-                    if (res.authSetting['scope.userInfo']) {
+          openid = wx.getStorageSync('openid');
+          if (openid === null || openid === '') {
+            // 可以通过 wx.getSetting 先查询一下用户是否授权了 "scope.userInfo" 这个 scope
+            wx.getSetting({
+              success: (res) => {
+                console.log(res);
+                if (res.authSetting['scope.userInfo']) {
+                  //已经授权，可以直接调用getUserInfo获取头像昵称，不会弹框
+                  wxGetUserInfo(code, userInfo, callback, callback2);
+                } else {
+                  //尚未授权
+                  wx.authorize({ //该方法 检查是否授权 
+                    scope: 'scope.userInfo',
+                    success: (res) => {
                       wxGetUserInfo(code, userInfo, callback, callback2);
+                    },
+                    fail: (res) => {
+                      wx.showModal({
+                        title: '提示',
+                        content: '我们需要获取您的信息，是否授权？',
+                        success: (res) => {
+                          if (res.confirm) {
+                            console.log(res);
+                            wx.openSetting({ //调起设置授权界面
+                              success: (res) => {
+                                if (res.authSetting['scope.userInfo']) {
+                                  wxGetUserInfo(code, userInfo, callback, callback2);
+                                }
+                              }
+                            });
+                          }
+                        }
+                      })
+                    },
+                    complete: (res) => {
                     }
-                  }
-                });
-                // wx.authorize({
-                //   scope: 'scope.userInfo',
-                //   success: (res) => {
-                //     console.log(res);
-                //     wxGetUserInfo(code, userInfo, callback, callback2);
-                //   },
-                //   complete: (res) => {
-                //     console.log(res);
-                //   }
-                // })
+                  })
+                }
               }
-            }
-          })
-          // }
+            })
+          }
         }
       }
     })

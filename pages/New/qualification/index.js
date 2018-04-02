@@ -6,6 +6,8 @@ Page({
     imageList: [],
     imageCount: 5,
     srcImg: $common.srcImg,
+    srcUploadImg: $common.srcUploadImg,
+
   },
   deleteImg(e) { //删除图片
     let index = e.currentTarget.dataset.index,
@@ -52,6 +54,7 @@ Page({
   bindImage() { //选择照片
     let imageList = this.data.imageList,
       imageCount = this.data.imageCount;
+    console.log(this.data.imageList, this.data.imageCount);
     if (imageCount <= 0) return;
     $common.chooseImage(function (res) {
       let url = res.tempFilePaths;
@@ -66,6 +69,7 @@ Page({
         imageList: imageList,
         imageCount: imageCount
       });
+      console.log(this.data.imageList, this.data.imageCount);
     }.bind(this), imageCount);
   },
   submit() {  //保存按钮
@@ -87,10 +91,7 @@ Page({
   },
   uploadFun(data) {
     if (data.url[data.i].QfsCreateOn) {
-      data.arr.push({
-        QfsPicName: data.url[data.i].QfsPicName,
-        sqlUpload: true
-      });
+      data.arr.push(data.url[data.i]);
       data.i++;
       this.uploadFun(data);
       return;
@@ -131,7 +132,7 @@ Page({
   },
   init() {
     let TeaQualif = app.globalData.teacherFor.TeaQualif;
-    let imageList = TeaQualif;
+    let imageList = TeaQualif ? TeaQualif : [];
     this.setData({
       imageCount: 5 - TeaQualif.length,
       imageList: imageList
@@ -147,14 +148,14 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    this.init();
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.init();
+
   },
 
   /**
@@ -189,6 +190,9 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: 'FirstTutor',
+      path: '/pages/Home/Home/index'
+    }
   }
 })

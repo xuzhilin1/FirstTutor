@@ -83,7 +83,6 @@ Page({
       { openId: wx.getStorageSync('openid') },
       function (res) {
         if (res.data.res) {
-          console.log(res);
           wx.setStorageSync("teacherStatusInfo", res.data);
           let vip = res.data.teaAddV ? res.data.teaAddV : false; //vip才能查看需求
           let teacherList = this.data.teacherList;

@@ -57,7 +57,7 @@
             </view>
           </view>
           <view class='fon-24 c8'>
-          {{tea.TeaAbstract}}
+            {{tea.TeaAbstract}}
           </view>
         </view>
       </view>
@@ -67,7 +67,7 @@
   <view wx:if='{{course.CorType!=1}}' class='bg-fff padding-b-20 border-t-1 margin-t-20 padding-lr-30'>
     <view class='height-85 fon-26 border-b-1 flex between aitems-center'>
       <view class='flex c2b aitems-center group-little'>
-        <text>支付开团邀请{{groupPersonNum}}人参团，人数不足自动退款</text>
+        <text>支付开团邀请{{course.CorClaNum - 1}}人参团，人数不足自动退款</text>
         <view bindtap='spellingRules' class='ca margin-l-20'>详细规则</view>
       </view>
       <image class='Jian' mode='widthFix' src='../../images/jos_03.jpg'></image>
@@ -76,11 +76,11 @@
       <view class='fon-26 padding-tb-20 c2b'>以下小伙伴正在发起拼团，您可以直接参与：</view>
       <view class='flex ssea aitems-center between'>
         <view class='flex between flex1 aitems-center'>
-          <image class='xiaoTou' src='{{groupPersonImage}}'></image>
-          <view class='fon-30'>{{groupPersonName}}</view>
+          <image class='xiaoTou' src='{{fgtList.StuAvaUrl}}'></image>
+          <view class='fon-30'>{{fgtList.StuNickName}}</view>
           <view class='fon-26 Cans flex1 purple'>
-            <view class='Cans'>还剩{{groupPersonNum}}人成团</view>
-            <view class='ca Cans'>截止{{groupPersonTime}}</view>
+            <view class='Cans'>还剩{{fgtList.NedCount}}人成团</view>
+            <view class='ca Cans'>截止{{fgtList.countDown}}</view>
           </view>
         </view>
         <view bindtap='goJoinGroup' class='white purple-bg CanRu fon-30'>去参团</view>

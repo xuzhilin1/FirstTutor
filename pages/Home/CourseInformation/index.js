@@ -9,7 +9,6 @@ Page({
 
     groupPersonName: '保持微笑2005',
     groupPersonImage: '../../images/ren_03.png',
-    groupPersonNum: 1,
     groupPersonTime: '02-23 12:25',
 
     courId: null, //课程id
@@ -21,6 +20,7 @@ Page({
     timeTables: [], //选择上课时间列表
     weekList: ['周一', '周二', '周三', '周四', '周五', '周六', '周末'],
     timeList: [], // 页面展示上课时间表 
+    fgtList: {}, //推荐
   },
   initPageData() { //初始化上课时间
     //周几就用数字1234567代替，时间段就用1（上午），2（下午1），3（下午2），4（晚上）代替
@@ -160,11 +160,17 @@ Page({
               "POST",
               $common.config.GetCorGroupInfos,
               {
-                courId: this.data.courId,
+                corId: this.data.courId,
               },
               (res) => {
                 if (res.data.res) {
-
+                  let fgtList = res.data.fgtList[0];
+                  let str = fgtList.FgtEndTime.replace('/Date(', '');
+                  str = str.replace(')/', '');
+                  fgtList.countDown = this.timeStamp(str);
+                  this.setData({
+                    fgtList: fgtList
+                  })
                 }
               },
               (res) => {
@@ -194,6 +200,19 @@ Page({
         this.stopModal();
       }
     );
+  },
+  timeStamp(time) { //时间戳转换为日期
+    let date = new Date(parseInt(time)),
+      y = date.getFullYear(),
+      m = date.getMonth() + 1,
+      d = date.getDate(),
+      h = date.getHours(),
+      f = date.getMinutes();
+    m < 10 && (m = '0' + m);
+    d < 10 && (d = '0' + d);
+    h < 10 && (h = '0' + h);
+    f < 10 && (f = '0' + f);
+    return `${m}-${d} ${h}:${f}`;
   },
   getCourTime() { //根据课程ID获取课程的上课时间
     $common.request(

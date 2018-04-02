@@ -2,31 +2,31 @@ const $common = require('../../../utils/common.js');
 const app = getApp();
 Page({
   data: {
-    pagesData: [{
-      corCanView: true, //是否通过审核
-      corCreateOn: '2017-08-06 13:31', //发布时间
-      corPrice: '200', // 课程价格
-      fgtType: 2, //1 拼团 2 单独购买
-      corClaNum: 1, //上课人数，1-3
-      corTitle: '口语一对一', //课程名称
-      fgtAttCount: 0, //拼团成功团数
-    }, {
-      corCanView: true, //是否通过审核
-      corCreateOn: '2017-08-06 13:31', //发布时间
-      corPrice: '200', // 课程价格
-      fgtType: 1, //1 拼团 2 单独购买
-      corClaNum: 2, //上课人数，1-3
-      corTitle: '口语一对二', //课程名称
-      fgtAttCount: 2,//拼团成功团数
-    }, {
-      corCanView: false, //是否通过审核
-      corCreateOn: '2017-08-06 13:31', //发布时间
-      corPrice: '200', // 课程价格
-      fgtType: 2, //1 拼团 2 单独购买
-      corClaNum: 1, //上课人数，1-3
-      corTitle: '口语一对一', //课程名称
-      fgtAttCount: 0, //拼团成功团数
-    }],
+    // pagesData: [{
+    //   corCanView: true, //是否通过审核
+    //   corCreateOn: '2017-08-06 13:31', //发布时间
+    //   corPrice: '200', // 课程价格
+    //   fgtType: 2, //1 拼团 2 单独购买
+    //   corClaNum: 1, //上课人数，1-3
+    //   corTitle: '口语一对一', //课程名称
+    //   fgtAttCount: 0, //拼团成功团数
+    // }, {
+    //   corCanView: true, //是否通过审核
+    //   corCreateOn: '2017-08-06 13:31', //发布时间
+    //   corPrice: '200', // 课程价格
+    //   fgtType: 1, //1 拼团 2 单独购买
+    //   corClaNum: 2, //上课人数，1-3
+    //   corTitle: '口语一对二', //课程名称
+    //   fgtAttCount: 2,//拼团成功团数
+    // }, {
+    //   corCanView: false, //是否通过审核
+    //   corCreateOn: '2017-08-06 13:31', //发布时间
+    //   corPrice: '200', // 课程价格
+    //   fgtType: 2, //1 拼团 2 单独购买
+    //   corClaNum: 1, //上课人数，1-3
+    //   corTitle: '口语一对一', //课程名称
+    //   fgtAttCount: 0, //拼团成功团数
+    // }],
 
 
     pageIndex: 1,
@@ -167,14 +167,14 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    this.init();
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.init();
+
   },
 
   /**

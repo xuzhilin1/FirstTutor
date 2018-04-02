@@ -3,6 +3,7 @@ const app = getApp();
 const $static = require('../../../utils/static.js');
 Page({
   data: {
+    
     pagesList: [
       {
         ZiLiao: '基本资料',
@@ -310,14 +311,14 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    this.init();
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.init();
+    
   },
 
   /**

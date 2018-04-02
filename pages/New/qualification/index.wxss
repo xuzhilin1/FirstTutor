@@ -1,5 +1,7 @@
 /* pages/New/qualification/index.wxss */
-
+view{
+  box-sizing: border-box;
+}
 .top {
   width: 100%;
   height: 346rpx;
