@@ -90,9 +90,14 @@ Page({
     this.uploadFun(data);
   },
   uploadFun(data) {
+    console.log(data);
+    if (!data.url[data.i]) {
+      wx.hideLoading();
+      return;
+    }
     if (data.url[data.i].QfsCreateOn) {
       data.arr.push(data.url[data.i]);
-      data.i++;
+      data.i = data.i + 1;
       this.uploadFun(data);
       return;
     }
@@ -176,7 +181,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    wx.stopPullDownRefresh();
   },
 
   /**

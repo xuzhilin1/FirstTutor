@@ -10,7 +10,7 @@ Page({
     tea: {}, //教师信息列表
     course: {}, //课程信息
     timeTables: [], //选择上课时间列表
-    weekList: ['周一', '周二', '周三', '周四', '周五', '周六', '周末'],
+    weekList: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
     timeList: [], // 页面展示上课时间表 
     fgtList: {}, //推荐
   },
@@ -67,21 +67,26 @@ Page({
     })
   },
   sureOrder() { //立即购买
-    let course = this.data.course,
-      timeList = this.data.timeList,
-      tea = this.data.tea;
+    let course = this.data.course;
+    let timeList = this.data.timeList;
     let flage = false;
+    let thisData = null;
     for (let i = 0, len = timeList.length; i < len; i++) {
       if (timeList[i].timeType === 2) {
+        thisData = {
+          index: i,
+          time: timeList[i].timeName,
+          TimId: timeList[i].TimId
+        };
         flage = true;
       }
     }
     if (!flage) {
-      $common.showModal('请选择上课时间');
+      $common.showModal('请选择时间段');
       return;
     }
     wx.navigateTo({
-      url: '../sureOrder/index?isGroup=' + 2 + '&tea=' + JSON.stringify(tea) + '&course=' + JSON.stringify(course) + '&timeList=' + JSON.stringify(timeList) + '&teaDep=' + tea.TeaDepositPer,
+      url: '../sureOrder/index?orderType=' + 2 + '&corId=' + course.CorId + '&groupType=' + -1 + '&cogId=' + -1 + '&weekTime=' + JSON.stringify(thisData),
     })
   },
   spellingRules() { //详细规则
@@ -100,39 +105,49 @@ Page({
     })
   },
   alonePayment() { //单独购买
-    let course = this.data.course,
-      timeList = this.data.timeList,
-      tea = this.data.tea;
+    let course = this.data.course;
+    let timeList = this.data.timeList;
     let flage = false;
+    let thisData = null;
     for (let i = 0, len = timeList.length; i < len; i++) {
       if (timeList[i].timeType === 2) {
+        thisData = {
+          index: i,
+          time: timeList[i].timeName,
+          TimId: timeList[i].TimId
+        };
         flage = true;
       }
     }
     if (!flage) {
-      $common.showModal('请选择上课时间');
+      $common.showModal('请选择时间段');
       return;
     }
     wx.navigateTo({
-      url: '../sureOrder/index?isGroup=' + 2,
+      url: '../sureOrder/index?corId=' + course.CorId + '&orderType=' + 2 + '&groupType=' + -1 + '&cogId=' + -1 + '&weekTime=' + JSON.stringify(thisData),
     })
   },
   fightGroup() { //多人拼团
-    let course = this.data.course,
-      timeList = this.data.timeList,
-      tea = this.data.tea;
+    let course = this.data.course;
+    let timeList = this.data.timeList;
     let flage = false;
+    let thisData = null;
     for (let i = 0, len = timeList.length; i < len; i++) {
       if (timeList[i].timeType === 2) {
+        thisData = {
+          index: i,
+          time: timeList[i].timeName,
+          TimId: timeList[i].TimId
+        };
         flage = true;
       }
     }
     if (!flage) {
-      $common.showModal('请选择上课时间');
+      $common.showModal('请选择时间段');
       return;
     }
     wx.navigateTo({
-      url: '../sureOrder/index?isGroupHead=' + 1,
+      url: '../sureOrder/index?corId=' + course.CorId + '&orderType=' + 1 + '&groupType=' + 1 + '&cogId=' + -1 + '&weekTime=' + JSON.stringify(thisData),
     })
   },
 
@@ -287,6 +302,7 @@ Page({
       }
       let nowIndex = arr[week - 1]; //当前所改变的数组下标
       timeList[nowIndex].timeType = 1;
+      timeList[nowIndex].TimId = target.TimId;
     });
     this.setData({
       timeList: timeList

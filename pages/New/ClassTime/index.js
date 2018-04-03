@@ -4,7 +4,7 @@ const app = getApp();
 Page({
   data: {
     purple: 'purple-bg white',
-    weekList: ['周一', '周二', '周三', '周四', '周五', '周六', '周末'],
+    weekList: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
     timeList: []
   },
   bindTime(e) {  // 选择
@@ -75,7 +75,7 @@ Page({
       }
     });
     if (arr.length <= 0) {
-      $common.showModal('请选择上可时间');
+      $common.showModal('请选择时间段');
       return;
     }
     app.globalData.releaseCourse.courseTime = arr;
@@ -137,7 +137,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    wx.stopPullDownRefresh();
   },
 
   /**
@@ -151,6 +151,9 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: 'FirstTutor',
+      path: '/pages/Home/Home/index'
+    }
   }
 })

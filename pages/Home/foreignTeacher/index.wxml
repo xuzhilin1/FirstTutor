@@ -2,14 +2,14 @@
 <!--  header  -->
 <view class='search-box'>
   <view class='search'>
-    <image bindtap='searchClick' class='img-top' src='../../images/search_03.jpg'></image>
+    <image bindtap='searchClick' class='img-top' src='../../images/search.png'></image>
     <input bindinput='bindInput' value='{{input}}' class='flex1 fon-26' placeholder-class='fon-26' placeholder='课程名称'></input>
   </view>
 </view>
 <!--  table  -->
-<view class='flex fon-26 padding-tb-20 padding-lr-30  border-t-1 border-b-1 margin-t-20  between aitems-center'>
+<view class='table-wrapper'>
   <!--  区域  -->
-  <view class='flex aitems-center'>
+  <view class='table-item'>
     <view>
       <picker class=' flex' value="{{areaIndex}}" range="{{areaList}}" range-key='area' bindchange="bindAreaChange">
         <view class='flex picker aitems-center '>
@@ -22,7 +22,7 @@
     </view>
   </view>
   <!--  商圈  -->
-  <view class='flex aitems-center'>
+  <view class='table-item'>
     <view>
       <picker class=' flex' range-key='TaName' value="{{tradIndex}}" range="{{tradList}}" bindchange="bindCourseType">
         <view class='flex picker aitems-center '>
@@ -35,7 +35,7 @@
     </view>
   </view>
   <!-- 时间段 -->
-  <view class='flex aitems-center'>
+  <view class='table-item'>
     <view>
       <picker class=' flex' value="{{timeIndex}}" range="{{timeList}}" bindchange="bindTimeChange">
         <view class='flex picker aitems-center '>
@@ -48,7 +48,7 @@
     </view>
   </view>
   <!--  价格区间  -->
-  <view class='flex aitems-center'>
+  <view class='table-item'>
     <view>
       <picker mode='multiSelector' class=' flex' value="{{priceIndex}}" range="{{priceList}}" bindchange="bindPriceChange">
         <view class='flex picker aitems-center '>

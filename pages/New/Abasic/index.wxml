@@ -1,7 +1,7 @@
 <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
   <view class='flex1 aitems-center  fon-30 flex '>
     <view class='width-100'>姓名</view>
-    <input bindinput='bindUserName' class='ca' value='{{userName}}' placeholder='未填写'></input>
+    <input bindinput='bindUserName' class='ca input-width' value='{{userName}}' placeholder='未填写'></input>
   </view>
 </view>
 
@@ -33,7 +33,7 @@
 <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
   <view class='flex1 aitems-center  fon-30 flex '>
     <view class='width-100'>微信</view>
-    <input bindinput='bindWeChat' class='ca' value='{{weChat}}' placeholder='未填写'></input>
+    <input bindinput='bindWeChat' class='ca input-width' value='{{weChat}}' placeholder='未填写'></input>
   </view>
 </view>
 
@@ -52,14 +52,14 @@
 <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
   <view class='flex1 aitems-center  fon-30 flex '>
     <view class='width-100'>大学</view>
-    <input bindinput='bindSchool' class='ca' value='{{school}}' placeholder='未填写'></input>
+    <input bindinput='bindSchool' class='ca input-width' value='{{school}}' placeholder='未填写'></input>
   </view>
 </view>
 
 <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
   <view class='flex1 aitems-center  fon-30 flex '>
     <view class='width-100'>简介</view>
-    <input bindinput='bindSynopsis' class='ca' placeholder='最多填写40个字符' value='{{synopsis}}' maxlength='40'></input>
+    <input bindinput='bindSynopsis' class='ca input-width' placeholder='最多填写40个字符' value='{{synopsis}}' maxlength='40'></input>
   </view>
 </view>
 

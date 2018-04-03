@@ -34,7 +34,7 @@ Page({
   },
   bindAgeChange(e) { //时间
     this.setData({
-      age: e.detail.value
+      age: this.countAge(e.detail.value)
     })
   },
   bindWeChat(e) { //微信
@@ -87,7 +87,7 @@ Page({
       let teacherFor = this.data.teacherFor;
       teacherFor.TeaName = userName;
       teacherFor.TeaGender = sex;
-      teacherFor.TeaAge = this.countAge(age);
+      teacherFor.TeaAge = age;
       teacherFor.TeaWeChat = weChat;
       teacherFor.TeaNaLityId = nationality;
       teacherFor.TeaNation = TeaNation,
@@ -121,16 +121,10 @@ Page({
         TeaAbstract: TeaAbstract
       },
       function (res) {
-        console.log(res);
         if (res.data.res && res.data.resType == 5) {
-          let status = this.data.status;
-          if (status === 0) {//申请外教资格
             wx.redirectTo({
               url: '../../Home/Success/index?status=0',
             })
-          } else if (status === 1) {//外教基本资料
-
-          }
         } else {
           switch (res.data.resType) {
             case 1:
@@ -260,7 +254,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    wx.stopPullDownRefresh();
   },
 
   /**
@@ -274,6 +268,9 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: 'FirstTutor',
+      path: '/pages/Home/Home/index'
+    }
   }
 })

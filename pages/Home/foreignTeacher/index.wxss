@@ -49,6 +49,7 @@ page {
   display: block;
   border-radius: 10rpx;
 }
+
 /*  评分  */
 
 .score {
@@ -102,10 +103,33 @@ page {
 /*  评分 end  */
 
 /*  暂无数据  */
-.noData{
+
+.noData {
   width: 100%;
   font-size: 38rpx;
   text-align: center;
   margin-top: 200rpx;
   color: #888;
+}
+
+.table-wrapper {
+  box-sizing: border-box;
+  margin-top: 20rpx;
+  padding: 20rpx 30rpx;
+  border-top: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 26rpx;
+  display: flex;
+  align-items: center;
+  -webkit-align-items: center;
+  justify-content: space-between;
+}
+
+.table-item {
+  box-sizing: border-box;
+  width: 24%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

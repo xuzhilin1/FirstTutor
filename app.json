@@ -1,6 +1,8 @@
 {
   "pages": [
     "pages/Home/Home/index",
+    "pages/New/activityDetail/index",
+    "pages/Home/Success/index",
     "pages/New/index/index",
     "pages/New/Abasic/index",
     "pages/New/CourseManagement/index",
@@ -15,7 +17,6 @@
     "pages/Home/sureOrder/index",
     "pages/Home/activity/index",
     "pages/Home/activitySign/index",
-    "pages/Home/Success/index",
     "pages/Home/Mycomments/index",
     "pages/Home/orderdetail/index",
     "pages/Home/comments/index",
@@ -38,7 +39,6 @@
     "pages/New/seeDetailS/index",
     "pages/New/OrdeRreview/index",
     "pages/New/activity/index",
-    "pages/New/activityDetail/index",
     "pages/New/Online/index",
     "pages/New/OrderCheckS/index",
     "pages/New/NeedSee/index",

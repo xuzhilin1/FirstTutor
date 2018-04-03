@@ -21,6 +21,8 @@ const phoneReg = /^1[34578]\d{9}$/;
 const srcImg = `${host}/QualifImgs/`;
 const srcUploadImg = `${host}/ImgCatch/`;
 const srcVideo = `${host}/QuaLifAudios/`;
+const srcActivity = `${host}/AtyImages/`;
+const srcBanner = `${host}/BannerImgs/`;
 const config = {
   /*
     首页
@@ -43,10 +45,14 @@ const config = {
   GetCourseInfo: `${host}/LittleProgram/Course/GetCourseInfo`,
   //课程信息，根据课程ID获取课程的上课时间(2018-03-29)
   GetTimeTableInfos: `${host}/LittleProgram/TimeTable/GetTimeTableInfos`,
-  // 学生-订单页外教信息获取（2018-04-02）
-  GetOrderForTeaInfo: `${host}/LittleProgram/ForeignTea/GetOrderForTeaInfo`,
   //购买课程--订单填写页--获取订单信息（2018-03-30）
   GetOrderInfos: `${host}/LittleProgram/CorOpenGroup/GetOrderInfos`,
+  //学生--提交订单(2018-04-03)
+  PlaceAnOrder: `${host}/LittleProgram/CorOpenGroup/PlaceAnOrder`,
+  // 学生--取消支付或者支付失败时调用(2018-04-03)
+  AttendGroupFailed: `${host}/LittleProgram/CorOpenGroup/AttendGroupFailed`,
+  // 学生--支付成功，模版消息发送（2018-04-03）
+  PayMentSuccess: `${host}/LittleProgram/CorOpenGroup/PayMentSuccess`,
   /*
     找外教
    */
@@ -95,7 +101,6 @@ const wxGetUserInfo = function (code, userInfo, callback, callback2) {
   if (openid) return;
   wx.getUserInfo({
     success: (res) => {
-      console.log(res);
       let userInfo = res.userInfo;
       wx.setStorageSync("userInfo", userInfo);//本地存储个人信息
       let openid = wx.getStorageSync('openid');
@@ -169,6 +174,8 @@ module.exports = {
   srcImg: srcImg,
   srcUploadImg: srcUploadImg,
   srcVideo: srcVideo,
+  srcActivity: srcActivity,
+  srcBanner: srcBanner,
   //请求数据
   request(method, url, data, success, fail, complete) {
     fail = typeof (fail) === 'function' ? fail : function () { };

@@ -13,12 +13,15 @@ Page({
   },
   submit() {
     let input = this.data.input;
+    let status = this.data.status;
     if (input.trim().length <= 0) {
-      $common.showModal('请填写教师介绍');
+      if (status == 0) {
+        $common.showModal('请填写教师介绍');
+      } else if (status == 1) {
+        $common.showModal('请填写课程介绍');
+      }
       return;
     }
-    let status = this.data.status;
-    console.log(status)
     switch (status) {
       case 0: //教师介绍
         app.globalData.teacherFor.TeaDescript = input;
@@ -115,7 +118,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    wx.stopPullDownRefresh();
   },
 
   /**
@@ -129,6 +132,9 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: 'FirstTutor',
+      path: '/pages/Home/Home/index'
+    }
   }
 })

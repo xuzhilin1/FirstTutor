@@ -3,7 +3,6 @@ const app = getApp();
 const $static = require('../../../utils/static.js');
 Page({
   data: {
-    
     pagesList: [
       {
         ZiLiao: '基本资料',
@@ -104,7 +103,12 @@ Page({
       },
       (res) => {
         if (res.data.res) {
-
+          let data = app.globalData.teacherFor.TeaQualif;
+          for (let i = 0, len = data.length; i < len; i++) { //保存成功后，图片链接切换为外教链接地址
+            data[i].QfsCreateOn = true;
+          }
+          app.globalData.teacherFor.TeaQualif = data;
+          $common.showModal('保存成功!');
         } else {
           switch (res) {
             case 1:
@@ -311,14 +315,14 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    this.init();
+   
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+    this.init();
   },
 
   /**

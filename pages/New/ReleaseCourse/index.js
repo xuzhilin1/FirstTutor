@@ -86,7 +86,7 @@ Page({
       return;
     }
     if (courseTime.length <= 0) {
-      $common.showModal('请选择上课时间段');
+      $common.showModal('请选择时间段');
       return;
     }
     if (!isCourseIntroduce) {

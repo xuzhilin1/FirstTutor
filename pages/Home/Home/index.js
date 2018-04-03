@@ -1,6 +1,8 @@
 const $common = require('../../../utils/common.js');
 Page({
   data: {
+    srcActivity: $common.srcActivity,
+    srcBanner: $common.srcBanner,
     banList: [],
     activity: {},
     pageIndex: 1, // 第几页
@@ -66,18 +68,25 @@ Page({
         pageSize: parseInt(this.data.pageSize)
       },
       (res) => {
-        callback();
         if (res.data.res) {
-          let pageIndex = parseInt(this.data.pageIndex);
-          let arr = res.data.teaList; //返回值数组
-          let listData = pageIndex === 1 ? [] : this.data.listData; //本地数组
-          arr.forEach(function (target, index) {
-            listData.push(target);
-          });
-          arr.length < this.data.pageSize || pageIndex++;  //本次获取到的数组长度小于本页应得长度，页数不增加
+          let pageIndex = parseInt(this.data.pageIndex),
+            pageSize = parseInt(this.data.pageSize);
+          let data = res.data.teaList;
+          if (data.length >= pageSize) { //获取的数据个数等于请求的数据的个数，下标累加
+            pageIndex++;
+          }
+          let listData = this.data.listData;
+          for (let i = 0, len = data.length; i < len; i++) {
+            listData.push(data[i]);
+          }
+          let hash = {};
+          let newArr = listData.reduce(function (item, next) {//数组依据TeaId去重
+            hash[next.TeaId] ? '' : hash[next.TeaId] = true && item.push(next);
+            return item
+          }, []);
           this.setData({
             pageIndex: pageIndex,
-            listData: listData
+            listData: newArr
           })
         } else {
           $common.showModal('未知错误，请稍后重试');
@@ -119,12 +128,12 @@ Page({
   getOpenId() { //获取openid
     let openid = wx.getStorageSync('openid');
     if (openid === null || openid === '') {
-      $common.getOpenid(null, () =>{
+      $common.getOpenid(null, () => {
         this.getOpenId();
       }); //获取用户信息及openid；
       return;
     }
-    this.studentRegister(); 
+    this.studentRegister();
   },
   addListenCallbackNum() {
     let num = parseInt(this.data.listenCallbackNum);
@@ -153,15 +162,15 @@ Page({
       (res) => {
         if (res.data.res) {
           switch (res.data.rtnType) {
-            case 1: 
-            //注册成功
-            break;
+            case 1:
+              //注册成功
+              break;
             case 2:
-            //改账号被禁用,无法访问程序,
-            break;
+              //改账号被禁用,无法访问程序,
+              break;
             case 3:
-            //账户正常
-            break;
+              //账户正常
+              break;
           }
         } else {
           switch (res.data.errType) {
@@ -226,6 +235,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function (res) {
+    wx.showLoading({ title: '努力加载中...' });
     this.getListData(() => {
       wx.hideLoading();
     });

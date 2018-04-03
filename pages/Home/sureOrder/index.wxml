@@ -19,7 +19,7 @@
         <image class='QiHao' mode='widthFix' src='../../images/tuan_06.png'></image>
         <view>
           {{course.CorTitle}}
-          <view class='bold bg-fff purple'>¥{{course.CorGroupPrice}}</view>
+          <view class='bold bg-fff purple'>¥{{course.CorPrice}}</view>
         </view>
       </view>
       <view class='right-box'>
@@ -33,13 +33,13 @@
     </view>
     <view class='flex aitems-center height-85  padding-lr-30 bg-fff border-t-1 fon-30 c2b '>
       上课时间段
-      <view class='ca margin-l-20 week-time'>{{course.weekTime}}</view>
+      <view class='ca margin-l-20 week-time'>{{weekTime}}</view>
     </view>
-    <view wx:if='{{isGroupHead === 0}}' class='flex aitems-center height-85  padding-lr-30 bg-fff border-t-1 fon-30 c2b '>
+    <view wx:if='{{groupType==2}}' class='flex aitems-center height-85  padding-lr-30 bg-fff border-t-1 fon-30 c2b '>
       上课时间
       <view class='ca margin-l-20'>{{startCourseTime}}</view>
     </view>
-    <view wx:if='{{isGroupHead === 0}}' class='flex aitems-center height-85  padding-lr-30 bg-fff border-t-1 fon-30 c2b'>
+    <view wx:if='{{groupType==2}}' class='flex aitems-center height-85  padding-lr-30 bg-fff border-t-1 fon-30 c2b'>
       上课地点
       <view class='ca margin-l-20'>{{courseAddress}}</view>
     </view>
@@ -48,11 +48,11 @@
   <view class='list border-t-1'>
     <view class='flex aitems-center padding-lr-30 padding-tb-20 bg-fff teacher-box'>
       <view class='teacher-l'>
-        <image class='touXiang margin-r-20 touxiang-image' src='{{tea.TeaAvaUrl}}'></image>
+        <image class='touXiang margin-r-20 touxiang-image' src='{{teacher.TeaAvaUrl}}'></image>
         <view class='flex1'>
           <view class='fon-26 margin-b-10 flex aitems-center '>
-            {{tea.TeaNickName}}
-            <image wx:if='{{tea.TeaAddV==1}}' class='HuangGuan margin-l-10' mode='widthFix' src='../../images/guan_03.png'></image>
+            {{teacher.TeaNickName}}
+            <image wx:if='{{teacher.TeaAddV==1}}' class='HuangGuan margin-l-10' mode='widthFix' src='../../images/guan_03.png'></image>
             <!--  星星  -->
             <view class='score'>
               <view class='score-all'>
@@ -61,15 +61,15 @@
               <view class='score-score'>
                 <view class='score-list' wx:for="{{5}}" wx:for-item='value' wx:for-index='key' wx:key='{{index}}'>
                   <!--  整星  -->
-                  <image wx:if="{{tea.RewScore - 0.5 > key ? key <= tea.RewScore : key < tea.RewScore - 1}}" class='score-img' src='../../images/xian_05.png'></image>
+                  <image wx:if="{{teacher.RewScore - 0.5 > key ? key <= teacher.RewScore : key < teacher.RewScore - 1}}" class='score-img' src='../../images/xian_05.png'></image>
                   <!--  半星  -->
-                  <image wx:if="{{tea.RewScore - 0.5 > key ? false : key < tea.RewScore }}" class='score-image' src='../../images/BanXIn_03.png'></image>
+                  <image wx:if="{{teacher.RewScore - 0.5 > key ? false : key < teacher.RewScore }}" class='score-image' src='../../images/BanXIn_03.png'></image>
                 </view>
               </view>
             </view>
           </view>
           <view class='fon-24 c8'>
-            {{tea.TeaAbstract}}
+            {{teacher.TeaAbstract}}
           </view>
         </view>
       </view>
@@ -90,7 +90,7 @@
     </view>
   </view>
   <!-- 选择上课时间段 -->
-  <view wx:if='{{isGroupHead === 1}}' class='flex bg-fff  height-85 padding-lr-30 aitems-center border-b-1 between'>
+  <view wx:if='{{orderType==2||groupType==1}}' class='flex bg-fff  height-85 padding-lr-30 aitems-center border-b-1 between'>
     <view class='flex1 aitems-center  fon-30 flex list-box'>
       <view class='width-150'>上课时间</view>
       <picker bindchange='bindTimeChange' class='list-input' value='{{timeIndex}}' range='{{timeList}}'>
@@ -100,7 +100,7 @@
     <image mode='widthFix' style='width:20rpx;' src='../../images/jian_13.png'></image>
   </view>
   <!--  上课地址  -->
-  <view wx:if='{{isGroupHead === 1}}' class='flex bg-fff  height-85 padding-lr-30 aitems-center border-b-1 between'>
+  <view wx:if='{{orderType==2||groupType==1}}' class='flex bg-fff  height-85 padding-lr-30 aitems-center border-b-1 between'>
     <view class='flex1 aitems-center  fon-30 flex list-box'>
       <view class='width-150'>上课地址</view>
       <input bindinput='bindCourseAddress' value='{{courseAddress}}' type='text' class='ca list-input' placeholder-class='ca' placeholder='（默认线下协商）'></input>
@@ -111,13 +111,13 @@
     <view class='fon-30 padding-l-20 border-l-2 c2b'>订金说明</view>
   </view>
   <view class='padding-lr-30 fon-24 border-b-1 c88 bg-fff padding-tb-40'>
-    平台预收课程费用{{teaDep}}%作为订金，剩余费用学生扣除订金后支付 给外教。
+    平台预收课程费用{{teacher.TeaDepositPer}}%作为订金，剩余费用学生扣除订金后支付 给外教。
   </view>
   <!-- footer -->
   <view class='footer flex border-t-1 between'>
     <view class='fon-26 cs flex bg-fff aitems-center padding-l-30'>
       <view class='margin-r-10'>支付订金</view>
-      <view class='fon-30 bold purple'> ¥{{course.CorType==1?course.paymentPrice:course.paymentPriceS}}</view>
+      <view class='fon-30 bold purple'> ¥{{PayPrice}}</view>
     </view>
     <view bindtap='submitOrder' class='white fon-32 cs purple-bg'>提交订单</view>
   </view>

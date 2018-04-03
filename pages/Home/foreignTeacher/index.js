@@ -15,7 +15,6 @@ Page({
     priceIndex: [-1, -1],
     pageIndex: 1, //分页
     pageSize: 10, //每页多少数据
-    isSure: true, //list剩余数据是否足够再次请求
   },
   teacherInfo(e) { //跳转外教信息
     let openid = wx.getStorageSync('openid');
@@ -33,6 +32,7 @@ Page({
     this.setData({
       input: e.detail.value.trim()
     })
+    this.getListData();
   },
   bindAreaChange(e) { //区域
     this.setData({
@@ -80,12 +80,11 @@ Page({
       }
     );
   },
-  getListData(isLoading) { //获取页面list
-    isLoading = typeof isLoading === 'undefined' ? false : true; //是否为上拉加载，加载push否则清空
+  getListData(isRefresh) { //获取页面list
+    isRefresh = isRefresh ? true : false;
     wx.showLoading({ title: '努力加载中...' });
-    let pageIndex = isLoading ? ++this.data.pageIndex : 1;
-    let isSure = this.data.isSure;
-    if (isLoading && !isSure) { return; } //当前状态为下拉加载，且无数据可请求
+    let pageIndex = this.data.pageIndex,
+      pageSize = this.data.pageSize;
     $common.request(
       "POST",
       $common.config.FindForeignTea,
@@ -97,24 +96,26 @@ Page({
         maxPrice: this.data.priceIndex[0] == -1 ? -1 : this.data.priceList[1][this.data.priceIndex[1]],
         corName: this.data.input ? this.data.input : null, //课程名
         pageIndex: pageIndex, //分页
-        pageSize: this.data.pageSize, //每页个数
+        pageSize: pageSize, //每页个数
       },
       (res) => {
         if (res.data.res) {
-          let arr = res.data.teaList,
-            listData;
-          if (isLoading) { //下拉加载数据
-            listData = this.data.listData;
-            arr.forEach(function (target, index) {
-              listData.push(target);
-            });
-          } else {
-            listData = res.data.teaList;
+          let data = res.data.teaList;
+          if (data.length >= pageSize) { //后续有数据，下标累加
+            pageIndex++;
           }
+          let listData = isRefresh ? this.data.listData : []; //上拉加载push，否则重新 开始
+          for (let i = 0, len = data.length; i < len; i++) {
+            listData.push(data[i]);
+          }
+          let hash = {};
+          let newArr = listData.reduce(function (item, next) {//数组依据TeaId去重
+            hash[next.TeaId] ? '' : hash[next.TeaId] = true && item.push(next);
+            return item
+          }, []);
           this.setData({
-            listData: listData,
+            listData: newArr,
             pageIndex: pageIndex,
-            isSure: arr.length < this.data.pageSize ? true : false
           })
         } else {
           $common.showModal('未知错误，请稍后重试');
@@ -124,7 +125,6 @@ Page({
         $common.showModal('亲~网络不给力哦，请稍后重试');
       },
       (res) => {
-        console.log(res);
         wx.hideLoading();
         wx.stopPullDownRefresh();
       },
@@ -140,6 +140,7 @@ Page({
     }
     this.setData({
       priceList: [arr1, arr2],
+      priceIndex: [-1, -1],
     })
   },
   init() {
@@ -186,14 +187,23 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    this.getListData();
+    this.setData({
+      pageIndex: 1,
+      input: '',
+      areaIndex: -1,
+      tradIndex: -1,
+      timeIndex: -1,
+    })
+    this.initPriceInterval();
+    this.getTradData();
+    this.getListData(true);
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    this.getListData(true);
+    this.getListData();
   },
 
   /**

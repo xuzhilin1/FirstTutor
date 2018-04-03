@@ -51,26 +51,7 @@ Page({
     let index = e.currentTarget.dataset.index;
     console.log(index);
   },
-  onShareAppMessage(res) { //转发
-    console.log(res);
-    if (res.from === 'button') {
-      console.log(res.target);
-    } else {
-      console.log(res.target);
-    }
-    return {
-      title: '自定义转发标题',
-      path: '/page/New/index/index',
-      success: function (res) {
-        // 转发成功
-        console.log(res);
-      },
-      fail: function (res) {
-        // 转发失败
-        console.log(res);
-      }
-    }
-  },
+
   onLoad: function (options) {
 
   },
@@ -103,7 +84,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    wx.stopPullDownRefresh();
   },
 
   /**
@@ -117,6 +98,9 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: 'FirstTutor',
+      path: '/pages/Home/Home/index'
+    }
   }
 })
