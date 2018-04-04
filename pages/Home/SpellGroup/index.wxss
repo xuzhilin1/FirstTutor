@@ -76,10 +76,11 @@
 
 .Kuang {
   width: 100%;
-  min-height: 378rpx;
+  /* min-height: 378rpx; */
   background-color: #e8f0ff;
   padding-top: 45rpx;
   position: relative;
+  padding-bottom: 45rpx;
 }
 
 .btn {

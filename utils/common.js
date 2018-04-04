@@ -2,9 +2,6 @@
    本地存储 userInfo openid userType teacherStatusInfo
    图片限制类型 .gif|.jpg|.jpeg|.png
    视频限制类型".mp4|.rmvb|.flv|.wmv|.mov|.avi";
-   外教资质图片链接：http://wj.1-zhao.com/QualifImgs/
-   外教视频链接：http://wj.1-zhao.com/QuaLifAudios/
-   上传文件暂存地址:http://wj.1-zhao.com/ImgCatch/
 */
 const data = {
   //adminsid:"1490463872",
@@ -18,11 +15,12 @@ const data = {
 const host = "https://wj.1-zhao.com";
 // 正则手机号码
 const phoneReg = /^1[34578]\d{9}$/;
-const srcImg = `${host}/QualifImgs/`;
-const srcUploadImg = `${host}/ImgCatch/`;
-const srcVideo = `${host}/QuaLifAudios/`;
-const srcActivity = `${host}/AtyImages/`;
-const srcBanner = `${host}/BannerImgs/`;
+const srcImg = `${host}/QualifImgs/`; //图片
+const srcUploadImg = `${host}/ImgCatch/`; //上传图片 
+const srcVideo = `${host}/QuaLifAudios/`; //视频
+const srcActivity = `${host}/AtyImages/`; //活动
+const srcBanner = `${host}/BannerImgs/`; //轮播图
+const srcPoster = `${host}/Content/Images/`; //海报
 const config = {
   /*
     首页
@@ -53,6 +51,10 @@ const config = {
   AttendGroupFailed: `${host}/LittleProgram/CorOpenGroup/AttendGroupFailed`,
   // 学生--支付成功，模版消息发送（2018-04-03）
   PayMentSuccess: `${host}/LittleProgram/CorOpenGroup/PayMentSuccess`,
+  // 购买成功后--生成海报(2018-04-04)
+  GetPosterInfo: `${host}/LittleProgram/Poster/GetPosterInfo`,
+  // 学生-查看团详情（2018-04-04）
+  LookUpFigroupInfo: `${host}/LittleProgram/CorOpenGroup/LookUpFigroupInfo`,
   /*
     找外教
    */
@@ -60,6 +62,15 @@ const config = {
   GetTradingAreaInfos: `${host}/LittleProgram/TradingArea/GetTradingAreaInfos`,
   //找外教搜索页接口
   FindForeignTea: `${host}/LittleProgram/ForeignTea/FindForeignTea`,
+  /*
+    活动
+   */
+  //学生--查看活动--活动列表页(2018-04-04)
+  GetAtyInfoList: `${host}/LittleProgram/Activity/GetAtyInfoList`,
+  //学生-查看活动详情(2018-04-04)
+  GetAtyDesInfo: `${host}/LittleProgram/Activity/GetAtyDesInfo`,
+  //学生--活动报名(2018-04-04)
+  AtySignUp: `${host}/LittleProgram/Activity/AtySignUp`,
   /*
     我的
    */
@@ -176,6 +187,7 @@ module.exports = {
   srcVideo: srcVideo,
   srcActivity: srcActivity,
   srcBanner: srcBanner,
+  srcPoster: srcPoster,
   //请求数据
   request(method, url, data, success, fail, complete) {
     fail = typeof (fail) === 'function' ? fail : function () { };

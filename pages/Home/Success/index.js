@@ -1,9 +1,13 @@
 // pages/Home/Success/index.js
+const $common = require('../../../utils/common.js');
 const app = getApp();
 Page({
   data: {
     contentText: '',
     status: 0,
+    srcPoster: $common.srcPoster,
+    poster: {}, //海报信息
+    isPoster: false, //海报 显隐
   },
   init() {
     let status = this.data.status;
@@ -24,6 +28,106 @@ Page({
     });
     this.setData({
       contentText: contentText
+    })
+  },
+  bindShowPoster() { //生成海报
+    wx.showLoading({ title: '努力加载中...' });
+    $common.request(
+      'POST',
+      $common.config.GetPosterInfo,
+      {},
+      (res) => {
+        if (res.data.res) {
+          let poster = res.data.poster;
+          this.setData({
+            poster: poster,
+            isPoster: true
+          })
+        } else {
+          $common.showModal('未知错误');
+        }
+      },
+      (res) => {
+        $common.showModal('亲~网络不给力哦，请稍后重试');
+      },
+      (res) => {
+        console.log(res);
+        wx.hideLoading();
+      }
+    )
+  },
+  bindIsPoster() { //海报隐藏
+    this.setData({
+      isPoster: false
+    })
+  },
+  savePoster() { //保存海报到相册
+    wx.getSetting({
+      success: (res) => {
+        console.log(res);
+        if (!res.authSetting['scope.writePhotosAlbum']) { //没有授权
+          wx.authorize({
+            scope: 'scope.writePhotosAlbum',
+            success: (res) => {
+              console.log(res);
+              this.saveImage();
+            },
+            fail: (res) => {
+              $common.showModal('是否授权保存到相册?', true, (res) => {
+                if (res.confirm) {
+                  wx.openSetting({
+                    success: (res) => {
+                      if (!res.authSetting['scope.writePhotosAlbum']) return;
+                      this.saveImage();
+                    }
+                  })
+                }
+              })
+            }
+          })
+        } else {
+          this.saveImage();
+        }
+      }
+    })
+  },
+  saveImage() { //保存图片
+    let srcPoster = this.data.srcPoster,
+      url = this.data.poster.PstImgName;
+    let filePath = `${srcPoster}${url}`;
+    wx.downloadFile({  //保存图片必须先下载
+      url: filePath,
+      success: (res) => {
+        if (res.statusCode === 200) {
+          let saveSrc = res.tempFilePath;
+          wx.saveImageToPhotosAlbum({
+            filePath: saveSrc,
+            success: (res) => {
+              this.setData({ //海报隐藏
+                isPoster: false
+              })
+              wx.showToast({
+                title: '保存成功',
+                icon: 'success',
+                duration: 2000
+              })
+            },
+            fail: (res) => {
+              wx.showToast({
+                title: '保存失败',
+                icon: 'none',
+                duration: 2000
+              })
+            },
+            complete: (res) => {
+              console.log(res);
+            }
+          })
+        }
+      },
+      fail: (res) => {
+        $common.showModal('亲~网络不给力哦，请稍后重试');
+      }
     })
   },
   goHome() { //返回首页

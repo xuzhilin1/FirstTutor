@@ -5,6 +5,7 @@ Page({
     userName: '',
     phone: '',
     remark: '',
+    atyId: -1, //活动id
   },
   bindUserName(e) { //姓名
     this.setData({
@@ -33,16 +34,56 @@ Page({
       $common.showModal('请输入正确的手机号');
       return;
     }
-    //发送请求
-    wx.navigateTo({ //跳转到报名成功页面
-      url: '../Success/index?status=1',
-    })
+    $common.request(
+      'POST',
+      $common.config.AtySignUp,
+      {
+        atyId: this.data.atyId,
+        openId: wx.getStorageSync('openid'),
+        stuName: userName,
+        stuPhone: phone,
+        Remark: remark
+      },
+      (res) => {
+        if (res.data.res) {
+          wx.navigateTo({ //跳转到报名成功页面
+            url: '../Success/index?status=1',
+          })
+        } else {
+          switch (res.data.errType) {
+            case 1:
+              $common.showModal('参数有误');
+              break;
+            case 2:
+              $common.showModal('未知错误');
+              break;
+            case 3:
+              $common.showModal('报名人数已满');
+              break;
+            case 2:
+              $common.showModal('报名失败');
+              break;
+          }
+        }
+      },
+      (res) => {
+        $common.showModal('亲~网络不给力哦，请稍后重试');
+      },
+      (res) => {
+        wx.hideLoading();
+        wx.stopPullDownRefresh();
+      }
+    )
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      atyId: options.atyId
+    })
   },
 
   /**

@@ -1,13 +1,13 @@
 <!--pages/Home/activity/index.wxml-->
-<view wx:for='{{pagesData}}' wx:key='{{index}}' bindtap='activityDetail' data-index='{{index}}' class='bg-fff padding-b-20 margin-t-20'>
-  <image class='INg' src='{{item.image}}'></image>
+<view wx:for='{{atyList}}' wx:key='{{index}}' bindtap='activityDetail' data-index='{{index}}' class='bg-fff padding-b-20 margin-t-20'>
+  <image class='INg' src='{{srcActivity}}{{item.AtyImgPath}}'></image>
   <view class='padding-lr-30 fon-32 padding-tb-20 XianZhi'>
-    {{item.context}}
+    {{item.AtyTitle}}
   </view>
   <view class='flex between padding-lr-30 aitems-center'>
     <view class='flex aitems-center fon-24 c8'>
       <image class='address' mode='widthFix' src='../../images/newaddress_07.png'></image>
-      {{item.address}} {{item.time}}
+      {{item.AtyAddress}} {{item.AtyStartTime}}
     </view>
     <view bindtap='ChaKan' class='detail fon-24 '>立即报名</view>
   </view>

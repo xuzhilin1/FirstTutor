@@ -3,8 +3,19 @@
 <view class='fon-42 t-center bold'>{{contentText}}</view>
 <button bindtap='goHome' class='border buns bg-fff btn purple fon-37'>去首页逛逛吧</button>
 <black wx:if='{{status===1}}'>
-  <button class=' white btn purple-bg fon-37'>点击生成海报</button>
+  <button  bindtap='bindShowPoster' class=' white btn purple-bg fon-37'>点击生成海报</button>
   <view class='fon-24 dibu'>
     点击生成海报分享至朋友圈，截屏并发送至【XX的微信号】即可参与平台抽奖（玩具、书籍、活动券等）
   </view>
 </black>
+<view wx:if='{{isPoster}}' class='model'>
+  <view class='modle-main'>
+    <image class='img-haibao' src='{{srcPoster}}{{poster.PstImgName}}'></image>
+    <button bindtap='savePoster' class='btoon purple-bg'>保存海报</button>
+  </view>
+  <view>
+    <view bindtap='bindIsPoster' class='t-center'>
+      <icon type="cancel" color='#fff' size="30" />
+    </view>
+  </view>
+</view>

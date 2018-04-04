@@ -1,33 +1,33 @@
 <!-- 一对一 -->
-<view wx:if='{{isGroup===0}}' class=' middle-m bg-fff flex aitems-center border-b-1 between padding-lr-30 border-t-1'>
+<view wx:if='{{course.CorType==1}}' class=' middle-m bg-fff flex aitems-center border-b-1 between padding-lr-30 border-t-1'>
   <view class='flex fon-36  c2b '>
     <image class='QiHao' mode='widthFix' src='../../images/qi_03.png'></image>
     <view>
-      {{pagesData.courseName}}
-      <view class=' fon-24 c8 margin-t-10 '>已有{{pagesData.buyNum}}人购买</view>
+      {{course.CorTitle}}
+      <view class=' fon-24 c8 margin-t-10 '>已有{{course.BuyCount}}人购买</view>
     </view>
   </view>
-  <view class='bold purple'>¥ {{pagesData.price}}</view>
+  <view class='bold purple'>¥ {{course.CorPrice}}</view>
 </view>
 <!--  一对多  -->
-<view wx:if='{{isGroup===1}}' class=' middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
+<view wx:if='{{course.CorType!=1}}' class=' middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
   <view class='flex fon-36  c2b '>
     <image class='QiHao' mode='widthFix' src='../../images/tuan_06.png'></image>
     <view>
-      {{pagesData.courseName}}
-      <view class='bold bg-fff purple'>¥ {{pagesData.price}}</view>
+      {{course.CorTitle}}
+      <view class='bold bg-fff purple'>¥ {{course.CorPrice}}</view>
     </view>
   </view>
-  <view class='purplea purple fon-24 '>{{pagesData.groupNum}}人团</view>
+  <view class='purplea purple fon-24 '>{{course.CorType}}人团</view>
 </view>
 <!--  导师信息  -->
 <view class='flex aitems-center padding-lr-30 padding-tb-20 bg-fff teacher-box'>
   <view class='teacher-l'>
-    <image class='touXiang margin-r-20' src='{{imageT}}'></image>
+    <image class='touXiang margin-r-20' src='{{teacher.TeaAvaUrl}}'></image>
     <view class='flex1'>
       <view class='fon-26 margin-b-10 flex aitems-center '>
-        {{userNameT}}
-        <image wx:if='{{isVip}}' class='HuangGuan margin-l-10' mode='widthFix' src='../../images/guan_03.png'></image>
+        {{teacher.TeaNickName}}
+        <image wx:if='{{teacher.TeaAddV==1}}' class='HuangGuan margin-l-10' mode='widthFix' src='../../images/guan_03.png'></image>
         <!--  星星  -->
         <view class='score'>
           <view class='score-all'>
@@ -36,17 +36,15 @@
           <view class='score-score'>
             <view class='score-list' wx:for="{{5}}" wx:key='{{index}}'>
               <!--  整星  -->
-              <image wx:if="{{listq - 0.5 > index ? index <= listq : index < listq - 1}}" class='score-img' src='../../images/xian_05.png'></image>
+              <image wx:if="{{teacher.RewScore - 0.5 > index ? index <= teacher.RewScore : index < teacher.RewScore - 1}}" class='score-img' src='../../images/xian_05.png'></image>
               <!--  半星  -->
-              <image wx:if="{{listq - 0.5 > index ? false : index < listq }}" class='score-image' src='../../images/BanXIn_03.png'></image>
+              <image wx:if="{{teacher.RewScore - 0.5 > index ? false : index < teacher.RewScore }}" class='score-image' src='../../images/BanXIn_03.png'></image>
             </view>
           </view>
         </view>
       </view>
       <view class='fon-24 c8'>
-        <black wx:for='{{userList}}' wx:key='{{index}}'>
-          <text wx:if='{{index!=0}}'>/</text>{{item}}
-        </black>
+        {{teacher.TeaAbstract}}
       </view>
     </view>
   </view>
@@ -54,34 +52,34 @@
 </view>
 <!--  拼团详情  -->
 <view class='margin-t-20 border-t-1 border-b-1'>
-  <view class='padding-tb-20 border-b-1 padding-lr-30 bg-fff'>
+  <view wx:if='{{course.CorType!=1}}' class='padding-tb-20 border-b-1 padding-lr-30 bg-fff'>
     <view class='fon-30 padding-l-20 border-l-2 c2b'>拼团详情</view>
   </view>
-  <view wx:for='{{pagesData.buyInfo}}' wx:key='{{index}}' class='flex fon-30 c2b bg-fff   padding-25 aitems-center between border-b-1'>
+  <view wx:if='{{course.CorType!=1}}' wx:for='{{mem}}' wx:key='{{index}}' class='flex fon-30 c2b bg-fff padding-25 aitems-center between border-b-1'>
     <view class='flex aitems-center'>
-      <image class='orderimg image-radius' src='{{item.image}}'></image>
-      {{item.name}}
-      <view wx:if='{{isGroup===1&&index===0}}' class='Tuan border fon-24 purple'>团长</view>
+      <image class='orderimg image-radius' src='{{item.UserAvaUrl}}'></image>
+      {{item.OdrName}}
+      <view wx:if='{{index==0}}' class='Tuan border fon-24 purple'>团长</view>
     </view>
     <view class='flex aitens-center'>
       <image class='phone' mode='widthFix' src='../../images/phone_06.png'></image>
-      {{item.phone}}
+      {{item.OdrPhone}}
     </view>
   </view>
   <view class='padding-25 fon-24 bg-fff'>
-    <block wx:if='{{isGroup===0}}'>
+    <block wx:if='{{course.CorType==1}}'>
       <view class='margin-b-20 '>订单号：{{pagesData.orderCode}}</view>
       <view class='margin-b-20 '>下单时间：{{pagesData.orderTime}}</view>
       <view class='margin-b-20 '>支付时间：{{pagesData.orderPayment}}</view>
     </block>
-    <block wx:if='{{isGroup===1}} '>
-      <view class='margin-b-20 '>团编号：{{pagesData.groupCode}}</view>
+    <block wx:if='{{course.CorType!=1}} '>
+      <view class='margin-b-20 '>团编号：{{cog.FgtId}}</view>
       <view class='margin-b-20 '>开团时间：{{pagesData.groupStartTime}}</view>
       <view class='margin-b-20 '>结束时间：{{pagesData.groupEndTime}}</view>
     </block>
     <view class='margin-b-20 '>上课时间段：{{pagesData.courseInterval}}</view>
-    <view class='margin-b-20 '>课程时长：{{pagesData.courseTime}}小时</view>
-    <view class='margin-b-20 '>上课时间：{{pagesData.courseDate}}</view>
+    <view class='margin-b-20 '>课程时长：{{course.courseTimeLong}}小时</view>
+    <view class='margin-b-20 '>上课时间：{{cog.StartTime}}</view>
   </view>
 </view>
 
@@ -91,11 +89,11 @@
   </view>
   <view class='padding-50 margin-t-20 bg-fff flex aitems-center fon-26 '>
     <image mode='widthFix' class='address' src='../../images/adddress_14.png'></image>
-    {{pagesData.address}}
+    {{cog.FgtStudyAddress}}
   </view>
   <view class='padding-50 margin-t-20 bg-fff flex aitems-center fon-26 '>
     <image mode='widthFix' class='address' src='../../images/adddress_14.png'></image>
-    {{pagesData.address}}
+    {{teacher.TeaPhone}}
   </view>
 </view>
 <view class='flex center btn-fa'>

@@ -86,8 +86,9 @@ Page({
   orderDetails(e) { //查看课程
     let index = e.currentTarget.dataset.index,
       courInfos = this.data.courInfos;
+    let teacherStatusInfo = wx.getStorageSync('teacherStatusInfo');
     wx.navigateTo({
-      url: '../orderDetails/index?isGroup=0',
+      url: '../courseDetail/index?CorId=' + courInfos[index].CorId + '&teaId=' + teacherStatusInfo.teaId,
     })
   },
   timeStamp(time) { //时间戳转换为日期
@@ -103,7 +104,8 @@ Page({
     f < 10 && (f = '0' + f);
     return `${y}-${m}-${d} ${h}:${f}`;
   },
-  getCourseList() { //获取课程列表
+  getCourseList(isReach) { //获取课程列表
+    isReach = isReach ? true : false;
     let teaId = wx.getStorageSync('teacherStatusInfo').teaId;
     let pageIndex = this.data.pageIndex,
       pageSize = this.data.pageSize;
@@ -118,7 +120,7 @@ Page({
       (res) => {
         if (res.data.res) {
           console.log(res);
-          let courInfos = this.data.courInfos;
+          let courInfos = isReach ? this.data.courInfos : [];//上拉加载push，下拉刷新，重新获取
           let arr = res.data.courInfos;
           if (arr.length >= pageSize) {
             pageIndex++;
@@ -147,7 +149,7 @@ Page({
               break;
             case 2:
               //未设置课程
-              $common.showModal('你还没有发布课程');
+              // $common.showModal('你还没有发布课程');
               break;
           }
         }
@@ -216,7 +218,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    this.getCourseList();
+    this.getCourseList(true);
   },
 
   /**

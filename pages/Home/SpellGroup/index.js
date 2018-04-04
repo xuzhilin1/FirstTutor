@@ -2,31 +2,14 @@
 const $common = require('../../../utils/common.js');
 Page({
   data: {
-    courseName: '口语一对二',
-    price: '200',
-    groupNum: 2,
-    partakeNum: 6,
-    courseTime: 2,
-    courseInterval: '9:00-11:00',
-    address: '上海市浦东新区张衡路666弄2号楼201室',
-    phone: '13501875412',
-    userName: 'Emily',
-    image: '../../images/ren_03.png',
-    userList: ['英式发音', '喜欢旅游', '明星老师'],
-    isVip: true,
-    country: '../../images/guan_03.png',
-    listq: 3,
-    buyInfo: [{
-      name: '黄涛',
-      phone: 13505145873,
-      image: '../../images/ceshi_03.jpg'
-    }, {
-      name: '刘先进',
-      phone: 13505145873,
-      image: '../../images/ceshi_03.jpg'
-    }],
+    groupType: 1, //团类型：1. 开团  2. 参团
     countDown: "00:00:00",
-    leftTime: '30000000', //倒计时时间戳
+    leftTime: '0', //倒计时时间戳
+    cogId: -1, //团id
+    course: {}, //课程信息
+    teacher: {}, //外教信息
+    cog: {}, //团信息
+    mem: [], //团成员信息
   },
   countDown() { // 倒计时
     let leftTime = parseInt(this.data.leftTime);
@@ -58,13 +41,84 @@ Page({
       url: '../Home/index',
     })
   },
+  getPageInfo() { //获取页面信息
+    wx.showLoading({ title: '努力加载中...' });
+    $common.request(
+      'POST',
+      $common.config.LookUpFigroupInfo,
+      {
+        cogId: this.data.cogId
+      },
+      (res) => {
+        if (res.data.res) {
+          let course = res.data.course;
+          switch (course.CorLenOfCla) {
+            case 1:
+              course.courseTimeLong = 1;
+              break;
+            case 2:
+              course.courseTimeLong = 1.5;
+              break;
+            case 3:
+              course.courseTimeLong = 2;
+              break;
+          }
+          let cog = res.data.cog,
+            leftTime = cog.RemainingTime;
+          this.setData({
+            course: course,
+            teacher: res.data.teacher,
+            cog: cog,
+            mem: res.data.mem,
+            leftTime: leftTime
+          });
+          this.countDown();
+        } else {
+          switch (res.errType) {
+            case 1:
+              $common.showModal('参数错误');
+              break;
+            case 2:
+              $common.showModal('未知错误');
+              break;
+          }
+        }
+      },
+      (res) => {
+        $common.showModal('亲~网络不给力哦，请稍后重试');
+      },
+      (res) => {
+        console.log(res);
+        wx.hideLoading();
+        wx.stopPullDownRefresh();
+      }
+    )
+  },
+  meToC() { //我来参团
+    wx.redirectTo({
+      url: '../sureOrder/index?corId=' + this.data.course.CorId + '&orderType=' + 1 + '&groupType=' + 2 + '&cogId=' + this.data.cogId,
+    })
+  },
+  meTo() { //我也来凑热闹开个团
+    wx.redirectTo({
+      url: '../CourseInformation/index?courId=' + this.data.course.CorId + '&teaId=' + this.data.teacher.TeaId
+    })
+  },
+  init() {
+    this.getPageInfo();
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    $common.request("GET", 'http://127.0.0.1:8081', null, (a, b, c) => {
-      console.log(a, b, c);
-    });
+    console.log(options);
+    if (options.cogId) {
+      this.setData({
+        cogId: parseInt(options.cogId),
+        groupType: parseInt(options.groupType)
+      })
+      this.init();
+    }
   },
 
   /**
@@ -99,7 +153,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    wx.stopPullDownRefresh();
+    this.init();
   },
 
   /**
@@ -115,7 +169,7 @@ Page({
   onShareAppMessage: function () {
     return {
       title: 'FirstTutor',
-      path: '/pages/Home/Home/index'
+      path: '/pages/Home/SpellGroup/index?cogId=' + this.data.cogId + '&groupType=2'
     }
   }
 })

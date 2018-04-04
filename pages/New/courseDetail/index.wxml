@@ -63,31 +63,6 @@
       </view>
     </view>
   </view>
-  <!--  参团  -->
-  <view wx:if='{{course.CorType!=1&&fgtList.StuNickName&&course.BeBuyCour<=0}}' class='bg-fff padding-b-20 border-t-1 margin-t-20 padding-lr-30'>
-    <view class='height-85 fon-26 border-b-1 flex between aitems-center'>
-      <view class='flex c2b aitems-center group-little'>
-        <text>支付开团邀请{{fgtList.NedCount}}人参团，人数不足自动退款</text>
-        <view bindtap='spellingRules' class='ca margin-l-20'>详细规则</view>
-      </view>
-      <image class='Jian' mode='widthFix' src='../../images/jos_03.jpg'></image>
-    </view>
-    <view>
-      <view class='fon-26 padding-tb-20 c2b'>以下小伙伴正在发起拼团，您可以直接参与：</view>
-      <view class='flex ssea aitems-center between'>
-        <view class='flex between flex1 aitems-center'>
-          <image class='xiaoTou' src='{{fgtList.StuAvaUrl}}'></image>
-          <view class='fon-30'>{{fgtList.StuNickName}}</view>
-          <view class='fon-26 Cans flex1 purple'>
-            <view class='Cans'>还剩{{fgtList.NedCount}}人成团</view>
-            <view class='ca Cans'>截止{{fgtList.countDown}}</view>
-          </view>
-        </view>
-        <view bindtap='goJoinGroup' class='white purple-bg CanRu fon-30'>去参团</view>
-      </view>
-    </view>
-  </view>
-  <!--end  -->
   <!--  选择上课时间  -->
   <view class='bg-fff padding-b-20 margin-t-20'>
     <view class='padding-tb-20 margin-b-20 border-b-1 padding-lr-30'>
@@ -115,7 +90,6 @@
     <view class='fon-30 padding-l-20 border-l-2 c2b'>课程介绍</view>
   </view>
   <view class='padding-lr-30 bg-fff fon-24 padding-tb-20'>
-
     <view class='c72'>{{course.CorDescript}}</view>
   </view>
   <!-- 定金说明 -->
@@ -125,42 +99,7 @@
   <view class='padding-lr-30 fon-24  c88 bg-fff padding-tb-40'>
     平台预收课程费用{{tea.TeaDepositPer}}%作为订金，剩余费用学生扣除订金后支付给外教。
   </view>
-  <!--  footer    一对一  -->
-  <view wx:if='{{course.CorType==1}}' class='footer flex border-t-1 between'>
-    <view class='fon-26 cs flex bg-fff aitems-center padding-l-30'>
-      <view class='margin-r-10'>支付订金</view>
-      <view class='fon-30 bold purple'> ¥{{course.CorBuyPrice}}</view>
-    </view>
-    <view wx:if='{{course.BeBuyCour<=0}}' bindtap='sureOrder' class='white fon-32 cs purple-bg'>立即购买</view>
-    <view wx:if='{{course.BeBuyCour>0}}' bindtap='orderDetail' class='white fon-32 cs purple-bg'>查看购买详情</view>
-  </view>
-  <!--  footer    一对多  -->
-  <view wx:if='{{course.CorType!=1}}' class='footer1 bg-fff flex border-t-1  aitems-center between'>
-    <view class='flex border-r-1 center aitems-center KuanDU'>
-      <view bindtap='goHome' class='fon-20 c88 gaoDU'>
-        <image class='fangZI' mode='widthFix' src='../../images/fangzi_07.png'></image>
-        首页
-      </view>
-    </view>
-    <view bindtap='chatTeacher' class='flex center aitems-center KuanDU'>
-      <view class='fon-20 c88 gaoDU'>
-        <image class='fangZI' mode='widthFix' src='../../images/zixun_09.png'></image>
-        咨询
-      </view>
-    </view>
-    <view wx:if='{{course.BeBuyCour<=0}}' bindtap='alonePayment' class='DanDUMai  flex aitems-center center'>
-      <view class='purple fon-26 t-center'>
-        <view>¥{{course.CorBuyPrice}}</view>
-        <view>单独购买</view>
-      </view>
-    </view>
-    <view wx:if='{{course.BeBuyCour<=0}}' bindtap='fightGroup' class='flex1 DanDUMaia purple-bg white flex aitems-center center'>
-      <view class=' fon-26 t-center'>
-        <view>¥{{course.CorGroupPrice}}</view>
-        <view>{{course.CorClaNum}}人拼团</view>
-      </view>
-    </view>
-    <view wx:if='{{course.BeBuyCour>0}}' bindtap='orderDetail' class='flex1 DanDUMaia purple-bg white flex aitems-center center'>查看购买详情</view>
-  </view>
-
+  <view bindtap='goHome' class='footer fon-30 white purple-bg'>返回首页</view>
 </view>
+
+  

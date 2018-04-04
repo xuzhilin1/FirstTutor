@@ -1,4 +1,4 @@
-// pages/New/orderDetails/index.js
+// 外教查看订单详情
 Page({
   data: {
     isGroup: 0, //1 拼团 0 !拼团,

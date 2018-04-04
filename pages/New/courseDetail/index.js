@@ -11,7 +11,11 @@ Page({
     timeTables: [], //选择上课时间列表
     weekList: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
     timeList: [], // 页面展示上课时间表 
-    fgtList: {}, //推荐
+  },
+  goHome() { //返回首页
+    wx.switchTab({
+      url: '../../Home/Home/index',
+    })
   },
   initPageData() { //初始化上课时间
     //周几就用数字1234567代替，时间段就用1（上午），2（下午1），3（下午2），4（晚上）代替
@@ -65,101 +69,6 @@ Page({
       timeList: timeList
     })
   },
-  orderDetail() { //查看购买详情
-    wx.navigateTo({
-      url: '../../New/orderDetailsS/index?cogId=' + this.data.course.BeBuyCour,
-    })
-  },
-  sureOrder() { //立即购买
-    let course = this.data.course;
-    let timeList = this.data.timeList;
-    let flage = false;
-    let thisData = null;
-    for (let i = 0, len = timeList.length; i < len; i++) {
-      if (timeList[i].timeType === 2) {
-        thisData = {
-          index: i,
-          time: timeList[i].timeName,
-          TimId: timeList[i].TimId
-        };
-        flage = true;
-      }
-    }
-    if (!flage) {
-      $common.showModal('请选择时间段');
-      return;
-    }
-    wx.navigateTo({
-      url: '../sureOrder/index?orderType=' + 2 + '&corId=' + course.CorId + '&groupType=' + -1 + '&cogId=' + -1 + '&weekTime=' + JSON.stringify(thisData),
-    })
-  },
-  spellingRules() { //详细规则
-    wx.navigateTo({
-      url: '../SpellingRules/index',
-    })
-  },
-  goHome() { //首页
-    wx.switchTab({
-      url: '../Home/index',
-    })
-  },
-  goJoinGroup() { //去参团
-    let course = this.data.course;
-    let fgtList = this.data.fgtList;
-    wx.navigateTo({
-      url: '../sureOrder/index?corId=' + course.CorId + '&orderType=' + 1 + '&groupType=' + 2 + '&cogId=' + fgtList.FgtId,
-    })
-  },
-  alonePayment() { //单独购买
-    let course = this.data.course;
-    let timeList = this.data.timeList;
-    let flage = false;
-    let thisData = null;
-    for (let i = 0, len = timeList.length; i < len; i++) {
-      if (timeList[i].timeType === 2) {
-        thisData = {
-          index: i,
-          time: timeList[i].timeName,
-          TimId: timeList[i].TimId
-        };
-        flage = true;
-      }
-    }
-    if (!flage) {
-      $common.showModal('请选择时间段');
-      return;
-    }
-    wx.navigateTo({
-      url: '../sureOrder/index?corId=' + course.CorId + '&orderType=' + 2 + '&groupType=' + -1 + '&cogId=' + -1 + '&weekTime=' + JSON.stringify(thisData),
-    })
-  },
-  fightGroup() { //多人拼团
-    let course = this.data.course;
-    let timeList = this.data.timeList;
-    let flage = false;
-    let thisData = null;
-    for (let i = 0, len = timeList.length; i < len; i++) {
-      if (timeList[i].timeType === 2) {
-        thisData = {
-          index: i,
-          time: timeList[i].timeName,
-          TimId: timeList[i].TimId
-        };
-        flage = true;
-      }
-    }
-    if (!flage) {
-      $common.showModal('请选择时间段');
-      return;
-    }
-    wx.navigateTo({
-      url: '../sureOrder/index?corId=' + course.CorId + '&orderType=' + 1 + '&groupType=' + 1 + '&cogId=' + -1 + '&weekTime=' + JSON.stringify(thisData),
-    })
-  },
-
-  chatTeacher() { //咨询 ， 与老师交流
-
-  },
   getCourseAndTeacherInfo() { //获取课程和教师信息
     $common.request(
       "POST",
@@ -189,34 +98,6 @@ Page({
             course: course,
             tea: res.data.tea
           })
-          if (course.CorType != 1) { //一对多页面 
-            $common.request(
-              "POST",
-              $common.config.GetCorGroupInfos,
-              {
-                corId: this.data.courId,
-              },
-              (res) => {
-                if (res.data.res) {
-                  console.log(res);
-                  let fgtList = res.data.fgtList[0];
-                  if (!fgtList) return;
-                  let str = fgtList.FgtEndTime.replace('/Date(', '');
-                  str = str.replace(')/', '');
-                  fgtList.countDown = this.timeStamp(str);
-                  this.setData({
-                    fgtList: fgtList
-                  })
-                }
-              },
-              (res) => {
-
-              },
-              (res) => {
-                console.log(res);
-              }
-            )
-          }
         } else {
           switch (res.data.errType) {
             case 1:
@@ -338,14 +219,14 @@ Page({
     this.getCourTime();
   },
   onLoad: function (options) {
-    let courId = options.courId,
+    let courId = options.CorId,
       teaId = options.teaId;
     this.setData({
       courId: courId,
       teaId: teaId
     })
     this.initPageData();
-
+    this.init();
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -358,7 +239,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.init();
+
   },
 
   /**

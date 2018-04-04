@@ -44,11 +44,9 @@ Page({
     app.globalData.teacherFor.TeaPhone = phone;
   },
   submit() { //点击保存按钮
-
     let teacherFor = app.globalData.teacherFor;
     let qualifs = [];
     let phone = this.data.phone;
-
     if (!teacherFor.TeaName) {
       $common.showModal('请完善基本资料');
       return;
@@ -131,10 +129,10 @@ Page({
   jump(e) {// 跳转
     let url = e.currentTarget.dataset.url,
       index = e.currentTarget.dataset.index;
-    if (index == 3) {
+    if (index == 3) { //调用上传图片
       this.uploadPhoto();
       return;
-    } else if (index == 4) {
+    } else if (index == 4) { //调用上传视频
       this.uploadVideo();
       return;
     }
@@ -190,7 +188,6 @@ Page({
   uploadVideo() { //上传上课视频
     $common.chooseVideo(function (res) {
       let url = res.tempFilePath;//文件路径
-      console.log(url);
       wx.showLoading({ title: '正在上传' });
       const uploadTask = wx.uploadFile({
         url: $common.config.UpLoadForTeaFile,
@@ -315,7 +312,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-   
+
   },
 
   /**

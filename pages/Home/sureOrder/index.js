@@ -2,7 +2,6 @@ const $common = require('../../../utils/common.js');
 Page({
   //页面分为两种情况，1，单独购买 = 团长购买 2，团员购买
   data: {
-
     startCourseTime: '', //上课时间
     courseAddress: '', //上课 地址
     studentName: '', //姓名
@@ -164,7 +163,9 @@ Page({
       return;
     }
     let orderType = this.data.orderType,
-      course = this.data.course;
+      course = this.data.course,
+      cogId = this.data.cogId,
+      groupType = this.data.groupType;
     $common.request(
       'POST',
       $common.config.PlaceAnOrder,
@@ -179,8 +180,8 @@ Page({
         corAddress: courseAddress, //上课地址(默认线下协商)
         payPrice: this.data.PayPrice, //支付金额
         orderType: orderType, //订单类型类型：1. 团购  2. 单独购
-        groupType: this.data.groupType, //团类型：1. 开团  2. 参团， 当orderType为1时必填
-        cogId: this.data.cogId,// 团ID：当groupType为2时必填
+        groupType: groupType, //团类型：1. 开团  2. 参团， 当orderType为1时必填
+        cogId: cogId,// 团ID：当groupType为2时必填
       },
       (res) => {
         if (res.data.res) {
@@ -194,27 +195,41 @@ Page({
             'paySign': paras.paySign,
             'success': (res) => { //支付成功
               console.log(res);
+              /*
+              单买: 跳转订单详情
+              拼团: 跳转拼团页
+               */
+              let pagePath = ''; //用户收到的模板消息链接
+              switch (orderType) { //订单类型类型：1. 团购  2. 单独购
+                case 1:
+                  pagePath = '/pages/Home/SpellGroup/index?cogId=' + cogId + '&groupType=' + groupType;
+                  break;
+                case 2:
+                  pagePath = '/pages/New/orderDetails/index';
+                  break;
+              }
               $common.request( //发送模板消息
                 'POST',
                 $common.config.PayMentSuccess,
                 {
                   cogId: cogId, //团id
                   openId: wx.getStorageSync('openid'),
-                  pagePath: '/pages/Home/SpellGroup/index'
+                  pagePath: pagePath
                 },
                 (res) => {
-                  wx.navigateTo({
-                    url: '../BuySuccess/index',
+                  console.log('购买类型' + orderType);
+                  wx.redirectTo({
+                    url: '../BuySuccess/index?orderType=' + orderType + '&cogId=' + cogId + '&groupType=' + groupType,
                   })
                   if (res.data.res) {
 
                   } else {
                     switch (res.data.errType) {
                       case 1:
-                        $common.showModal('参数错误');
+                        //$common.showModal('参数错误');
                         break;
                       case 2:
-                        $common.showModal('未知错误');
+                        //$common.showModal('未知错误');
                         break;
                     }
                   }
@@ -229,7 +244,6 @@ Page({
               )
             },
             'fail': (res) => { //支付失败
-              console.log(res);
               $common.request(
                 'POST',
                 $common.config.AttendGroupFailed,
@@ -243,13 +257,13 @@ Page({
                   } else {
                     switch (res.data.errType) {
                       case 1:
-                        $common.showModal('参数错误');
+                        //$common.showModal('参数错误');
                         break;
                       case 2:
-                        $common.showModal('未知错误');
+                        //$common.showModal('未知错误');
                         break;
                       case 3:
-                        $common.showModal('服务器出错');
+                        //$common.showModal('服务器出错');
                         break;
                     }
                   }
@@ -341,6 +355,17 @@ Page({
               res.data.course.courseTimeLong = 2;
               break;
           }
+          if (res.data.corOpenG) { //参团信息
+            let corOpenG = res.data.corOpenG;
+            let weekTimeData = {};
+            weekTimeData.TimId = corOpenG.TimId;
+            this.setData({
+              weekTime: corOpenG.TimeFie,
+              startCourseTime: corOpenG.TimeStart,
+              courseAddress: corOpenG.Address,
+              weekTimeData: weekTimeData
+            })
+          }
           this.setData({
             PayPrice: res.data.PayPrice,
             course: res.data.course,
@@ -381,7 +406,7 @@ Page({
       corId = options.corId,
       groupType = options.groupType,
       orderType = options.orderType,
-      weekTime = JSON.parse(options.weekTime);
+      weekTime = options.weekTime ? JSON.parse(options.weekTime) : false;
     this.setData({
       cogId: cogId,
       corId: corId,
@@ -389,7 +414,8 @@ Page({
       orderType: orderType,
       weekTimeData: weekTime,
     })
-    this.initCourseTimeData();
+    if (!weekTime) return;
+    this.initCourseTimeData(); //初始化上课时间段
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

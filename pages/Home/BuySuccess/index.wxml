@@ -1,14 +1,14 @@
 <view class='bg-fff header border-b-1'>
   <image class='imgas' mode='widthFix' src='../../images/lian_03.jpg'></image>
   <view class='fon-42 t-center bold'>恭喜您，购买成功！</view>
-  <button bindtap='spellGroup' class='border buns bg-fff btn purple fon-37'>查看拼团信息</button>
-  <button bindtap='bindIsPoster' class=' white btn purple-bg fon-37'>点击生成海报</button>
+  <button wx:if='{{orderType===1}}' bindtap='spellGroup' class='margin-t-50 border buns bg-fff btn purple fon-37'>查看拼团信息</button>
+  <button bindtap='bindShowPoster' class='margin-t-50 white btn purple-bg fon-37'>点击生成海报</button>
   <view class='fon-24 dibu'>
     点击生成海报分享至朋友圈，截屏并发送至【XX的微信号】即可参与平台抽奖（玩具、书籍、活动券等）
   </view>
   <view wx:if='{{isPoster}}' class='model'>
     <view class='modle-main'>
-      <image class='img-haibao' src='{{poster}}'></image>
+      <image class='img-haibao' src='{{srcPoster}}{{poster.PstImgName}}'></image>
       <button bindtap='savePoster' class='btoon purple-bg'>保存海报</button>
     </view>
     <view>
@@ -18,7 +18,7 @@
     </view>
   </view>
 </view>
-<view class='padding-tb-20 margin-t-20 bg-fff border-t-1 padding-lr-30'>
+<!-- <view class='padding-tb-20 margin-t-20 bg-fff border-t-1 padding-lr-30'>
   <view class='fon-30 padding-l-20 border-l-2 c2b'>上课地址及外教联系方式</view>
 </view>
 <view class=' border-b-1'>
@@ -30,4 +30,4 @@
     <image mode='widthFix' class='address' src='../../images/phone_06.png'></image>
     {{phone}}
   </view>
-</view>
+</view> -->

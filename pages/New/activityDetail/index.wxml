@@ -1,17 +1,10 @@
 <view class='big-outer'>
-  <!-- <swiper class='swiper' indicator-dots="{{true}}" indicator-active-color="#fff" indicator-color="#ccc" autoplay="{{true}}">
-  <block wx:for="{{imgUrls}}">
-    <swiper-item>
-      <image src="{{item}}" class="slide-image" />
-    </swiper-item>
-  </block>
- </swiper> -->
   <view class='header'>
     <image src='{{image}}'></image>
   </view>
   <view class='middle-middle bg-fff'>
-    <view class='fon-32 margin-b-20'>{{context}}</view>
-    <view class='fon-24 c8'>已报名{{enrollNum}}人 / 不限制人数</view>
+    <view class='fon-32 margin-b-20'>{{atyInfo.AtyTitle}}</view>
+    <view class='fon-24 c8'>已报名{{atyInfo.AtyPartNum}}人 / 不限制人数</view>
   </view>
 
   <view class='border-t-1'>
@@ -19,15 +12,15 @@
       <view class='flex aitems-center '>
         <image mode='widthFix' class='imgs-s' src='../../images/time_03.png'></image>
         <view class='fon-24 baomi c8'>活动时间</view>
-        <view class='fon-24 XianZhi1'>{{startTime}} 至 {{endTime}}</view>
+        <view class='fon-24 XianZhi1'>{{atyInfo.startTime}} 至 {{atyInfo.endTime}}</view>
       </view>
 
     </view>
-    <view bindtap='openLocation' class='flex border-b-1 bg-fff DIZHi aitems-center  between '>
+    <view class='flex border-b-1 bg-fff DIZHi aitems-center  between '>
       <view class='flex aitems-center '>
         <image mode='widthFix' class='imgs-s' src='../../images/add_06.png'></image>
         <view class='fon-24 baomi c8'>活动地址</view>
-        <view class='fon-24 XianZhi1'>{{address}}</view>
+        <view class='fon-24 XianZhi1'>{{atyInfo.AtyAddress}}</view>
       </view>
       <image mode='widthFix' class='img-rrr' src='../../images/jian_13.png'></image>
     </view>
@@ -39,12 +32,16 @@
 
 
   <view class='context'>
-    <black wx:for='{{introduce}}' wx:key='{{index}}'>
+    <view class='context-title purple'>
+
+    </view>
+    <view class='context-list c8'> {{atyInfo.AtyDescript}}</view>
+    <!-- <black wx:for='{{introduce}}' wx:key='{{index}}'>
       <view class='context-title purple'>
         {{item.title}}
       </view>
       <view class='context-list c8' wx:for='{{item.list}}' wx:key='{{index}}'>{{item}}</view>
-    </black>
+    </black> -->
   </view>
   <!--  -->
   <view wx:if='{{status===1}}' class='footer white fon-30 JieShu'>活动已结束</view>
