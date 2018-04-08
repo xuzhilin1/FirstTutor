@@ -1,41 +1,110 @@
 // pages/New/activity/index.js
+const $common = require('../../../utils/common.js');
 Page({
   data: {
-    pagesData: [],
+    srcActivity: $common.srcActivity,
+    pageIndex: 1,
+    pageSize: 10,
+    atyInfos: [], //页面数据
   },
-  getPagesData() {
-    let arr = [{
-      image: '../../images/DE_03.jpg',
-      context: '十名外教，集体讲课，带你从头开始学英语！',
-      address: '上海',
-      time: '2018-03-25 12:00',
-      status: 0,
-    }, {
-      image: '../../images/DE_03.jpg',
-      context: '十名外教，集体讲课，带你从头开始学英语！',
-      address: '上海',
-      time: '2018-03-25 12:00',
-      status: 1,
-    }];
-    this.setData({
-      pagesData: arr
-    })
+  timeStamp(time) { //时间戳转换为日期
+    let str1 = time.replace("/Date(", ''),
+      thisTime = str1.replace(')/', '');
+    let date = new Date(parseInt(thisTime)),
+      y = date.getFullYear(),
+      m = date.getMonth() + 1,
+      d = date.getDate(),
+      h = date.getHours(),
+      f = date.getMinutes();
+    m < 10 && (m = '0' + m);
+    d < 10 && (d = '0' + d);
+    h < 10 && (h = '0' + h);
+    f < 10 && (f = '0' + f);
+    return `${y}-${m}-${d} ${h}:${f}`;
+  },
+  activityStatus(startTime, endTime) { //判断活动状态
+    startTime = startTime.replace("/Date(", '').replace(')/', '');
+    endTime = endTime.replace("/Date(", '').replace(')/', '');
+    let now = Date.parse(new Date()); //当前时间
+    if (now - startTime >= 0) {
+      if (now - endTime <= 0) {//活动进行中
+        return 2;
+      } else { //活动已结束
+        return 3;
+      }
+    } else { //活动未开始
+      return 1;
+    }
   },
 
   activityDetail(e) {  // 活动详情
     let index = e.currentTarget.dataset.index,
-      pagesData = this.data.pagesData;
+      atyInfos = this.data.atyInfos;
     wx.navigateTo({
-      url: '../activityDetail/index?isSign=0',
+      url: '../activityDetail/index?isSign=0&atyId=' + atyInfos[index].AtyId,
     })
   },
-  onLoad: function (options) {
+  init(isReach) {
+    isReach = isReach ? true : false;
+    wx.showLoading({ title: '努力加载中...' });
+    let pageIndex = isReach ? this.data.pageIndex : 1,
+      pageSize = this.data.pageSize;
+    $common.request(
+      'POST',
+      $common.config.GetMySignUpAtyList,
+      {
+        openId: wx.getStorageSync('openid'),
+        pageIndex: pageIndex,
+        pageSize: pageSize
+      },
+      (res) => {
+        if (res.data.res) {
+          let data = res.data.atyInfos;
+          let atyInfos = isReach ? this.setData.isReach : [];
+          if (data.length >= pageSize) {
+            pageIndex++;
+          }
+          for (let i = 0, len = data.length; i < len; i++) {
+            data[i].whatTime = this.timeStamp(data[i].AtyEndTime);
+            data[i].status = this.activityStatus(data[i].AtyStartTime, data[i].AtyEndTime);
+            atyInfos.push(data[i]);
+          }
+          let hash = {};
+          let newArr = atyInfos.reduce(function (item, next) {//数组依据FgtId去重
+            hash[next.AtyId] ? '' : hash[next.AtyId] = true && item.push(next);
+            return item
+          }, []);
+          this.setData({
+            atyInfos: newArr,
+            pageIndex: pageIndex
+          })
+        } else {
+          switch (res.data.errType) {
+            case 1:
+              $common.showModal('参数有误');
+              break;
+            case 2:
+              $common.showModal('未知错误');
+              break;
+          }
+        }
+      },
+      (res) => {
 
+      },
+      (res) => {
+        console.log(res);
+        wx.hideLoading();
+        wx.stopPullDownRefresh();
+      }
+    )
+  },
+  onLoad: function (options) {
+    this.init();
   },
 
 
   onReady: function () {
-    this.getPagesData();
   },
 
   /**
@@ -63,14 +132,14 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    wx.stopPullDownRefresh();
+    this.init();
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    this.init(true);
   },
 
   /**

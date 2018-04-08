@@ -2,56 +2,130 @@
 const $common = require('../../../utils/common.js');
 Page({
   data: {
-    SPagesData: [{
-      isGroup: true,
-      name: '口语一对二',
-      price: '150',
-      actualPrice: '150.00',
-      groupNum: 2,
-      PaymentNum: 6,
-      num: '一对二',
-      status: '拼团中，还差1人成团',
-      image: '../../images/ren_03.png',
-      userName: 'Emily',
-      courseTime: 2,
-    }, {
-      isGroup: false,
-      name: '口语一对一',
-      price: '200',
-      actualPrice: '200.00',
-      groupNum: 2,
-      PaymentNum: 6,
-      num: '一对一',
-      status: '已支付',
-      image: '../../images/ren_03.png',
-      userName: 'Emily',
-      courseTime: 2,
-    }],
+    pageIndex: 1,
+    pageSize: 5,
+    infoList: [], //页面数据
   },
   orderDelete(e) { //删除订单
     let index = e.currentTarget.dataset.index,
-      SPagesData = this.data.SPagesData;
+      infoList = this.data.infoList;
     $common.showModal('确定删除该订单？', true, (res) => {
       if (res.confirm) {
-        SPagesData.splice(index, 1);
-        this.setData({
-          SPagesData: SPagesData
-        })
+        $common.request(
+          'POST',
+          $common.config.DeleteOgoById,
+          {
+            odrId: infoList[index].OdrId
+          },
+          (res) => {
+            if (res.data.res) {
+              wx.showToast({
+                title: '删除成功',
+                icon: 'success',
+                duration: 2000
+              })
+              infoList.splice(index, 1);
+              this.setData({
+                infoList: infoList
+              })
+            } else {
+              switch (res.data.errType) {
+                case 1:
+                  $common.showModal('参数有误');
+                  break;
+                case 2:
+                  $common.showModal('未知错误');
+                  break;
+                case 3:
+                  $common.showModal('订单不存在');
+                  break;
+                case 4:
+                  $common.showModal('删除失败');
+                  break;
+              }
+            }
+          },
+          (res) => {
+
+          },
+          (res) => {
+            console.log(res);
+          }
+        )
       }
     });
   },
   SOrderDetail(e) { //查看详情
     let index = e.currentTarget.dataset.index,
-      SPagesData = this.data.SPagesData;
+      infoList = this.data.infoList;
     wx.navigateTo({
-      url: '../orderDetailsS/index',
+      url: '../orderDetailsS/index?cogId=' + infoList[index].FgtId,
     })
   },
-  bindshare(e) {
-    let index = e.currentTarget.dataset.index;
-    console.log(index);
-  },
+  init(isReach) {
+    isReach = isReach ? true : false;
+    console.log(isReach);
+    let pageIndex = isReach ? this.data.pageIndex : 1,
+      pageSize = this.data.pageSize;
+    wx.showLoading({ title: '努力加载中...' });
+    $common.request(
+      'POST',
+      $common.config.GetOrderList,
+      {
+        openId: wx.getStorageSync('openid'),
+        pageIndex: pageIndex,
+        pageSize: pageSize,
+      },
+      (res) => {
+        if (res.data.res) {
+          let infoList = isReach ? this.data.infoList : [];
+          let data = res.data.infoList;
+          if (data.length >= pageSize) {
+            pageIndex++;
+          }
+          for (let i = 0, len = data.length; i < len; i++) {
+            switch (data[i].CourseInfo.CorLenOfCla) {
+              case 1:
+                data[i].CourseInfo.courseTimeLong = 1;
+                break;
+              case 2:
+                data[i].CourseInfo.courseTimeLong = 1.5;
+                break;
+              case 3:
+                data[i].CourseInfo.courseTimeLong = 2;
+                break;
+            }
+            infoList.push(data[i]);
+          }
+          let hash = {};
+          let newArr = infoList.reduce(function (item, next) {//数组依据FgtId去重
+            hash[next.FgtId] ? '' : hash[next.FgtId] = true && item.push(next);
+            return item
+          }, []);
+          this.setData({
+            infoList: newArr,
+            pageIndex: pageIndex
+          })
+        } else {
+          switch (res.data.errType) {
+            case 1:
+              $common.showModal('参数有误');
+              break;
+            case 2:
+              $common.showModal('未知错误');
+              break;
+          }
+        }
+      },
+      (res) => {
 
+      },
+      (res) => {
+        wx.hideLoading();
+        wx.stopPullDownRefresh();
+      }
+    )
+  },
   onLoad: function (options) {
 
   },
@@ -63,7 +137,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.init();
   },
 
   /**
@@ -84,14 +158,14 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    wx.stopPullDownRefresh();
+    this.init();
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    this.init(true);
   },
 
   /**

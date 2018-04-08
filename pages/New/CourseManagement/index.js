@@ -107,15 +107,16 @@ Page({
   getCourseList(isReach) { //获取课程列表
     isReach = isReach ? true : false;
     let teaId = wx.getStorageSync('teacherStatusInfo').teaId;
-    let pageIndex = this.data.pageIndex,
+    let pageIndex = isReach ? this.data.pageIndex : 1,
       pageSize = this.data.pageSize;
+    wx.showLoading({ title: '努力加载中...' });
     $common.request(
       "POST",
       $common.config.GetMyCourInfos,
       {
         teaId: teaId,
         pageIndex: pageIndex,
-        pageSize: this.data.pageSize
+        pageSize: pageSize
       },
       (res) => {
         if (res.data.res) {
@@ -165,11 +166,8 @@ Page({
   },
   init() {
     this.setData({
-      pageIndex: 1,
-      pageSize: 5,
       courInfos: [],
     })
-    wx.showLoading({ title: '努力加载中...' });
     this.getCourseList();
   },
   /**

@@ -1,11 +1,11 @@
 {
   "pages": [
-    "pages/Home/activity/index",
+    "pages/New/index/index",
     "pages/Home/Home/index",
+    "pages/Home/activity/index",
     "pages/New/OrderCheckS/index",
     "pages/New/OrderCheck/index",
     "pages/Home/BuySuccess/index",
-    "pages/New/index/index",
     "pages/New/courseDetail/index",
     "pages/New/activityDetail/index",
     "pages/Home/Success/index",

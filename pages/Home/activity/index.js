@@ -30,7 +30,7 @@ Page({
   init(isReach) {
     isReach = isReach ? true : false;
     wx.showLoading({ title: '努力加载中...' });
-    let pageIndex = this.data.pageIndex,
+    let pageIndex = isReach ? this.data.pageIndex : 1,
       pageSize = this.data.pageSize;
     $common.request(
       'POST',
@@ -41,7 +41,7 @@ Page({
       },
       (res) => {
         if (res.data.res) {
-          let atyList = isReach ? this.data.isReach : [];
+          let atyList = isReach ? this.data.atyList : [];
           let data = res.data.atyList;
           if (data.length >= pageSize) {
             pageIndex++;
@@ -51,9 +51,15 @@ Page({
               str1 = str.replace("/Date(", ''),
               time = str1.replace(')/', '');
             data[i].showTime = this.timeStamp(time); //时间戳转换为时间
+            atyList.push(data[i]);
           }
+          let hash = {};
+          let newArr = atyList.reduce(function (item, next) {//数组依据AtyId去重
+            hash[next.AtyId] ? '' : hash[next.AtyId] = true && item.push(next);
+            return item
+          }, []);
           this.setData({
-            atyList: data,
+            atyList: newArr,
             pageIndex: pageIndex
           })
         } else {
@@ -115,9 +121,6 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    this.setData({
-      pageIndex: 1
-    })
     this.init();
   },
 

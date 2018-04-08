@@ -81,9 +81,9 @@ Page({
     );
   },
   getListData(isRefresh) { //获取页面list
-    isRefresh = isRefresh ? true : false;
+    isRefresh = isRefresh ? true : false; //true 上拉， false重新加载
     wx.showLoading({ title: '努力加载中...' });
-    let pageIndex = this.data.pageIndex,
+    let pageIndex = isRefresh ? this.data.pageIndex : 1,
       pageSize = this.data.pageSize;
     $common.request(
       "POST",
@@ -188,7 +188,6 @@ Page({
    */
   onPullDownRefresh: function () {
     this.setData({
-      pageIndex: 1,
       input: '',
       areaIndex: -1,
       tradIndex: -1,
@@ -196,14 +195,14 @@ Page({
     })
     this.initPriceInterval();
     this.getTradData();
-    this.getListData(true);
+    this.getListData();
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    this.getListData();
+    this.getListData(true);
   },
 
   /**

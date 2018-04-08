@@ -12,6 +12,7 @@ Page({
     weekList: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
     timeList: [], // 页面展示上课时间表 
     fgtList: {}, //推荐
+    orderBeDel: 0, //1 订单已删除  0 未删除
   },
   initPageData() { //初始化上课时间
     //周几就用数字1234567代替，时间段就用1（上午），2（下午1），3（下午2），4（晚上）代替
@@ -66,6 +67,11 @@ Page({
     })
   },
   orderDetail() { //查看购买详情
+    let orderBeDel = parseInt(this.data.orderBeDel);
+    if (orderBeDel === 1) {
+      $common.showModal('订单已删除');
+      return;
+    }
     wx.navigateTo({
       url: '../../New/orderDetailsS/index?cogId=' + this.data.course.BeBuyCour,
     })
@@ -187,7 +193,8 @@ Page({
           }
           this.setData({
             course: course,
-            tea: res.data.tea
+            tea: res.data.tea,
+            orderBeDel: res.data.orderBeDel
           })
           if (course.CorType != 1) { //一对多页面 
             $common.request(

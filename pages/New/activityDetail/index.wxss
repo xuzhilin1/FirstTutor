@@ -1,4 +1,5 @@
 /* pages/New/activityDetail/index.wxss */
+@import "../../../wxParse/wxParse.wxss";
 
 .slide-image {
   width: 100%;
@@ -43,15 +44,15 @@
   height: 80rpx;
   line-height: 80rpx;
   background-color: #979797;
-  position: fixed;
+  /* position: fixed;
   left: 0;
-  bottom: 0;
+  bottom: 0; */
   width: 100%;
   text-align: center;
 }
 
 .context {
-  padding: 0 40rpx 20rpx;
+  padding: 20rpx 40rpx;
   background: #fff;
   width: 100%;
   box-sizing: border-box;
@@ -70,4 +71,16 @@
 
 .footer-btn {
   background-color: #7c99d0;
+}
+
+.sepa {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 30rpx 20rpx;
+}
+
+.video {
+  width: 100%;
+  height: 400rpx;
+  box-sizing: border-box;
 }

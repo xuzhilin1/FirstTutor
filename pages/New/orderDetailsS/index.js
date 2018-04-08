@@ -2,37 +2,11 @@
 const $common = require('../../../utils/common.js');
 Page({
   data: {
-    isGroup: 0, //1 拼团 0 !拼团,
-    userNameT: 'Emily',
-    imageT: '../../images/ren_03.png',
-    userList: ['英式发音', '喜欢旅游', '明星老师'],
-    isVip: true,
-    listq: 4.5,
-    pagesData: {
-      courseName: '口语一对一',
-      buyNum: 5,
-      price: "200",
-      groupNum: 2,
-      buyInfo: [{
-        name: '黄涛',
-        phone: 13505145873,
-        image: '../../images/ceshi_03.jpg'
-      }, {
-        name: '刘先进',
-        phone: 13505145873,
-        image: '../../images/ceshi_03.jpg'
-      }],
-      address: '上海市浦东新区张衡路666弄2号楼201室',
-      orderCode: 456465434,
-      orderTime: '2017-08-17 12:25:21',
-      orderPayment: '2017-08-17 12:25:21',
-      groupCode: 465746131,
-      groupStartTime: '2017-08-17 12:25:21',
-      groupEndTime: '2017-08-17 12:25:21',
-      courseInterval: '周一/上午',
-      courseTime: 2,
-      courseDate: '9:00-11:00',
-    }
+    cog: {}, //团信息
+    course: {}, //课程信息
+    mem: {}, //团成员信息
+    teacher: {}, //外教信息
+    showMem: {}, //当前页面显示成员信息
   },
   init() {
     wx.showLoading({ title: '努力加载中...' });
@@ -58,11 +32,22 @@ Page({
               break;
           }
           let cog = res.data.cog;
+          let mem = res.data.mem;
+          let showMem;
+          for (let i = 0, len = mem.length; i < len; i++) {
+            if (mem[i].ViewOrder) {
+              showMem = mem[i];
+            }
+          }
+          showMem.orderTime = this.timeStamp(showMem.OdrCreateOn);//下单时间;
+          showMem.buyTime = this.timeStamp(showMem.OdrBuyDate); //支付时间
+          showMem.groupSuccessTime = this.timeStamp(showMem.OdrFgtSuccessTime);//拼团成功时间
           this.setData({
             course: course,
             teacher: res.data.teacher,
             cog: cog,
-            mem: res.data.mem,
+            mem: mem,
+            showMem: showMem
           });
         } else {
           switch (res.errType) {
@@ -85,6 +70,62 @@ Page({
       }
     )
 
+  },
+  deleteOrder() { //删除订单
+    $common.request(
+      'POST',
+      $common.config.DeleteOgoById,
+      {
+        odrId: this.data.showMem.OdrId
+      },
+      (res) => {
+        if (res.data.res) {
+          $common.showModal('删除成功', false, (res) => {
+            if (res.confirm) {
+              wx.redirectTo({
+                url: '../../Home/teachersInformation/index?data=' + this.data.teacher.TeaId,
+              })
+            }
+          });
+        } else {
+          switch (res.data.errType) {
+            case 1:
+              $common.showModal('参数有误');
+              break;
+            case 2:
+              $common.showModal('未知错误');
+              break;
+            case 3:
+              $common.showModal('订单不存在');
+              break;
+            case 4:
+              $common.showModal('删除失败');
+              break;
+          }
+        }
+      },
+      (res) => {
+
+      },
+      (res) => {
+        console.log(res);
+      }
+    )
+  },
+  timeStamp(time) { //时间戳转换为日期
+    let str1 = time.replace("/Date(", ''),
+      thisTime = str1.replace(')/', '');
+    let date = new Date(parseInt(thisTime)),
+      y = date.getFullYear(),
+      m = date.getMonth() + 1,
+      d = date.getDate(),
+      h = date.getHours(),
+      f = date.getMinutes();
+    m < 10 && (m = '0' + m);
+    d < 10 && (d = '0' + d);
+    h < 10 && (h = '0' + h);
+    f < 10 && (f = '0' + f);
+    return `${y}-${m}-${d} ${h}:${f}`;
   },
   /**
    * 生命周期函数--监听页面加载

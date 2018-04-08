@@ -1,36 +1,25 @@
 // pages/New/activityDetail/index.js
 const $common = require('../../../utils/common.js');
+const WxParse = require('../../../wxParse/wxParse.js'); //字符串转换为微信页面
 Page({
   data: {
     status: 0, //1 活动已结束 0 活动未结束
     isSign: 0, // 1 立即报名活动 0 我的活动查看
-    image: '../../images/DE_03.jpg',
-    context: '从零开始学英语，听说读写，全面升级',
-    presonNum: "infinity",
-    enrollNum: 100,
-    startTime: '12-26 17:00',
-    endTime: '12-26 20:00',
-    address: '上海市浦东新区张衡路666号',
-    introduce: [{
-      title: '适应对象',
-      list: ['1、英语基础薄弱，几乎零基础的学习者',
-        '2、多年不碰英语，希望重拾英语的学习者',
-        '3、希望以一种轻松的方法掌握英语的学习者。']
-    }, {
-      title: '适应对象',
-      list: ['1、英语基础薄弱，几乎零基础的学习者',
-        '2、多年不碰英语，希望重拾英语的学习者',
-        '3、希望以一种轻松的方法掌握英语的学习者。']
-    }],
+    srcActivity: $common.srcActivity,
+    srcActivityVideo: $common.srcActivityVideo,
     latitude: 31.22114,
     longitude: 121.54409,
     atyId: -1, //活动id
     atyInfo: {}, //页面信息
+    atyImgs: [], //轮播图
+    alreadySignUp: 0, //是否已经报名 0 否，大于0 是
   },
   openLocation() { //查看地址所在位置
     $common.openLocation(this.data.latitude, this.data.longitude);
   },
   activitySign() {
+    let alreadySignUp = this.data.alreadySignUp;
+    if (alreadySignUp > 0) return;
     wx.navigateTo({
       url: '../../Home/activitySign/index?atyId=' + this.data.atyId,
     })
@@ -48,13 +37,21 @@ Page({
     f < 10 && (f = '0' + f);
     return `${m}-${d} ${h}:${f}`;
   },
+  judgeOld(time) { //判断活动是否过期
+    let Sstr1 = time.replace("/Date(", ''),
+      Stime = Sstr1.replace(')/', '');
+    let timestamp = Date.parse(new Date());
+    let status = Stime - timestamp > 0 ? 0 : 1;
+    return status;
+  },
   init() {
     wx.showLoading({ title: '努力加载中...' });
     $common.request(
       'POST',
       $common.config.GetAtyDesInfo,
       {
-        atyId: this.data.atyId
+        atyId: this.data.atyId,
+        openId: wx.getStorageSync('openid')
       },
       (res) => {
         if (res.data.res) {
@@ -67,8 +64,13 @@ Page({
             Estr1 = Estr.replace("/Date(", ''),
             Etime = Estr1.replace(')/', '');
           atyInfo.endTime = this.timeStamp(Etime);
+          WxParse.wxParse('article', 'html', atyInfo.AtyDescript, this, 5);
+          let status = this.judgeOld(atyInfo.AtyEndTime);
           this.setData({
-            atyInfo: atyInfo
+            atyInfo: atyInfo,
+            atyImgs: res.data.atyImgs,
+            status: status,
+            alreadySignUp: res.data.alreadySignUp
           })
         } else {
           switch (res.data.errType) {
@@ -98,7 +100,6 @@ Page({
     if (options.atyId) {
       atyId = options.atyId;
     }
-    console.log(options);
     this.setData({
       isSign: parseInt(options.isSign),
       atyId: atyId

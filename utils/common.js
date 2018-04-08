@@ -1,7 +1,5 @@
 /*
    本地存储 userInfo openid userType teacherStatusInfo
-   图片限制类型 .gif|.jpg|.jpeg|.png
-   视频限制类型".mp4|.rmvb|.flv|.wmv|.mov|.avi";
 */
 const data = {
   //adminsid:"1490463872",
@@ -13,12 +11,12 @@ const data = {
   TitleName: ""
 };
 const host = "https://wj.1-zhao.com";
-// 正则手机号码
-const phoneReg = /^1[34578]\d{9}$/;
+const phoneReg = /^1[34578]\d{9}$/; // 正则手机号码
 const srcImg = `${host}/QualifImgs/`; //图片
 const srcUploadImg = `${host}/ImgCatch/`; //上传图片 
 const srcVideo = `${host}/QuaLifAudios/`; //视频
 const srcActivity = `${host}/AtyImages/`; //活动
+const srcActivityVideo = `${host}/ActVideos/`; //活动视频
 const srcBanner = `${host}/BannerImgs/`; //轮播图
 const srcPoster = `${host}/Content/Images/`; //海报
 const config = {
@@ -55,6 +53,8 @@ const config = {
   GetPosterInfo: `${host}/LittleProgram/Poster/GetPosterInfo`,
   // 学生-查看团详情（2018-04-04）
   LookUpFigroupInfo: `${host}/LittleProgram/CorOpenGroup/LookUpFigroupInfo`,
+  // 学生-删除订单（2018-04-08）
+  DeleteOgoById: `${host}/LittleProgram/OpenGrpOrder/DeleteOgoById`,
   /*
     找外教
    */
@@ -106,6 +106,12 @@ const config = {
   AlterCourseGet: `${host}/LittleProgram/Course/AlterCourseGet`,
   //外教-修改课程信息(2018-04-02)
   AlterCourse: `${host}/LittleProgram/Course/AlterCourse`,
+  //学生-获取我的订单列表(2018-04-08)
+  GetOrderList: `${host}/LittleProgram/OpenGrpOrder/GetOrderList`,
+  //学生-我的-我报名的活动(2018-04-08)
+  GetMySignUpAtyList: `${host}/LittleProgram/Activity/GetMySignUpAtyList`,
+  //学生--我的--学习需求
+  GetMyLearnNeeds: `${host}/LittleProgram/Student/GetMyLearnNeeds`,
 }
 const wxGetUserInfo = function (code, userInfo, callback, callback2) {
   let openid = wx.getStorageSync('openid');
@@ -188,6 +194,7 @@ module.exports = {
   srcActivity: srcActivity,
   srcBanner: srcBanner,
   srcPoster: srcPoster,
+  srcActivityVideo: srcActivityVideo,
   //请求数据
   request(method, url, data, success, fail, complete) {
     fail = typeof (fail) === 'function' ? fail : function () { };

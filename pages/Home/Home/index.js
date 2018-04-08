@@ -58,14 +58,17 @@ Page({
       }.bind(this)
     );
   },
-  getListData(callback) { //推荐外教
+  getListData(isReach, callback) { //推荐外教
+    isReach = isReach ? true : false;
     callback = typeof callback === 'function' ? callback : function () { };
+    let pageIndex = isReach ? this.data.pageIndex : 1,
+      pageSize = this.data.pageSize;
     $common.request(
       "POST",
       $common.config.GetRecomForTeas,
       {
-        pageIndex: parseInt(this.data.pageIndex),
-        pageSize: parseInt(this.data.pageSize)
+        pageIndex: pageIndex,
+        pageSize: pageSize
       },
       (res) => {
         if (res.data.res) {
@@ -225,9 +228,6 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    this.setData({
-      pageIndex: 1
-    })
     this.init();
   },
 
@@ -236,7 +236,7 @@ Page({
    */
   onReachBottom: function (res) {
     wx.showLoading({ title: '努力加载中...' });
-    this.getListData(() => {
+    this.getListData(true, () => {
       wx.hideLoading();
     });
   },
