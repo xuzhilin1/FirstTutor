@@ -194,7 +194,6 @@ Page({
             'signType': 'MD5',
             'paySign': paras.paySign,
             'success': (res) => { //支付成功
-              console.log(res);
               /*
               单买: 跳转订单详情
               拼团: 跳转拼团页
@@ -202,10 +201,10 @@ Page({
               let pagePath = ''; //用户收到的模板消息链接
               switch (orderType) { //订单类型类型：1. 团购  2. 单独购
                 case 1:
-                  pagePath = '/pages/Home/SpellGroup/index?cogId=' + cogId + '&groupType=' + groupType;
+                  pagePath = '/pages/Home/SpellGroup/index?cogId=' + cogId + '&isOpen=true';
                   break;
                 case 2:
-                  pagePath = '/pages/New/orderDetails/index';
+                  pagePath = '/pages/New/orderDetails/index?cogId=' + cogId;
                   break;
               }
               $common.request( //发送模板消息
@@ -217,7 +216,7 @@ Page({
                   pagePath: pagePath
                 },
                 (res) => {
-                  console.log('购买类型' + orderType);
+                  console.log(cogId, pagePath);
                   wx.redirectTo({
                     url: '../BuySuccess/index?orderType=' + orderType + '&cogId=' + cogId + '&groupType=' + groupType,
                   })

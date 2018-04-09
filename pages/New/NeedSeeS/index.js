@@ -1,52 +1,61 @@
 // pages/New/NeedSee/index.js
 const $common = require('../../../utils/common.js');
+const $static = require('../../../utils/static.js');
 Page({
   data: {
-    pagesData: [{
-      name: '英语口语一对一',
-      address: '长宁',
-      week: '周一',
-      time: '上午',
-      browse: 20,
-      minPrice: '100',
-      maxPrice: '200',
-      type: true,
-    }, {
-      name: '英语口语一对一',
-      address: '长宁',
-      week: '周一',
-      time: '上午',
-      browse: 20,
-      minPrice: '100',
-      maxPrice: '200',
-      type: false
-    }],
+    address: $static.areaShanghai,
     pageIndex: 1,
     pageSize: 5,
     LnList: [],
   },
   seeDetail(e) { //修改需求
     let index = e.currentTarget.dataset.index,
-      pagesData = this.data.pagesData;
+      LnList = this.data.LnList;
     wx.navigateTo({
-      url: '../seeDetailS/index',
+      url: '../seeDetailS/index?status=2&nedId=' + LnList[index].NedId,
     })
   },
   bindDelete(e) { //删除
     let index = e.currentTarget.dataset.index,
-      pagesData = this.data.pagesData;
+      LnList = this.data.LnList;
     $common.showModal('确定删除?', true, (res) => {
       if (res.confirm) {
-        pagesData.splice(index, 1);
-        this.setData({
-          pagesData: pagesData
-        })
+        $common.request(
+          'POST',
+          $common.config.DeleteMyLearnNeed,
+          {
+            nedId: LnList[index].NedId
+          },
+          (res) => {
+            if (res.data.res) {
+              LnList.splice(index, 1);
+              this.setData({
+                LnList: LnList
+              })
+            } else {
+              switch (res.data.errType) {
+                case 1:
+                  $common.showModal('参数错误');
+                  break;
+                case 2:
+                  $common.showModal('未知错误');
+                  break;
+              }
+            }
+          },
+          (res) => {
+
+          },
+          (res) => {
+          }
+        )
+
       }
     });
   },
   seeDetailS() { //发布需求
     wx.navigateTo({
-      url: '../seeDetailS/index',
+      url: '../seeDetailS/index?status=1',
     })
   },
   init(isReach) {
@@ -69,16 +78,37 @@ Page({
           if (data.length >= pageSize) {
             pageIndex++;
           }
+          let address = this.data.address;
           for (let i = 0, len = data.length; i < len; i++) {
+            switch (data[i].NedClaTime) {
+              case 1:
+                data[i].timeStage = '上午';
+                break;
+              case 2:
+                data[i].timeStage = '下午1';
+                break;
+              case 3:
+                data[i].timeStage = '下午2';
+                break;
+              case 4:
+                data[i].timeStage = '晚上';
+                break;
+            }
+            for (let j = 0, l = address.length; j < l; j++) {
+              if (data[i].NedClaArea == address[j].id) {
+                data[i].area = address[j].area;
+                break;
+              }
+            }
             LnList.push(data[i]);
           }
-          // let hash = {};
-          // let newArr = LnList.reduce(function (item, next) {//数组依据FgtId去重
-          //   hash[next.FgtId] ? '' : hash[next.FgtId] = true && item.push(next);
-          //   return item
-          // }, []);
+          let hash = {};
+          let newArr = LnList.reduce(function (item, next) {//数组依据NedId去重
+            hash[next.NedId] ? '' : hash[next.NedId] = true && item.push(next);
+            return item
+          }, []);
           this.setData({
-            infoList: LnList,
+            LnList: newArr,
             pageIndex: pageIndex
           })
         } else {
@@ -96,7 +126,6 @@ Page({
 
       },
       (res) => {
-        console.log(res);
         wx.hideLoading();
         wx.stopPullDownRefresh();
       }

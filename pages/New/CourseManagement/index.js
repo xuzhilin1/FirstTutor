@@ -92,6 +92,7 @@ Page({
     })
   },
   timeStamp(time) { //时间戳转换为日期
+    time = time.replace("/Date(", '').replace(')/', '');
     let date = new Date(parseInt(time)),
       y = date.getFullYear(),
       m = date.getMonth() + 1,
@@ -109,6 +110,7 @@ Page({
     let teaId = wx.getStorageSync('teacherStatusInfo').teaId;
     let pageIndex = isReach ? this.data.pageIndex : 1,
       pageSize = this.data.pageSize;
+    let courInfos = isReach ? this.data.courInfos : [];//上拉加载push，下拉刷新，重新获取
     wx.showLoading({ title: '努力加载中...' });
     $common.request(
       "POST",
@@ -121,16 +123,12 @@ Page({
       (res) => {
         if (res.data.res) {
           console.log(res);
-          let courInfos = isReach ? this.data.courInfos : [];//上拉加载push，下拉刷新，重新获取
           let arr = res.data.courInfos;
           if (arr.length >= pageSize) {
             pageIndex++;
           }
           for (let i = 0, len = arr.length; i < len; i++) {
-            let str = arr[i].CorCreateOn,
-              str1 = str.replace("/Date(", ''),
-              time = str1.replace(')/', '');
-            arr[i].showTime = this.timeStamp(time); //时间戳转换为时间
+            arr[i].showTime = this.timeStamp(arr[i].CorCreateOn); //时间戳转换为时间
             courInfos.push(arr[i]);
           }
           let hash = {};

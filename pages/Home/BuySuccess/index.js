@@ -3,13 +3,18 @@ const $common = require('../../../utils/common.js');
 Page({
   data: {
     srcPoster: $common.srcPoster,
-    address: '上海市浦东新区张衡路666弄2号楼201室',
-    phone: '13501875412',
     poster: {}, //海报信息
     isPoster: false, //海报 显隐
     orderType: 1, //订单类型类型：1. 团购  2. 单独购
     cogId: -1, //团id 例 35
     groupType: 1, //团类型：1. 开团  2. 参团
+    teaAddress: '', //外教地址
+    teaPhone: '', //外教联系方式
+  },
+  goHome() { //返回首页
+    wx.switchTab({
+      url: '/pages/Home/Home/index',
+    })
   },
   bindShowPoster() { //生成海报
     wx.showLoading({ title: '努力加载中...' });
@@ -113,8 +118,39 @@ Page({
   },
   spellGroup() {  // 查看拼团信息
     wx.navigateTo({
-      url: '../SpellGroup/index?cogId=' + this.data.cogId + '&isGroupHead=true' + '&groupType=' + this.data.groupType,
+      url: '../SpellGroup/index?cogId=' + this.data.cogId
     })
+  },
+  getTeacherPhone() {  //获取外教联系方式
+    $common.request(
+      'POST',
+      $common.config.GetTeaAddressPhone,
+      {
+        cogId: this.data.cogId
+      },
+      (res) => {
+        if (res.data.res) {
+          this.setData({
+            teaAddress: res.data.teaAddress,
+            teaPhone: res.data.teaPhone
+          })
+        } else {
+          switch (res.data.errType) {
+            case 1:
+              //参数错误
+              break;
+            case 2:
+              //未知错误
+              break;
+          }
+        }
+      },
+      (res) => {
+
+      },
+      (res) => {
+      }
+    )
   },
   /**
    * 生命周期函数--监听页面加载
@@ -127,17 +163,18 @@ Page({
       })
     }
     if (options.cogId) {
-      let cogId = parseInt(options.cogId); //订单类型类型：1. 团购  2. 单独购
+      let cogId = parseInt(options.cogId); //团id
       this.setData({
         cogId: cogId
       })
     }
     if (options.groupType) {
-      let groupType = parseInt(options.groupType); //订单类型类型：1. 团购  2. 单独购
+      let groupType = parseInt(options.groupType); //团类型：1. 开团  2. 参团
       this.setData({
         groupType: groupType
       })
     }
+    this.getTeacherPhone();
   },
 
   /**

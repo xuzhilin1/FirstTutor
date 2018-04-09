@@ -42,7 +42,18 @@
 .text-type {
   color: #7c99d0;
 }
-.list-footer{
+
+.list-footer {
   display: flex;
   justify-content: flex-end;
+}
+
+/*  暂无数据  */
+
+.noData {
+  width: 100%;
+  font-size: 38rpx;
+  text-align: center;
+  margin-top: 200rpx;
+  color: #888;
 }

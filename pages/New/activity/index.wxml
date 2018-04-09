@@ -11,8 +11,12 @@
   <view class='flex between margin-t-20 aitems-center'>
     <view class='flex aitems-center fon-24 c8'>
       <image class='address' mode='widthFix' src='../../images/newaddress_07.png'></image>
-      {{item.AtyAddress}} {{item.whatTime}}
+      <!-- {{item.AtyAddress}} -->
+      上海 {{item.whatTime}}
     </view>
     <view bindtap='activityDetail' data-index='{{index}}' class='detail fon-24 purple border'>查看详情</view>
   </view>
+</view>
+<view wx:if='{{atyInfos.length<=0}}' class='noData'>
+  暂无数据
 </view>

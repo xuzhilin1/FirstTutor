@@ -78,7 +78,7 @@ Page({
           if (data.length >= pageSize) { //获取的数据个数等于请求的数据的个数，下标累加
             pageIndex++;
           }
-          let listData = this.data.listData;
+          let listData = isReach ? this.data.listData : [];
           for (let i = 0, len = data.length; i < len; i++) {
             listData.push(data[i]);
           }
@@ -118,8 +118,15 @@ Page({
     })
   },
   activityDetail() { //跳转到活动详情
+    let openid = wx.getStorageSync('openid');
+    if (openid === null || openid === '') {
+      $common.getOpenid(); //获取用户信息及openid；
+      return;
+    }
+    let AtyId = this.data.activity.AtyId;
+    if (!AtyId) return;
     wx.navigateTo({
-      url: '../../New/activityDetail/index',
+      url: '../../New/activityDetail/index?isSign=1&atyId=' + AtyId,
     })
   },
   init() { //进入页面初始化

@@ -8,6 +8,11 @@ Page({
     atyList: [],
   },
   activityDetail(e) {
+    let openid = wx.getStorageSync('openid');
+    if (openid === null || openid === '') {
+      $common.getOpenid(); //获取用户信息及openid；
+      return;
+    }
     let index = e.currentTarget.dataset.index,
       atyList = this.data.atyList;
     wx.navigateTo({
@@ -15,6 +20,8 @@ Page({
     })
   },
   timeStamp(time) { //时间戳转换为日期
+    time = time.replace("/Date(", '').replace(')/', '');
+    let now = Date.parse(new Date());
     let date = new Date(parseInt(time)),
       y = date.getFullYear(),
       m = date.getMonth() + 1,
@@ -25,8 +32,12 @@ Page({
     d < 10 && (d = '0' + d);
     h < 10 && (h = '0' + h);
     f < 10 && (f = '0' + f);
-    return `${y}-${m}-${d} ${h}:${f}`;
+    return {
+      isEnd: time - now > 0 ? true : false, //true 活动未结束 false活动已结束
+      time: `${y}-${m}-${d} ${h}:${f}`
+    }
   },
+
   init(isReach) {
     isReach = isReach ? true : false;
     wx.showLoading({ title: '努力加载中...' });
@@ -47,10 +58,7 @@ Page({
             pageIndex++;
           }
           for (let i = 0, len = data.length; i < len; i++) {
-            let str = data[i].AtyStartTime,
-              str1 = str.replace("/Date(", ''),
-              time = str1.replace(')/', '');
-            data[i].showTime = this.timeStamp(time); //时间戳转换为时间
+            data[i].showTime = this.timeStamp(data[i].AtyEndTime); //时间戳转换为时间
             atyList.push(data[i]);
           }
           let hash = {};

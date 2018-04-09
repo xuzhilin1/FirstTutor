@@ -52,14 +52,15 @@
 </view>
 <!--  拼团详情  -->
 <view class='margin-t-20 border-t-1 border-b-1'>
-  <view wx:if='{{course.CorType!=1}}' class='padding-tb-20 border-b-1 padding-lr-30 bg-fff'>
+  <view wx:if='{{course.CorType!=1&&cog.FgtType==1}}' class='padding-tb-20 border-b-1 padding-lr-30 bg-fff'>
     <view class='fon-30 padding-l-20 border-l-2 c2b'>拼团详情</view>
   </view>
-  <view wx:if='{{course.CorType!=1}}' wx:for='{{mem}}' wx:key='{{index}}' class='flex fon-30 c2b bg-fff padding-25 aitems-center between border-b-1'>
+  <!--  显示条件， 为团类型，单是不为单独购买  -->
+  <view wx:if='{{course.CorType!=1&&cog.FgtType==1}}' wx:for='{{mem}}' wx:key='{{index}}' class='flex fon-30 c2b bg-fff padding-25 aitems-center between border-b-1'>
     <view class='flex aitems-center'>
       <image class='orderimg image-radius' src='{{item.UserAvaUrl}}'></image>
       {{item.OdrName}}
-      <view wx:if='{{index==0}}' class='Tuan border fon-24 purple'>团长</view>
+      <view wx:if='{{cog.FgtType==1&&index==0}}' class='Tuan border fon-24 purple'>团长</view>
     </view>
     <view class='flex aitens-center'>
       <image class='phone' mode='widthFix' src='../../images/phone_06.png'></image>
@@ -83,11 +84,11 @@
   </view>
   <view class='padding-50 margin-t-20 bg-fff flex aitems-center fon-26 '>
     <image mode='widthFix' class='address' src='../../images/adddress_14.png'></image>
-    {{cog.FgtStudyAddress}}
+    {{teaAddress}}
   </view>
   <view class='padding-50 margin-t-20 bg-fff flex aitems-center fon-26 '>
-    <image mode='widthFix' class='address' src='../../images/adddress_14.png'></image>
-    {{teacher.TeaPhone}}
+    <image mode='widthFix' class='address' src='../../images/phone_06.png'></image>
+    {{teaPhone}}
   </view>
 </view>
 <view wx:if='{{cog.FgtStatus==3}}' class='flex center btn-fa'>

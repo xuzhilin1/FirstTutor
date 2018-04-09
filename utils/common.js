@@ -11,6 +11,10 @@ const data = {
   TitleName: ""
 };
 const host = "https://wj.1-zhao.com";
+const QQMapWX = require('./qqmap-wx-jssdk.min.js');
+const mapKey = new QQMapWX({
+  key: '4WABZ-V2ARX-NLS45-T5Q7T-CETWK-KMB7C' // 必填
+});
 const phoneReg = /^1[34578]\d{9}$/; // 正则手机号码
 const srcImg = `${host}/QualifImgs/`; //图片
 const srcUploadImg = `${host}/ImgCatch/`; //上传图片 
@@ -55,6 +59,8 @@ const config = {
   LookUpFigroupInfo: `${host}/LittleProgram/CorOpenGroup/LookUpFigroupInfo`,
   // 学生-删除订单（2018-04-08）
   DeleteOgoById: `${host}/LittleProgram/OpenGrpOrder/DeleteOgoById`,
+  // 订单页--获取外教上课地址与手机号(2018-04-09)
+  GetTeaAddressPhone: `${host}/LittleProgram/CorOpenGroup/GetTeaAddressPhone`,
   /*
     找外教
    */
@@ -111,7 +117,21 @@ const config = {
   //学生-我的-我报名的活动(2018-04-08)
   GetMySignUpAtyList: `${host}/LittleProgram/Activity/GetMySignUpAtyList`,
   //学生--我的--学习需求
-  GetMyLearnNeeds: `${host}/LittleProgram/Student/GetMyLearnNeeds`,
+  GetMyLearnNeeds: `${host}/LittleProgram/LearnNeeds/GetMyLearnNeeds`,
+  //学生-删除我的需求(2018-04-09)
+  DeleteMyLearnNeed: `${host}/LittleProgram/LearnNeeds/DeleteMyLearnNeed`,
+  //学生-发布需求信息(2018-04-09)
+  ReleaseMyLearnNeed: `${host}/LittleProgram/LearnNeeds/ReleaseMyLearnNeed`,
+  //学生-我的-获取某需求信息以供修改(2018-04-09)
+  GetMyLearnNeedInfo: `${host}/LittleProgram/LearnNeeds/GetMyLearnNeedInfo`,
+  //学生--我的--修改需求(2018-04-09)
+  AlterMyLearnNeedInfo: `${host}/LittleProgram/LearnNeeds/AlterMyLearnNeedInfo`,
+  //学生--我的评论，评论列表(2018-04-09)
+  GetMyAllRewInfos: `${host}/LittleProgram/Review/GetMyAllRewInfos`,
+  //学生--发布一条新评论(2018-04-09)
+  GiveTeaAMark: `${host}/LittleProgram/Review/GiveTeaAMark`,
+  //学生--删除评论(2018-04-09)
+  DeleteReview: `${host}/LittleProgram/Review/DeleteReview`,
 }
 const wxGetUserInfo = function (code, userInfo, callback, callback2) {
   let openid = wx.getStorageSync('openid');
@@ -248,14 +268,18 @@ module.exports = {
       success: success,
     })
   },
-  //查看位置
-  openLocation(latitude, longitude, scale) {
-    scale = scale ? parseInt(scale) : scale;
-    wx.openLocation({
-      latitude: latitude,
-      longitude: longitude,
-      scale: scale
-    })
+  getAddress(address, success) { //调用腾讯地图api地址解析为坐标
+    success = typeof success == 'function' ? success : function () { };
+    mapKey.geocoder({
+      address: address,
+      success: success,
+      fail: (res) => {
+
+      },
+      complete: (res) => {
+        console.log(res);
+      }
+    });
   },
   //获取openid以及个人头像等信息
   getOpenid(callback, callback2) {

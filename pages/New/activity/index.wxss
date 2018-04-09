@@ -18,3 +18,12 @@
   width: 30rpx;
   margin-right: 20rpx;
 }
+/*  暂无数据  */
+
+.noData {
+  width: 100%;
+  font-size: 38rpx;
+  text-align: center;
+  margin-top: 200rpx;
+  color: #888;
+}

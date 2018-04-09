@@ -72,9 +72,16 @@ Page({
       $common.showModal('订单已删除');
       return;
     }
-    wx.navigateTo({
-      url: '../../New/orderDetailsS/index?cogId=' + this.data.course.BeBuyCour,
-    })
+    if (this.data.CorType == 1) {
+      wx.navigateTo({
+        url: '../../New/orderDetailsS/index?cogId=' + this.data.course.BeBuyCour,
+      })
+    } else {
+      wx.navigateTo({
+        url: '/pages/Home/SpellGroup/index?cogId=' + this.data.course.BeBuyCour,
+      })
+    }
+
   },
   sureOrder() { //立即购买
     let course = this.data.course;

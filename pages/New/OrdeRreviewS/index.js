@@ -1,50 +1,109 @@
 const $common = require('../../../utils/common.js');
 Page({
   data: {
-    pagesData: [],
-  },
-  getPagesData() {
-    let arr = [{
-      userName: 'Emily',
-      image: '../../images/ren_03.png',
-      userList: ['英式发音', '喜欢旅游', '明星老师'],
-      isVip: true,
-      country: '../../images/guan_03.png',
-      status: 0, //0 未点评 1 已点评
-      listq: 3,
-    }, {
-      userName: 'Emily',
-      image: '../../images/ren_03.png',
-      userList: ['英式发音', '喜欢旅游', '明星老师'],
-      isVip: true,
-      country: '../../images/guan_03.png',
-      status: 1, //0 未点评 1 已点评
-      listq: 4.5
-    }];
-    this.setData({
-      pagesData: arr
-    })
+    teaList: [],
+    pageIndex: 1,
+    pageSize: 5,
   },
   bindDelete(e) { //删除点评
     let index = e.currentTarget.dataset.index,
-      pagesData = this.data.pagesData;
+      teaList = this.data.teaList;
     $common.showModal('确定删除?', true, (res) => {
       if (res.confirm) {
-        pagesData.splice(index, 1);
-        this.setData({
-          pagesData: pagesData
-        })
+        $common.request(
+          'POST',
+          $common.config.DeleteReview,
+          {
+            rewId: teaList[index].RewId
+          },
+          (res) => {
+            if (res.data.res) {
+              this.init();
+            } else {
+              switch (res.data.errType) {
+                case 1:
+                  $common.showModal('参数错误');
+                  break;
+                case 2:
+                  $common.showModal('删除失败');
+                  break;
+              }
+            }
+          },
+          (res) => {
+
+          },
+          (res) => {
+            console.log(res);
+          }
+        )
+
       }
     });
   },
   releaseRemark(e) { //立即点评
     let index = e.currentTarget.dataset.index,
-      pagesData = this.data.pagesData;
+      teaList = this.data.teaList;
     wx.navigateTo({
-      url: '../releaseRemark/index',
+      url: `../releaseRemark/index?RewTeaId=${teaList[index].TeaId}&RewStuId=${teaList[index].StuId}`,
     })
   },
+  init(isReach) {
+    isReach = isReach ? true : false;
+    let pageIndex = isReach ? this.data.pageIndex : 1,
+      pageSize = this.data.pageSize;
+    wx.showLoading({ title: '努力加载中...' });
+    $common.request(
+      'POST',
+      $common.config.GetMyAllRewInfos,
+      {
+        openId: wx.getStorageSync('openid'),
+      },
+      (res) => {
+        if (res.data.res) {
+          let teaList = isReach ? this.data.teaList : [];
+          let data = res.data.teaList;
+          if (data.length >= pageSize) {
+            pageIndex++;
+          }
+          for (let i = 0, len = data.length; i < len; i++) {
+            teaList.push(data[i]);
+          }
+          let hash = {};
+          let newArr = teaList.reduce(function (item, next) {//数组依据RewId去重
+            hash[next.RewId] ? '' : hash[next.RewId] = true && item.push(next);
+            return item
+          }, []);
+          this.setData({
+            teaList: newArr,
+            pageIndex: pageIndex
+          })
+        } else {
+          switch (res.data.errType) {
+            case 1:
+              $common.showModal('参数有误');
+              break;
+            case 2:
+              $common.showModal('未知错误');
+              break;
+            case 3:
+              $common.showModal('未知错误');
+              break;
+            case 4:
+              $common.showModal('获取信息 失败');
+              break;
+          }
+        }
+      },
+      (res) => {
 
+      },
+      (res) => {
+        wx.hideLoading();
+        wx.stopPullDownRefresh();
+      }
+    )
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -56,14 +115,14 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    this.getPagesData();
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.init();
   },
 
   /**
@@ -84,7 +143,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    wx.stopPullDownRefresh();
+    this.init(this);
   },
 
   /**

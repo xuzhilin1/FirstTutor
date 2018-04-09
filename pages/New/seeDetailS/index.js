@@ -2,11 +2,13 @@ const $common = require('../../../utils/common.js');
 const $static = require('../../../utils/static.js');
 Page({
   data: {
+    nedId: -1,
+    status: 1, //1 发布需求， 2 修改需求
     areaList: $static.areaShanghai,
     areaIndex: 0,
     weekList: ['一', '二', '三', '四', '五', '六', '日'],
     weekIndex: 0,
-    timeList: ['上午', '下午', '晚上'],
+    timeList: ['上午', '下午1', '下午2', '晚上'],
     timeIndex: 0,
     pariceList: [
       [0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
@@ -33,6 +35,11 @@ Page({
     })
   },
   bindPriceChange(e) { //费用
+    let data = e.detail.value;
+    if (data[0] >= data[1]) {
+      $common.showModal('请选择正确的费用区间');
+      return;
+    }
     this.setData({
       priceIndex: e.detail.value
     })
@@ -54,8 +61,8 @@ Page({
   },
   submit() { //提交需求
     let area = this.data.areaList[this.data.areaIndex],
-      week = this.data.weekList[this.data.weekIndex],
-      time = this.data.timeList[this.data.timeIndex],
+      week = parseInt(this.data.weekIndex) + 1,
+      time = parseInt(this.data.timeIndex) + 1,
       minPrice = this.data.pariceList[0][this.data.priceIndex[0]],
       maxPrice = this.data.pariceList[1][this.data.priceIndex[1]],
       address = this.data.address,
@@ -65,18 +72,202 @@ Page({
       $common.showModal('请填写上课地址');
       return;
     }
-    if (address.trim().length <= 0) {
+    if (course.trim().length <= 0) {
       $common.showModal('请填写学习课程');
       return;
     }
-    //发请求
+    console.log(course, address, week, minPrice, maxPrice, other, time, area.id);
+    let status = this.data.status;
+    if (status === 1) { //发布需求
+      this.saveData(course, address, week, minPrice, maxPrice, other, time, area.id);
+    } else if (status === 2) { //修改需求
+      this.reviseData(course, address, week, minPrice, maxPrice, other, time, area.id);
+    }
+  },
+  reviseData(NedCorName, NedAddress, NedCorAfw, NedMinPrice, NedMaxPrice, NedOther, NedClaTime, NedClaArea) { //修改需求
+    $common.request(
+      'POST',
+      $common.config.AlterMyLearnNeedInfo,
+      {
+        lnd: {
+          NedId: this.data.nedId,
+          NedCorName: NedCorName, //学习课程
+          NedAddress: NedAddress, //学习地址
+          NedCorAfw: NedCorAfw, //上课时间（周几）
+          NedMinPrice: NedMinPrice, //最低价格
+          NedMaxPrice: NedMaxPrice, //最高价格
+          NedOther: NedOther, //其他要求
+          NedClaTime: NedClaTime, //上课时间段（1 上午，2 下午1，3 下午2，4 晚上）
+          NedClaArea: NedClaArea, //所在区域
+        }
+      },
+      (res) => {
+        if (res.data.res) {
+          wx.showToast({
+            title: '修改成功',
+            icon: 'success',
+          })
+          setTimeout(() => {
+            wx.navigateBack({
+              delta: 1
+            })
+          }, 1500);
+        } else {
+          switch (res.data.errType) {
+            case 1:
+              $common.showModal('参数不正确');
+              break;
+            case 2:
+              $common.showModal('修改失败');
+              break;
+          }
+        }
+      },
+      (res) => {
+
+      },
+      (res) => {
+        console.log(res);
+      }
+    )
+  },
+  saveData(NedCorName, NedAddress, NedCorAfw, NedMinPrice, NedMaxPrice, NedOther, NedClaTime, NedClaArea) { //发布需求
+    $common.request(
+      'POST',
+      $common.config.ReleaseMyLearnNeed,
+      {
+        openId: wx.getStorageSync('openid'),
+        lnd: {
+          NedCorName: NedCorName, //学习课程
+          NedAddress: NedAddress, //学习地址
+          NedCorAfw: NedCorAfw, //上课时间（周几）
+          NedMinPrice: NedMinPrice, //最低价格
+          NedMaxPrice: NedMaxPrice, //最高价格
+          NedOther: NedOther, //其他要求
+          NedClaTime: NedClaTime, //上课时间段（1 上午，2 下午1，3 下午2，4 晚上）
+          NedClaArea: NedClaArea, //所在区域
+        }
+      },
+      (res) => {
+        if (res.data.res) {
+          wx.showToast({
+            title: '添加成功',
+            icon: 'success',
+          })
+          setTimeout(() => {
+            wx.navigateBack({
+              delta: 1
+            })
+          }, 1500);
+        } else {
+          switch (res.data.errType) {
+            case 1:
+              $common.showModal('参数不正确');
+              break;
+            case 2:
+              $common.showModal('未知错误');
+              break;
+            case 3:
+              $common.showModal('未知错误');
+              break;
+            case 4:
+              $common.showModal('添加失败');
+              break;
+          }
+        }
+      },
+      (res) => {
+
+      },
+      (res) => {
+      }
+    )
+  },
+  init() {
+    let status = this.data.status;
+    if (status === 1) {
+      wx.stopPullDownRefresh();
+      return;
+    }
+    wx.showLoading({ title: '努力加载中...' });
+    $common.request(
+      'POST',
+      $common.config.GetMyLearnNeedInfo,
+      {
+        nedId: this.data.nedId
+      },
+      (res) => {
+        if (res.data.res) {
+          let data = res.data.lnd;
+          let areaList = this.data.areaList,
+            areaIndex = 0;
+          for (let i = 0, len = areaList.length; i < len; i++) {
+            if (data.NedClaArea == areaList[i].id) {
+              areaIndex = i;
+              break;
+            }
+          }
+          let pariceList = this.data.pariceList[0],
+            minIndex = 0,
+            maxIndex = 0;
+          for (let i = 0, len = pariceList.length; i < len; i++) {
+            (pariceList[i] == data.NedMinPrice) && (minIndex = i);
+            (pariceList[i] == data.NedMaxPrice) && (maxIndex = i);
+          }
+          this.setData({
+            address: data.NedAddress,
+            course: data.NedCorName,
+            other: data.NedOther,
+            areaIndex: areaIndex,
+            weekIndex: parseInt(data.NedCorAfw) - 1,
+            timeIndex: parseInt(data.NedClaTime) - 1,
+            priceIndex: [minIndex, maxIndex],
+          })
+        } else {
+          switch (res.data.errType) {
+            case 1:
+              $common.showModal('参数不正确');
+              break;
+            case 1:
+              $common.showModal('未知错误');
+              break;
+          }
+        }
+      },
+      (res) => {
+
+      },
+      (res) => {
+        console.log(res);
+        wx.hideLoading();
+        wx.stopPullDownRefresh();
+      }
+    )
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    let status = options.status ? parseInt(options.status) : 1;
+    let nedId = options.nedId ? options.nedId : -1;
+    this.setData({
+      status: status,
+      nedId: nedId
+    })
+    this.init();
+    switch (status) {
+      case 1:
+        wx.setNavigationBarTitle({
+          title: '需求查看'
+        })
+        break;
+      case 2:
+        wx.setNavigationBarTitle({
+          title: '需求修改'
+        })
+        break;
+    }
   },
 
   /**
@@ -111,7 +302,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    wx.stopPullDownRefresh();
+    this.init();
   },
 
   /**

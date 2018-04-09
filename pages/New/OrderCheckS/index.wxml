@@ -43,7 +43,8 @@
   </view>
   <view class='flex fon-24 border-t-1 border-b-1 padding-lr-30  aitems-center bg-fff between'>
     <view class='fon-26 color-block'>实付款：¥{{item.PayPrice}}</view>
-    <button wx:if='{{item.FgtType==1&&item.FgtStatus==1}}' open-type='share' class='btn-box border AnNiu white purple-bg'>
+    <!--wx:if='{{item.FgtType==1&&item.FgtStatus==1}}'  -->
+    <button data-index='{{index}}' open-type='share' class='btn-box border AnNiu white purple-bg'>
       邀请好友
     </button>
     <view wx:if='{{item.FgtStatus==2}}' bindtap='SOrderDetail' data-index='{{index}}' class='border AnNiu white purple-bg'>查看详情</view>

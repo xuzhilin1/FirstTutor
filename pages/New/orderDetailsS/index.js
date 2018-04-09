@@ -7,6 +7,8 @@ Page({
     mem: {}, //团成员信息
     teacher: {}, //外教信息
     showMem: {}, //当前页面显示成员信息
+    teaAddress: '', //外教地址
+    teaPhone: '', //外教联系方式
   },
   init() {
     wx.showLoading({ title: '努力加载中...' });
@@ -69,7 +71,6 @@ Page({
         wx.stopPullDownRefresh();
       }
     )
-
   },
   deleteOrder() { //删除订单
     $common.request(
@@ -127,15 +128,46 @@ Page({
     f < 10 && (f = '0' + f);
     return `${y}-${m}-${d} ${h}:${f}`;
   },
+  getTeacherPhone() {  //获取外教联系方式
+    $common.request(
+      'POST',
+      $common.config.GetTeaAddressPhone,
+      {
+        cogId: this.data.cogId
+      },
+      (res) => {
+        if (res.data.res) {
+          this.setData({
+            teaAddress: res.data.teaAddress,
+            teaPhone: res.data.teaPhone
+          })
+        } else {
+          switch (res.data.errType) {
+            case 1:
+              //参数错误
+              break;
+            case 2:
+              //未知错误
+              break;
+          }
+        }
+      },
+      (res) => {
+
+      },
+      (res) => {
+      }
+    )
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options);
     this.setData({
       cogId: options.cogId
     })
     this.init();
+    this.getTeacherPhone();
   },
 
   /**

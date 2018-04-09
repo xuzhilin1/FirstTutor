@@ -20,7 +20,7 @@
         <view class='fon-24 XianZhi1'>{{atyInfo.startTime}} 至 {{atyInfo.endTime}}</view>
       </view>
     </view>
-    <view class='flex border-b-1 bg-fff DIZHi aitems-center  between '>
+    <view bindtap='openLoc' class='flex border-b-1 bg-fff DIZHi aitems-center  between '>
       <view class='flex aitems-center '>
         <image mode='widthFix' class='imgs-s' src='../../images/add_06.png'></image>
         <view class='fon-24 baomi c8'>活动地址</view>

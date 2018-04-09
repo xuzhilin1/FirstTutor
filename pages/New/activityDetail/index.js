@@ -7,15 +7,24 @@ Page({
     isSign: 0, // 1 立即报名活动 0 我的活动查看
     srcActivity: $common.srcActivity,
     srcActivityVideo: $common.srcActivityVideo,
-    latitude: 31.22114,
-    longitude: 121.54409,
     atyId: -1, //活动id
     atyInfo: {}, //页面信息
     atyImgs: [], //轮播图
     alreadySignUp: 0, //是否已经报名 0 否，大于0 是
   },
-  openLocation() { //查看地址所在位置
-    $common.openLocation(this.data.latitude, this.data.longitude);
+  openLoc() { //查看地址所在位置
+    let address = this.data.atyInfo.AtyAddress;
+    $common.getAddress(address, (res) => {
+      let data = res.result.location,
+        w = data.lat,
+        j = data.lng;
+      console.log(data);
+      wx.openLocation({
+        latitude: w,
+        longitude: j,
+        name: address
+      })
+    });
   },
   activitySign() {
     let alreadySignUp = this.data.alreadySignUp;

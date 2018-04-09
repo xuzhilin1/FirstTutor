@@ -14,7 +14,7 @@
       <picker class=' flex' value="{{areaIndex}}" range="{{areaList}}" range-key='area' bindchange="bindAreaChange">
         <view class='flex picker aitems-center '>
           <view class="fon-26 flex aitems-center yanse ">
-            <view class='c72'>{{areaIndex===-1?"区域":areaList[areaIndex].area}}</view>
+            <view class='c72'>{{areaIndex===-1?"所有区域":areaList[areaIndex].area}}</view>
             <image mode='widthFix' class='xia margin-l-10' src='../../images/xia_07.jpg'></image>
           </view>
         </view>
@@ -27,7 +27,7 @@
       <picker class=' flex' range-key='TaName' value="{{tradIndex}}" range="{{tradList}}" bindchange="bindCourseType">
         <view class='flex picker aitems-center '>
           <view class="fon-26 flex aitems-center yanse ">
-            <view class='c72'>{{tradIndex===-1?"商圈":tradList[tradIndex].TaName}}</view>
+            <view class='c72'>{{tradIndex===-1?"所有商圈":tradList[tradIndex].TaName}}</view>
             <image mode='widthFix' class='xia margin-l-10' src='../../images/xia_07.jpg'></image>
           </view>
         </view>
@@ -40,7 +40,7 @@
       <picker class=' flex' value="{{timeIndex}}" range="{{timeList}}" bindchange="bindTimeChange">
         <view class='flex picker aitems-center '>
           <view class="fon-26 flex aitems-center yanse ">
-            <view class='c72'>{{timeIndex===-1?"时间段":timeList[timeIndex]}}</view>
+            <view class='c72'>{{timeIndex===-1?"所有时间段":timeList[timeIndex]}}</view>
             <image mode='widthFix' class='xia margin-l-10' src='../../images/xia_07.jpg'></image>
           </view>
         </view>
@@ -53,7 +53,7 @@
       <picker mode='multiSelector' class=' flex' value="{{priceIndex}}" range="{{priceList}}" bindchange="bindPriceChange">
         <view class='flex picker aitems-center '>
           <view class="fon-26 flex aitems-center yanse ">
-            <view class='c72'>{{priceIndex[0]===-1?"价格区间":priceList[0][priceIndex[0]] + '-' + priceList[1][priceIndex[1]]}}</view>
+            <view class='c72'>{{priceIndex[0]===-1?"所有价格":priceList[0][priceIndex[0]] + '-' + priceList[1][priceIndex[1]]}}</view>
             <image mode='widthFix' class='xia margin-l-10' src='../../images/xia_07.jpg'></image>
           </view>
         </view>

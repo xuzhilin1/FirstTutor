@@ -1,23 +1,26 @@
 <view class='wrapper'>
-  <view wx:for='{{pagesData}}' wx:key='{{index}}' class='margin-t-20'>
+  <view wx:for='{{LnList}}' wx:key='{{index}}' class='margin-t-20'>
     <view class=' middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
       <view class='flex fon-36  c2b '>
         <view>
-          {{item.name}}
-          <view class='c8  fon-24 margin-t-20'>{{item.address}} | {{item.week}} | {{item.time}}</view>
+          {{item.NedCorName}}
+          <view class='c8  fon-24 margin-t-20'>{{item.area}} | {{item.NedCorAfw}} | {{item.timeStage}}</view>
         </view>
       </view>
-      <view class='purplea purple fon-32 bold'>¥{{item.minPrice}} - ¥{{item.maxPrice}}</view>
+      <view class='purplea purple fon-32 bold'>¥{{item.NedMinPrice}} - ¥{{item.NedMaxPrice}}</view>
     </view>
     <view class='flex fon-24 border-t-1 border-b-1 padding-lr-30  aitems-center bg-fff between'>
       <view class='fon-26 c8'>
-        <text class='text-type'>{{item.type?"已审核":"待审核"}}</text> {{item.browse}}人浏览
+        <text class='text-type'>{{item.NedCanView==1?"已审核":"待审核"}}</text> {{item.BrowingTimes}}人浏览
       </view>
       <view class='list-footer'>
         <view bindtap='bindDelete' data-index='{{index}}' class='border purple AnNiu'>删除</view>
         <view bindtap='seeDetail' data-index='{{index}}' class='border AnNiu white purple-bg'>修改需求</view>
       </view>
     </view>
+  </view>
+  <view wx:if='{{LnList.length<=0}}' class='noData'>
+    暂无数据
   </view>
   <view bindtap='seeDetailS' class='footer'>
     发布需求

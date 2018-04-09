@@ -7,8 +7,9 @@
   <view class='flex between padding-lr-30 aitems-center'>
     <view class='flex aitems-center fon-24 c8'>
       <image class='address' mode='widthFix' src='../../images/newaddress_07.png'></image>
-      {{item.AtyAddress}} {{item.showTime}}
+      上海
+      <!-- {{item.AtyAddress}} -->{{item.showTime.time}}
     </view>
-    <view bindtap='ChaKan' class='detail fon-24 '>立即报名</view>
+    <view wx:if='{{item.showTime.isEnd}}' bindtap='ChaKan' class='detail fon-24 '>立即报名</view>
   </view>
 </view>

@@ -171,7 +171,17 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function (res) {
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+      let index = res.target.dataset.index;
+      let infoList = this.data.infoList;
+      return {
+        title: 'FirstTutor',
+        path: '/pages/Home/SpellGroup/index?cogId=' + infoList[index].FgtId
+      }
+    }
     return {
       title: 'FirstTutor',
       path: '/pages/Home/Home/index'

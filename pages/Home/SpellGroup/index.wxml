@@ -53,14 +53,14 @@
     </view>
   </view>
 </view>
-<!-- core -->
-<view wx:if='{{cog.FgtStatus==1}}' class='padding-lr-30 padding-tb-20 bg-fff core'>
+<!-- 开团中-->
+<view wx:if='{{cog.FgtStatu!=3&&cog.FgtStatus==1?true:isOpen===0?false:true}}' class='padding-lr-30 padding-tb-20 bg-fff core'>
   <view class='Kuang'>
-    <view wx:if='{{cog.FgtStatus > cog.FgtAttCount}}' class='bold fon-30  t-center'>还差
-      <text class='fon-48 bold purple'> {{cog.FgtStatus - cog.FgtAttCount}}</text> 人，快喊小伙伴一起拼团吧
+    <view wx:if='{{cog.FgtStatus==1}}' class='bold fon-30  t-center'>还差
+      <text class='fon-48 bold purple'> {{cog.FgtMemNum - cog.FgtAttCount}}</text> 人，快喊小伙伴一起拼团吧
     </view>
-    <view wx:if='{{cog.FgtStatus > cog.FgtAttCount}}' class='fon-24 t-center margin-t-50 c40'>剩余 {{countDown}} 结束</view>
-    <view wx:if='{{cog.FgtStatus == cog.FgtAttCount}}' class='bold fon-30  t-center'>已有2人参加，
+    <view wx:if='{{cog.FgtStatus==1}}' class='fon-24 t-center margin-t-50 c40'>剩余 {{countDown}} 结束</view>
+    <view wx:if='{{cog.FgtStatus==2}}' class='bold fon-30  t-center'>已有{{cog.FgtMemNum}}人参加，
       <text class='fon-30 bold purple'>拼团成功</text>
     </view>
     <view class='flex margin-t-50  center aitems-center'>
@@ -74,20 +74,20 @@
       </view>
     </view>
   </view>
-  <button wx:if='{{groupType==1 && cog.FgtStatus > cog.FgtAttCount}}' open-type='share' class='btn white margin-t-20 purple-bg fon-32'>分享给好友来拼团</button>
-  <button wx:if='{{groupType==1 && cog.FgtStatus > cog.FgtAttCount}}' bindtap='goHome' class='btn bg-fff margin-t-20 margin-b-20 border purple fon-32'>返回首页</button>
-  <button wx:if='{{groupType==2 && cog.FgtStatus > cog.FgtAttCount}}' bindtap='meToC' class='btn white margin-t-20 purple-bg fon-32'>我要参团</button>
-  <button wx:if='{{groupType==2 && cog.FgtStatus > cog.FgtAttCount}}' open-type='share' class='btn bg-fff margin-t-20 margin-b-20 border purple fon-32'>分享给好友来拼团</button>
-  <button bindtap='meTo' wx:if='{{cog.FgtStatus == cog.FgtAttCount}}' class='btn white margin-t-20 purple-bg fon-32'>我也来开这个团</button>
+  <button wx:if='{{isOpen===0&&cog.FgtStatus==1}}' open-type='share' class='btn white margin-t-20 purple-bg fon-32'>分享给好友来拼团</button>
+  <button wx:if='{{isOpen===0&&cog.FgtStatus==1}}' bindtap='goHome' class='btn bg-fff margin-t-20 margin-b-20 border purple fon-32'>返回首页</button>
+  <button wx:if='{{isOpen===1&&cog.FgtStatus==1}}' bindtap='meToC' class='btn white margin-t-20 purple-bg fon-32'>我要参团</button>
+  <button wx:if='{{isOpen===1&&cog.FgtStatus==1}}' open-type='share' class='btn bg-fff margin-t-20 margin-b-20 border purple fon-32'>分享给好友来拼团</button>
+  <button bindtap='meTo' wx:if='{{isOpen===1&&cog.FgtStatus==2}}' class='btn white margin-t-20 purple-bg fon-32'>我也来开这个团</button>
 </view>
 <!-- 拼团失败 -->
-<view wx:if='{{cog.FgtStatus==3}}' class='bg-fff border-t-1 border-b-1 padding-lr-30 padding-tb-20 margin-t-20'>
+<view wx:if='{{isOpen===0&&cog.FgtStatus==3}}' class='bg-fff border-t-1 border-b-1 padding-lr-30 padding-tb-20 margin-t-20'>
   <view class='group-fail-title c2b padding-tb-20'>很遗憾，拼团失败!</view>
   <view class='group-fail-context c8'>建议减少拼团人数或参与别人的拼团再次尝试!</view>
   <button bindtap='goHome' class='btn white purple-bg fon-32'>去首页逛逛</button>
 </view>
 <!--  拼团成功  -->
-<block wx:if='{{cog.FgtStatus==2}}'>
+<block wx:if='{{isOpen===0&&cog.FgtStatus==2}}'>
   <view class='groupSuccess bg-fff border-t-1 border-b-1 margin-t-20'>
     <view class='group-success-title c2b'>
       <image src='../../images/duia_03.jpg'></image>
@@ -120,10 +120,10 @@
 <view class='border-b-1 margin-b-20'>
   <view class='padding-50  padding-tb-20 bg-fff flex aitems-center fon-26 '>
     <image mode='widthFix' class='address' src='../../images/adddress_14.png'></image>
-    {{cog.FgtStudyAddress}}
+    {{teaAddress}}
   </view>
   <view class='padding-50  padding-tb-20 bg-fff flex aitems-center fon-26 '>
     <image mode='widthFix' class='address' src='../../images/phone_06.png'></image>
-    {{teacher.TeaPhone}}
+    {{teaPhone}}
   </view>
 </view>

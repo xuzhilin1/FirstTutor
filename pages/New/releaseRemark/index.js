@@ -26,11 +26,54 @@ Page({
       $common.showModal('请填写外教介绍');
       return;
     }
-    // 发送请求
+    $common.request(
+      'POST',
+      $common.config.GiveTeaAMark,
+      {
+        rew: {
+          RewTeaId: this.data.RewTeaId,
+          RewStuId: this.data.RewStuId,
+          RewComment: input,
+          RewScore: scoure
+        }
+      },
+      (res) => {
+        if (res.data.res) {
+          wx.showToast({
+            title: '提交成功',
+            icon: 'success',
+          })
+          setTimeout(() => {
+            wx.navigateBack({
+              delta: 1
+            })
+          }, 1500);
+        } else {
+          switch (res.data.errType) {
+            case 1:
+              $common.showModal('参数错误');
+              break;
+            case 2:
+              $common.showModal('提交失败');
+              break;
+          }
+        }
+      },
+      (res) => {
+
+      },
+      (res) => {
+      }
+    )
   },
 
   onLoad: function (options) {
-
+    let RewTeaId = options.RewTeaId ? options.RewTeaId : -1,
+      RewStuId = options.RewStuId ? options.RewStuId : -1;
+    this.setData({
+      RewStuId: RewStuId,
+      RewTeaId: RewTeaId
+    })
   },
 
   /**
@@ -44,7 +87,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.init();
+
   },
 
   /**
