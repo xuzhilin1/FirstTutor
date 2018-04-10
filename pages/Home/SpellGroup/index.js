@@ -2,8 +2,8 @@
 const $common = require('../../../utils/common.js');
 Page({
   data: {
-    isOpen: 0, // 0 从内部条连接进入， 1 外部分享链接进入
-    groupType: 1, //团类型：1. 开团  2. 参团
+    isShowPage: false, //整个页面是否显示
+    isJoin: false, //true 本人有购买此课程
     countDown: "00:00:00",
     leftTime: '0', //倒计时时间戳
     cogId: -1, //团id
@@ -45,6 +45,11 @@ Page({
     })
   },
   getPageInfo() { //获取页面信息
+    let openid = wx.getStorageSync('openid');
+    if (!openid) {
+      $common.getOpenid(null, this.getPageInfo);
+      return;
+    }
     wx.showLoading({ title: '努力加载中...' });
     $common.request(
       'POST',
@@ -69,13 +74,12 @@ Page({
           let cog = res.data.cog,
             leftTime = cog.RemainingTime;
           let mem = res.data.mem;
-          let groupType = 2;
+          let openid = wx.getStorageSync('openid');
+          let isJoin = false;
           for (let i = 0, len = mem.length; i < len; i++) {
-            if (mem[i].ViewOrder) { //ViewOrder为true 表示是本人
-              if (mem[i].OdrIsHead) { //OdrIsHead 为true 表示团长
-                groupType = 1;
-                break;
-              }
+            if (mem[i].OdrOpenId == openid) {
+              isJoin = true; //有参加过此团
+              break;
             }
           }
           this.setData({
@@ -84,9 +88,12 @@ Page({
             cog: cog,
             mem: mem,
             leftTime: leftTime,
-            groupType: groupType
+            isJoin: isJoin,
+            isShowPage: true
           });
-          this.countDown();
+          if (cog.FgtStatus == 1) {
+            this.countDown();
+          }
         } else {
           switch (res.errType) {
             case 1:
@@ -158,11 +165,9 @@ Page({
    */
   onLoad: function (options) {
     console.log(options);
-    let isOpen = options.isOpen ? 1 : 0; // 0 从内部条连接进入， 1 外部分享链接进入
     let cogId = parseInt(options.cogId);
     this.setData({
       cogId: cogId, //65测试
-      isOpen: isOpen
     })
     this.init();
   },
@@ -215,7 +220,7 @@ Page({
   onShareAppMessage: function () {
     return {
       title: 'FirstTutor',
-      path: '/pages/Home/SpellGroup/index?cogId=' + this.data.cogId + '&isOpen=true'
+      path: '/pages/Home/SpellGroup/index?cogId=' + this.data.cogId
     }
   }
 })

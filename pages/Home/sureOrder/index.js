@@ -200,7 +200,7 @@ Page({
                */
               let pagePath = ''; //用户收到的模板消息链接
               if (orderType == 1) {//订单类型类型：1. 团购  2. 单独购
-                pagePath = '/pages/Home/SpellGroup/index?cogId=' + cogId + '&isOpen=true';
+                pagePath = '/pages/Home/SpellGroup/index?cogId=' + cogId;
               } else if (orderType == 2) {
                 pagePath = '/pages/New/orderDetails/index?cogId=' + cogId;
               }
@@ -358,9 +358,9 @@ Page({
             })
           }
           let course = res.data.course;
-          course.CorPrice = course.CorPrice.toFixed(2);
+          course.CorPrice = course.CorPrice.toFixed(2) < 0.01 ? 0.01 : course.CorPrice.toFixed(2);
           this.setData({
-            PayPrice: res.data.PayPrice.toFixed(2),
+            PayPrice: res.data.PayPrice.toFixed(2) < 0.01 ? 0.01 : res.data.PayPrice.toFixed(2),
             course: course,
             teacher: res.data.teacher
           });

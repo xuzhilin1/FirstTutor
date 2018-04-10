@@ -1,129 +1,177 @@
 <!--pages/Home/SpellGroup/index.wxml-->
-<view class=''>
-  <view class=' middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
-    <view class='flex fon-36  c2b '>
-      <image class='QiHao' mode='widthFix' src='../../images/tuan_06.png'></image>
-      <view>
-        {{course.CorTitle}}
-        <view class='bold bg-fff margin-t-10 purple'>¥{{course.CorPrice}}</view>
+<block wx:if='{{isShowPage}}'>
+  <view class=''>
+    <view class=' middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
+      <view class='flex fon-36  c2b '>
+        <image class='QiHao' mode='widthFix' src='../../images/tuan_06.png'></image>
+        <view>
+          {{course.CorTitle}}
+          <view class='bold bg-fff margin-t-10 purple'>¥{{course.CorPrice}}</view>
+        </view>
+      </view>
+      <view class='fon-24 view-right'>
+        <view class='c8'>已有{{course.BuyCount}}人参与</view>
+        <view class='purplea purple margin-t-10'>{{course.CorType}}人团</view>
       </view>
     </view>
-    <view class='fon-24 view-right'>
-      <view class='c8'>已有{{course.BuyCount}}人参与</view>
-      <view class='purplea purple margin-t-10'>{{course.CorType}}人团</view>
-    </view>
   </view>
-</view>
-<view class='flex aitems-center height-85  padding-lr-30 bg-fff border-t-1 fon-30 c2b '>
-  课程时长
-  <view class='c2b margin-l-20'>{{course.courseTimeLong}}小时</view>
-</view>
-<view class='flex aitems-center height-85  padding-lr-30 bg-fff border-t-1 fon-30 c2b '>
-  上课时间
-  <view class='c2b margin-l-20'>{{cog.StartTime}}</view>
-</view>
-<!-- teacher info -->
-<view class='list border-t-1 border-b-1'>
-  <view class='flex aitems-center padding-lr-30 padding-tb-20 bg-fff teacher-box'>
-    <view class='teacher-l'>
-      <image class='touXiang margin-r-20 touxiang-image' src='{{teacher.TeaAvaUrl}}'></image>
-      <view class='flex1'>
-        <view class='fon-26 margin-b-10 flex aitems-center '>
-          {{teacher.TeaNickName}}
-          <image wx:if='{{teacher.TeaAddV==1}}' class='HuangGuan margin-l-10' mode='widthFix' src='../../images/guan_03.png'></image>
-          <!--  星星  -->
-          <view class='score'>
-            <view class='score-all'>
-              <image wx:for="{{5}}" wx:key='{{index}}' class='score-list' mode='widthFix' src='../../images/hui_07.png'></image>
-            </view>
-            <view class='score-score'>
-              <view class='score-list' wx:for="{{5}}" wx:for-item='value' wx:for-index='key' wx:key='{{index}}'>
-                <!--  整星  -->
-                <image wx:if="{{teacher.RewScore - 0.5 > key ? key <= teacher.RewScore : key < teacher.RewScore - 1}}" class='score-img' src='../../images/xian_05.png'></image>
-                <!--  半星  -->
-                <image wx:if="{{teacher.RewScore - 0.5 > key ? false : key < teacher.RewScore }}" class='score-image' src='../../images/BanXIn_03.png'></image>
+  <view class='flex aitems-center height-85  padding-lr-30 bg-fff border-t-1 fon-30 c2b '>
+    课程时长
+    <view class='c2b margin-l-20'>{{course.courseTimeLong}}小时</view>
+  </view>
+  <view class='flex aitems-center height-85  padding-lr-30 bg-fff border-t-1 fon-30 c2b '>
+    上课时间
+    <view class='c2b margin-l-20'>{{cog.StartTime}}</view>
+  </view>
+  <!-- teacher info -->
+  <view class='list border-t-1 border-b-1'>
+    <view class='flex aitems-center padding-lr-30 padding-tb-20 bg-fff teacher-box'>
+      <view class='teacher-l'>
+        <image class='touXiang margin-r-20 touxiang-image' src='{{teacher.TeaAvaUrl}}'></image>
+        <view class='flex1'>
+          <view class='fon-26 margin-b-10 flex aitems-center '>
+            {{teacher.TeaNickName}}
+            <image wx:if='{{teacher.TeaAddV==1}}' class='HuangGuan margin-l-10' mode='widthFix' src='../../images/guan_03.png'></image>
+            <!--  星星  -->
+            <view class='score'>
+              <view class='score-all'>
+                <image wx:for="{{5}}" wx:key='{{index}}' class='score-list' mode='widthFix' src='../../images/hui_07.png'></image>
+              </view>
+              <view class='score-score'>
+                <view class='score-list' wx:for="{{5}}" wx:for-item='value' wx:for-index='key' wx:key='{{index}}'>
+                  <!--  整星  -->
+                  <image wx:if="{{teacher.RewScore - 0.5 > key ? key <= teacher.RewScore : key < teacher.RewScore - 1}}" class='score-img' src='../../images/xian_05.png'></image>
+                  <!--  半星  -->
+                  <image wx:if="{{teacher.RewScore - 0.5 > key ? false : key < teacher.RewScore }}" class='score-image' src='../../images/BanXIn_03.png'></image>
+                </view>
               </view>
             </view>
           </view>
-        </view>
-        <view class='fon-24 c8'>
-          {{teacher.TeaAbstract}}
+          <view class='fon-24 c8'>
+            {{teacher.TeaAbstract}}
+          </view>
         </view>
       </view>
     </view>
   </view>
-</view>
-<!-- 开团中-->
-<view wx:if='{{cog.FgtStatu!=3&&cog.FgtStatus==1?true:isOpen===0?false:true}}' class='padding-lr-30 padding-tb-20 bg-fff core'>
-  <view class='Kuang'>
-    <view wx:if='{{cog.FgtStatus==1}}' class='bold fon-30  t-center'>还差
-      <text class='fon-48 bold purple'> {{cog.FgtMemNum - cog.FgtAttCount}}</text> 人，快喊小伙伴一起拼团吧
-    </view>
-    <view wx:if='{{cog.FgtStatus==1}}' class='fon-24 t-center margin-t-50 c40'>剩余 {{countDown}} 结束</view>
-    <view wx:if='{{cog.FgtStatus==2}}' class='bold fon-30  t-center'>已有{{cog.FgtMemNum}}人参加，
-      <text class='fon-30 bold purple'>拼团成功</text>
-    </view>
-    <view class='flex margin-t-50  center aitems-center'>
-      <view class='text1'></view>
-      <view class='waiceng' wx:for='{{mem}}' wx:key='{{index}}'>
-        <image class='Soa' src='{{item.UserAvaUrl}}'></image>
-        <view wx:if='{{index==0}}' class='white fon-18 tuanZhang purple-bg'>团长</view>
+  <!--  购买过课程-拼团中 ----   START -->
+  <view wx:if='{{cog.FgtStatus==1&&isJoin}}' class='padding-lr-30 padding-tb-20 bg-fff core'>
+    <view class='Kuang'>
+      <view class='bold fon-30  t-center'>还差
+        <text class='fon-48 bold purple'> {{cog.FgtMemNum - cog.FgtAttCount}}</text> 人，快喊小伙伴一起拼团吧
       </view>
-      <view class='waiceng' wx:if='{{cog.FgtMemNum > cog.FgtAttCount}}'>
-        <view class='wen'>？</view>
+      <view class='fon-24 t-center margin-t-50 c40'>剩余 {{countDown}} 结束</view>
+      <view class='flex margin-t-50  center aitems-center'>
+        <view class='text1'></view>
+        <view class='waiceng' wx:for='{{mem}}' wx:key='{{index}}'>
+          <image class='Soa' src='{{item.UserAvaUrl}}'></image>
+          <view wx:if='{{index==0}}' class='white fon-18 tuanZhang purple-bg'>团长</view>
+        </view>
+        <view class='waiceng' wx:if='{{cog.FgtMemNum - cog.FgtAttCount == 1}}'>
+          <view class='wen'>？</view>
+        </view>
+        <view class='waiceng' wx:if='{{cog.FgtMemNum - cog.FgtAttCount == 2}}'>
+          <view class='wen'>？</view>
+        </view>
       </view>
     </view>
+    <button open-type='share' class='btn white margin-t-20 purple-bg fon-32'>分享给好友来拼团</button>
+    <button bindtap='goHome' class='btn bg-fff margin-t-20 margin-b-20 border purple fon-32'>返回首页</button>
   </view>
-  <button wx:if='{{isOpen===0&&cog.FgtStatus==1}}' open-type='share' class='btn white margin-t-20 purple-bg fon-32'>分享给好友来拼团</button>
-  <button wx:if='{{isOpen===0&&cog.FgtStatus==1}}' bindtap='goHome' class='btn bg-fff margin-t-20 margin-b-20 border purple fon-32'>返回首页</button>
-  <button wx:if='{{isOpen===1&&cog.FgtStatus==1}}' bindtap='meToC' class='btn white margin-t-20 purple-bg fon-32'>我要参团</button>
-  <button wx:if='{{isOpen===1&&cog.FgtStatus==1}}' open-type='share' class='btn bg-fff margin-t-20 margin-b-20 border purple fon-32'>分享给好友来拼团</button>
-  <button bindtap='meTo' wx:if='{{isOpen===1&&cog.FgtStatus==2}}' class='btn white margin-t-20 purple-bg fon-32'>我也来开这个团</button>
-</view>
-<!-- 拼团失败 -->
-<view wx:if='{{isOpen===0&&cog.FgtStatus==3}}' class='bg-fff border-t-1 border-b-1 padding-lr-30 padding-tb-20 margin-t-20'>
-  <view class='group-fail-title c2b padding-tb-20'>很遗憾，拼团失败!</view>
-  <view class='group-fail-context c8'>建议减少拼团人数或参与别人的拼团再次尝试!</view>
-  <button bindtap='goHome' class='btn white purple-bg fon-32'>去首页逛逛</button>
-</view>
-<!--  拼团成功  -->
-<block wx:if='{{isOpen===0&&cog.FgtStatus==2}}'>
-  <view class='groupSuccess bg-fff border-t-1 border-b-1 margin-t-20'>
-    <view class='group-success-title c2b'>
-      <image src='../../images/duia_03.jpg'></image>
-      <text>恭喜您，拼团成功!</text>
+  <!--  购买过课程-拼团中 ----   END -->
+
+  <!--  未购买过课程-拼团中 ----   START -->
+  <view wx:if='{{cog.FgtStatus==1&&!isJoin}}' class='padding-lr-30 padding-tb-20 bg-fff core'>
+    <view class='Kuang'>
+      <view class='bold fon-30  t-center'>还差
+        <text class='fon-48 bold purple'> {{cog.FgtMemNum - cog.FgtAttCount}}</text> 人，快喊小伙伴一起拼团吧
+      </view>
+      <view class='fon-24 t-center margin-t-50 c40'>剩余 {{countDown}} 结束</view>
+      <view class='flex margin-t-50  center aitems-center'>
+        <view class='text1'></view>
+        <view class='waiceng' wx:for='{{mem}}' wx:key='{{index}}'>
+          <image class='Soa' src='{{item.UserAvaUrl}}'></image>
+          <view wx:if='{{index==0}}' class='white fon-18 tuanZhang purple-bg'>团长</view>
+        </view>
+                <view class='waiceng' wx:if='{{cog.FgtMemNum - cog.FgtAttCount == 1}}'>
+          <view class='wen'>？</view>
+        </view>
+        <view class='waiceng' wx:if='{{cog.FgtMemNum - cog.FgtAttCount == 2}}'>
+          <view class='wen'>？</view>
+        </view>
+      </view>
     </view>
+    <button bindtap='meToC' class='btn white margin-t-20 purple-bg fon-32'>我要参团</button>
+    <button open-type='share' class='btn bg-fff margin-t-20 margin-b-20 border purple fon-32'>分享给好友来拼团</button>
+  </view>
+  <!--  未购买过课程-拼团中 ----   END -->
+
+  <!--  未购买过课程-拼团成功 ----   START -->
+  <view wx:if='{{cog.FgtStatus==2&&!isJoin}}' class='padding-lr-30 padding-tb-20 bg-fff core'>
+    <view class='Kuang'>
+      <view class='bold fon-30  t-center'>已有{{cog.FgtMemNum}}人参加，
+        <text class='fon-30 bold purple'>拼团成功</text>
+      </view>
+      <view class='flex margin-t-50  center aitems-center'>
+        <view class='text1'></view>
+        <view class='waiceng' wx:for='{{mem}}' wx:key='{{index}}'>
+          <image class='Soa' src='{{item.UserAvaUrl}}'></image>
+          <view wx:if='{{index==0}}' class='white fon-18 tuanZhang purple-bg'>团长</view>
+        </view>
+      </view>
+    </view>
+    <button bindtap='meTo' class='btn white margin-t-20 purple-bg fon-32'>我也来开这个团</button>
+  </view>
+  <!--  未购买过课程-拼团成功 ----   END -->
+
+  <!-- 拼团失败 ----   START  -->
+  <view wx:if='{{cog.FgtStatus==3}}' class='bg-fff border-t-1 border-b-1 padding-lr-30 padding-tb-20 margin-t-20'>
+    <view class='group-fail-title c2b padding-tb-20'>很遗憾，拼团失败!</view>
+    <view class='group-fail-context c8'>建议减少拼团人数或参与别人的拼团再次尝试!</view>
     <button bindtap='goHome' class='btn white purple-bg fon-32'>去首页逛逛</button>
   </view>
-  <!--  拼团详情  -->
-  <view class='border-b-1'>
-    <view class='padding-tb-20 border-b-1 padding-lr-30 bg-fff'>
-      <view class='fon-30 padding-l-20 border-l-2 c2b'>拼团详情</view>
+  <!-- 拼团失败 ----   END  -->
+
+  <!--  购买过课程-拼团成功 ----   START -->
+  <block wx:if='{{cog.FgtStatus==2&&isJoin}}'>
+    <view class='groupSuccess bg-fff border-t-1 border-b-1 margin-t-20'>
+      <view class='group-success-title c2b'>
+        <image src='../../images/duia_03.jpg'></image>
+        <text>恭喜您，拼团成功!</text>
+      </view>
+      <button bindtap='goHome' class='btn white purple-bg fon-32'>去首页逛逛</button>
     </view>
-    <view wx:for='{{mem}}' wx:key='{{index}}' class='flex fon-30 c2b bg-fff   padding-25 aitems-center between border-b-1'>
-      <view class='flex aitems-center'>
-        <image class='orderimg image-radius' src='{{item.UserAvaUrl}}'></image>
-        {{item.OdrName}}
-        <view wx:if='{{index===0}}' class='Tuan border fon-24 purple'>团长</view>
+    <!--  拼团详情  -->
+    <view class='border-b-1'>
+      <view class='padding-tb-20 border-b-1 padding-lr-30 bg-fff'>
+        <view class='fon-30 padding-l-20 border-l-2 c2b'>拼团详情</view>
       </view>
-      <view class='flex aitens-center'>
-        <image class='phone' mode='widthFix' src='../../images/phone_06.png'></image>
-        {{item.OdrPhone}}
+      <view wx:for='{{mem}}' wx:key='{{index}}' class='flex fon-30 c2b bg-fff   padding-25 aitems-center between border-b-1'>
+        <view class='flex aitems-center'>
+          <image class='orderimg image-radius' src='{{item.UserAvaUrl}}'></image>
+          {{item.OdrName}}
+          <view wx:if='{{index===0}}' class='Tuan border fon-24 purple'>团长</view>
+        </view>
+        <view class='flex aitens-center'>
+          <image class='phone' mode='widthFix' src='../../images/phone_06.png'></image>
+          {{item.OdrPhone}}
+        </view>
       </view>
+    </view>
+  </block>
+  <!--  购买过课程-拼团成功 ----   END -->
+
+  <view class='padding-tb-20 margin-t-20 bg-fff border-t-1 padding-lr-30'>
+    <view class='fon-30 padding-l-20 border-l-2 c2b'>上课地址及外教联系方式</view>
+  </view>
+  <view class='border-b-1 margin-b-20'>
+    <view class='padding-50  padding-tb-20 bg-fff flex aitems-center fon-26 '>
+      <image mode='widthFix' class='address' src='../../images/adddress_14.png'></image>
+      {{teaAddress}}
+    </view>
+    <view class='padding-50  padding-tb-20 bg-fff flex aitems-center fon-26 '>
+      <image mode='widthFix' class='address' src='../../images/phone_06.png'></image>
+      {{teaPhone}}
     </view>
   </view>
 </block>
-
-<view class='padding-tb-20 margin-t-20 bg-fff border-t-1 padding-lr-30'>
-  <view class='fon-30 padding-l-20 border-l-2 c2b'>上课地址及外教联系方式</view>
-</view>
-<view class='border-b-1 margin-b-20'>
-  <view class='padding-50  padding-tb-20 bg-fff flex aitems-center fon-26 '>
-    <image mode='widthFix' class='address' src='../../images/adddress_14.png'></image>
-    {{teaAddress}}
-  </view>
-  <view class='padding-50  padding-tb-20 bg-fff flex aitems-center fon-26 '>
-    <image mode='widthFix' class='address' src='../../images/phone_06.png'></image>
-    {{teaPhone}}
-  </view>
-</view>

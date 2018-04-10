@@ -198,9 +198,9 @@ Page({
               course.courseTimeLong = 2; //2小时
               break;
           }
-          course.CorBuyPrice = course.CorBuyPrice.toFixed(2);//保留两位小数
-          course.CorPrice = course.CorPrice.toFixed(2);
-          course.CorGroupPrice = course.CorGroupPrice.toFixed(2);
+          course.CorBuyPrice = course.CorBuyPrice.toFixed(2) < 0.01 ? 0.01 : course.CorBuyPrice.toFixed(2);//保留两位小数
+          course.CorPrice = course.CorPrice.toFixed(2) < 0.01 ? 0.01 : course.CorPrice.toFixed(2);
+          course.CorGroupPrice = course.CorGroupPrice.toFixed(2) < 0.01 ? 0.01 : course.CorGroupPrice.toFixed(2);
           this.setData({
             course: course,
             tea: res.data.tea,
