@@ -1,5 +1,5 @@
 <!--pages/New/basic/basic.wxml-->
-<view wx:for="{{pagesList}}" wx:key='{{index}}' bindtap='jump' data-index='{{index}}' data-url='{{item.url}}' class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
+<view wx:for="{{pagesList}}" wx:key='{{index}}' bindtap='jump' data-index='{{index}}' data-url='{{item.url}}' class='flex height-85 padding-lr-30 aitems-center border-b-1 between list-box'>
   <view class='flex1 aitems-center  fon-30 flex '>
     <view class='width-135'>{{item.ZiLiao}}</view>
     <view class='ca zxx_text_overflow'>{{item.Types}}</view>

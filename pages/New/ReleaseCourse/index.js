@@ -81,7 +81,7 @@ Page({
       $common.showModal('请填写课程价格');
       return;
     }
-    if (isNaN(courseAllPrice) && Number(courseAllPrice) < 0) {
+    if (isNaN(courseAllPrice) && Number(courseAllPrice).toFixed(2) < 0) {
       $common.showModal('请填写有效的价格');
       return;
     }
@@ -97,7 +97,7 @@ Page({
       this.releaseCourse(
         courseTypeIndex + 1,
         courseName,
-        courseAllPrice,
+        Number(courseAllPrice).toFixed(2),
         courseDurationIndex + 1,
         courseIntroduce,
         courseTypeIndex + 1,
@@ -107,7 +107,7 @@ Page({
       this.reviseCourse(
         courseTypeIndex + 1,
         courseName,
-        courseAllPrice,
+        Number(courseAllPrice).toFixed(2),
         courseDurationIndex + 1,
         courseIntroduce,
         courseTypeIndex + 1,
@@ -136,13 +136,13 @@ Page({
           wx.showToast({
             title: '修改成功',
             icon: 'success',
-            duration: 2000,
-            success: (res) => {
-              wx.navigateBack({
-                delta: 1
-              })
-            }
+            duration: 1500,
           })
+          setTimeout(() => {
+            wx.navigateBack({
+              delta: 1
+            })
+          }, 1500);
         } else {
           switch (res.data.errType) {
             case 1:
@@ -183,13 +183,13 @@ Page({
           wx.showToast({
             title: '发布成功',
             icon: 'success',
-            duration: 2000,
-            success: (res) => {
-              wx.navigateBack({
-                delta: 1
-              })
-            }
+            duration: 1500,
           })
+          setTimeout(() => {
+            wx.navigateBack({
+              delta: 1
+            })
+          }, 1500);
         } else {
           switch (res.data.errType) {
             case 1:

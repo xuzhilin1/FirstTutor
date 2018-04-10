@@ -1,43 +1,95 @@
-// 外教查看订单详情
+const $common = require('../../../utils/common.js');
 Page({
   data: {
-    isGroup: 0, //1 拼团 0 !拼团,
-    pagesData: {
-      courseName: '口语一对一',
-      buyNum: 5,
-      price: "200",
-      groupNum: 2,
-      buyInfo: [{
-        name: '张忠祥',
-        phone: 13505145873,
-        image: '../../images/ceshi_03.jpg'
-      }, {
-        name: '黄涛',
-        phone: 13505145873,
-        image: '../../images/ceshi_03.jpg'
-      }],
-      address: '上海市浦东新区张衡路666弄2号楼201室',
-      orderCode: 456465434,
-      orderTime: '2017-08-17 12:25:21',
-      orderPayment: '2017-08-17 12:25:21',
-      groupCode: 465746131,
-      groupStartTime: '2017-08-17 12:25:21',
-      groupEndTime: '2017-08-17 12:25:21',
-      courseInterval: '周一/上午',
-      courseTime: 2,
-      courseDate: '9:00-11:00',
-    }
+    cogId: -1,
+    MemList: [],
+    cog: {},
+    course: {}
   },
+  timeStamp(time) { //时间戳转换为日期
+    time = time.replace("/Date(", '').replace(')/', '');
+    let date = new Date(parseInt(time)),
+      y = date.getFullYear(),
+      m = date.getMonth() + 1,
+      d = date.getDate(),
+      h = date.getHours(),
+      f = date.getMinutes();
+    m < 10 && (m = '0' + m);
+    d < 10 && (d = '0' + d);
+    h < 10 && (h = '0' + h);
+    f < 10 && (f = '0' + f);
+    return `${y}-${m}-${d} ${h}:${f}`;
+  },
+  init() {
+    wx.showLoading({ title: '努力加载中...' });
+    $common.request(
+      'POST',
+      $common.config.GetTeaOrderInfoList,
+      {
+        cogId: this.data.cogId
+      },
+      (res) => {
+        if (res.data.res) {
+          let MemList = res.data.MemList,
+            cog = res.data.cog,
+            course = res.data.course;
+          switch (course.CorLenOfCla) {
+            case 1:
+              course.courseTimeLong = 1;
+              break;
+            case 2:
+              course.courseTimeLong = 1.5;
+              break;
+            case 3:
+              course.courseTimeLong = 2;
+              break;
+          }
+          for (let i = 0, len = MemList.length; i < len; i++) {
+            MemList[i].orderCreatTime = this.timeStamp(MemList[i].OdrCreateOn);
+            MemList[i].orderBuyTime = this.timeStamp(MemList[i].OdrBuyDate);
+          }
+          cog.courseStartTime = this.timeStamp(cog.FgtOpenTime);
+          cog.courseEndTime = this.timeStamp(cog.FgtEndTime);
+          this.setData({
+            MemList: MemList,
+            cog: cog,
+            course: course
+          })
+        } else {
+          switch (res.data.errType) {
+            case 1:
+              $common.showModal('参数有误');
+              break;
+            case 2:
+              $common.showModal('获取团信息出错');
+              break;
+            case 3:
+              $common.showModal('获取课程信息失败');
+              break;
+            case 4:
+              $common.showModal('获取团成员订单信息失败');
+              break;
+          }
+        }
+      },
+      (res) => {
 
+      },
+      (res) => {
+        wx.hideLoading();
+        wx.stopPullDownRefresh();
+      }
+    )
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    if (options.isGroup) {
-      this.setData({
-        isGroup: parseInt(options.isGroup)
-      })
-    }
+    let cogId = options.cogId ? options.cogId : -1;
+    this.setData({
+      cogId: cogId
+    })
+    this.init();
   },
 
   /**
@@ -72,7 +124,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    wx.stopPullDownRefresh();
+    this.init();
   },
 
   /**

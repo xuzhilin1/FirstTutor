@@ -80,7 +80,7 @@ Page({
     let index = e.currentTarget.dataset.index,
       courInfos = this.data.courInfos;
     wx.navigateTo({
-      url: '../GroupList/index',
+      url: `../GroupList/index?courId=${courInfos[index].CorId}`,
     })
   },
   orderDetails(e) { //查看课程
@@ -132,7 +132,7 @@ Page({
             courInfos.push(arr[i]);
           }
           let hash = {};
-          let newArr = arr.reduce(function (item, next) {//数组依据CorId去重
+          let newArr = courInfos.reduce(function (item, next) {//数组依据CorId去重
             hash[next.CorId] ? '' : hash[next.CorId] = true && item.push(next);
             return item
           }, []);
@@ -162,17 +162,11 @@ Page({
       }
     )
   },
-  init() {
-    this.setData({
-      courInfos: [],
-    })
-    this.getCourseList();
-  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getCourseList();
   },
 
   /**
@@ -186,7 +180,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.init();
+
   },
 
   /**
@@ -207,7 +201,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    this.init();
+    this.getCourseList();
   },
 
   /**

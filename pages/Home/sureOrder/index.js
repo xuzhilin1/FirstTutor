@@ -199,13 +199,10 @@ Page({
               拼团: 跳转拼团页
                */
               let pagePath = ''; //用户收到的模板消息链接
-              switch (orderType) { //订单类型类型：1. 团购  2. 单独购
-                case 1:
-                  pagePath = '/pages/Home/SpellGroup/index?cogId=' + cogId + '&isOpen=true';
-                  break;
-                case 2:
-                  pagePath = '/pages/New/orderDetails/index?cogId=' + cogId;
-                  break;
+              if (orderType == 1) {//订单类型类型：1. 团购  2. 单独购
+                pagePath = '/pages/Home/SpellGroup/index?cogId=' + cogId + '&isOpen=true';
+              } else if (orderType == 2) {
+                pagePath = '/pages/New/orderDetails/index?cogId=' + cogId;
               }
               $common.request( //发送模板消息
                 'POST',
@@ -216,7 +213,7 @@ Page({
                   pagePath: pagePath
                 },
                 (res) => {
-                  console.log(cogId, pagePath);
+                  console.log(cogId, pagePath, orderType, this.data.orderType);
                   wx.redirectTo({
                     url: '../BuySuccess/index?orderType=' + orderType + '&cogId=' + cogId + '&groupType=' + groupType,
                   })
@@ -237,8 +234,6 @@ Page({
 
                 },
                 (res) => {
-                  console.log(res);
-                  console.log(cogId, wx.getStorageSync('openid'), '/pages/Home/SpellGroup/index')
                 },
               )
             },
@@ -271,8 +266,6 @@ Page({
 
                 },
                 (res) => {
-                  console.log(res);
-                  console.log(cogId, wx.getStorageSync('openid'))
                 },
               )
             },
@@ -308,7 +301,6 @@ Page({
         $common.showModal('亲~网络不给力哦，请稍后重试');
       },
       (res) => {
-        console.log(res);
       }
     );
   },
@@ -365,9 +357,11 @@ Page({
               weekTimeData: weekTimeData
             })
           }
+          let course = res.data.course;
+          course.CorPrice = course.CorPrice.toFixed(2);
           this.setData({
-            PayPrice: res.data.PayPrice,
-            course: res.data.course,
+            PayPrice: res.data.PayPrice.toFixed(2),
+            course: course,
             teacher: res.data.teacher
           });
           this.initCourseTimeLong();
@@ -386,7 +380,6 @@ Page({
         $common.showModal('亲~网络不给力哦，请稍后重试');
       },
       (res) => {
-        console.log(res);
         wx.hideLoading();
         wx.stopPullDownRefresh();
       }
@@ -400,7 +393,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options);
     let cogId = options.cogId,
       corId = options.corId,
       groupType = options.groupType,

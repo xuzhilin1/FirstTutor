@@ -69,7 +69,7 @@
         <image class='Soa' src='{{item.UserAvaUrl}}'></image>
         <view wx:if='{{index==0}}' class='white fon-18 tuanZhang purple-bg'>团长</view>
       </view>
-      <view class='waiceng' wx:if='{{cog.FgtStatus > cog.FgtAttCount}}'>
+      <view class='waiceng' wx:if='{{cog.FgtMemNum > cog.FgtAttCount}}'>
         <view class='wen'>？</view>
       </view>
     </view>

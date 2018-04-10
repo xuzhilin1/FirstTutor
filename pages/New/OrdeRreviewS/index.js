@@ -90,7 +90,7 @@ Page({
               $common.showModal('未知错误');
               break;
             case 4:
-              $common.showModal('获取信息 失败');
+              $common.showModal('获取信息失败');
               break;
           }
         }

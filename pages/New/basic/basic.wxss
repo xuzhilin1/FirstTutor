@@ -4,8 +4,13 @@ page {
   background-color: #fff;
 }
 
+.list-box {
+  box-sizing: border-box;
+  width: 100%;
+}
+
 .zxx_text_overflow {
-  width: 60%;
+  width: 70%;
   box-sizing: border-box;
   white-space: nowrap;
   text-overflow: ellipsis;

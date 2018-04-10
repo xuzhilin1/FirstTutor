@@ -3,6 +3,7 @@ const $common = require('../../../utils/common.js');
 const app = getApp();
 Page({
   data: {
+    audit: 0, //0 审核中 1 审核通过 2 审核不通过
     contentText: '',
     status: 0,
     srcPoster: $common.srcPoster,
@@ -16,7 +17,14 @@ Page({
     switch (status) {
       case 0: //外教资格申请
         titleText = '申请FirstTutor外教资格';
-        contentText = '您已成功提交申请，请等待审核';
+        let audit = this.data.audit;
+        if (audit === 0) {
+          contentText = '您已成功提交申请，请等待审核';
+        } else if (audit === 1) {
+          contentText = '您已通过审核';
+        } else if (audit === 2) {
+          contentText = '您的审核未通过';
+        }
         break;
       case 1: //活动报名
         titleText = '活动报名成功';
@@ -135,13 +143,25 @@ Page({
       url: '../Home/index',
     })
   },
+  returnNew() { //返回重新申请
+    wx.navigateBack({
+      delta: 1
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let audit = 0,
+      status = parseInt(options.status);
+    if (options.audit) {
+      audit = parseInt(options.audit);
+    }
     this.setData({
-      status: parseInt(options.status)
+      status: status,
+      audit: audit
     })
+    this.init();
   },
 
   /**
@@ -155,7 +175,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.init();
+
   },
 
   /**

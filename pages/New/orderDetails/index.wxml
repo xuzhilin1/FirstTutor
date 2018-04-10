@@ -1,58 +1,58 @@
-<view wx:if='{{isGroup===0}}' class=' middle-m bg-fff flex aitems-center border-b-1 between padding-lr-30 border-t-1'>
+<view wx:if='{{course.CorType==1}}' class=' middle-m bg-fff flex aitems-center border-b-1 between padding-lr-30 border-t-1'>
   <view class='flex fon-36  c2b '>
     <image class='QiHao' mode='widthFix' src='../../images/qi_03.png'></image>
     <view>
-      {{pagesData.courseName}}
-      <view class=' fon-24 c8 margin-t-10 '>已有{{pagesData.buyNum}}人购买</view>
+      {{course.CorTitle}}
+      <view class=' fon-24 c8 margin-t-10 '>已有{{course.BuyCount}}人购买</view>
     </view>
   </view>
-  <view class='bold purple'>¥ {{pagesData.price}}</view>
+  <view class='bold purple'>¥ {{course.CorPrice}}</view>
 </view>
 
-<view wx:if='{{isGroup===1}}' class=' middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
+<view wx:if='{{course.CorType!=1}}' class=' middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
   <view class='flex fon-36  c2b '>
     <image class='QiHao' mode='widthFix' src='../../images/tuan_06.png'></image>
     <view>
-      {{pagesData.courseName}}
-      <view class='bold bg-fff purple'>¥ {{pagesData.price}}</view>
+      {{course.CorTitle}}
+      <view class='bold bg-fff purple'>¥ {{course.CorPrice}}</view>
     </view>
   </view>
-  <view class='purplea purple fon-24 '>{{pagesData.groupNum}}人团</view>
+  <view class='purplea purple fon-24 '>{{course.CorType}}人团</view>
 </view>
 <!--  -->
 
 <view class='margin-t-20'>
-  <view wx:for='{{pagesData.buyInfo}}' wx:key='{{index}}' class='flex fon-30 c2b bg-fff  border-t-1 padding-25 aitems-center between'>
+  <view wx:for='{{MemList}}' wx:key='{{index}}' class='flex fon-30 c2b bg-fff  border-t-1 padding-25 aitems-center between'>
     <view class='flex aitems-center'>
-      <image class='orderimg' src='{{item.image}}'></image>
-      {{item.name}}
-      <view wx:if='{{isGroup===1&&index===0}}' class='Tuan border fon-24 purple'>团长</view>
+      <image class='orderimg' src='{{item.UserAvaUrl}}'></image>
+      {{item.OdrName}}
+      <view wx:if='{{course.CorType!=1&&item.OdrIsHead}}' class='Tuan border fon-24 purple'>团长</view>
       <image class='Wen' mode='widthFix' src='../../images/DuiHua_06.png'></image>
     </view>
     <view class='flex aitens-center'>
       <image class='phone' mode='widthFix' src='../../images/phone_06.png'></image>
-      {{item.phone}}
+      {{item.OdrPhone}}
     </view>
   </view>
 
 </view>
 <view class='padding-25 bg-fff flex aitems-center fon-26 border-t-1 border-b-1'>
   <image mode='widthFix' class='address' src='../../images/adddress_14.png'></image>
-  上课地址：{{pagesData.address}}
+  上课地址：{{cog.FgtStudyAddress}}
 </view>
 
 <view class='padding-25 margin-t-20 fon-24 border-t-1 border-b-1 bg-fff'>
-  <block wx:if='{{isGroup===0}}'>
-    <view class='margin-b-20 '>订单号：{{pagesData.orderCode}}</view>
-    <view class='margin-b-20 '>下单时间：{{pagesData.orderTime}}</view>
-    <view class='margin-b-20 '>支付时间：{{pagesData.orderPayment}}</view>
+  <block wx:if='{{course.CorType==1}}'>
+    <view class='margin-b-20 '>订单号：{{MemList[0].OdrOutradeno}}</view>
+    <view class='margin-b-20 '>下单时间：{{MemList[0].orderCreatTime}}</view>
+    <view class='margin-b-20 '>支付时间：{{MemList[0].orderBuyTime}}</view>
   </block>
-  <block wx:if='{{isGroup===1}} '>
-    <view class='margin-b-20 '>团编号：{{pagesData.groupCode}}</view>
-    <view class='margin-b-20 '>开团时间：{{pagesData.groupStartTime}}</view>
-    <view class='margin-b-20 '>结束时间：{{pagesData.groupEndTime}}</view>
+  <block wx:if='{{course.CorType!=1}} '>
+    <view class='margin-b-20 '>团编号：{{cog.FgtNumber}}</view>
+    <view class='margin-b-20 '>开团时间：{{cog.courseStartTime}}</view>
+    <view class='margin-b-20 '>结束时间：{{cog.courseEndTime}}</view>
   </block>
-  <view class='margin-b-20 '>上课时间段：{{pagesData.courseInterval}}</view>
-  <view class='margin-b-20 '>课程时长：{{pagesData.courseTime}}小时</view>
-  <view class='margin-b-20 '>上课时间：{{pagesData.courseDate}}</view>
+  <view class='margin-b-20 '>上课时间段：{{MemList[0].TimStr}}</view>
+  <view class='margin-b-20 '>课程时长：{{course.courseTimeLong}}小时</view>
+  <view class='margin-b-20 '>上课时间：{{cog.FgtStartTime}}</view>
 </view>

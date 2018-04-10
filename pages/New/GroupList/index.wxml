@@ -1,21 +1,21 @@
 <view class='big-outer'>
-  <view wx:for='{{pagesData}}' wx:key='{{index}}' class='margin-t-20'>
+  <view wx:for='{{cogList}}' wx:key='{{index}}' class='margin-t-20'>
     <view class='flex fon-26 border-t-1 bg-f9 c8 height-75 between padding-lr-30 aitems-center'>
-      <view>{{item.corCanView}}</view>
-      <view>成团时间：{{item.corCreateOn}}</view>
+      <view>一对{{item.whatNum}}</view>
+      <view>成团时间：{{item.showTime}}</view>
     </view>
     <view class=' middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
       <view class='flex fon-36  c2b '>
         <image class='QiHao' mode='widthFix' src='../../images/tuan_06.png'></image>
         <view>
-          {{item.corTitle}}
-          <view class='bold bg-fff purple'>¥ {{item.corPrice}}</view>
+          {{course.CorTitle}}
+          <view class='bold bg-fff purple'>¥ {{course.CorPrice}}</view>
         </view>
       </view>
-      <view class='purplea purple fon-24 '>2人团</view>
+      <view class='purplea purple fon-24 '>{{item.FgtMemNum}}人团</view>
     </view>
     <view class='flex fon-24 border-t-1 border-b-1 padding-lr-30 aitems-center bg-fff box-footer'>
-      <view class='box-time c8'>上课时间:{{item.startTime}}</view>
+      <view class='box-time c8'>上课时间:{{item.ClaStudyTime}}{{item.FgtStartTime}}</view>
       <view bindtap='orderDetails' data-index='{{index}}' class='border AnNiu white purple-bg'>拼团详情</view>
     </view>
   </view>

@@ -27,7 +27,7 @@
     </view>
     <view class='flex fon-24 border-t-1 border-b-1 padding-lr-30 aitems-center bg-fff j-right'>
       <view bindtap='bindDelete' data-index='{{index}}' class='purple AnNiu border'>删除课程</view>
-      <view bindtap='groupList' data-index='{{index}}' wx:if='{{item.CorType!=1&&item.CorCanView==1}}' class='border AnNiu white purple-bg'>成功拼团 {{item.BuyCount}}</view>
+      <view bindtap='groupList' data-index='{{index}}' wx:if='{{item.CorType!=1&&item.CorCanView==1}}' class='border AnNiu white purple-bg'>成功拼团 {{item.FGCount}}</view>
       <view bindtap='orderDetails' data-index='{{index}}' wx:if='{{item.CorCanView==1&&item.CorType==1}}' class='border AnNiu white purple-bg'>查看课程</view>
       <view bindtap='reviseReleaseCourse' data-index='{{index}}' wx:if='{{item.CorCanView==0}}' class='border AnNiu white purple-bg'>修改课程</view>
     </view>

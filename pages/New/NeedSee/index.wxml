@@ -1,16 +1,16 @@
 <view class='wrapper'>
-  <view wx:for='{{pagesData}}' wx:key='{{index}}' class='margin-t-20'>
+  <view wx:for='{{lnList}}' wx:key='{{index}}' class='margin-t-20'>
     <view class=' middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
       <view class='flex fon-36  c2b '>
         <view>
-          {{item.name}}
-          <view class='c8  fon-24 margin-t-20'>{{item.address}} | {{item.week}} | {{item.time}}</view>
+          {{item.NedCorName}}
+          <view class='c8  fon-24 margin-t-20'>{{item.address}} | 周{{item.week}} | {{item.time}}</view>
         </view>
       </view>
-      <view class='purplea purple fon-32 bold'>¥{{item.minPrice}} - ¥{{item.maxPrice}}</view>
+      <view class='purplea purple fon-32 bold'>¥{{item.NedMinPrice}} - ¥{{item.NedMaxPrice}}</view>
     </view>
     <view class='flex fon-24 border-t-1 border-b-1 padding-lr-30  aitems-center bg-fff between'>
-      <view class='fon-26 c8'>{{item.browse}}人浏览</view>
+      <view class='fon-26 c8'>{{item.BrowingTimes}}人浏览</view>
       <view bindtap='seeDetail' data-index='{{index}}' class='border AnNiu white purple-bg'>立即沟通</view>
     </view>
   </view>

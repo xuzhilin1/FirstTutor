@@ -2,8 +2,9 @@
 <image class='imgas' src='../../images/successs_03.jpg'></image>
 <view class='fon-42 t-center bold'>{{contentText}}</view>
 <button bindtap='goHome' class='border buns bg-fff btn purple fon-37'>去首页逛逛吧</button>
+<button wx:if='{{audit===2}}' bindtap='returnNew' class=' white btn purple-bg fon-37'>返回重新申请</button>
 <black wx:if='{{status===1}}'>
-  <button  bindtap='bindShowPoster' class=' white btn purple-bg fon-37'>点击生成海报</button>
+  <button bindtap='bindShowPoster' class=' white btn purple-bg fon-37'>点击生成海报</button>
   <view class='fon-24 dibu'>
     点击生成海报分享至朋友圈，截屏并发送至【XX的微信号】即可参与平台抽奖（玩具、书籍、活动券等）
   </view>

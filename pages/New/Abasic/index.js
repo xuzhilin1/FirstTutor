@@ -3,6 +3,8 @@ const $common = require('../../../utils/common.js');
 const app = getApp();
 Page({
   data: {
+    teaToe: 0, //外教审核状态， 0 未审核 1 审核通过 2 审核未通过
+    teaBeDel: 0, //0 教师未被删除，  1 外教已被删除
     status: 0, //0 外教资格申请 1 外教基本资料 
     userName: '',
     sexArray: [{
@@ -122,9 +124,9 @@ Page({
       },
       function (res) {
         if (res.data.res && res.data.resType == 5) {
-            wx.redirectTo({
-              url: '../../Home/Success/index?status=0',
-            })
+          wx.redirectTo({
+            url: '../../Home/Success/index?status=0',
+          })
         } else {
           switch (res.data.resType) {
             case 1:
@@ -179,14 +181,50 @@ Page({
     });
     this.setTeaNaLityId();
   },
+  getForTeaStatus() { //外教申请，获取外教信息
+    let openid = wx.getStorageSync('openid');
+    if (!openid) {
+      //判断并获取openId
+      $common.getOpenid(null, this.getForTeaStatus);
+      return;
+    }
+    $common.request(
+      'POST',
+      $common.config.GetForTeaStatus,
+      {
+        openId: wx.getStorageSync('openid')
+      },
+      (res) => {
+        if (res.data.res) {
+          let teaToe = res.data.teaToe,
+            teaBeDel = res.data.teaBeDel;
+          this.setData({
+            teaToe: teaToe,
+            teaBeDel: teaBeDel
+          });
+          if (teaBeDel === 0) { //外教未被删除
+            let audit = teaToe; //0 审核中 1 审核通过 2 审核不通过
+            wx.navigateTo({
+              url: `../../Home/Success/index?status=0&audit=${audit}`,
+            })
+          }
+        }
+      },
+      (res) => {
+
+      },
+      (res) => {
+        console.log(res);
+      }
+    )
+  },
   init() {
     let status = this.data.status;
     let titleText = '';
     switch (status) {
       case 0: //申请外教资格
         titleText = '申请FirstTutor外教资格';
-        //判断并获取openId
-        $common.getOpenid();
+        this.getForTeaStatus();
         break;
       case 1: //外教基本资料
         titleText = '基本资料';
@@ -226,14 +264,14 @@ Page({
   },
   onReady: function () {
     this.getCountryInfo();
-  
+    this.init();
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.init();
+
   },
 
   /**

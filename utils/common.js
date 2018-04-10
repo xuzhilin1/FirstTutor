@@ -132,6 +132,16 @@ const config = {
   GiveTeaAMark: `${host}/LittleProgram/Review/GiveTeaAMark`,
   //学生--删除评论(2018-04-09)
   DeleteReview: `${host}/LittleProgram/Review/DeleteReview`,
+  //外教--获取某课程拼团成功信息列表(2018-04-09)
+  GetMyCorOrderList: `${host}/LittleProgram/OpenGrpOrder/GetMyCorOrderList`,
+  //外教-拼团详情
+  GetTeaOrderInfoList: `${host}/LittleProgram/OpenGrpOrder/GetTeaOrderInfoList`,
+  //外教-我的--需求查看(2018-04-10)
+  GetAllLearnNeeds: `${host}/LittleProgram/LearnNeeds/GetAllLearnNeeds`,
+  // 外教-订单查看-获取外教发布课程被购买订单列表(2018-04-10)
+  GetTeaCogInfoList: `${host}/LittleProgram/OpenGrpOrder/GetTeaCogInfoList`,
+  // 外教--点评管理--点评信息获取(2018-04-10)
+  GetAllRewAboutMe: `${host}/LittleProgram/Review/GetAllRewAboutMe`,
 }
 const wxGetUserInfo = function (code, userInfo, callback, callback2) {
   let openid = wx.getStorageSync('openid');

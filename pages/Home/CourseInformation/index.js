@@ -2,6 +2,7 @@
 const $common = require('../../../utils/common.js');
 Page({
   data: {
+    FgtType: 1, //1 拼团 2 单独购买
     purple: 'purple-bg white',
     courId: null, //课程id
     teaId: null, //教师id
@@ -72,7 +73,7 @@ Page({
       $common.showModal('订单已删除');
       return;
     }
-    if (this.data.CorType == 1) {
+    if (this.data.FgtType == 2) { //1 拼团 2 单独购买
       wx.navigateTo({
         url: '../../New/orderDetailsS/index?cogId=' + this.data.course.BeBuyCour,
       })
@@ -81,7 +82,6 @@ Page({
         url: '/pages/Home/SpellGroup/index?cogId=' + this.data.course.BeBuyCour,
       })
     }
-
   },
   sureOrder() { //立即购买
     let course = this.data.course;
@@ -198,10 +198,14 @@ Page({
               course.courseTimeLong = 2; //2小时
               break;
           }
+          course.CorBuyPrice = course.CorBuyPrice.toFixed(2);//保留两位小数
+          course.CorPrice = course.CorPrice.toFixed(2);
+          course.CorGroupPrice = course.CorGroupPrice.toFixed(2);
           this.setData({
             course: course,
             tea: res.data.tea,
-            orderBeDel: res.data.orderBeDel
+            orderBeDel: res.data.orderBeDel,
+            FgtType: res.data.FgtType,
           })
           if (course.CorType != 1) { //一对多页面 
             $common.request(

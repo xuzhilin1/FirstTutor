@@ -2,38 +2,112 @@ const $common = require('../../../utils/common.js');
 const app = getApp();
 Page({
   data: {
-    pagesData: [{
-      corCanView: '一对二',
-      corCreateOn: '2017-08-06 13:31', //发布时间
-      corPrice: '200', // 课程价格
-      fgtType: 1, //1 拼团 2 单独购买
-      corClaNum: 2, //上课人数，1-3
-      corTitle: '口语一对二', //课程名称
-      fgtAttCount: 2,//拼团成功团数
-      startTime: '周一上午/9:00-11:00'
-    }, {
-      corCanView: '一对三',
-      corCreateOn: '2017-08-06 13:31', //发布时间
-      corPrice: '200', // 课程价格
-      fgtType: 1, //1 拼团 2 单独购买
-      corClaNum: 1, //上课人数，1-3
-      corTitle: '口语一对一', //课程名称
-      fgtAttCount: 0, //拼团成功团数
-      startTime: '周二下午/9:00-11:00'
-    }]
+    courId: -1,
+    pageIndex: 1,
+    pageSize: 5,
+    course: {},
+    cogList: [],
   },
   orderDetails(e) {
     let index = e.currentTarget.dataset.index,
-      pagesData = this.data.pagesData;
+      cogList = this.data.cogList;
     wx.navigateTo({
-      url: '../orderDetails/index?isGroup=1',
+      url: `../orderDetails/index?cogId=${cogList[index].FgtId}`,
     })
+  },
+  timeStamp(time) { //时间戳转换为日期
+    time = time.replace("/Date(", '').replace(')/', '');
+    let date = new Date(parseInt(time)),
+      y = date.getFullYear(),
+      m = date.getMonth() + 1,
+      d = date.getDate(),
+      h = date.getHours(),
+      f = date.getMinutes();
+    m < 10 && (m = '0' + m);
+    d < 10 && (d = '0' + d);
+    h < 10 && (h = '0' + h);
+    f < 10 && (f = '0' + f);
+    return `${y}-${m}-${d} ${h}:${f}`;
+  },
+  init(isReach) {
+    isReach = isReach ? true : false;
+    let teaId = wx.getStorageSync('teacherStatusInfo').teaId;
+    let pageIndex = isReach ? this.data.pageIndex : 1,
+      pageSize = this.data.pageSize;
+    let cogList = isReach ? this.data.cogList : [];//上拉加载push，下拉刷新，重新获取
+    wx.showLoading({ title: '努力加载中...' });
+    $common.request(
+      "POST",
+      $common.config.GetMyCorOrderList,
+      {
+        courId: this.data.courId,
+        pageIndex: pageIndex,
+        pageSize: pageSize
+      },
+      (res) => {
+        if (res.data.res) {
+          let course = res.data.course,
+            data = res.data.cogList;
+          if (data.length >= pageSize) {
+            pageIndex++;
+          }
+          for (let i = 0, len = data.length; i < len; i++) {
+            let whatNum = '';
+            switch (data[i].FgtMemNum) {
+              case 1:
+                whatNum = '一';
+                break;
+              case 2:
+                whatNum = '二';
+                break;
+              case 3:
+                whatNum = '三';
+                break;
+            }
+            data[i].whatNum = whatNum;
+            data[i].showTime = this.timeStamp(data[i].FgtOpenTime); //时间戳转换为时间
+            cogList.push(data[i]);
+          }
+          let hash = {};
+          let newArr = cogList.reduce(function (item, next) {//数组依据FgtId去重
+            hash[next.FgtId] ? '' : hash[next.FgtId] = true && item.push(next);
+            return item
+          }, []);
+          course.CorPrice = course.CorPrice.toFixed(2);
+          this.setData({
+            cogList: newArr,
+            course: course,
+            pageIndex: pageIndex,
+          })
+        } else {
+          switch (res.data.errType) {
+            case 1:
+              $common.showModal('参数错误');
+              break;
+            case 2:
+              $common.showModal('未知错误');
+              break;
+          }
+        }
+      },
+      (res) => {
+        $common.showModal('亲~网络不给力哦，请稍后重试');
+      },
+      (res) => {
+        wx.hideLoading();
+        wx.stopPullDownRefresh();
+      }
+    )
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    if (options.courId) {
+      this.setData({
+        courId: options.courId
+      })
+    }
   },
 
   /**
@@ -47,7 +121,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.init();
   },
 
   /**
@@ -68,14 +142,14 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    wx.stopPullDownRefresh();
+    this.init();
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    this.init(true);
   },
 
   /**
