@@ -36,7 +36,7 @@
   </view>
 
 </view>
-<view class='padding-25 bg-fff flex aitems-center fon-26 border-t-1 border-b-1'>
+<view  bindtap='lookAddress' class='padding-25 bg-fff flex aitems-center fon-26 border-t-1 border-b-1'>
   <image mode='widthFix' class='address' src='../../images/adddress_14.png'></image>
   上课地址：{{cog.FgtStudyAddress}}
 </view>

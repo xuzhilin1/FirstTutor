@@ -93,7 +93,7 @@
           <image class='Soa' src='{{item.UserAvaUrl}}'></image>
           <view wx:if='{{index==0}}' class='white fon-18 tuanZhang purple-bg'>团长</view>
         </view>
-                <view class='waiceng' wx:if='{{cog.FgtMemNum - cog.FgtAttCount == 1}}'>
+        <view class='waiceng' wx:if='{{cog.FgtMemNum - cog.FgtAttCount == 1}}'>
           <view class='wen'>？</view>
         </view>
         <view class='waiceng' wx:if='{{cog.FgtMemNum - cog.FgtAttCount == 2}}'>
@@ -160,18 +160,20 @@
     </view>
   </block>
   <!--  购买过课程-拼团成功 ----   END -->
-
-  <view class='padding-tb-20 margin-t-20 bg-fff border-t-1 padding-lr-30'>
-    <view class='fon-30 padding-l-20 border-l-2 c2b'>上课地址及外教联系方式</view>
-  </view>
-  <view class='border-b-1 margin-b-20'>
-    <view class='padding-50  padding-tb-20 bg-fff flex aitems-center fon-26 '>
-      <image mode='widthFix' class='address' src='../../images/adddress_14.png'></image>
-      {{teaAddress}}
+  <!--  外教联系方式  -->
+  <block wx:if='{{cog.FgtStatus!=3}}'>
+    <view class='padding-tb-20 margin-t-20 bg-fff border-t-1 padding-lr-30'>
+      <view class='fon-30 padding-l-20 border-l-2 c2b'>上课地址及外教联系方式</view>
     </view>
-    <view class='padding-50  padding-tb-20 bg-fff flex aitems-center fon-26 '>
-      <image mode='widthFix' class='address' src='../../images/phone_06.png'></image>
-      {{teaPhone}}
+    <view class='border-b-1 margin-b-20'>
+      <view bindtap='lookAddress' class='padding-50  padding-tb-20 bg-fff flex aitems-center fon-26 '>
+        <image mode='widthFix' class='address' src='../../images/adddress_14.png'></image>
+        {{teaAddress}}
+      </view>
+      <view class='padding-50  padding-tb-20 bg-fff flex aitems-center fon-26 '>
+        <image mode='widthFix' class='address' src='../../images/phone_06.png'></image>
+        {{teaPhone}}
+      </view>
     </view>
-  </view>
+  </block>
 </block>

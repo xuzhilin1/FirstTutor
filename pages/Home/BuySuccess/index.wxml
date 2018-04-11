@@ -23,7 +23,7 @@
   <view class='fon-30 padding-l-20 border-l-2 c2b'>上课地址及外教联系方式</view>
 </view>
 <view class=' border-b-1'>
-  <view class='padding-50  padding-tb-20 bg-fff flex aitems-center fon-26 '>
+  <view bindtap='lookAddress' class='padding-50  padding-tb-20 bg-fff flex aitems-center fon-26 '>
     <image mode='widthFix' class='address' src='../../images/adddress_14.png'></image>
     {{teaAddress}}
   </view>

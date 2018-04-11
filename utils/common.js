@@ -278,11 +278,19 @@ module.exports = {
       success: success,
     })
   },
-  getAddress(address, success) { //调用腾讯地图api地址解析为坐标
-    success = typeof success == 'function' ? success : function () { };
+  getAddress(address) { //调用腾讯地图api地址解析为坐标
     mapKey.geocoder({
       address: address,
-      success: success,
+      success: (res) => { //打开地图查看
+        let data = res.result.location,
+          w = data.lat,
+          j = data.lng;
+        wx.openLocation({
+          latitude: w,
+          longitude: j,
+          name: address
+        })
+      },
       fail: (res) => {
 
       },

@@ -4,17 +4,30 @@ Page({
   data: {
     input: '', //课程名
     listData: [],
-    areaList: $static.areaShanghai,
-    areaIndex: -1,
+    areaList: [], //区域
+    areaIndex: 0,
+    isArea: false, //初始化只显示默认文本
     tradList: [], //商圈
-    tradIndex: -1,
-    timeList: ['上午', '下午1', '下午2', '晚上'], //时间段
-    timeIndex: -1,
+    tradIndex: 0,
+    isTrad: false,
+    timeList: ['所有时间段', '上午', '下午1', '下午2', '晚上'], //时间段
+    timeIndex: 0,
+    isTime: false,
     modalArr: [0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000], //价格区间模板数组
     priceList: [], //价格区间
     priceIndex: [-1, -1],
     pageIndex: 1, //分页
     pageSize: 10, //每页多少数据
+  },
+  initArea() { //初始化区域
+    let data = $static.areaShanghai;
+    data.unshift({
+      id: 0,
+      area: '所有区域',
+    });
+    this.setData({
+      areaList: data
+    })
   },
   teacherInfo(e) { //跳转外教信息
     let openid = wx.getStorageSync('openid');
@@ -36,19 +49,22 @@ Page({
   },
   bindAreaChange(e) { //区域
     this.setData({
-      areaIndex: parseInt(e.detail.value)
+      areaIndex: parseInt(e.detail.value),
+      isArea: true
     });
     this.getListData();
   },
   bindCourseType(e) { //商圈
     this.setData({
-      tradIndex: parseInt(e.detail.value)
+      tradIndex: parseInt(e.detail.value),
+      isTrad: true
     })
     this.getListData();
   },
   bindTimeChange(e) { //时间段
     this.setData({
-      timeIndex: parseInt(e.detail.value)
+      timeIndex: parseInt(e.detail.value),
+      isTime: true
     });
     this.getListData();
   },
@@ -73,8 +89,13 @@ Page({
       null,
       (res) => {
         if (res.data.res) {
+          let data = res.data.taList;
+          data.unshift({
+            TaId: 0,
+            TaName: '所有商圈'
+          })
           this.setData({
-            tradList: res.data.taList
+            tradList: data
           })
         }
       }
@@ -85,16 +106,23 @@ Page({
     wx.showLoading({ title: '努力加载中...' });
     let pageIndex = isRefresh ? this.data.pageIndex : 1,
       pageSize = this.data.pageSize;
+    let timeCla = this.data.timeIndex === 0 ? -1 : parseInt(this.data.timeIndex), //时间段（1-4）
+      areaId = this.data.areaIndex === 0 ? -1 : this.data.areaList[this.data.areaIndex].id, // 区域ID（1-16）
+      taAreaId = this.data.tradIndex === 0 ? -1 : this.data.tradList[this.data.tradIndex].TaId, //商圈区域ID（1-16）
+      minPrice = this.data.priceIndex[0] == -1 ? -1 : this.data.priceList[0][this.data.priceIndex[0]], //价格区间
+      maxPrice = this.data.priceIndex[0] == -1 ? -1 : this.data.priceList[1][this.data.priceIndex[1]],
+      corName = this.data.input ? this.data.input : null; //课程名
+    console.log(areaId, taAreaId, timeCla, minPrice, maxPrice, corName);
     $common.request(
       "POST",
       $common.config.FindForeignTea,
       {
-        areaId: this.data.areaIndex === -1 ? -1 : this.data.areaList[this.data.areaIndex].id, // 区域ID（1-16）
-        taAreaId: this.data.tradIndex === -1 ? -1 : this.data.tradList[this.data.tradIndex].TaId, //商圈区域ID（1-16）
-        timeCla: this.data.timeIndex === -1 ? -1 : parseInt(this.data.timeIndex) + 1, //时间段（1-4）
-        minPrice: this.data.priceIndex[0] == -1 ? -1 : this.data.priceList[0][this.data.priceIndex[0]], //价格区间
-        maxPrice: this.data.priceIndex[0] == -1 ? -1 : this.data.priceList[1][this.data.priceIndex[1]],
-        corName: this.data.input ? this.data.input : null, //课程名
+        areaId: areaId,
+        taAreaId: taAreaId,
+        timeCla: timeCla,
+        minPrice: minPrice,
+        maxPrice: maxPrice,
+        corName: corName,
         pageIndex: pageIndex, //分页
         pageSize: pageSize, //每页个数
       },
@@ -151,7 +179,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.initArea();
   },
 
   /**
@@ -189,9 +217,9 @@ Page({
   onPullDownRefresh: function () {
     this.setData({
       input: '',
-      areaIndex: -1,
-      tradIndex: -1,
-      timeIndex: -1,
+      areaIndex: 0,
+      tradIndex: 0,
+      timeIndex: 0,
     })
     this.initPriceInterval();
     this.getTradData();

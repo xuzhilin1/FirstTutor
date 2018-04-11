@@ -11,6 +11,10 @@ Page({
     teaAddress: '', //外教地址
     teaPhone: '', //外教联系方式
   },
+  lookAddress() { //查看地图
+    let address = this.data.teaAddress;
+    $common.getAddress(address);
+  },
   goHome() { //返回首页
     wx.switchTab({
       url: '/pages/Home/Home/index',

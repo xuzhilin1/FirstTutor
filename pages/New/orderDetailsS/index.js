@@ -10,6 +10,10 @@ Page({
     teaAddress: '', //外教地址
     teaPhone: '', //外教联系方式
   },
+  lookAddress() { //查看地图
+    let address = this.data.teaAddress;
+    $common.getAddress(address);
+  },
   init() {
     wx.showLoading({ title: '努力加载中...' });
     $common.request(

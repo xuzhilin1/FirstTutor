@@ -6,6 +6,10 @@ Page({
     cog: {},
     course: {}
   },
+  lookAddress() { //查看地图
+    let address = this.data.teaAddress;
+    $common.getAddress(address);
+  },
   timeStamp(time) { //时间戳转换为日期
     time = time.replace("/Date(", '').replace(')/', '');
     let date = new Date(parseInt(time)),

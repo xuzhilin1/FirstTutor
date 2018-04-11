@@ -14,6 +14,10 @@ Page({
     teaAddress: '', //外教地址
     teaPhone: '', //外教联系方式
   },
+  lookAddress() { //查看地图
+    let address = this.data.teaAddress;
+    $common.getAddress(address);
+  },
   countDown() { // 倒计时
     let leftTime = parseInt(this.data.leftTime);
     leftTime -= 1000;

@@ -14,17 +14,7 @@ Page({
   },
   openLoc() { //查看地址所在位置
     let address = this.data.atyInfo.AtyAddress;
-    $common.getAddress(address, (res) => {
-      let data = res.result.location,
-        w = data.lat,
-        j = data.lng;
-      console.log(data);
-      wx.openLocation({
-        latitude: w,
-        longitude: j,
-        name: address
-      })
-    });
+    $common.getAddress(address);
   },
   activitySign() {
     let alreadySignUp = this.data.alreadySignUp;
