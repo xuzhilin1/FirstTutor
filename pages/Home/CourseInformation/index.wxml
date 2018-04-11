@@ -5,7 +5,7 @@
     <view class='flex fon-36 c2b'>
       <image class='QiHao' mode='widthFix' src='../../images/qi_03.png'></image>
       <view>
-        {{course.CorTitle}}
+        <text>{{course.CorTitle}}</text>
         <view class='c8 margin-t-20 fon-24'>已有{{course.BuyCount}}人参与</view>
       </view>
     </view>
@@ -18,7 +18,7 @@
     <view class='flex fon-36  c2b '>
       <image class='QiHao' mode='widthFix' src='../../images/tuan_06.png'></image>
       <view>
-        {{course.CorTitle}}
+        <text>{{course.CorTitle}}</text>
         <view class='bold bg-fff purple'>¥{{course.CorPrice}}</view>
       </view>
     </view>
@@ -123,7 +123,7 @@
     <view class='fon-30 padding-l-20 border-l-2 c2b'>订金说明</view>
   </view>
   <view class='padding-lr-30 fon-24  c88 bg-fff padding-tb-40'>
-    平台预收课程费用{{tea.TeaDepositPer}}%作为订金，剩余费用学生扣除订金后支付给外教。
+    <text>平台预收课程费用{{tea.TeaDepositPer}}%作为订金，剩余费用学生扣除订金后支付给外教。</text>
   </view>
   <!--  footer    一对一  -->
   <view wx:if='{{course.CorType==1}}' class='footer flex border-t-1 between'>

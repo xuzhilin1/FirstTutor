@@ -18,7 +18,11 @@ Page({
           },
           (res) => {
             if (res.data.res) {
-              this.init();
+              // this.init();
+              teaList[index].RewId = 0;
+              this.setData({
+                teaList: teaList
+              })
             } else {
               switch (res.data.errType) {
                 case 1:

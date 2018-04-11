@@ -4,7 +4,7 @@
     <view wx:if='{{item.FgtMemNum!=1&&item.FgtStatus==2}}' class='color-block'>拼团成功</view>
     <view wx:if='{{item.FgtMemNum!=1&&item.FgtStatus==3}}' class='color-block'>拼团失败</view>
     <view wx:if='{{item.FgtMemNum!=1&&item.FgtType==1&&item.FgtStatus==1}}' class='color-block'>拼团中，还差{{item.FgtMemNum - item.FgtAttCount}}人成团</view>
-     <view wx:if='{{item.FgtMemNum==1&&item.OdrPayType==0}}' class='color-block'>未支付</view>
+    <view wx:if='{{item.FgtMemNum==1&&item.OdrPayType==0}}' class='color-block'>未支付</view>
     <view wx:if='{{item.FgtMemNum==1&&item.OdrPayType==1}}' class='color-block'>已支付</view>
     <view wx:if='{{item.FgtMemNum==1&&item.OdrPayType==2}}' class='color-block'>退款中</view>
     <view wx:if='{{item.FgtMemNum==1&&item.OdrPayType==3}}' class='color-block'>已退款</view>
@@ -14,7 +14,7 @@
     <view class='flex fon-36  c2b '>
       <image class='QiHao' mode='widthFix' src='../../images/tuan_06.png'></image>
       <view>
-        {{item.CourseInfo.CorTitle}}
+        <text>{{item.CourseInfo.CorTitle}}</text>
         <view class='purple price'>¥{{item.CourseInfo.CorPrice}}</view>
       </view>
     </view>
@@ -28,7 +28,7 @@
     <view>
       <view class='flex fon-36  c2b '>
         <image class='QiHao' mode='widthFix' src='../../images/qi_03.png'></image>
-        {{item.CourseInfo.CorTitle}}
+        <text>{{item.CourseInfo.CorTitle}}</text>
       </view>
       <view class='c8 fon-24 margin-t-10 num-margin-l'>已有{{item.CourseInfo.CorBuyCount}}人购买</view>
     </view>
@@ -43,8 +43,7 @@
   </view>
   <view class='flex fon-24 border-t-1 border-b-1 padding-lr-30  aitems-center bg-fff between'>
     <view class='fon-26 color-block'>实付款：¥{{item.PayPrice}}</view>
-    <!--wx:if='{{item.FgtType==1&&item.FgtStatus==1}}'  -->
-    <button data-index='{{index}}' open-type='share' class='btn-box border AnNiu white purple-bg'>
+    <button wx:if='{{item.FgtType==1&&item.FgtStatus==1}}' data-index='{{index}}' open-type='share' class='btn-box border AnNiu white purple-bg'>
       邀请好友
     </button>
     <view wx:if='{{item.FgtStatus==2}}' bindtap='SOrderDetail' data-index='{{index}}' class='border AnNiu white purple-bg'>查看详情</view>

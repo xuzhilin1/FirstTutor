@@ -15,16 +15,21 @@ Page({
     isTime: false,
     modalArr: [0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000], //价格区间模板数组
     priceList: [], //价格区间
-    priceIndex: [-1, -1],
+    priceIndex: [0, 0],
+    isPrice: false,
+    isPriceAll: false,
     pageIndex: 1, //分页
     pageSize: 10, //每页多少数据
   },
   initArea() { //初始化区域
-    let data = $static.areaShanghai;
-    data.unshift({
+    let data = [{
       id: 0,
       area: '所有区域',
-    });
+    }];
+    let address = $static.areaShanghai;
+    for (let i = 0, len = address.length; i < len; i++) {
+      data.push(address[i]);
+    }
     this.setData({
       areaList: data
     })
@@ -70,12 +75,19 @@ Page({
   },
   bindPriceChange(e) { //价格区间
     let value = e.detail.value;
-    if (Number(value[0]) >= Number(value[1])) {
+    let isPriceAll = false;
+    let min = Number(value[0]),
+      max = Number(value[1]);
+    if (min === 0 && max === 0) {
+      isPriceAll = true;
+    } else if (min >= max) {
       $common.showModal('请选择正确的价格区间');
       return;
     }
     this.setData({
-      priceIndex: e.detail.value
+      priceIndex: [min, max],
+      isPrice: true,
+      isPriceAll: isPriceAll
     });
     this.getListData();
   },
@@ -109,9 +121,14 @@ Page({
     let timeCla = this.data.timeIndex === 0 ? -1 : parseInt(this.data.timeIndex), //时间段（1-4）
       areaId = this.data.areaIndex === 0 ? -1 : this.data.areaList[this.data.areaIndex].id, // 区域ID（1-16）
       taAreaId = this.data.tradIndex === 0 ? -1 : this.data.tradList[this.data.tradIndex].TaId, //商圈区域ID（1-16）
-      minPrice = this.data.priceIndex[0] == -1 ? -1 : this.data.priceList[0][this.data.priceIndex[0]], //价格区间
-      maxPrice = this.data.priceIndex[0] == -1 ? -1 : this.data.priceList[1][this.data.priceIndex[1]],
-      corName = this.data.input ? this.data.input : null; //课程名
+      minPrice = this.data.priceList[0][this.data.priceIndex[0]], //价格区间
+      maxPrice = this.data.priceList[1][this.data.priceIndex[1]],
+    corName = this.data.input ? this.data.input : null; //课程名
+    console.log(minPrice, minPrice);
+    if (minPrice == 0 && maxPrice == 0) {
+      maxPrice = -1;
+      minPrice = -1;
+    }
     console.log(areaId, taAreaId, timeCla, minPrice, maxPrice, corName);
     $common.request(
       "POST",
@@ -180,6 +197,7 @@ Page({
    */
   onLoad: function (options) {
     this.initArea();
+    this.initPriceInterval();
   },
 
   /**
@@ -187,7 +205,6 @@ Page({
    */
   onReady: function () {
     this.init();
-    this.initPriceInterval();
   },
 
   /**
@@ -220,10 +237,10 @@ Page({
       areaIndex: 0,
       tradIndex: 0,
       timeIndex: 0,
+      priceIndex: [0, 0],
+      isPriceAll:true
     })
-    this.initPriceInterval();
-    this.getTradData();
-    this.getListData();
+    this.init();
   },
 
   /**

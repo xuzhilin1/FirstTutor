@@ -1,15 +1,17 @@
 <!--pages/Home/activity/index.wxml-->
-<view wx:for='{{atyList}}' wx:key='{{index}}' bindtap='activityDetail' data-index='{{index}}' class='bg-fff padding-b-20 margin-t-20'>
-  <image class='INg' src='{{srcActivity}}{{item.AtyImgPath}}'></image>
-  <view class='padding-lr-30 fon-32 padding-tb-20 XianZhi'>
-    {{item.AtyTitle}}
-  </view>
-  <view class='flex between padding-lr-30 aitems-center'>
-    <view class='flex aitems-center fon-24 c8'>
-      <image class='address' mode='widthFix' src='../../images/newaddress_07.png'></image>
-      上海
-      <!-- {{item.AtyAddress}} -->{{item.showTime.time}}
+<view class='wrapper'>
+  <view wx:for='{{atyList}}' wx:key='{{index}}' bindtap='activityDetail' data-index='{{index}}' class='bg-fff padding-b-20 margin-t-20'>
+    <image class='INg' src='{{srcActivity}}{{item.AtyImgPath}}'></image>
+    <view class='padding-lr-30 fon-32 padding-tb-20 XianZhi'>
+      <text>{{item.AtyTitle}}</text>
     </view>
-    <view wx:if='{{item.showTime.isEnd}}' bindtap='ChaKan' class='detail fon-24 '>立即报名</view>
+    <view class='flex between padding-lr-30 aitems-center'>
+      <view class='flex aitems-center fon-24 c8'>
+        <image class='address' mode='widthFix' src='../../images/newaddress_07.png'></image>
+        上海
+        <!-- {{item.AtyAddress}} -->{{item.showTime.time}}
+      </view>
+      <view wx:if='{{item.showTime.isEnd}}' bindtap='ChaKan' class='detail fon-24 '>立即报名</view>
+    </view>
   </view>
 </view>

@@ -1,10 +1,10 @@
 <!--pages/New/basic/basic.wxml-->
-<view wx:for="{{pagesList}}" wx:key='{{index}}' bindtap='jump' data-index='{{index}}' data-url='{{item.url}}' class='flex height-85 padding-lr-30 aitems-center border-b-1 between list-box'>
-  <view class='flex1 aitems-center  fon-30 flex '>
-    <view class='width-135'>{{item.ZiLiao}}</view>
-    <view class='ca zxx_text_overflow'>{{item.Types}}</view>
+<view wx:for="{{pagesList}}" wx:key='{{index}}' bindtap='jump' data-index='{{index}}' data-url='{{item.url}}' class='list-box'>
+  <view class='list-box-item'>
+    <view class='list-left'>{{item.ZiLiao}}</view>
+    <view class='zxx_text_overflow'>{{item.Types}}</view>
   </view>
-  <image mode='widthFix' style='width:21rpx;' src='../../images/jian_13.png'></image>
+  <image mode='widthFix' class='list-image' src='../../images/jian_13.png'></image>
 </view>
 
 <!--  -->
@@ -18,9 +18,3 @@
 
 <button bindtap='submit' class='btn purple-bg margin-t-60 white'>保存</button>
 
-<!-- <view class='message'>
-  <view class='message-box'>
-    <progress percent="20" show-info='{{false}}' stroke-width='6' color='#7c99d0' />
-    <view class='message-text'>正在上传...</view>
-  </view>
-</view> -->

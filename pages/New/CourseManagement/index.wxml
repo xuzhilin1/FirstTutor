@@ -2,7 +2,7 @@
   <view wx:for='{{courInfos}}' wx:key='{{index}}' class='margin-t-20'>
     <view class='flex fon-26 border-t-1 bg-f9 c8 height-75 between padding-lr-30 aitems-center'>
       <view wx:if='{{item.CorCanView==0}}'>未审核</view>
-      <view wx:if='{{item.CorCanView==1}}'>审核已通过</view>
+      <view wx:if='{{item.CorCanView==1}}'>审核通过</view>
       <view wx:if='{{item.CorCanView==2}}'>审核未通过</view>
       <view>发布时间：{{item.showTime}}</view>
     </view>

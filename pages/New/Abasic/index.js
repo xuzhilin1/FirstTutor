@@ -15,7 +15,7 @@ Page({
       sex: '男'
     }],
     sexIndex: 0,
-    age: '1983-11-16',
+    age: '30',
     weChat: '',
     nationalityIndex: 0,
     nationalityArray: [],
@@ -116,7 +116,7 @@ Page({
         TeaOpenId: wx.getStorageSync('openid'),
         TeaName: TeaName,
         TeaGender: TeaGender,
-        TeaAge: this.countAge(TeaAge),
+        TeaAge: TeaAge,
         TeaWeChat: TeaWeChat,
         TeaUniversity: TeaUniversity,
         TeaNaLityId: TeaNaLityId,

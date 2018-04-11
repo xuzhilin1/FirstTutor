@@ -3,7 +3,7 @@
     <view class=' middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
       <view class='flex fon-36  c2b '>
         <view>
-          {{item.NedCorName}}
+          <text>{{item.NedCorName}}</text>
           <view class='c8  fon-24 margin-t-20'>{{item.area}} | {{item.NedCorAfw}} | {{item.timeStage}}</view>
         </view>
       </view>

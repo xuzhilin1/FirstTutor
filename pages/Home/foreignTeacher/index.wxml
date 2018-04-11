@@ -53,7 +53,7 @@
       <picker mode='multiSelector' class=' flex' value="{{priceIndex}}" range="{{priceList}}" bindchange="bindPriceChange">
         <view class='flex picker aitems-center '>
           <view class="fon-26 flex aitems-center yanse ">
-            <view class='c72'>{{priceIndex[0]===-1?"价格区间":priceList[0][priceIndex[0]] + '-' + priceList[1][priceIndex[1]]}}</view>
+            <view class='c72'>{{!isPrice?"价格区间":isPriceAll?"所有价格":priceList[0][priceIndex[0]] + '-' + priceList[1][priceIndex[1]]}}</view>
             <image mode='widthFix' class='xia margin-l-10' src='../../images/xia_07.jpg'></image>
           </view>
         </view>

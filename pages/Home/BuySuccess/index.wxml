@@ -27,7 +27,7 @@
     <image mode='widthFix' class='address' src='../../images/adddress_14.png'></image>
     {{teaAddress}}
   </view>
-  <view class='padding-50  padding-tb-20 bg-fff flex aitems-center fon-26 '>
+  <view  bindtap='callPhone' data-phone='{{teaPhone}}' class='padding-50  padding-tb-20 bg-fff flex aitems-center fon-26 '>
     <image mode='widthFix' class='address' src='../../images/phone_06.png'></image>
     {{teaPhone}}
   </view>

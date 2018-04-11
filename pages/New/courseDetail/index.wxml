@@ -5,7 +5,7 @@
     <view class='flex fon-36 c2b'>
       <image class='QiHao' mode='widthFix' src='../../images/qi_03.png'></image>
       <view>
-        {{course.CorTitle}}
+       <text>{{course.CorTitle}}</text>
         <view class='c8 margin-t-20 fon-24'>已有{{course.BuyCount}}人参与</view>
       </view>
     </view>
@@ -18,7 +18,7 @@
     <view class='flex fon-36  c2b '>
       <image class='QiHao' mode='widthFix' src='../../images/tuan_06.png'></image>
       <view>
-        {{course.CorTitle}}
+       <text>{{course.CorTitle}}</text>
         <view class='bold bg-fff purple'>¥{{course.CorPrice}}</view>
       </view>
     </view>

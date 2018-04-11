@@ -2,7 +2,7 @@
   <view class='flex fon-36  c2b '>
     <image class='QiHao' mode='widthFix' src='../../images/qi_03.png'></image>
     <view>
-      {{course.CorTitle}}
+      <text>{{course.CorTitle}}</text>
       <view class=' fon-24 c8 margin-t-10 '>已有{{course.BuyCount}}人购买</view>
     </view>
   </view>
@@ -13,7 +13,7 @@
   <view class='flex fon-36  c2b '>
     <image class='QiHao' mode='widthFix' src='../../images/tuan_06.png'></image>
     <view>
-      {{course.CorTitle}}
+     <text>{{course.CorTitle}}</text>
       <view class='bold bg-fff purple'>¥ {{course.CorPrice}}</view>
     </view>
   </view>
@@ -29,7 +29,7 @@
       <view wx:if='{{course.CorType!=1&&item.OdrIsHead}}' class='Tuan border fon-24 purple'>团长</view>
       <image class='Wen' mode='widthFix' src='../../images/DuiHua_06.png'></image>
     </view>
-    <view class='flex aitens-center'>
+    <view bindtap='callPhone' data-phone='{{item.OdrPhone}}' class='flex aitens-center'>
       <image class='phone' mode='widthFix' src='../../images/phone_06.png'></image>
       {{item.OdrPhone}}
     </view>

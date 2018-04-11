@@ -1,14 +1,17 @@
 /* pages/Home/activity/index.wxss */
-.INg{
+
+.INg {
   width: 100%;
   height: 326rpx;
   display: block;
 }
-.address{
+
+.address {
   width: 30rpx;
   margin-right: 20rpx;
 }
-.detail{
+
+.detail {
   width: 140rpx;
   height: 45rpx;
   text-align: center;
@@ -16,4 +19,8 @@
   border-radius: 5px;
   border: 1px solid #55ba81;
   color: #55ba81;
+}
+
+.wrapper>view:nth-child(1) {
+  margin-top: 0;
 }

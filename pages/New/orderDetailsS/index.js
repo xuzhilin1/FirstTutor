@@ -10,6 +10,13 @@ Page({
     teaAddress: '', //外教地址
     teaPhone: '', //外教联系方式
   },
+  callPhone(e) { //打电话
+    let phone = e.currentTarget.dataset.phone;
+    console.log(phone);
+    wx.makePhoneCall({
+      phoneNumber: phone
+    })
+  },
   lookAddress() { //查看地图
     let address = this.data.teaAddress;
     $common.getAddress(address);

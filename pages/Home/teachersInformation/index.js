@@ -27,6 +27,12 @@ Page({
     allComment: false,
     listenCallbackNum: 0, //本页面三个接口，监听请求全部完成
   },
+  callPhone(e) { //打电话
+    let phone = e.currentTarget.dataset.phone;
+    wx.makePhoneCall({
+      phoneNumber: phone
+    })
+  },
   bindNavbar(e) { //nav滚动页面
     let index = parseInt(e.currentTarget.dataset.index),
       navbarList = this.data.navbarList;

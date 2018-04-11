@@ -4,49 +4,44 @@ page {
   background-color: #fff;
 }
 
+view {
+  box-sizing: border-box;
+}
+
 .list-box {
   box-sizing: border-box;
   width: 100%;
+  height: 85rpx;
+  padding: 0 30rpx;
+  border-bottom: 1px solid #e0e0e0;
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
+}
+
+.list-box-item {
+  font-size: 30rpx;
+  display: flex;
+  align-items: center;
+  width: 90%;
+  height: 100%;
+}
+
+.list-left {
+  width: 135rpx;
 }
 
 .zxx_text_overflow {
-  width: 70%;
+  width: 75%;
   box-sizing: border-box;
   white-space: nowrap;
   text-overflow: ellipsis;
   -o-text-overflow: ellipsis;
   overflow: hidden;
+  color: #aaa;
+  padding-right: 30rpx;
 }
 
-.message {
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  z-index: 200;
-}
-
-.message .message-box {
-  width: 200rpx;
-  height: 200rpx;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  border-radius: 10rpx;
-  margin-top: 50%;
-}
-
-.message .message-text {
-  font-size: 26rpx;
-  margin-top: 20rpx;
-  color: #fff;
-}
-
-.message progress {
-  width: 60%;
+.list-image {
+  width: 21rpx;
 }

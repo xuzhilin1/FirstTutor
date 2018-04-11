@@ -152,7 +152,7 @@
           {{item.OdrName}}
           <view wx:if='{{index===0}}' class='Tuan border fon-24 purple'>团长</view>
         </view>
-        <view class='flex aitens-center'>
+        <view bindtap='callPhone'data-phone='{{item.OdrPhone}}' class='flex aitens-center'>
           <image class='phone' mode='widthFix' src='../../images/phone_06.png'></image>
           {{item.OdrPhone}}
         </view>
@@ -170,7 +170,7 @@
         <image mode='widthFix' class='address' src='../../images/adddress_14.png'></image>
         {{teaAddress}}
       </view>
-      <view class='padding-50  padding-tb-20 bg-fff flex aitems-center fon-26 '>
+      <view bindtap='callPhone' data-phone='{{teaPhone}}' class='padding-50  padding-tb-20 bg-fff flex aitems-center fon-26 '>
         <image mode='widthFix' class='address' src='../../images/phone_06.png'></image>
         {{teaPhone}}
       </view>
