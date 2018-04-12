@@ -1,16 +1,18 @@
 /*
    本地存储 userInfo openid userType teacherStatusInfo
 */
-const data = {
-  //adminsid:"1490463872",
-  //appid: "wx978aabc5088a48c3",
-  MchId: "1490463872", //商户号
-  //Secret: "b068590dc836feca0973125466df1668",
-  // APIKey: "yizhaokejiarw234WER123123456eehu",
-  // TheLablePath: "D:\wwwroot\kcbweb\cert\apiclient_cert.p12",
-  TitleName: ""
-};
-const host = "https://wj.1-zhao.com";
+// const data = {
+//   //adminsid:"1490463872",
+//   //appid: "wx978aabc5088a48c3",
+//   MchId: "1490463872", //商户号
+//   //Secret: "b068590dc836feca0973125466df1668",
+//   // APIKey: "yizhaokejiarw234WER123123456eehu",
+//   // TheLablePath: "D:\wwwroot\kcbweb\cert\apiclient_cert.p12",
+//   TitleName: ""
+// };
+const myHttps = "wj.1-zhao.com";
+const host = `https://${myHttps}`;
+const webStock = `wss://${myHttps}/WebSocketServer.ashx`;
 const QQMapWX = require('./qqmap-wx-jssdk.min.js');
 const mapKey = new QQMapWX({
   key: '4WABZ-V2ARX-NLS45-T5Q7T-CETWK-KMB7C' // 必填
@@ -142,6 +144,12 @@ const config = {
   GetTeaCogInfoList: `${host}/LittleProgram/OpenGrpOrder/GetTeaCogInfoList`,
   // 外教--点评管理--点评信息获取(2018-04-10)
   GetAllRewAboutMe: `${host}/LittleProgram/Review/GetAllRewAboutMe`,
+  // 获取与我相关的所有聊天记录(2018-04-12)
+  GetChatMemRecord: `${host}/LittleProgram/ChatRecord/GetChatMemRecord`,
+  // 获取两人聊天记录(2018-04-12)
+  GetChatRecord: `${host}/LittleProgram/ChatRecord/GetChatRecord`,
+  // 获取聊天双方头像（2018-04-12）
+  GetUserInfo: `${host}/LittleProgram/UserInfo/GetUserInfo`,
 }
 const wxGetUserInfo = function (code, userInfo, callback, callback2) {
   let openid = wx.getStorageSync('openid');
@@ -216,6 +224,7 @@ const failFun = function (code, userInfo, callback, callback2) {
   })
 }
 module.exports = {
+  webStock: webStock,
   config: config,
   phoneReg: phoneReg,
   srcImg: srcImg,

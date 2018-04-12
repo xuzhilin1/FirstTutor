@@ -1,13 +1,14 @@
 <!--pages/New/onlineChart/index.wxml-->
 <view class='wrapper'>
+  <!-- 右边  start  -->
   <view class='core' wx:for='{{listData}}' wx:key='{{index}}'>
-     <view wx:if='{{item.isTime}}' class='core-time'>
-      {{item.time}}
-    </view> 
-    <view wx:if='{{item.chartType}}' class='core-me'>
+    <view wx:if='{{item.isTime}}' class='core-time'>
+      {{item.showTime}}
+    </view>
+    <view wx:if='{{item.CrdBeMySelf==1}}' class='core-me'>
       <view class='core-box-me'>
         <view class='core-chart'>
-          {{item.chartContext}}
+          {{item.CrdChatMsg}}
         </view>
         <view class='core-right'>
           <view class='core-right-1'></view>
@@ -16,7 +17,8 @@
       </view>
       <image class='core-image' src='{{myImage}}'></image>
     </view>
-    <view wx:if='{{!item.chartType}}' class='core-you'>
+    <!-- 左边  start  -->
+    <view wx:if='{{item.CrdBeMySelf==0}}' class='core-you'>
       <image class='core-image' src='{{youImage}}'></image>
       <view class='core-box-you'>
         <view class='core-left'>
@@ -24,7 +26,7 @@
           <view class='core-left-2'></view>
         </view>
         <view class='core-chart'>
-          {{item.chartContext}}
+          {{item.CrdChatMsg}}
         </view>
       </view>
     </view>

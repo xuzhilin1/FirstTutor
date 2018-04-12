@@ -115,6 +115,6 @@
       </view>
     </view>
   </view>
-  <view class='footer fon-30 white purple-bg'>咨询老师</view>
+  <view bindtap='onlineChart' class='footer fon-30 white purple-bg'>咨询老师</view>
 
 </view>

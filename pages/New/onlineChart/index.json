@@ -3,5 +3,6 @@
   "backgroundTextStyle": "light",
   "navigationBarBackgroundColor": "#000",
   "navigationBarTextStyle": "white",
-  "navigationBarTitleText": "在线沟通"
+  "navigationBarTitleText": "在线沟通",
+  "enablePullDownRefresh": true
 }

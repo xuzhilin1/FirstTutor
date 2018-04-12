@@ -11,7 +11,7 @@
         上海
         <!-- {{item.AtyAddress}} -->{{item.showTime.time}}
       </view>
-      <view wx:if='{{item.showTime.isEnd}}' bindtap='ChaKan' class='detail fon-24 '>立即报名</view>
+      <view wx:if='{{item.showTime.isEnd}}' bindtap='ChaKan' class='detail fon-24 '>{{item.SignUpType>0?"已报名":"立即报名"}}</view>
     </view>
   </view>
 </view>

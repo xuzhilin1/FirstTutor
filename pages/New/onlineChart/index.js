@@ -1,34 +1,57 @@
 // pages/New/onlineChart/index.js
+const $common = require('../../../utils/common.js');
+let SocketTask;
 Page({
   data: {
     value: '', //聊天框的初始内容
-    myImage: '../../images/ren_03.png',
-    youImage: '../../images/ren_03.png',
-    listData: [{
-      isTime: true, //是否显示 时间 
-      time: '11:52',
-      chartType: true, // true 我 false 你
-      chartContext: '你好，在吗?'
-    }, {
-      isTime: false, //是否显示 时间 
-      time: '11:52',
-      chartType: false, // true 我 false 你
-      chartContext: '你好，在的'
-    }]
+    myImage: '',
+    youImage: '',
+    pageIndex: 1,
+    pageSize: 5,
+    listData: [],
+    userId: -1,
+    newDataCount: 0, //自己发送与接收数据之和
   },
   confirm(e) { //点击右下角 发送 按钮
     let value = e.detail.value;
     if (value.trim().length <= 0) return;
-    let listData = this.data.listData;
-    listData.push({
-      isTime: true, //是否显示 时间 
-      time: '11:52',
-      chartType: true, // true 我 false 你
-      chartContext: value
-    });
-    this.setData({
-      listData: listData,
-      value: '',
+    let obj = {
+      CrdChatMsg: value,
+      CrdReceOpId: this.data.userId
+    }
+    wx.sendSocketMessage({ //发送消息
+      data: JSON.stringify(obj),
+      success: (res) => {
+        let newDataCount = this.data.newDataCount;
+        newDataCount++;
+        let listData = this.data.listData;
+        let lastData = listData[listData.length - 1];
+        let date = new Date();
+        let timeStamp = Date.parse(date);
+        let y = date.getFullYear(),
+          m = date.getMonth() + 1,
+          d = date.getDate(),
+          h = date.getHours(),
+          f = date.getMinutes();
+        m < 10 && (m = '0' + m);
+        d < 10 && (d = '0' + d);
+        h < 10 && (h = '0' + h);
+        f < 10 && (f = '0' + f);
+        let showTime = `${y}-${m}-${d} ${h}:${f}`;
+        let obj = {
+          CrdBeMySelf: 1,
+          CrdChatMsg: value,
+          timeStamp: timeStamp,
+          showTime: showTime,
+          isTime: timeStamp - lastData.timeStamp >= 300000 ? true : false
+        };
+        listData.push(obj);
+        this.setData({
+          value: '',
+          newDataCount: newDataCount,
+          listData: listData
+        })
+      }
     })
     wx.createSelectorQuery().select('#wrap').boundingClientRect(function (rect) {
       // 使页面滚动到底部
@@ -39,11 +62,175 @@ Page({
     }).exec();
   },
 
+  getImage() { //获取头像
+    $common.request(
+      'POST',
+      $common.config.GetUserInfo,
+      {
+        openId: wx.getStorageSync('openid'),
+        userId: this.data.userId
+      },
+      (res) => {
+        if (res.data.res) {
+          this.setData({
+            myImage: res.data.curAvaUrl,
+            youImage: res.data.tarAvaUrl
+          })
+        } else {
+          switch (res.data.errType) {
+            case 1:
+              $common.showModal('参数错误');
+              break;
+            case 2:
+              $common.showModal('获取头像失败');
+              break;
+          }
+        }
+      },
+      (res) => {
+
+      },
+      (res) => {
+      }
+    )
+  },
+  timeStamp(time) { //时间戳转换为日期
+    time = time.replace("/Date(", '').replace(')/', '');
+    let date = new Date(parseInt(time)),
+      y = date.getFullYear(),
+      m = date.getMonth() + 1,
+      d = date.getDate(),
+      h = date.getHours(),
+      f = date.getMinutes();
+    let msec = Date.parse(new Date(parseInt(time)));
+    m < 10 && (m = '0' + m);
+    d < 10 && (d = '0' + d);
+    h < 10 && (h = '0' + h);
+    f < 10 && (f = '0' + f);
+    return {
+      timeWhile: `${y}-${m}-${d} ${h}:${f}`,
+      msec: msec
+    }
+  },
+  getChat(isReach) { //获取聊天记录
+    isReach = isReach ? true : false;
+    let pageIndex = isReach ? this.data.pageIndex : 1,
+      pageSize = this.data.pageSize,
+      newDataCount = this.data.newDataCount;
+    wx.showLoading({ title: '努力加载中...' });
+    $common.request(
+      'POST',
+      $common.config.GetChatRecord,
+      {
+        openId: wx.getStorageSync('openid'),
+        userId: this.data.userId,
+        pageIndex: pageIndex,
+        pageSize: pageSize,
+        newDataCount: newDataCount
+      },
+      (res) => {
+        if (res.data.res) {
+          let data = res.data.infoList;
+          if (data.length >= pageSize) {
+            pageIndex++;
+          }
+          let listData = isReach ? this.data.listData : [];
+          for (let i = 0, len = data.length; i < len; i++) {
+            let date = this.timeStamp(data[i].CrdSendTime);
+            data[i].showTime = date.timeWhile;
+            data[i].timeStamp = date.msec;
+            //对话时距超过5分钟显示时间 
+            data[i].isTime = i > 0 ? data[i].timeStamp - data[i - 1].timeStamp >= 300000 ? true : false : false;
+            listData.unshift(data[i]);
+          }
+          this.setData({
+            listData: listData,
+            pageIndex: pageIndex
+          })
+        } else {
+          switch (res.data.errType) {
+            case 1:
+              //参数错误
+              break;
+            case 2:
+              //userId不正确
+              break;
+            case 3:
+              //获取记录失败
+              break;
+            case 4:
+              //更改消息状态失败
+              break;
+          }
+        }
+      },
+      (res) => {
+
+      },
+      (res) => {
+        wx.hideLoading();
+        wx.stopPullDownRefresh();
+      }
+    )
+  },
+  init() {
+    let openid = wx.getStorageSync('openid');
+    this.getImage();
+    this.getChat();
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    let userId = options.userId;
+    this.setData({
+      userId: userId
+    });
+    let openid = wx.getStorageSync('openid');
+    var socketOpen = false;
+    //建立连接
+    wx.connectSocket({
+      url: `${$common.webStock}?userId=${openid}&tarUserId=${userId}`,
+    });
+    //连接成功
+    wx.onSocketOpen(() => {
+      console.log('WebSocket连接已打开！');
+    })
+    //接收数据
+    wx.onSocketMessage((res) => {
+      let data = JSON.parse(res.data);
+      console.log(data);
+      if (data.CrdReceOpId != this.data.userId) {
+        return; //不是正在和你说话的人，不鸟他
+      }
+      let newDataCount = this.data.newDataCount;
+      newDataCount++;
+      let listData = this.data.listData;
+      let obj = {
+        CrdBeMySelf: 0,
+        CrdChatMsg: data.CrdChatMsg,
+      };
+      let date = new Date(parseInt(data.CrdCreateOn)),
+        y = date.getFullYear(),
+        m = date.getMonth() + 1,
+        d = date.getDate(),
+        h = date.getHours(),
+        f = date.getMinutes();
+      m < 10 && (m = '0' + m);
+      d < 10 && (d = '0' + d);
+      h < 10 && (h = '0' + h);
+      f < 10 && (f = '0' + f);
+      obj.showTime = `${y}-${m}-${d} ${h}:${f}`;
+      obj.timeStamp = data.CrdCreateOn;
+      let lastData = listData[listData.length - 1];
+      obj.isTime = obj.timeStamp - lastData.timeStamp >= 300000 ? true : false;
+      listData.push(obj);
+      this.setData({
+        newDataCount: newDataCount,
+        listData: listData
+      })
+    });
   },
 
   /**
@@ -57,28 +244,28 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.init();
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    wx.closeSocket();
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    wx.closeSocket();
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    wx.stopPullDownRefresh();
+    this.getChat(true);
   },
 
   /**

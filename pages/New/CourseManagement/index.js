@@ -79,6 +79,10 @@ Page({
   groupList(e) { //成功拼团
     let index = e.currentTarget.dataset.index,
       courInfos = this.data.courInfos;
+    if (courInfos.FGCount <= 0) {
+      $common.showModal('暂无拼团数据');
+      return;
+    }
     wx.navigateTo({
       url: `../GroupList/index?courId=${courInfos[index].CorId}`,
     })
@@ -166,7 +170,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getCourseList();
+
   },
 
   /**
@@ -180,7 +184,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getCourseList();
   },
 
   /**

@@ -10,6 +10,12 @@ Page({
     teaAddress: '', //外教地址
     teaPhone: '', //外教联系方式
   },
+  onlineChart(e) { //立即沟通
+    let userId = this.data.teacher.TeaUserId;
+    wx.navigateTo({
+      url: `../../New/onlineChart/index?userId=${userId}`,
+    })
+  },
   callPhone(e) { //打电话
     let phone = e.currentTarget.dataset.phone;
     console.log(phone);

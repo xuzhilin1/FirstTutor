@@ -6,6 +6,13 @@ Page({
     cog: {},
     course: {}
   },
+  onlineChart(e) { //立即沟通
+  let index = e.currentTarget.dataset.index;
+    let userId = this.data.MemList[index].UserId;
+    wx.navigateTo({
+      url: `../../New/onlineChart/index?userId=${userId}`,
+    })
+  },
   callPhone(e) { //打电话
     let phone = e.currentTarget.dataset.phone;
     console.log(phone);

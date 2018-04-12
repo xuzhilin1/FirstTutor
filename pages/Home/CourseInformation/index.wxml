@@ -142,7 +142,7 @@
         首页
       </view>
     </view>
-    <view bindtap='chatTeacher' class='flex center aitems-center KuanDU'>
+    <view bindtap='onlineChart' class='flex center aitems-center KuanDU'>
       <view class='fon-20 c88 gaoDU'>
         <image class='fangZI' mode='widthFix' src='../../images/zixun_09.png'></image>
         咨询

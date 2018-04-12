@@ -27,6 +27,12 @@ Page({
     allComment: false,
     listenCallbackNum: 0, //本页面三个接口，监听请求全部完成
   },
+  onlineChart() { //立即沟通
+    let TeaUserId = this.data.teaInfo.TeaUserId;
+    wx.navigateTo({
+      url: `../../New/onlineChart/index?userId=${TeaUserId}`,
+    })
+  },
   callPhone(e) { //打电话
     let phone = e.currentTarget.dataset.phone;
     wx.makePhoneCall({

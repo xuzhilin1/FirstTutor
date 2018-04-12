@@ -27,7 +27,7 @@
       <image class='orderimg' src='{{item.UserAvaUrl}}'></image>
       {{item.OdrName}}
       <view wx:if='{{course.CorType!=1&&item.OdrIsHead}}' class='Tuan border fon-24 purple'>团长</view>
-      <image class='Wen' mode='widthFix' src='../../images/DuiHua_06.png'></image>
+      <image bindtap='onlineChart' data-index='{{index}}' class='Wen' mode='widthFix' src='../../images/DuiHua_06.png'></image>
     </view>
     <view bindtap='callPhone' data-phone='{{item.OdrPhone}}' class='flex aitens-center'>
       <image class='phone' mode='widthFix' src='../../images/phone_06.png'></image>

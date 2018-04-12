@@ -39,6 +39,11 @@ Page({
   },
 
   init(isReach) {
+    let openid = wx.getStorageSync('openid');
+    if (openid === null || openid === '') {
+      $common.getOpenid(null, this.init); //获取用户信息及openid；
+      return;
+    }
     isReach = isReach ? true : false;
     wx.showLoading({ title: '努力加载中...' });
     let pageIndex = isReach ? this.data.pageIndex : 1,
@@ -47,6 +52,7 @@ Page({
       'POST',
       $common.config.GetAtyInfoList,
       {
+        openId: wx.getStorageSync('openid'),
         pageIndex: pageIndex,
         pageSize: pageSize,
       },

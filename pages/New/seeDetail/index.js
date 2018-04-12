@@ -52,6 +52,12 @@ Page({
     }
     return data;
   },
+  onlineChart() { //立即沟通
+    let userId = this.data.lnd.UserId;
+    wx.navigateTo({
+      url: `../../New/onlineChart/index?userId=${userId}`,
+    })
+  },
   complateAddress(res) { //区域
     let addressData = this.data.addressData;
     let data;

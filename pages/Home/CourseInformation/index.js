@@ -15,6 +15,12 @@ Page({
     fgtList: {}, //推荐
     orderBeDel: 0, //1 订单已删除  0 未删除
   },
+  onlineChart() { //立即沟通
+    let TeaUserId = this.data.tea.TeaUserId;
+    wx.navigateTo({
+      url: `../../New/onlineChart/index?userId=${TeaUserId}`,
+    })
+  },
   initPageData() { //初始化上课时间
     //周几就用数字1234567代替，时间段就用1（上午），2（下午1），3（下午2），4（晚上）代替
     let arr = [];
@@ -168,10 +174,6 @@ Page({
     wx.navigateTo({
       url: '../sureOrder/index?corId=' + course.CorId + '&orderType=' + 1 + '&groupType=' + 1 + '&cogId=' + -1 + '&weekTime=' + JSON.stringify(thisData),
     })
-  },
-
-  chatTeacher() { //咨询 ， 与老师交流
-
   },
   getCourseAndTeacherInfo() { //获取课程和教师信息
     $common.request(
