@@ -1,11 +1,11 @@
 {
   "pages": [
     "pages/Home/Home/index",
+    "pages/Home/SpellGroup/index",
+    "pages/New/Abasic/index",
     "pages/New/index/index",
     "pages/New/orderDetails/index",
     "pages/Home/BuySuccess/index",
-    "pages/Home/SpellGroup/index",
-    "pages/New/Abasic/index",
     "pages/Home/Success/index",
     "pages/New/basic/basic",
     "pages/Home/activity/index",

@@ -119,7 +119,7 @@
   border-left: 20rpx solid transparent;
   position: absolute;
   left: 48%;
-  top: -20rpx;
+  top: -18rpx;
 }
 
 /*  评分  */

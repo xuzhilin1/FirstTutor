@@ -145,7 +145,7 @@ Page({
     let studentName = this.data.studentName,
       studentPhone = this.data.studentPhone,
       startCourseTime = this.data.startCourseTime,
-      courseAddress = this.data.courseAddress;
+      courseAddress = this.data.courseAddress ? this.data.courseAddress : '线下协商';
     if (studentName.trim().length <= 0) {
       $common.showModal('请输入姓名');
       return;
@@ -156,10 +156,6 @@ Page({
     }
     if (!startCourseTime) {
       $common.showModal('请选择上课时间');
-      return;
-    }
-    if (courseAddress.trim().length <= 0) {
-      $common.showModal('请选择上课地址');
       return;
     }
     let orderType = this.data.orderType,
@@ -285,13 +281,13 @@ Page({
             case 4:
               $common.showModal('获取信息出错');
               break;
-            case 1:
+            case 5:
               $common.showModal('拼团信息添加失败');
               break;
-            case 1:
+            case 6:
               $common.showModal('cogId不正确或者服务器出错');
               break;
-            case 1:
+            case 7:
               $common.showModal('该团已经结束');
               break;
           }

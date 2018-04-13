@@ -9,7 +9,7 @@
     <view class='flex fon-36  c2b '>
       <image class='QiHao' mode='widthFix' src='../../images/tuan_06.png'></image>
       <view>
-       <text>{{item.CorTitle}}</text>
+        <text>{{item.CorTitle}}</text>
         <view class='c8 fon-24 margin-t-10'>已有{{item.BuyCount}}人购买</view>
       </view>
     </view>
@@ -26,6 +26,7 @@
 
   <view class='flex fon-24 border-t-1 border-b-1 padding-lr-30  aitems-center bg-fff between'>
     <view class='fon-26 c8'>上课时间：{{item.ClaStudyTime}}{{item.FgtStartTime}}</view>
-    <view bindtap='orderDetail' data-index='{{index}}' class='border AnNiu white purple-bg'>{{item.CorType!=1?"拼团详情":"订单详情"}}</view>
+    <view wx:if='{{item.FgtType==1}}' bindtap='orderDetail' data-index='{{index}}' class='border AnNiu white purple-bg'>拼团详情</view>
+    <view wx:if='{{item.FgtType==2}}' bindtap='orderDetail' data-index='{{index}}' class='border AnNiu white purple-bg'>订单详情</view>
   </view>
 </view>

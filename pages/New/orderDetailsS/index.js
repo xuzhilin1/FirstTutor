@@ -61,6 +61,7 @@ Page({
           showMem.orderTime = this.timeStamp(showMem.OdrCreateOn);//下单时间;
           showMem.buyTime = this.timeStamp(showMem.OdrBuyDate); //支付时间
           showMem.groupSuccessTime = this.timeStamp(showMem.OdrFgtSuccessTime);//拼团成功时间
+          course.CorPrice = course.CorPrice.toFixed(2) < 0.01 ? 0.01 : course.CorPrice.toFixed(2);
           this.setData({
             course: course,
             teacher: res.data.teacher,

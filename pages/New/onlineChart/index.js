@@ -7,7 +7,7 @@ Page({
     myImage: '',
     youImage: '',
     pageIndex: 1,
-    pageSize: 5,
+    pageSize: 10,
     listData: [],
     userId: -1,
     newDataCount: 0, //自己发送与接收数据之和
@@ -54,7 +54,7 @@ Page({
           CrdChatMsg: value,
           timeStamp: timeStamp,
           showTime: showTime,
-          isTime: timeStamp - lastData.timeStamp >= 300000 ? true : false
+          isTime: listData.length > 0 ? timeStamp - lastData.timeStamp >= 300000 ? true : false : false
         };
         listData.push(obj);
         this.setData({
@@ -62,8 +62,12 @@ Page({
           newDataCount: newDataCount,
           listData: listData
         })
+        this.myPageScroll();
       }
     })
+
+  },
+  myPageScroll() {
     wx.createSelectorQuery().select('#wrap').boundingClientRect(function (rect) {
       // 使页面滚动到底部
       wx.pageScrollTo({
@@ -72,7 +76,6 @@ Page({
       console.log(rect);
     }).exec();
   },
-
   getImage() { //获取头像
     $common.request(
       'POST',
@@ -236,12 +239,13 @@ Page({
       obj.showTime = `${y}-${m}-${d} ${h}:${f}`;
       obj.timeStamp = data.CrdCreateOn;
       let lastData = listData[listData.length - 1];
-      obj.isTime = obj.timeStamp - lastData.timeStamp >= 300000 ? true : false;
+      obj.isTime = listData.length > 0 ? obj.timeStamp - lastData.timeStamp >= 300000 ? true : false : false;
       listData.push(obj);
       this.setData({
         newDataCount: newDataCount,
         listData: listData
-      })
+      });
+      this.myPageScroll();
     });
   },
 

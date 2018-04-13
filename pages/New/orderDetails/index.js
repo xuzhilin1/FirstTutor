@@ -7,7 +7,7 @@ Page({
     course: {}
   },
   onlineChart(e) { //立即沟通
-  let index = e.currentTarget.dataset.index;
+    let index = e.currentTarget.dataset.index;
     let userId = this.data.MemList[index].UserId;
     wx.navigateTo({
       url: `../../New/onlineChart/index?userId=${userId}`,
@@ -66,10 +66,18 @@ Page({
             MemList[i].orderCreatTime = this.timeStamp(MemList[i].OdrCreateOn);
             MemList[i].orderBuyTime = this.timeStamp(MemList[i].OdrBuyDate);
           }
+          let memData = [];
+          for (let i = 0, len = MemList.length; i < len; i++) {
+            if (MemList[i].OdrIsHead) {
+              memData.unshift(MemList[i]);
+            } else {
+              memData.push(MemList[i]);
+            }
+          }
           cog.courseStartTime = this.timeStamp(cog.FgtOpenTime);
           cog.courseEndTime = this.timeStamp(cog.FgtEndTime);
           this.setData({
-            MemList: MemList,
+            MemList: memData,
             cog: cog,
             course: course
           })

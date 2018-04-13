@@ -130,10 +130,12 @@ Page({
         } else {
           switch (res.data.resType) {
             case 1:
-              $common.showModal('参数有误');
+              //参数有误
+              $common.showModal('注册失败');
               break;
             case 2:
-              $common.showModal('openid非法');
+              //openid非法
+              $common.showModal('注册失败');
               break;
             case 3:
               $common.showModal('该外教已注册');

@@ -26,7 +26,7 @@
     <view class='flex aitems-center'>
       <image class='orderimg' src='{{item.UserAvaUrl}}'></image>
       {{item.OdrName}}
-      <view wx:if='{{course.CorType!=1&&item.OdrIsHead}}' class='Tuan border fon-24 purple'>团长</view>
+      <view wx:if='{{cog.FgtType==1&&item.OdrIsHead}}' class='Tuan border fon-24 purple'>团长</view>
       <image bindtap='onlineChart' data-index='{{index}}' class='Wen' mode='widthFix' src='../../images/DuiHua_06.png'></image>
     </view>
     <view bindtap='callPhone' data-phone='{{item.OdrPhone}}' class='flex aitens-center'>

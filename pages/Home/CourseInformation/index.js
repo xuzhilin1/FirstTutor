@@ -122,11 +122,12 @@ Page({
       url: '../Home/index',
     })
   },
-  goJoinGroup() { //去参团
+  goJoinGroup(e) { //去参团
     let course = this.data.course;
     let fgtList = this.data.fgtList;
+    let index = e.currentTarget.dataset.index;
     wx.navigateTo({
-      url: '../sureOrder/index?corId=' + course.CorId + '&orderType=' + 1 + '&groupType=' + 2 + '&cogId=' + fgtList.FgtId,
+      url: '../sureOrder/index?corId=' + course.CorId + '&orderType=' + 1 + '&groupType=' + 2 + '&cogId=' + fgtList[index].FgtId,
     })
   },
   alonePayment() { //单独购买
@@ -219,13 +220,13 @@ Page({
               (res) => {
                 if (res.data.res) {
                   console.log(res);
-                  let fgtList = res.data.fgtList[0];
-                  if (!fgtList) return;
-                  let str = fgtList.FgtEndTime.replace('/Date(', '');
-                  str = str.replace(')/', '');
-                  fgtList.countDown = this.timeStamp(str);
+                  let data = res.data.fgtList;
+                  if (data.length <= 0) return;
+                  for (let i = 0, len = data.length; i < len; i++) {
+                    data[i].countDown = this.timeStamp(data[i].FgtEndTime);
+                  }
                   this.setData({
-                    fgtList: fgtList
+                    fgtList: data
                   })
                 }
               },
@@ -258,6 +259,7 @@ Page({
     );
   },
   timeStamp(time) { //时间戳转换为日期
+    time = time.replace('/Date(', '').replace(')/', '');
     let date = new Date(parseInt(time)),
       y = date.getFullYear(),
       m = date.getMonth() + 1,

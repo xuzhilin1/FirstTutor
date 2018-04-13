@@ -2,6 +2,7 @@
 const $common = require('../../../utils/common.js');
 Page({
   data: {
+    isOverdue: false, //拼团是否过期
     isShowPage: false, //整个页面是否显示
     isJoin: false, //true 本人有购买此课程
     countDown: "00:00:00",
@@ -43,6 +44,7 @@ Page({
       if (leftTime <= 0) {
         this.setData({
           countDown: `00:00:00`,
+          isOverdue: true
         })
         return;
       }
@@ -92,17 +94,26 @@ Page({
               break;
             }
           }
+          let memData = [];
+          for (let i = 0, len = mem.length; i < len; i++) {
+            if (mem[i].OdrIsHead) {
+              memData.unshift(mem[i]);
+            } else {
+              memData.push(mem[i]);
+            }
+          }
+          course.CorPrice = course.CorPrice.toFixed(2) < 0.01 ? 0.01 : course.CorPrice.toFixed(2);
           this.setData({
             course: course,
             teacher: res.data.teacher,
             cog: cog,
-            mem: mem,
+            mem: memData,
             leftTime: leftTime,
             isJoin: isJoin,
             isShowPage: true
           });
-          if (cog.FgtStatus == 1) {
-            this.countDown();
+          if (cog.FgtStatus == 1) {    
+              this.countDown(); 
           }
         } else {
           switch (res.errType) {
@@ -174,7 +185,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options);
     let cogId = parseInt(options.cogId);
     this.setData({
       cogId: cogId, //65测试
@@ -186,7 +196,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    this.countDown();
+    
   },
 
   /**
