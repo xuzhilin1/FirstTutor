@@ -25,20 +25,17 @@ Page({
   },
   //普通选择
   bindPickerChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       index: e.detail.value
     })
   },
   bindPickerChange1: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       index1: e.detail.value
     })
   },
   //日期
   bindDateChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       date: e.detail.value
     })

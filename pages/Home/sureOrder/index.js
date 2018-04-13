@@ -200,9 +200,9 @@ Page({
                */
               let pagePath = ''; //用户收到的模板消息链接
               if (orderType == 1) {//订单类型类型：1. 团购  2. 单独购
-                pagePath = '/pages/Home/SpellGroup/index?cogId=' + cogId;
+                pagePath = 'pages/Home/SpellGroup/index?cogId=' + cogId;
               } else if (orderType == 2) {
-                pagePath = '/pages/New/orderDetails/index?cogId=' + cogId;
+                pagePath = 'pages/New/orderDetails/index?cogId=' + cogId;
               }
               $common.request( //发送模板消息
                 'POST',
@@ -222,10 +222,10 @@ Page({
                   } else {
                     switch (res.data.errType) {
                       case 1:
-                        //$common.showModal('参数错误');
+                        $common.showModal('发送模板消息，参数错误');
                         break;
                       case 2:
-                        //$common.showModal('未知错误');
+                        $common.showModal('发送模板消息，未知错误');
                         break;
                     }
                   }

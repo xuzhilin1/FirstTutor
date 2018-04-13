@@ -12,6 +12,16 @@ Page({
     userId: -1,
     newDataCount: 0, //自己发送与接收数据之和
   },
+  removeDuplicate(thisArr, thisId) { //去重
+    let hash = {};
+    let newArr = thisArr.reduce(function (item, target, index) {
+      hash[target[thisId]] ? item[hash[target[thisId]].nowIndex] = target : hash[target[thisId]] = {
+        nowIndex: item.push(target) && index
+      }
+      return item;
+    }, []);
+    return newArr;
+  },
   confirm(e) { //点击右下角 发送 按钮
     let value = e.detail.value;
     if (value.trim().length <= 0) return;
@@ -27,7 +37,7 @@ Page({
         let listData = this.data.listData;
         let lastData = listData[listData.length - 1];
         let date = new Date();
-        let timeStamp = Date.parse(date);
+        let timeStamp = date.getTime();
         let y = date.getFullYear(),
           m = date.getMonth() + 1,
           d = date.getDate(),
@@ -39,6 +49,7 @@ Page({
         f < 10 && (f = '0' + f);
         let showTime = `${y}-${m}-${d} ${h}:${f}`;
         let obj = {
+          CrdId: timeStamp, //暂用时间戳代替唯一id
           CrdBeMySelf: 1,
           CrdChatMsg: value,
           timeStamp: timeStamp,
@@ -144,7 +155,7 @@ Page({
             listData.unshift(data[i]);
           }
           this.setData({
-            listData: listData,
+            listData: this.removeDuplicate(listData, 'CrdId'), //数组依据CrdId去重
             pageIndex: pageIndex
           })
         } else {
@@ -221,6 +232,7 @@ Page({
       d < 10 && (d = '0' + d);
       h < 10 && (h = '0' + h);
       f < 10 && (f = '0' + f);
+      obj.CrdId = new Date().getTime(); //暂用时间戳代替唯一id
       obj.showTime = `${y}-${m}-${d} ${h}:${f}`;
       obj.timeStamp = data.CrdCreateOn;
       let lastData = listData[listData.length - 1];

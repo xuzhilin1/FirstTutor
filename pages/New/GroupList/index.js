@@ -82,10 +82,10 @@ Page({
         } else {
           switch (res.data.errType) {
             case 1:
-              $common.showModal('参数错误');
+              //$common.showModal('参数错误');
               break;
             case 2:
-              $common.showModal('未知错误');
+              //$common.showModal('未知错误');
               break;
           }
         }

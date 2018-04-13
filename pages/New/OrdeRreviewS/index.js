@@ -75,7 +75,7 @@ Page({
           }
           let hash = {};
           let newArr = teaList.reduce(function (item, next) {//数组依据RewId去重
-            hash[next.RewId] ? '' : hash[next.RewId] = true && item.push(next);
+            hash[next.TeaId] ? '' : hash[next.TeaId] = true && item.push(next);
             return item
           }, []);
           this.setData({

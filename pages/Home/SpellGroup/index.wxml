@@ -67,10 +67,10 @@
           <image class='Soa' src='{{item.UserAvaUrl}}'></image>
           <view wx:if='{{index==0}}' class='white fon-18 tuanZhang purple-bg'>团长</view>
         </view>
-        <view class='waiceng' wx:if='{{cog.FgtMemNum - cog.FgtAttCount == 1}}'>
+        <view class='waiceng' wx:if='{{cog.FgtMemNum - cog.FgtAttCount >= 1}}'>
           <view class='wen'>？</view>
         </view>
-        <view class='waiceng' wx:if='{{cog.FgtMemNum - cog.FgtAttCount == 2}}'>
+        <view class='waiceng' wx:if='{{cog.FgtMemNum - cog.FgtAttCount >= 2}}'>
           <view class='wen'>？</view>
         </view>
       </view>
