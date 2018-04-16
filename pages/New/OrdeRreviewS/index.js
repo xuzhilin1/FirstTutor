@@ -38,7 +38,6 @@ Page({
 
           },
           (res) => {
-            console.log(res);
           }
         )
 

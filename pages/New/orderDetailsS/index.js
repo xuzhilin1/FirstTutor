@@ -18,7 +18,6 @@ Page({
   },
   callPhone(e) { //打电话
     let phone = e.currentTarget.dataset.phone;
-    console.log(phone);
     wx.makePhoneCall({
       phoneNumber: phone
     })
@@ -84,7 +83,6 @@ Page({
         $common.showModal('亲~网络不给力哦，请稍后重试');
       },
       (res) => {
-        console.log(res);
         wx.hideLoading();
         wx.stopPullDownRefresh();
       }
@@ -127,7 +125,6 @@ Page({
 
       },
       (res) => {
-        console.log(res);
       }
     )
   },

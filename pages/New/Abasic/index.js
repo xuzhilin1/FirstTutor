@@ -216,7 +216,6 @@ Page({
 
       },
       (res) => {
-        console.log(res);
       }
     )
   },
@@ -225,11 +224,11 @@ Page({
     let titleText = '';
     switch (status) {
       case 0: //申请外教资格
-        titleText = '申请FirstTutor外教资格';
+        titleText = 'apply';
         this.getForTeaStatus();
         break;
       case 1: //外教基本资料
-        titleText = '基本资料';
+        titleText = 'Basic info';
         this.initTeacherInfo();
         break;
     }

@@ -45,7 +45,6 @@ Page({
             activity: res.data.activity
           })
         } else {
-          console.log(res);
           $common.showModal('未知错误，请稍后重试');
         }
       }.bind(this),
@@ -108,7 +107,7 @@ Page({
   teacherInfo(e) { //跳转外教信息
     let openid = wx.getStorageSync('openid');
     if (openid === null || openid === '') {
-      $common.getOpenid(); //获取用户信息及openid；
+      $common.getOpenid(null, this.studentRegister); //获取用户信息及openid；
       return;
     }
     let index = e.currentTarget.dataset.index,
@@ -138,12 +137,9 @@ Page({
   getOpenId() { //获取openid
     let openid = wx.getStorageSync('openid');
     if (openid === null || openid === '') {
-      $common.getOpenid(null, () => {
-        this.getOpenId();
-      }); //获取用户信息及openid；
+      $common.getOpenid(null, this.studentRegister); //获取用户信息及openid；
       return;
     }
-    this.studentRegister();
   },
   addListenCallbackNum() {
     let num = parseInt(this.data.listenCallbackNum);
@@ -196,18 +192,14 @@ Page({
           }
         }
       },
-      (res) => {
-
-      },
-      (res) => {
-      }
     );
   },
   onLoad(options) {
+    this.init();
     this.getOpenId();
   },
   onReady() {
-    this.init();
+
   },
 
   /**

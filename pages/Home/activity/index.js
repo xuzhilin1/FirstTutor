@@ -37,11 +37,50 @@ Page({
       time: `${y}-${m}-${d} ${h}:${f}`
     }
   },
-
+  studentRegister() { //学生注册
+    $common.request(
+      "POST",
+      $common.config.RisStudent,
+      {
+        openId: wx.getStorageSync('openid')
+      },
+      (res) => {
+        if (res.data.res) {
+          switch (res.data.rtnType) {
+            case 1:
+              //注册成功
+              break;
+            case 2:
+              //改账号被禁用,无法访问程序,
+              break;
+            case 3:
+              //账户正常
+              break;
+          }
+        } else {
+          switch (res.data.errType) {
+            case 1:
+              //发生异常
+              break;
+            case 2:
+              //openId错误
+              break;
+            case 3:
+              //未知错误
+              break;
+          }
+        }
+      },
+    );
+  },
+  getOpenIdCallback() { //防止用户首页拒绝授权，在此授权后再次调用注册
+    this.init();
+    this.studentRegister();
+  },
   init(isReach) {
     let openid = wx.getStorageSync('openid');
     if (openid === null || openid === '') {
-      $common.getOpenid(null, this.init); //获取用户信息及openid；
+      $common.getOpenid(null, this.getOpenIdCallback); //获取用户信息及openid；
       return;
     }
     isReach = isReach ? true : false;

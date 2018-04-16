@@ -49,7 +49,6 @@ Page({
 
           },
           (res) => {
-            console.log(res);
           }
         )
       }
@@ -64,7 +63,6 @@ Page({
   },
   init(isReach) {
     isReach = isReach ? true : false;
-    console.log(isReach);
     let pageIndex = isReach ? this.data.pageIndex : 1,
       pageSize = this.data.pageSize;
     wx.showLoading({ title: '努力加载中...' });
@@ -174,7 +172,6 @@ Page({
   onShareAppMessage: function (res) {
     if (res.from === 'button') {
       // 来自页面内转发按钮
-      console.log(res.target)
       let index = res.target.dataset.index;
       let infoList = this.data.infoList;
       return {

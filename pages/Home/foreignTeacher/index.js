@@ -34,10 +34,46 @@ Page({
       areaList: data
     })
   },
+  studentRegister() { //学生注册
+    $common.request(
+      "POST",
+      $common.config.RisStudent,
+      {
+        openId: wx.getStorageSync('openid')
+      },
+      (res) => {
+        if (res.data.res) {
+          switch (res.data.rtnType) {
+            case 1:
+              //注册成功
+              break;
+            case 2:
+              //改账号被禁用,无法访问程序,
+              break;
+            case 3:
+              //账户正常
+              break;
+          }
+        } else {
+          switch (res.data.errType) {
+            case 1:
+              //发生异常
+              break;
+            case 2:
+              //openId错误
+              break;
+            case 3:
+              //未知错误
+              break;
+          }
+        }
+      },
+    );
+  },
   teacherInfo(e) { //跳转外教信息
     let openid = wx.getStorageSync('openid');
     if (openid === null || openid === '') {
-      $common.getOpenid(); //获取用户信息及openid；
+      $common.getOpenid(null, this.studentRegister); //防止用户首页拒绝授权，本页面再次注册
       return;
     }
     let index = e.currentTarget.dataset.index,
@@ -123,13 +159,11 @@ Page({
       taAreaId = this.data.tradIndex === 0 ? -1 : this.data.tradList[this.data.tradIndex].TaId, //商圈区域ID（1-16）
       minPrice = this.data.priceList[0][this.data.priceIndex[0]], //价格区间
       maxPrice = this.data.priceList[1][this.data.priceIndex[1]],
-    corName = this.data.input ? this.data.input : null; //课程名
-    console.log(minPrice, minPrice);
+      corName = this.data.input ? this.data.input : null; //课程名
     if (minPrice == 0 && maxPrice == 0) {
       maxPrice = -1;
       minPrice = -1;
     }
-    console.log(areaId, taAreaId, timeCla, minPrice, maxPrice, corName);
     $common.request(
       "POST",
       $common.config.FindForeignTea,
@@ -238,7 +272,7 @@ Page({
       tradIndex: 0,
       timeIndex: 0,
       priceIndex: [0, 0],
-      isPriceAll:true
+      isPriceAll: true
     })
     this.init();
   },

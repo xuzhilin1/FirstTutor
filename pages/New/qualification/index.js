@@ -12,7 +12,6 @@ Page({
   deleteImg(e) { //删除图片
     let index = e.currentTarget.dataset.index,
       imageList = this.data.imageList;
-    console.log(index, imageList);
     let thisData = imageList[index];
     $common.showModal('确定删除?', true, (res) => {
       if (res.cancel) return;
@@ -38,7 +37,6 @@ Page({
 
           },
           (res) => {
-            console.log(res);
           }
         )
       } else { //并未保存过，直接本地删除
@@ -54,7 +52,6 @@ Page({
   bindImage() { //选择照片
     let imageList = this.data.imageList,
       imageCount = this.data.imageCount;
-    console.log(this.data.imageList, this.data.imageCount);
     if (imageCount <= 0) return;
     $common.chooseImage(function (res) {
       let url = res.tempFilePaths;
@@ -69,7 +66,6 @@ Page({
         imageList: imageList,
         imageCount: imageCount
       });
-      console.log(this.data.imageList, this.data.imageCount);
     }.bind(this), imageCount);
   },
   submit() {  //保存按钮
@@ -78,7 +74,6 @@ Page({
       $common.showModal('请选择教师资质图片');
       return;
     }
-    console.log(imageList);
 
     wx.showLoading({ title: '正在上传' });
     let data = {
@@ -90,7 +85,6 @@ Page({
     this.uploadFun(data);
   },
   uploadFun(data) {
-    console.log(data);
     if (!data.url[data.i]) {
       wx.hideLoading();
       return;
@@ -121,7 +115,6 @@ Page({
 
       },
       complete: (res) => {
-        console.log(res);
         if (data.i >= data.len - 1) {
           wx.hideLoading();
           app.globalData.teacherFor.TeaQualif = data.arr;

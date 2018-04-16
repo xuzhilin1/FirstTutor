@@ -158,7 +158,6 @@ Page({
         $common.showModal('亲~网络不给力哦，请稍后重试');
       },
       (res) => {
-        console.log(res);
       }
     )
   },
@@ -260,7 +259,6 @@ Page({
         $common.showModal('亲~网络不给力哦，请稍后重试');
       },
       (res) => {
-        console.log(res);
         wx.hideLoading();
         wx.stopPullDownRefresh();
       }
@@ -275,7 +273,6 @@ Page({
       courseAllPrice = appData.courseAllPrice, //课程价格
       courseDurationIndex = appData.courseDurationIndex; //课程时长下标
     let isCourseIntroduce = false; //课程介绍是否完善
-    console.log(courseIntroduce);
     if (courseIntroduce.trim().length > 0) {
       isCourseIntroduce = true;
     }

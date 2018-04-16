@@ -1,15 +1,6 @@
 /*
    本地存储 userInfo openid userType teacherStatusInfo
 */
-// const data = {
-//   //adminsid:"1490463872",
-//   //appid: "wx978aabc5088a48c3",
-//   MchId: "1490463872", //商户号
-//   //Secret: "b068590dc836feca0973125466df1668",
-//   // APIKey: "yizhaokejiarw234WER123123456eehu",
-//   // TheLablePath: "D:\wwwroot\kcbweb\cert\apiclient_cert.p12",
-//   TitleName: ""
-// };
 const myHttps = "wj.1-zhao.com";
 const host = `https://${myHttps}`;
 const webStock = `wss://${myHttps}/WebSocketServer.ashx`;
@@ -151,74 +142,79 @@ const config = {
   // 获取聊天双方头像（2018-04-12）
   GetUserInfo: `${host}/LittleProgram/UserInfo/GetUserInfo`,
 }
-const wxGetUserInfo = function (code, userInfo, callback, callback2) {
-  let openid = wx.getStorageSync('openid');
-  if (openid) return;
-  wx.getUserInfo({
-    success: (res) => {
-      let userInfo = res.userInfo;
-      wx.setStorageSync("userInfo", userInfo);//本地存储个人信息
-      let openid = wx.getStorageSync('openid');
-      if (openid) return;
-      wx.request({
-        url: config.GetSaveUserOpenId,
-        data: {
-          code: code,
-          nickName: userInfo.nickName,
-          avaUrl: userInfo.avatarUrl,
-        },
-        header: { 'content-type': 'application/json' },
-        method: 'POST',
-        success: (res) => {
-          if (res.data.res) {
-            //保存openid
-            wx.setStorageSync('openid', res.data.openid);
-            //保存用户类型
-            wx.setStorageSync('userType', res.data.userType);
-            callback();
-            callback2();
-          }
-        }
-      })
-      callback();
-    },
-    fail: failFun(code, userInfo, callback, callback2)
-  })
-}
-const failFun = function (code, userInfo, callback, callback2) {
-  let openid = wx.getStorageSync('openid');
-  if (openid) return;
-  // 可以通过 wx.getSetting 先查询一下用户是否授权了 "scope.userInfo" 这个 scope
-  wx.getSetting({
-    success: (res) => {
-      if (res.authSetting['scope.userInfo']) {
-        //已经授权，可以直接调用getUserInfo获取头像昵称，不会弹框
-        wxGetUserInfo(code, userInfo, callback, callback2);
-      } else {
-        //尚未授权
-        wx.authorize({ //该方法 检查是否授权 
-          scope: 'scope.userInfo',
+const wxGetUserInfo = function (callback, callback2) {
+  wx.login({
+    complete: (res) => {
+      if (res.code) {
+        let code = res.code;
+        wx.getUserInfo({
           success: (res) => {
-            wxGetUserInfo(code, userInfo, callback, callback2);
-          },
-          fail: () => {
-            wx.showModal({
-              title: '提示',
-              content: '我们需要获取您的信息，是否授权？',
+            let userInfo = res.userInfo;
+            wx.setStorageSync("userInfo", userInfo);//本地存储个人信息
+            //发请求
+            wx.request({
+              url: config.GetSaveUserOpenId,
+              data: {
+                code: code,
+                nickName: userInfo.nickName,
+                avaUrl: userInfo.avatarUrl,
+              },
+              header: { 'content-type': 'application/json' },
+              method: 'POST',
               success: (res) => {
-                if (res.confirm) {
-                  wx.openSetting({ //调起设置授权界面
-                    success: (res) => {
-                      if (res.authSetting['scope.userInfo']) {
-                        wxGetUserInfo(code, userInfo, callback, callback2);
-                      }
-                    }
-                  });
+                if (res.data.res) {
+                  //保存openid
+                  wx.setStorageSync('openid', res.data.openid);
+                  //保存用户类型
+                  wx.setStorageSync('userType', res.data.userType);
+                  callback();
+                  callback2();
                 }
+              },
+              fail: (res) =>{
+                wx.showModal({
+                  title: '提示',
+                  content: '亲~网络不给力哦，请稍后重试',
+                  showCancel: false,
+                })
               }
             })
+            callback();
+          },
+          fail: (res) => {
+            wx.showModal({
+              title: '提示',
+              content: '获取信息失败',
+              showCancel: false,
+            })
           }
+        });
+      } else {
+        wx.showModal({
+          title: '提示',
+          content: '获取信息失败',
+          showCancel: false,
         })
+      }
+    }
+  })
+}
+const refuseModal = function (callback, callback2) { //用户拒绝授权弹框处理
+  wx.showModal({
+    title: '提示',
+    content: '您已拒绝授权，无法正常使用FirstTutor，是否重新授权？',
+    complete: (res) => {
+      if (res.confirm) { //用户点击确认
+        wx.openSetting({ //调起设置授权界面
+          complete: (res) => {
+            if (res.authSetting['scope.userInfo']) { //用户已授权
+              //发请求
+              wxGetUserInfo(callback, callback2);
+            } else { //用户未授权
+              refuseModal(callback, callback2);
+            }
+          }
+        });
       }
     }
   })
@@ -301,10 +297,8 @@ module.exports = {
         })
       },
       fail: (res) => {
-
       },
       complete: (res) => {
-        console.log(res);
       }
     });
   },
@@ -312,21 +306,23 @@ module.exports = {
   getOpenid(callback, callback2) {
     callback = typeof (callback) === 'function' ? callback : function (res) { };
     callback2 = typeof (callback2) === 'function' ? callback2 : function (res) { };
-    let openid,
-      code,
-      userInfo;
-    wx.login({
-      success: (res) => {
-        if (res.code) {
-          //获取code
-          code = res.code;
-          openid = wx.getStorageSync('openid');
-          if (openid === null || openid === '') {
-            wxGetUserInfo(code, userInfo, callback, callback2);
+    let openid = wx.getStorageSync('openid');
+    if (openid) return;
+    wx.authorize({ //事先向用户发起授权请求
+      scope: 'scope.userInfo',
+      complete: (res) => {
+        wx.getSetting({ //查看用户是否授权
+          complete: (res) => {
+            if (res.authSetting['scope.userInfo']) { //已授权
+              //调用获取用户信息的函数
+              wxGetUserInfo(callback, callback2);
+            } else { //未授权
+              refuseModal(callback, callback2);
+            }
           }
-        }
+        })
       }
-    })
+    });
   },
 
 }

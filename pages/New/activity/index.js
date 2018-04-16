@@ -93,7 +93,6 @@ Page({
 
       },
       (res) => {
-        console.log(res);
         wx.hideLoading();
         wx.stopPullDownRefresh();
       }

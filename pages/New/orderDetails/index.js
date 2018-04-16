@@ -15,7 +15,6 @@ Page({
   },
   callPhone(e) { //打电话
     let phone = e.currentTarget.dataset.phone;
-    console.log(phone);
     wx.makePhoneCall({
       phoneNumber: phone
     })

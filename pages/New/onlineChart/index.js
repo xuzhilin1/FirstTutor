@@ -73,7 +73,6 @@ Page({
       wx.pageScrollTo({
         scrollTop: rect.bottom
       })
-      console.log(rect);
     }).exec();
   },
   getImage() { //获取头像
@@ -209,12 +208,11 @@ Page({
     });
     //连接成功
     wx.onSocketOpen(() => {
-      console.log('WebSocket连接已打开！');
+      //console.log('WebSocket连接已打开！');
     })
     //接收数据
     wx.onSocketMessage((res) => {
       let data = JSON.parse(res.data);
-      console.log(data);
       if (data.CrdReceOpId != this.data.userId) {
         return; //不是正在和你说话的人，不鸟他
       }

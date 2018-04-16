@@ -42,7 +42,6 @@ Page({
             $common.showModal('亲~网络不给力哦，请稍后重试');
           },
           (res) => {
-            console.log(res);
           }
         )
       }
@@ -126,7 +125,6 @@ Page({
       },
       (res) => {
         if (res.data.res) {
-          console.log(res);
           let arr = res.data.courInfos;
           if (arr.length >= pageSize) {
             pageIndex++;

@@ -5,32 +5,32 @@ Page({
   data: {
     pagesList: [
       {
-        ZiLiao: '基本资料',
-        Types: '待完善',
+        ZiLiao: 'Basic info',
+        Types: 'Imperfect',
         url: '../Abasic/index?status=1'
       },
       {
-        ZiLiao: '教师介绍',
-        Types: '未填写',
+        ZiLiao: 'Introduce',
+        Types: 'unfilled',
         url: '../Teachers/index?status=0'
       },
       {
-        ZiLiao: '教师资质',
-        Types: '未上传',
+        ZiLiao: 'Qualification',
+        Types: 'Not uploaded',
         url: '../qualification/index'
       },
       {
-        ZiLiao: '证件照',
-        Types: '未上传',
+        ZiLiao: 'ID Photo',
+        Types: 'Not uploaded',
       },
       {
-        ZiLiao: '上课视频',
-        Types: '未上传',
+        ZiLiao: 'Class video',
+        Types: 'Not uploaded',
 
       },
       {
-        ZiLiao: '上课区域',
-        Types: '未选择',
+        ZiLiao: 'Class area',
+        Types: 'Not selected',
         url: '../area/index'
       }
     ],
@@ -122,7 +122,6 @@ Page({
 
       },
       (res) => {
-        console.log(res);
       }
     )
   },
@@ -229,9 +228,9 @@ Page({
         }
       });
       uploadTask.onProgressUpdate((res) => {
-        console.log('上传进度', res.progress)
-        console.log('已经上传的数据长度', res.totalBytesSent)
-        console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend)
+        //console.log('上传进度', res.progress)
+        //console.log('已经上传的数据长度', res.totalBytesSent)
+        //console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend)
       })
     }.bind(this));
   },
@@ -266,7 +265,6 @@ Page({
         $common.showModal('亲~网络不给力哦，请稍后重试');
       },
       (res) => {
-        console.log(res);
         wx.hideLoading();
         wx.stopPullDownRefresh();
       }
@@ -290,12 +288,12 @@ Page({
     if (!app.globalData.teacherFor.TeaQualif) return;
     let teacherFor = app.globalData.teacherFor;
     let pagesList = this.data.pagesList;
-    pagesList[0].Types = teacherFor.TeaName ? '已完善' : '待完善';//基本资料
-    pagesList[1].Types = teacherFor.TeaDescript ? '已填写' : '未填写';//教师介绍
-    pagesList[2].Types = teacherFor.TeaQualif.length > 0 ? '已上传' : '未上传';//教师资质
-    pagesList[3].Types = teacherFor.TeaIdPhoto ? '已上传' : '未上传';//证件照
-    pagesList[4].Types = teacherFor.TeaAudio ? '已上传' : '未上传';//上课视频
-    pagesList[5].Types = teacherFor.TeaClaArea ? this.courArea() : '未选择';//上课区域
+    pagesList[0].Types = teacherFor.TeaName ? 'perfect' : 'Imperfect';//基本资料
+    pagesList[1].Types = teacherFor.TeaDescript ? 'Filled out' : 'unfilled';//教师介绍
+    pagesList[2].Types = teacherFor.TeaQualif.length > 0 ? 'uploaded' : 'Not uploaded';//教师资质
+    pagesList[3].Types = teacherFor.TeaIdPhoto ? 'uploaded' : 'Not uploaded';//证件照
+    pagesList[4].Types = teacherFor.TeaAudio ? 'uploaded' : 'Not uploaded';//上课视频
+    pagesList[5].Types = teacherFor.TeaClaArea ? this.courArea() : 'Not selected';//上课区域
     this.setData({
       pagesList: pagesList,
       phone: teacherFor.TeaPhone

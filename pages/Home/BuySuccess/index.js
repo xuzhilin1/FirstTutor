@@ -47,7 +47,6 @@ Page({
         $common.showModal('亲~网络不给力哦，请稍后重试');
       },
       (res) => {
-        console.log(res);
         wx.hideLoading();
       }
     )
@@ -60,12 +59,10 @@ Page({
   savePoster() { //保存海报到相册
     wx.getSetting({
       success: (res) => {
-        console.log(res);
         if (!res.authSetting['scope.writePhotosAlbum']) { //没有授权
           wx.authorize({
             scope: 'scope.writePhotosAlbum',
             success: (res) => {
-              console.log(res);
               this.saveImage();
             },
             fail: (res) => {
@@ -116,7 +113,6 @@ Page({
               })
             },
             complete: (res) => {
-              console.log(res);
             }
           })
         }

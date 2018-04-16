@@ -76,7 +76,6 @@ Page({
       $common.showModal('请填写学习课程');
       return;
     }
-    console.log(course, address, week, minPrice, maxPrice, other, time, area.id);
     let status = this.data.status;
     if (status === 1) { //发布需求
       this.saveData(course, address, week, minPrice, maxPrice, other, time, area.id);
@@ -127,7 +126,6 @@ Page({
 
       },
       (res) => {
-        console.log(res);
       }
     )
   },
@@ -238,7 +236,6 @@ Page({
 
       },
       (res) => {
-        console.log(res);
         wx.hideLoading();
         wx.stopPullDownRefresh();
       }

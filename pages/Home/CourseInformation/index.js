@@ -2,11 +2,11 @@
 const $common = require('../../../utils/common.js');
 Page({
   data: {
+    isPage: false,//页面是否显示
     FgtType: 1, //1 拼团 2 单独购买
     purple: 'purple-bg white',
     courId: null, //课程id
     teaId: null, //教师id
-    listenCallbackNum: 0,
     tea: {}, //教师信息列表
     course: {}, //课程信息
     timeTables: [], //选择上课时间列表
@@ -176,7 +176,53 @@ Page({
       url: '../sureOrder/index?corId=' + course.CorId + '&orderType=' + 1 + '&groupType=' + 1 + '&cogId=' + -1 + '&weekTime=' + JSON.stringify(thisData),
     })
   },
+  studentRegister() { //学生注册
+    $common.request(
+      "POST",
+      $common.config.RisStudent,
+      {
+        openId: wx.getStorageSync('openid')
+      },
+      (res) => {
+        if (res.data.res) {
+          switch (res.data.rtnType) {
+            case 1:
+              //注册成功
+              break;
+            case 2:
+              //改账号被禁用,无法访问程序,
+              break;
+            case 3:
+              //账户正常
+              break;
+          }
+        } else {
+          switch (res.data.errType) {
+            case 1:
+              //发生异常
+              break;
+            case 2:
+              //openId错误
+              break;
+            case 3:
+              //未知错误
+              break;
+          }
+        }
+      },
+    );
+  },
+  getOpenCallback() {
+    this.getCourseAndTeacherInfo();
+    this.studentRegister();
+  },
   getCourseAndTeacherInfo() { //获取课程和教师信息
+    let openid = wx.getStorageSync('openid');
+    if (!openid) {
+      $common.getOpenid(null, this.getOpenCallback);
+      return;
+    }
+    wx.showLoading({ title: '努力加载中...' });
     $common.request(
       "POST",
       $common.config.GetCourseInfo,
@@ -209,6 +255,7 @@ Page({
             tea: res.data.tea,
             orderBeDel: res.data.orderBeDel,
             FgtType: res.data.FgtType,
+            isPage: true
           })
           if (course.CorType != 1) { //一对多页面 
             $common.request(
@@ -219,7 +266,6 @@ Page({
               },
               (res) => {
                 if (res.data.res) {
-                  console.log(res);
                   let data = res.data.fgtList;
                   if (data.length <= 0) return;
                   for (let i = 0, len = data.length; i < len; i++) {
@@ -234,7 +280,6 @@ Page({
 
               },
               (res) => {
-                console.log(res);
               }
             )
           }
@@ -253,8 +298,8 @@ Page({
         $common.showModal('亲~网络不给力哦，请稍后重试');
       },
       (res) => {
-        this.addListenCallbackNum();
-        this.stopModal();
+        wx.hideLoading();
+        wx.stopPullDownRefresh();
       }
     );
   },
@@ -301,8 +346,6 @@ Page({
         $common.showModal('亲~网络不给力哦，请稍后重试');
       },
       (res) => {
-        this.addListenCallbackNum();
-        this.stopModal();
       }
     );
   },
@@ -337,25 +380,8 @@ Page({
       timeList: timeList
     })
   },
-  addListenCallbackNum() {
-    let num = parseInt(this.data.listenCallbackNum);
-    num++;
-    this.setData({
-      listenCallbackNum: num
-    })
-  },
-  stopModal() { //停止页面的各种加载状态
-    let num = parseInt(this.data.listenCallbackNum);
-    if (num >= 2) { //本页面有两个接口
-      wx.hideLoading();
-      wx.stopPullDownRefresh();
-      this.setData({
-        listenCallbackNum: 0
-      })
-    }
-  },
+
   init() {
-    wx.showLoading({ title: '努力加载中...' });
     this.getCourseAndTeacherInfo();
     this.getCourTime();
   },
