@@ -9,10 +9,10 @@ Page({
     userName: '',
     sexArray: [{
       id: 0,
-      sex: '女'
+      sex: 'woman'
     }, {
       id: 1,
-      sex: '男'
+      sex: 'man'
     }],
     sexIndex: 0,
     age: '30',

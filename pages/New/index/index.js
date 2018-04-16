@@ -47,7 +47,7 @@ Page({
       isShow: true,
       url: '../../images/LI_16.jpg',
       title: "Online communication",
-      luJin: '../Online/index'
+      luJin: '../Online/index?isTeacher=true'
     }],
     //学生
     studentList: [{

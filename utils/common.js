@@ -8,6 +8,7 @@ const QQMapWX = require('./qqmap-wx-jssdk.min.js');
 const mapKey = new QQMapWX({
   key: '4WABZ-V2ARX-NLS45-T5Q7T-CETWK-KMB7C' // 必填
 });
+const MD5 = require('./md5.js');
 const phoneReg = /^1[34578]\d{9}$/; // 正则手机号码
 const srcImg = `${host}/QualifImgs/`; //图片
 const srcUploadImg = `${host}/ImgCatch/`; //上传图片 
@@ -171,7 +172,7 @@ const wxGetUserInfo = function (callback, callback2) {
                   callback2();
                 }
               },
-              fail: (res) =>{
+              fail: (res) => {
                 wx.showModal({
                   title: '提示',
                   content: '亲~网络不给力哦，请稍后重试',
@@ -230,6 +231,32 @@ module.exports = {
   srcBanner: srcBanner,
   srcPoster: srcPoster,
   srcActivityVideo: srcActivityVideo,
+  //翻译
+  translate(query, complete) {
+    // let appid = '2015063000000001', //官方示例，次数不限估计
+    //   key = '12345678'
+    let appid = '20180416000146782', //百度翻译appid
+      key = 'i21sgz3p7ZDqfQiTq44D', //秘钥
+      salt = (new Date).getTime(), //所需随机数
+      // 要翻译的内容, 多个query可以用\n连接  如 query= 'apple\norange\nbanana\npear'
+      from = 'zh', //源语言
+      to = 'en', //译文语言
+      sign = MD5(`${appid}${query}${salt}${key}`); //MD5加密后数据
+    wx.request({
+      url: 'https://fanyi-api.baidu.com/api/trans/vip/translate',
+      method: 'GET',
+      header: { 'content-type': 'application/json;charset=utf-8' },
+      data: {
+        q: query,
+        appid: appid,
+        salt: salt,
+        from: from,
+        to: to,
+        sign: sign
+      },
+      complete: complete
+    })
+  },
   //请求数据
   request(method, url, data, success, fail, complete) {
     fail = typeof (fail) === 'function' ? fail : function () { };

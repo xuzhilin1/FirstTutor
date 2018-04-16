@@ -2,6 +2,7 @@
 const $common = require('../../../utils/common.js');
 Page({
   data: {
+    isTeacher: false,// true 外教。 false 学生
     infoList: [],
     pageSize: 10,
     pageIndex: 1,
@@ -9,9 +10,16 @@ Page({
   onlineChart(e) { //进入到聊天页面
     let index = e.currentTarget.dataset.index,
       infoList = this.data.infoList;
-    wx.navigateTo({
-      url: `../onlineChart/index?userId=${infoList[index].UserId}`,
-    })
+    let isTeacher = this.data.isTeacher;
+    if (isTeacher) {
+      wx.navigateTo({
+        url: `../onlineChart/index?userId=${infoList[index].UserId}&isTeacher=true`,
+      })
+    } else {
+      wx.navigateTo({
+        url: `../onlineChart/index?userId=${infoList[index].UserId}`,
+      })
+    }
   },
   timeStamp(time) { //时间戳转换为日期
     time = time.replace("/Date(", '').replace(')/', '');
@@ -85,7 +93,15 @@ Page({
   },
 
   onLoad: function (options) {
-
+    let isTeacher = options.isTeacher ? true : false;
+    this.setData({
+      isTeacher: isTeacher
+    })
+    if (isTeacher) { //外教，改标题为英文版
+      wx.setNavigationBarTitle({
+        title: 'Online communication',
+      })
+    }
   },
 
   onReady: function () {

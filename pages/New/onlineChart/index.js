@@ -3,6 +3,7 @@ const $common = require('../../../utils/common.js');
 let SocketTask;
 Page({
   data: {
+    isTeacher: false,// true 外教。 false 学生
     value: '', //聊天框的初始内容
     myImage: '',
     youImage: '',
@@ -196,8 +197,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let isTeacher = options.isTeacher ? true : false;
+    if (isTeacher) { //外教，改标题为英文版
+      wx.setNavigationBarTitle({
+        title: 'Online communication',
+      })
+    }
     let userId = options.userId;
     this.setData({
+      isTeacher: isTeacher,
       userId: userId
     });
     let openid = wx.getStorageSync('openid');

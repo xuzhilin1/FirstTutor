@@ -42,19 +42,33 @@ Page({
           if (data.length >= pageSize) {
             pageIndex++;
           }
+          let translate = []; //翻译
           for (let i = 0, len = data.length; i < len; i++) {
             data[i].showTime = this.timeStamp(data[i].RewCreateOn);
-            rewList.push(data[i]);
+            translate.push(data[i].RewComment);
           }
-          let hash = {};
-          let newArr = rewList.reduce(function (item, next) {//数组依据RewId去重
-            hash[next.RewId] ? '' : hash[next.RewId] = true && item.push(next);
-            return item
-          }, []);
-          this.setData({
-            rewList: newArr,
-            pageIndex: pageIndex,
-          })
+          $common.translate(translate.join('\n'), (res) => { //调用翻译文本
+            let trans_result = res.data.trans_result;
+            if (trans_result && trans_result.length > 0) { //翻译成功了
+              for (let i = 0, len = data.length; i < len; i++) {
+                data[i].RewComment = trans_result[i].dst;
+                rewList.push(data[i]);
+              }
+            } else {//没有返回东西，报错了,显示原文
+              for (let i = 0, len = data.length; i < len; i++) {
+                rewList.push(data[i]);
+              }
+            }
+            let hash = {};
+            let newArr = rewList.reduce(function (item, next) {//数组依据RewId去重
+              hash[next.RewId] ? '' : hash[next.RewId] = true && item.push(next);
+              return item
+            }, []);
+            this.setData({
+              rewList: newArr,
+              pageIndex: pageIndex,
+            })
+          });
         } else {
           switch (res.data.errType) {
             case 1:
