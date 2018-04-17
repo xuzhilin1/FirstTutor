@@ -65,7 +65,7 @@
 <view bindtap='teacherInfo' data-index='{{index}}' wx:for='{{listData}}' wx:key='{{index}}' class='list border-b-1'>
   <view class='flex aitems-center padding-lr-30 padding-tb-20 bg-fff teacher-box'>
     <view class='teacher-l'>
-      <image class='touXiang margin-r-20 touxiang-image' src='{{item.TeaAvaUrl}}'></image>
+      <image catchtap='lookYouImage' data-index='{{index}}' class='touXiang margin-r-20 touxiang-image' src='{{item.TeaIDPhoto?srcForIdPhoto+item.TeaIDPhoto:item.TeaAvaUrl}}'></image>
       <view class='flex1'>
         <view class='fon-26 margin-b-10 flex aitems-center '>
           {{item.TeaName}}

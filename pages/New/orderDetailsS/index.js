@@ -2,6 +2,7 @@
 const $common = require('../../../utils/common.js');
 Page({
   data: {
+    srcForIdPhoto: $common.srcForIdPhoto,
     cog: {}, //团信息
     course: {}, //课程信息
     mem: {}, //团成员信息
@@ -9,6 +10,14 @@ Page({
     showMem: {}, //当前页面显示成员信息
     teaAddress: '', //外教地址
     teaPhone: '', //外教联系方式
+  },
+  lookYouImage() { //查看头像
+    let listData = this.data.teacher;
+    let srcForIdPhoto = this.data.srcForIdPhoto;
+    let image = listData.TeaIDPhoto ? srcForIdPhoto + listData.TeaIDPhoto : listData.TeaAvaUrl;
+    wx.previewImage({
+      urls: [image],
+    })
   },
   onlineChart(e) { //立即沟通
     let userId = this.data.teacher.TeaUserId;

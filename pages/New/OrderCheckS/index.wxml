@@ -50,3 +50,6 @@
     <view wx:if='{{item.FgtStatus==3}}' bindtap='orderDelete' data-index='{{index}}' class='border AnNiu white purple-bg'>删除订单</view>
   </view>
 </view>
+<view wx:if='{{infoList.length<=0}}' class='noData'>
+  暂无数据
+</view>

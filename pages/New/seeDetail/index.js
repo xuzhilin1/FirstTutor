@@ -55,7 +55,7 @@ Page({
   onlineChart() { //立即沟通
     let userId = this.data.lnd.UserId;
     wx.navigateTo({
-      url: `../../New/onlineChart/index?userId=${userId}`,
+      url: `../../New/onlineChart/index?userId=${userId}&isTeacher=true`,
     })
   },
   complateAddress(res) { //区域

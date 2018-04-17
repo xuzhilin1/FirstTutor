@@ -17,6 +17,7 @@ const srcActivity = `${host}/AtyImages/`; //活动
 const srcActivityVideo = `${host}/ActVideos/`; //活动视频
 const srcBanner = `${host}/BannerImgs/`; //轮播图
 const srcPoster = `${host}/Content/Images/`; //海报
+const srcForIdPhoto = `${host}/ForIdPhoto/`;//证件照
 const config = {
   /*
     首页
@@ -142,14 +143,18 @@ const config = {
   GetChatRecord: `${host}/LittleProgram/ChatRecord/GetChatRecord`,
   // 获取聊天双方头像（2018-04-12）
   GetUserInfo: `${host}/LittleProgram/UserInfo/GetUserInfo`,
+  // 外教-获取某外教所有课程所占用的时间段列表(2018-04-17)
+  GetAllTeaTimeTableInfo: `${host}/LittleProgram/TimeTable/GetAllTeaTimeTableInfo`,
 }
 const wxGetUserInfo = function (callback, callback2) {
   wx.login({
     complete: (res) => {
+      console.log(res);
       if (res.code) {
         let code = res.code;
         wx.getUserInfo({
           success: (res) => {
+            console.log(res);
             let userInfo = res.userInfo;
             wx.setStorageSync("userInfo", userInfo);//本地存储个人信息
             //发请求
@@ -163,6 +168,7 @@ const wxGetUserInfo = function (callback, callback2) {
               header: { 'content-type': 'application/json' },
               method: 'POST',
               success: (res) => {
+                console.log(res);
                 if (res.data.res) {
                   //保存openid
                   wx.setStorageSync('openid', res.data.openid);
@@ -173,6 +179,7 @@ const wxGetUserInfo = function (callback, callback2) {
                 }
               },
               fail: (res) => {
+                console.log(res);
                 wx.showModal({
                   title: '提示',
                   content: '亲~网络不给力哦，请稍后重试',
@@ -230,6 +237,7 @@ module.exports = {
   srcActivity: srcActivity,
   srcBanner: srcBanner,
   srcPoster: srcPoster,
+  srcForIdPhoto: srcForIdPhoto,
   srcActivityVideo: srcActivityVideo,
   //翻译
   translate(query, complete) {
@@ -272,16 +280,18 @@ module.exports = {
     })
   },
   //模态弹窗
-  showModal(content, showCancel, success, confirmText, title) {
+  showModal(content, showCancel, success, confirmText, title, cancelText) {
     title = title ? title : '提示';
     showCancel = showCancel ? true : false;
     confirmText = confirmText ? confirmText : '确定';
+    cancelText = cancelText ? cancelText : '取消';
     success = typeof (success) === 'function' ? success : function (res) { };
     wx.showModal({
       title: title,
       content: content,
       showCancel: showCancel,
       confirmText: confirmText,
+      cancelText: cancelText,
       success: success
     });
   },
@@ -338,8 +348,10 @@ module.exports = {
     wx.authorize({ //事先向用户发起授权请求
       scope: 'scope.userInfo',
       complete: (res) => {
+        console.log(res);
         wx.getSetting({ //查看用户是否授权
           complete: (res) => {
+            console.log(res);
             if (res.authSetting['scope.userInfo']) { //已授权
               //调用获取用户信息的函数
               wxGetUserInfo(callback, callback2);
@@ -351,5 +363,23 @@ module.exports = {
       }
     });
   },
+  // add(event) {
+  //   let id = event.currentTarget.dataset.id;
+  //   let productCont = this.data.productCont;
+  //   for (let i = 0, len = productCont.length; i < len; i++) {
+  //     let flag = false;
+  //     for (let j = 0, l = productCont[i].length; j < l; j++) {
+  //       if (id = productCont[i][j].id) {
+  //         productCont[i][j].sort++;
+  //         flag = true;
+  //         break;
+  //       }
+  //     }
+  //     if (flag) break;
+  //   }
+  //   this.setData({
+  //     productCont: productCont
+  //   })
+  // }
 
 }

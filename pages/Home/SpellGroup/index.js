@@ -2,6 +2,7 @@
 const $common = require('../../../utils/common.js');
 Page({
   data: {
+    srcForIdPhoto: $common.srcForIdPhoto,
     isOverdue: false, //拼团是否过期
     isShowPage: false, //整个页面是否显示
     isJoin: false, //true 本人有购买此课程
@@ -14,6 +15,14 @@ Page({
     mem: [], //团成员信息
     teaAddress: '', //外教地址
     teaPhone: '', //外教联系方式
+  },
+  lookYouImage() { //查看头像
+    let listData = this.data.teacher;
+    let srcForIdPhoto = this.data.srcForIdPhoto;
+    let image = listData.TeaIDPhoto ? srcForIdPhoto + listData.TeaIDPhoto : listData.TeaAvaUrl;
+    wx.previewImage({
+      urls: [image],
+    })
   },
   callPhone(e) { //打电话
     let phone = e.currentTarget.dataset.phone;

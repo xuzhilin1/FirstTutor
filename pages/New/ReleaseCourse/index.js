@@ -299,10 +299,10 @@ Page({
     })
     switch (status) {
       case 0: //发布课程
-        titleText = '发布课程';
+        titleText = 'Publishing courses';
         break;
       case 1: //修改课程
-        titleText = '修改课程';
+        titleText = 'Modify course';
         this.getAlterCourse();
         break;
     }

@@ -5,7 +5,7 @@
   <button wx:if='{{orderType===1}}' bindtap='spellGroup' class='margin-t-50 border buns bg-fff btn purple fon-37'>查看拼团信息</button>
   <button bindtap='bindShowPoster' class='margin-t-50 white btn purple-bg fon-37'>点击生成海报</button>
   <view class='fon-24 dibu'>
-    点击生成海报分享至朋友圈，截屏并发送至【XX的微信号】即可参与平台抽奖（玩具、书籍、活动券等）
+   {{poster.PstAbstract}}
   </view>
   <view wx:if='{{isPoster}}' class='model'>
     <view class='modle-main'>

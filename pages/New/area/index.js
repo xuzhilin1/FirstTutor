@@ -4,7 +4,7 @@ const app = getApp();
 Page({
   data: {
     purple: 'purple-bg white',
-    pageList: $static.areaShanghai,
+    pageList: $static.areaShanghaiEn,
   },
   bindChange: function (e) { //切换，选择
     let index = e.currentTarget.dataset.index,
@@ -23,7 +23,7 @@ Page({
       }
     })
     if (arr.length <= 0) {
-      $common.showModal('请选择上课区域');
+      $common.showModal('Please select class area!', false, false, 'OK', 'Prompt');
       return;
     }
     app.globalData.teacherFor.TeaClaArea = arr.join(',');

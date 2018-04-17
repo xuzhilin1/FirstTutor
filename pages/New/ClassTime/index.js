@@ -82,19 +82,49 @@ Page({
       delta: 1,
     })
   },
-  init() {
-    let courseTime = app.globalData.releaseCourse.courseTime;
-    let timeList = this.data.timeList;
-    for (let i = 0, len = courseTime.length; i < len; i++) {
-      for (let j = 0, l = timeList.length; j < l; j++) {
-        if (courseTime[i].TimAfw === timeList[j].TimAfw && courseTime[i].TimClaTime === timeList[j].TimClaTime) {
-          timeList[j].timeType = 2;
+  getCourseTimeTable() { //获取课程占用
+    $common.request(
+      'POST',
+      $common.config.GetAllTeaTimeTableInfo,
+      {
+        teaId: wx.getStorageSync('teacherStatusInfo').teaId
+      },
+      (res) => {
+        if (res.data.res) {
+          let data = res.data.timList;
+          let timeList = this.data.timeList;
+          for (let i = 0, len = data.length; i < len; i++) { //判断那些时间段不能选
+            for (let j = 0, l = timeList.length; j < l; j++) {
+              if (data[i].TimAfw === timeList[j].TimAfw && data[i].TimClaTime === timeList[j].TimClaTime) {
+                timeList[j].timeType = 0;
+              }
+            }
+          }
+          let courseTime = app.globalData.releaseCourse.courseTime;
+          for (let i = 0, len = courseTime.length; i < len; i++) {//判断那些时间段已选
+            for (let j = 0, l = timeList.length; j < l; j++) {
+              if (courseTime[i].TimAfw === timeList[j].TimAfw && courseTime[i].TimClaTime === timeList[j].TimClaTime) {
+                timeList[j].timeType = 2;
+              }
+            }
+          }
+          this.setData({
+            timeList: timeList
+          })
+        } else {
+          $common.showModal('未知错误');
         }
+      },
+      (res) => {
+
+      },
+      (res) => {
+        console.log(res);
       }
-    }
-    this.setData({
-      timeList: timeList
-    })
+    )
+  },
+  init() {
+    this.getCourseTimeTable();
   },
   /**
    * 生命周期函数--监听页面加载

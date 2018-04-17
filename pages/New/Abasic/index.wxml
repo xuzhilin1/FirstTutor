@@ -9,7 +9,7 @@
   <picker class='flex1' range-key='sex' value="{{sexIndex}}" range="{{sexArray}}" bindchange="bindSexChange">
     <view class='flex picker aitems-center '>
       <view class="fon-30 flex aitems-center yanse ">
-        <view class='width-left'>Gender</view>
+        <view class='width-l'>Gender</view>
         <view class='ca'>{{sexArray[sexIndex].sex}}</view>
       </view>
     </view>
@@ -21,7 +21,7 @@
   <picker class='flex1' value='1990-01-01' bindchange="bindAgeChange" mode="date">
     <view class='flex picker aitems-center '>
       <view class="fon-30 flex aitems-center yanse ">
-        <view class='width-left'>Age</view>
+        <view class='width-l'>Age</view>
         <view class='ca'>{{age}}</view>
       </view>
     </view>
@@ -41,7 +41,7 @@
   <picker class='flex1' range-key='NalName' value="{{nationalityIndex}}" range="{{nationalityArray}}" bindchange="bindNationalityChange">
     <view class='flex picker aitems-center '>
       <view class="fon-30 flex aitems-center yanse ">
-        <view class='width-left'>Nationality</view>
+        <view class='width-l'>Nationality</view>
         <view class='ca'>{{nationalityArray[nationalityIndex].NalName}}</view>
       </view>
     </view>

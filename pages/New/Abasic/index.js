@@ -69,19 +69,19 @@ Page({
       school = this.data.school,
       synopsis = this.data.synopsis;
     if (userName.trim().length <= 0) {
-      $common.showModal('请填写您的姓名');
+      $common.showModal('Please fill in your name', false, false, 'OK', 'Prompt');
       return;
     }
     if (weChat.trim().length <= 0) {
-      $common.showModal('请填写您的微信号');
+      $common.showModal('Please fill in your WeChat number', false, false, 'OK', 'Prompt');
       return;
     }
     if (school.trim().length <= 0) {
-      $common.showModal('请填写您的学校');
+      $common.showModal('Please fill in your school', false, false, 'OK', 'Prompt');
       return;
     }
     if (synopsis.trim().length <= 0) {
-      $common.showModal('请填写您的简介');
+      $common.showModal('Please fill in your profile', false, false, 'OK', 'Prompt');
       return;
     }
     let status = this.data.status;
@@ -102,7 +102,7 @@ Page({
       return;
     }
     let openid = wx.getStorageSync('openid');
-    if (openid === null || openid === '') { //没有openid，获取
+    if (!openid) { //没有openid，获取
       $common.getOpenid();
       return;
     }
@@ -131,17 +131,17 @@ Page({
           switch (res.data.resType) {
             case 1:
               //参数有误
-              $common.showModal('注册失败');
+              $common.showModal('registration failed', false, false, 'OK', 'Prompt');
               break;
             case 2:
               //openid非法
-              $common.showModal('注册失败');
+              $common.showModal('registration failed', false, false, 'OK', 'Prompt');
               break;
             case 3:
-              $common.showModal('该外教已注册');
+              $common.showModal('The tutor has been registered', false, false, 'OK', 'Prompt');
               break;
             case 4:
-              $common.showModal('注册失败');
+              $common.showModal('registration failed', false, false, 'OK', 'Prompt');
               break;
           }
         }
@@ -224,7 +224,7 @@ Page({
     let titleText = '';
     switch (status) {
       case 0: //申请外教资格
-        titleText = 'apply';
+        titleText = 'registration';
         this.getForTeaStatus();
         break;
       case 1: //外教基本资料
@@ -242,17 +242,32 @@ Page({
       null,
       (res) => {
         if (res.data.res) {
-          this.setData({
-            nationalityArray: res.data.nationList
-          })
+          let data = res.data.nationList;
+          //翻译
+          let translate = data.reduce(function (item, target, index) {
+            item.push(target.NalName);
+            return item;
+          }, []);
+          $common.translate(translate.join('\n'), (res) => {
+            let trans_result = res.data.trans_result;
+            if (trans_result && trans_result.length > 0) { //翻译成功了
+              for (let i = 0, len = data.length; i < len; i++) {
+                data[i].NalName = trans_result[i].dst;
+              }
+            } else {//没有返回东西，报错了,显示原文
+            }
+            this.setData({
+              nationalityArray: data
+            })
+          });
           this.setTeaNaLityId();
         } else {
-          $common.showModal('获取国籍信息失败，请重新获取', true, (res) => {
+          $common.showModal('Failed to obtain nationality information. Please regain', true, (res) => {
             if (res.confirm) {
               //用户点击确定，重新请求国籍信息
               this.getCountryInfo();
             }
-          });
+          }, 'OK', 'Prompt', 'NO');
         }
       });
   },
@@ -293,6 +308,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
+    this.init();
     wx.stopPullDownRefresh();
   },
 

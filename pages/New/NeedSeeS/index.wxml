@@ -1,5 +1,5 @@
 <view class='wrapper'>
-  <view wx:for='{{LnList}}' wx:key='{{index}}' class='margin-t-20'>
+  <view wx:for='{{LnList}}' wx:key='{{index}}' class='margin-t-20 page-list'>
     <view class=' middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
       <view class='flex fon-36  c2b '>
         <view>

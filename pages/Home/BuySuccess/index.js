@@ -27,7 +27,12 @@ Page({
     })
   },
   bindShowPoster() { //生成海报
-    wx.showLoading({ title: '努力加载中...' });
+    this.setData({
+      isPoster: true
+    })
+  },
+  getPoster() {  //获取海报
+    // wx.showLoading({ title: '努力加载中...' });
     $common.request(
       'POST',
       $common.config.GetPosterInfo,
@@ -37,7 +42,6 @@ Page({
           let poster = res.data.poster;
           this.setData({
             poster: poster,
-            isPoster: true
           })
         } else {
           $common.showModal('未知错误');
@@ -47,7 +51,8 @@ Page({
         $common.showModal('亲~网络不给力哦，请稍后重试');
       },
       (res) => {
-        wx.hideLoading();
+        // wx.hideLoading();
+        wx.stopPullDownRefresh();
       }
     )
   },
@@ -180,6 +185,12 @@ Page({
         groupType: groupType
       })
     }
+    // this.setData({
+    //   orderType: 1,
+    //   cogId: 25,
+    //   groupType: 1
+    // })
+    this.getPoster();
     this.getTeacherPhone();
   },
 
@@ -215,7 +226,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    wx.stopPullDownRefresh();
+    this.getPoster();
   },
 
   /**

@@ -10,3 +10,6 @@
     </view>
   </view>
 </view>
+<view wx:if='{{infoList.length<=0}}' class='noData'>
+  暂无数据
+</view>

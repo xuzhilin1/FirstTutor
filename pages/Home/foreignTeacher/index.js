@@ -2,6 +2,7 @@ const $common = require('../../../utils/common.js');
 const $static = require('../../../utils/static.js');
 Page({
   data: {
+    srcForIdPhoto: $common.srcForIdPhoto,
     input: '', //课程名
     listData: [],
     areaList: [], //区域
@@ -20,6 +21,15 @@ Page({
     isPriceAll: false,
     pageIndex: 1, //分页
     pageSize: 10, //每页多少数据
+  },
+  lookYouImage(e) { //查看头像
+    let index = e.currentTarget.dataset.index;
+    let listData = this.data.listData;
+    let srcForIdPhoto = this.data.srcForIdPhoto;
+    let image = listData[index].TeaIDPhoto ? srcForIdPhoto + listData[index].TeaIDPhoto : listData[index].TeaAvaUrl;
+    wx.previewImage({
+      urls: [image],
+    })
   },
   initArea() { //初始化区域
     let data = [{

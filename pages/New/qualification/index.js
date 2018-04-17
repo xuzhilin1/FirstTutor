@@ -13,7 +13,7 @@ Page({
     let index = e.currentTarget.dataset.index,
       imageList = this.data.imageList;
     let thisData = imageList[index];
-    $common.showModal('确定删除?', true, (res) => {
+    $common.showModal('Be sure to delete?', true, (res) => {
       if (res.cancel) return;
       if (thisData.QfsCreateOn) { //保存到数据库的图片，调用接口删除
         $common.request(
@@ -47,7 +47,7 @@ Page({
         })
         app.globalData.teacherFor.TeaQualif = imageList;
       }
-    })
+    }, 'OK', 'Prompt', 'NO')
   },
   bindImage() { //选择照片
     let imageList = this.data.imageList,
@@ -71,11 +71,10 @@ Page({
   submit() {  //保存按钮
     let imageList = this.data.imageList;
     if (imageList.length <= 0) {
-      $common.showModal('请选择教师资质图片');
+      $common.showModal('Please select a teacher qualification picture', false, false, 'OK', 'Prompt');
       return;
     }
-
-    wx.showLoading({ title: '正在上传' });
+    wx.showLoading({ title: 'uploading...' });
     let data = {
       url: imageList,
       i: 0,
@@ -112,7 +111,6 @@ Page({
         } else { }
       },
       fail: () => {
-
       },
       complete: (res) => {
         if (data.i >= data.len - 1) {

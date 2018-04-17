@@ -31,14 +31,3 @@
   text-align: center;
   width: 100%;
 }
-
-/*暂无数据  */
-
-.ZanWuShuJu {
-  height: 80rpx;
-  line-height: 80rpx;
-  text-align: center;
-  font-size: 24rpx;
-  color: #888;
-  margin-top: 200rpx;
-}

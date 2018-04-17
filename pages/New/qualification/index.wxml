@@ -8,4 +8,4 @@
   </view>
   <image wx:if='{{imageCount>0}}' class='ZiPian' bindtap='bindImage' src='../../images/tupian_03.jpg'></image>
 </view>
-<button bindtap='submit' class='btn purple-bg margin-t-60 white'>保存</button>
+<button bindtap='submit' class='btn purple-bg margin-t-60 white'>save</button>

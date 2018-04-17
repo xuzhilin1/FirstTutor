@@ -4,7 +4,7 @@
     <image class='bg-image' src='../../images/bg-all_02.jpg'></image>
     <view class='white flex aitems-center padding-lr-30 padding-tb-20 teacher-box header-box'>
       <view class='teacher-l'>
-        <image class='touXiang margin-r-20 touxiang-image touxiang-image-t' src='{{teaInfo.TeaAvaUrl}}'></image>
+        <image catchtap='lookYouImage' class='touXiang margin-r-20 touxiang-image touxiang-image-t' src='{{teaInfo.TeaIDPhoto?srcForIdPhoto+teaInfo.TeaIDPhoto:teaInfo.TeaAvaUrl}}'></image>
         <view class='flex1'>
           <view class='fon-26 margin-b-10 flex aitems-center '>
             <text>{{teaInfo.TeaName}}</text>

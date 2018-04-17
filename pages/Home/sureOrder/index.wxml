@@ -49,7 +49,7 @@
     <view class='list border-t-1'>
       <view class='flex aitems-center padding-lr-30 padding-tb-20 bg-fff teacher-box'>
         <view class='teacher-l'>
-          <image class='touXiang margin-r-20 touxiang-image' src='{{teacher.TeaAvaUrl}}'></image>
+          <image catchtap='lookYouImage' class='touXiang margin-r-20 touxiang-image' src='{{teacher.TeaIDPhoto?srcForIdPhoto+teacher.TeaIDPhoto:teacher.TeaAvaUrl}}'></image>
           <view class='flex1'>
             <view class='fon-26 margin-b-10 flex aitems-center '>
               {{teacher.TeaNickName}}

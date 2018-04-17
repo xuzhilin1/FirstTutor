@@ -102,16 +102,6 @@ page {
 
 /*  评分 end  */
 
-/*  暂无数据  */
-
-.noData {
-  width: 100%;
-  font-size: 38rpx;
-  text-align: center;
-  margin-top: 200rpx;
-  color: #888;
-}
-
 .table-wrapper {
   box-sizing: border-box;
   margin-top: 20rpx;

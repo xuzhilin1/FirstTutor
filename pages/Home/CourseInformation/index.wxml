@@ -1,169 +1,169 @@
 <!--pages/Home/CourseInformation/index.wxml-->
 <block wx:if='{{isPage}}'>
-<view class='big-outer'>
-  <!-- 一对一 -->
-  <view wx:if='{{course.CorType==1}}' class=' middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
-    <view class='flex fon-36 c2b'>
-      <image class='QiHao' mode='widthFix' src='../../images/qi_03.png'></image>
-      <view>
-        <text>{{course.CorTitle}}</text>
-        <view class='c8 margin-t-20 fon-24'>已有{{course.BuyCount}}人参与</view>
+  <view class='big-outer'>
+    <!-- 一对一 -->
+    <view wx:if='{{course.CorType==1}}' class=' middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
+      <view class='flex fon-36 c2b'>
+        <image class='QiHao' mode='widthFix' src='../../images/qi_03.png'></image>
+        <view>
+          <text>{{course.CorTitle}}</text>
+          <view class='c8 margin-t-20 fon-24'>已有{{course.BuyCount}}人参与</view>
+        </view>
+      </view>
+      <view class='fon-30 '>
+        <view class='bold bg-fff margin-t-10 purple'>¥{{course.CorPrice}}</view>
       </view>
     </view>
-    <view class='fon-30 '>
-      <view class='bold bg-fff margin-t-10 purple'>¥{{course.CorPrice}}</view>
-    </view>
-  </view>
-  <!--  一对多  -->
-  <view wx:if='{{course.CorType!=1}}' class=' middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
-    <view class='flex fon-36  c2b '>
-      <image class='QiHao' mode='widthFix' src='../../images/tuan_06.png'></image>
-      <view>
-        <text>{{course.CorTitle}}</text>
-        <view class='bold bg-fff purple'>¥{{course.CorPrice}}</view>
+    <!--  一对多  -->
+    <view wx:if='{{course.CorType!=1}}' class=' middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
+      <view class='flex fon-36  c2b '>
+        <image class='QiHao' mode='widthFix' src='../../images/tuan_06.png'></image>
+        <view>
+          <text>{{course.CorTitle}}</text>
+          <view class='bold bg-fff purple'>¥{{course.CorPrice}}</view>
+        </view>
+      </view>
+      <view class='right-box'>
+        <view class='fon-24 margin-b-10 ca'>已有{{course.BuyCount}}人参与</view>
+        <view class='purplea purple fon-24 '>{{course.CorClaNum}}人团</view>
       </view>
     </view>
-    <view class='right-box'>
-      <view class='fon-24 margin-b-10 ca'>已有{{course.BuyCount}}人参与</view>
-      <view class='purplea purple fon-24 '>{{course.CorClaNum}}人团</view>
+    <!-- 课程时长 -->
+    <view class='flex aitems-center height-85 padding-lr-30 bg-fff border-t-1 fon-30 c2b '>
+      课程时长
+      <view class='ca margin-l-20'>{{course.courseTimeLong}}小时</view>
     </view>
-  </view>
-  <!-- 课程时长 -->
-  <view class='flex aitems-center height-85 padding-lr-30 bg-fff border-t-1 fon-30 c2b '>
-    课程时长
-    <view class='ca margin-l-20'>{{course.courseTimeLong}}小时</view>
-  </view>
-  <!--  导师信息  -->
-  <view class='list border-t-1'>
-    <view class='flex aitems-center padding-lr-30 padding-tb-20 bg-fff teacher-box'>
-      <view class='teacher-l'>
-        <image class='touXiang margin-r-20 touxiang-image' src='{{tea.TeaAvaUrl}}'></image>
-        <view class='flex1'>
-          <view class='fon-26 margin-b-10 flex aitems-center '>
-            {{tea.TeaNickName}}
-            <image wx:if='{{tea.TeaAddV==1}}' class='HuangGuan margin-l-10' mode='widthFix' src='../../images/guan_03.png'></image>
-            <!--  星星  -->
-            <view class='score'>
-              <view class='score-all'>
-                <image wx:for="{{5}}" wx:key='{{index}}' class='score-list' mode='widthFix' src='../../images/hui_07.png'></image>
-              </view>
-              <view class='score-score'>
-                <view class='score-list' wx:for="{{5}}" wx:for-item='value' wx:for-index='key' wx:key='{{index}}'>
-                  <!--  整星  -->
-                  <image wx:if="{{tea.RewScore - 0.5 > key ? key <= tea.RewScore : key < tea.RewScore - 1}}" class='score-img' src='../../images/xian_05.png'></image>
-                  <!--  半星  -->
-                  <image wx:if="{{tea.RewScore - 0.5 > key ? false : key < tea.RewScore }}" class='score-image' src='../../images/BanXIn_03.png'></image>
+    <!--  导师信息  -->
+    <view class='list border-t-1'>
+      <view class='flex aitems-center padding-lr-30 padding-tb-20 bg-fff teacher-box'>
+        <view class='teacher-l'>
+          <image catchtap='lookYouImage' class='touXiang margin-r-20 touxiang-image' src='{{tea.TeaIDPhoto?srcForIdPhoto+tea.TeaIDPhoto:tea.TeaAvaUrl}}'></image>
+          <view class='flex1'>
+            <view class='fon-26 margin-b-10 flex aitems-center '>
+              {{tea.TeaNickName}}
+              <image wx:if='{{tea.TeaAddV==1}}' class='HuangGuan margin-l-10' mode='widthFix' src='../../images/guan_03.png'></image>
+              <!--  星星  -->
+              <view class='score'>
+                <view class='score-all'>
+                  <image wx:for="{{5}}" wx:key='{{index}}' class='score-list' mode='widthFix' src='../../images/hui_07.png'></image>
+                </view>
+                <view class='score-score'>
+                  <view class='score-list' wx:for="{{5}}" wx:for-item='value' wx:for-index='key' wx:key='{{index}}'>
+                    <!--  整星  -->
+                    <image wx:if="{{tea.RewScore - 0.5 > key ? key <= tea.RewScore : key < tea.RewScore - 1}}" class='score-img' src='../../images/xian_05.png'></image>
+                    <!--  半星  -->
+                    <image wx:if="{{tea.RewScore - 0.5 > key ? false : key < tea.RewScore }}" class='score-image' src='../../images/BanXIn_03.png'></image>
+                  </view>
                 </view>
               </view>
             </view>
+            <view class='fon-24 c8'>
+              {{tea.TeaAbstract}}
+            </view>
           </view>
-          <view class='fon-24 c8'>
-            {{tea.TeaAbstract}}
+        </view>
+      </view>
+    </view>
+    <!--  参团  -->
+    <!--是一对多类型 && 没买过此类课程 && 当前数组有数据 -->
+    <view wx:if='{{course.CorType!=1&&course.BeBuyCour<=0&&fgtList.length>0}}' class='bg-fff border-t-1 margin-t-20 padding-lr-30 join-group'>
+      <view class='height-85 fon-26 border-b-1 flex between aitems-center'>
+        <view class='flex c2b aitems-center group-little'>
+          <text>支付开团邀请{{course.CorClaNum}}人参团，人数不足自动退款</text>
+          <view bindtap='spellingRules' class='ca margin-l-20'>详细规则</view>
+        </view>
+        <image class='Jian' mode='widthFix' src='../../images/jos_03.jpg'></image>
+      </view>
+      <view>
+        <view class='fon-26 padding-tb-20 c2b'>以下小伙伴正在发起拼团，您可以直接参与：</view>
+        <view wx:if='{{index<3}}' wx:for='{{fgtList}}' wx:key='{{index}}' class='flex ssea aitems-center between margin-b-20'>
+          <view class='flex between flex1 aitems-center'>
+            <image class='xiaoTou' src='{{item.StuAvaUrl}}'></image>
+            <view class='fon-30'>{{item.StuNickName}}</view>
+            <view class='fon-26 Cans flex1 purple'>
+              <view class='Cans'>还剩{{item.NedCount}}人成团</view>
+              <view class='ca Cans'>截止{{item.countDown}}</view>
+            </view>
+          </view>
+          <view bindtap='goJoinGroup' data-index='{{index}}' class='white purple-bg CanRu fon-30'>去参团</view>
+        </view>
+      </view>
+    </view>
+    <!--end  -->
+    <!--  选择上课时间  -->
+    <view class='bg-fff padding-b-20 margin-t-20'>
+      <view class='padding-tb-20 margin-b-20 border-b-1 padding-lr-30'>
+        <view class='fon-30 padding-l-20 border-l-2 c2b'>选择时间段</view>
+      </view>
+      <view class='flex  fon-24 padding-lr-30 between warp'>
+        <view wx:for='{{weekList}}' wx:key='{{index}}' class='QuKuai c8'>{{item}}</view>
+      </view>
+      <view class='flex  fon-26 padding-lr-30 between warp'>
+        <view wx:for='{{timeList}}' data-index='{{index}}' bindtap='bindTime' wx:key='{{index}}' class='QuKuai QuKuaia {{item.timeType===2?purple:null}} {{item.timeType===0?"no-btn":""}}'>{{item.timeName}}</view>
+      </view>
+      <view class='flex padding-lr-30   margin-t-20'>
+        <view class='flex zhushi'>
+          <view class='Zhu white purple-bg fon-20'>注</view>
+          <view class='flex1 fon-22'>
+            <view class='margin-b-10'>上午：课程区间9-12点；下午1：课程区间12-15点；</view>
+            <view class='margin-b-10'>下午2:课程区间15-18点；晚上：课程区间18-21点；</view>
+            <view class='margin-b-10'>具体时间自行商量，时间表仅供参考</view>
           </view>
         </view>
       </view>
     </view>
-  </view>
-  <!--  参团  -->
-  <!--是一对多类型 && 没买过此类课程 && 当前数组有数据 -->
-  <view wx:if='{{course.CorType!=1&&course.BeBuyCour<=0&&fgtList.length>0}}' class='bg-fff border-t-1 margin-t-20 padding-lr-30 join-group'>
-    <view class='height-85 fon-26 border-b-1 flex between aitems-center'>
-      <view class='flex c2b aitems-center group-little'>
-        <text>支付开团邀请{{course.CorClaNum}}人参团，人数不足自动退款</text>
-        <view bindtap='spellingRules' class='ca margin-l-20'>详细规则</view>
-      </view>
-      <image class='Jian' mode='widthFix' src='../../images/jos_03.jpg'></image>
+    <!--  课程介绍  -->
+    <view class='padding-tb-20 border-b-1 bg-fff padding-lr-30 margin-t-20'>
+      <view class='fon-30 padding-l-20 border-l-2 c2b'>课程介绍</view>
     </view>
-    <view>
-      <view class='fon-26 padding-tb-20 c2b'>以下小伙伴正在发起拼团，您可以直接参与：</view>
-      <view wx:if='{{index<3}}' wx:for='{{fgtList}}' wx:key='{{index}}' class='flex ssea aitems-center between margin-b-20'>
-        <view class='flex between flex1 aitems-center'>
-          <image class='xiaoTou' src='{{item.StuAvaUrl}}'></image>
-          <view class='fon-30'>{{item.StuNickName}}</view>
-          <view class='fon-26 Cans flex1 purple'>
-            <view class='Cans'>还剩{{item.NedCount}}人成团</view>
-            <view class='ca Cans'>截止{{item.countDown}}</view>
-          </view>
-        </view>
-        <view bindtap='goJoinGroup' data-index='{{index}}' class='white purple-bg CanRu fon-30'>去参团</view>
-      </view>
-    </view>
-  </view>
-  <!--end  -->
-  <!--  选择上课时间  -->
-  <view class='bg-fff padding-b-20 margin-t-20'>
-    <view class='padding-tb-20 margin-b-20 border-b-1 padding-lr-30'>
-      <view class='fon-30 padding-l-20 border-l-2 c2b'>选择时间段</view>
-    </view>
-    <view class='flex  fon-24 padding-lr-30 between warp'>
-      <view wx:for='{{weekList}}' wx:key='{{index}}' class='QuKuai c8'>{{item}}</view>
-    </view>
-    <view class='flex  fon-26 padding-lr-30 between warp'>
-      <view wx:for='{{timeList}}' data-index='{{index}}' bindtap='bindTime' wx:key='{{index}}' class='QuKuai QuKuaia {{item.timeType===2?purple:null}} {{item.timeType===0?"no-btn":""}}'>{{item.timeName}}</view>
-    </view>
-    <view class='flex padding-lr-30   margin-t-20'>
-      <view class='flex zhushi'>
-        <view class='Zhu white purple-bg fon-20'>注</view>
-        <view class='flex1 fon-22'>
-          <view class='margin-b-10'>上午：课程区间9-12点；下午1：课程区间12-15点；</view>
-          <view class='margin-b-10'>下午2:课程区间15-18点；晚上：课程区间18-21点；</view>
-          <view class='margin-b-10'>具体时间自行商量，时间表仅供参考</view>
-        </view>
-      </view>
-    </view>
-  </view>
-  <!--  课程介绍  -->
-  <view class='padding-tb-20 border-b-1 bg-fff padding-lr-30 margin-t-20'>
-    <view class='fon-30 padding-l-20 border-l-2 c2b'>课程介绍</view>
-  </view>
-  <view class='padding-lr-30 bg-fff fon-24 padding-tb-20'>
+    <view class='padding-lr-30 bg-fff fon-24 padding-tb-20'>
 
-    <view class='c72'>{{course.CorDescript}}</view>
-  </view>
-  <!-- 定金说明 -->
-  <view class='height-85 flex margin-t-20 border-t-1 aitems-center bg-fff  border-b-1  padding-lr-30'>
-    <view class='fon-30 padding-l-20 border-l-2 c2b'>订金说明</view>
-  </view>
-  <view class='padding-lr-30 fon-24  c88 bg-fff padding-tb-40'>
-    <text>平台预收课程费用{{tea.TeaDepositPer}}%作为订金，剩余费用学生扣除订金后支付给外教。</text>
-  </view>
-  <!--  footer    一对一  -->
-  <view wx:if='{{course.CorType==1}}' class='footer flex border-t-1 between'>
-    <view class='fon-26 cs flex bg-fff aitems-center padding-l-30'>
-      <view class='margin-r-10'>支付订金</view>
-      <view class='fon-30 bold purple'> ¥{{course.CorBuyPrice}}</view>
+      <view class='c72'>{{course.CorDescript}}</view>
     </view>
-    <view wx:if='{{course.BeBuyCour<=0}}' bindtap='sureOrder' class='white fon-32 cs purple-bg'>立即购买</view>
-    <view wx:if='{{course.BeBuyCour>0}}' bindtap='orderDetail' class='white fon-32 cs purple-bg'>查看购买详情</view>
-  </view>
-  <!--  footer    一对多  -->
-  <view wx:if='{{course.CorType!=1}}' class='footer1 bg-fff flex border-t-1  aitems-center between'>
-    <view class='flex border-r-1 center aitems-center KuanDU'>
-      <view bindtap='goHome' class='fon-20 c88 gaoDU'>
-        <image class='fangZI' mode='widthFix' src='../../images/fangzi_07.png'></image>
-        首页
+    <!-- 定金说明 -->
+    <view class='height-85 flex margin-t-20 border-t-1 aitems-center bg-fff  border-b-1  padding-lr-30'>
+      <view class='fon-30 padding-l-20 border-l-2 c2b'>订金说明</view>
+    </view>
+    <view class='padding-lr-30 fon-24  c88 bg-fff padding-tb-40'>
+      <text>平台预收课程费用{{tea.TeaDepositPer}}%作为订金，剩余费用学生扣除订金后支付给外教。</text>
+    </view>
+    <!--  footer    一对一  -->
+    <view wx:if='{{course.CorType==1}}' class='footer flex border-t-1 between'>
+      <view class='fon-26 cs flex bg-fff aitems-center padding-l-30'>
+        <view class='margin-r-10'>支付订金</view>
+        <view class='fon-30 bold purple'> ¥{{course.CorBuyPrice}}</view>
       </view>
+      <view wx:if='{{course.BeBuyCour<=0}}' bindtap='sureOrder' class='white fon-32 cs purple-bg'>立即购买</view>
+      <view wx:if='{{course.BeBuyCour>0}}' bindtap='orderDetail' class='white fon-32 cs purple-bg'>查看购买详情</view>
     </view>
-    <view bindtap='onlineChart' class='flex center aitems-center KuanDU'>
-      <view class='fon-20 c88 gaoDU'>
-        <image class='fangZI' mode='widthFix' src='../../images/zixun_09.png'></image>
-        咨询
+    <!--  footer    一对多  -->
+    <view wx:if='{{course.CorType!=1}}' class='footer1 bg-fff flex border-t-1  aitems-center between'>
+      <view class='flex border-r-1 center aitems-center KuanDU'>
+        <view bindtap='goHome' class='fon-20 c88 gaoDU'>
+          <image class='fangZI' mode='widthFix' src='../../images/fangzi_07.png'></image>
+          首页
+        </view>
       </view>
-    </view>
-    <view wx:if='{{course.BeBuyCour<=0}}' bindtap='alonePayment' class='DanDUMai  flex aitems-center center'>
-      <view class='purple fon-26 t-center'>
-        <view>¥{{course.CorBuyPrice}}</view>
-        <view>单独购买</view>
+      <view bindtap='onlineChart' class='flex center aitems-center KuanDU'>
+        <view class='fon-20 c88 gaoDU'>
+          <image class='fangZI' mode='widthFix' src='../../images/zixun_09.png'></image>
+          咨询
+        </view>
       </view>
-    </view>
-    <view wx:if='{{course.BeBuyCour<=0}}' bindtap='fightGroup' class='flex1 DanDUMaia purple-bg white flex aitems-center center'>
-      <view class=' fon-26 t-center'>
-        <view>¥{{course.CorGroupPrice}}</view>
-        <view>{{course.CorClaNum}}人拼团</view>
+      <view wx:if='{{course.BeBuyCour<=0}}' bindtap='alonePayment' class='DanDUMai  flex aitems-center center'>
+        <view class='purple fon-26 t-center'>
+          <view>¥{{course.CorBuyPrice}}</view>
+          <view>单独购买</view>
+        </view>
       </view>
+      <view wx:if='{{course.BeBuyCour<=0}}' bindtap='fightGroup' class='flex1 DanDUMaia purple-bg white flex aitems-center center'>
+        <view class=' fon-26 t-center'>
+          <view>¥{{course.CorGroupPrice}}</view>
+          <view>{{course.CorClaNum}}人拼团</view>
+        </view>
+      </view>
+      <view wx:if='{{course.BeBuyCour>0}}' bindtap='orderDetail' class='flex1 DanDUMaia purple-bg white flex aitems-center center'>查看购买详情</view>
     </view>
-    <view wx:if='{{course.BeBuyCour>0}}' bindtap='orderDetail' class='flex1 DanDUMaia purple-bg white flex aitems-center center'>查看购买详情</view>
-  </view>
 
-</view>
+  </view>
 </block>

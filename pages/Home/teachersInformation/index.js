@@ -2,6 +2,7 @@ const $common = require('../../../utils/common.js');
 const $static = require('../../../utils/static.js');
 Page({
   data: {
+    srcForIdPhoto: $common.srcForIdPhoto,
     srcImg: $common.srcImg,
     srcVideo: $common.srcVideo,
     teaId: null,   //教师id
@@ -26,6 +27,14 @@ Page({
     totalCount: 0, //共计多少条评论
     allComment: false,
     listenCallbackNum: 0, //本页面三个接口，监听请求全部完成
+  },
+  lookYouImage() { //查看头像
+    let listData = this.data.teaInfo;
+    let srcForIdPhoto = this.data.srcForIdPhoto;
+    let image = listData.TeaIDPhoto ? srcForIdPhoto + listData.TeaIDPhoto : listData.TeaAvaUrl;
+    wx.previewImage({
+      urls: [image],
+    })
   },
   onlineChart() { //立即沟通
     let TeaUserId = this.data.teaInfo.TeaUserId;

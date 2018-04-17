@@ -9,3 +9,6 @@
     <view class='fon-24 c8 neirong'>{{item.RewComment}}</view>
   </view>
 </view>
+<view wx:if='{{rewList.length<=0}}' class='noData'>
+  暂无数据
+</view>

@@ -1,6 +1,7 @@
 const $common = require('../../../utils/common.js');
 Page({
   data: {
+    srcForIdPhoto: $common.srcForIdPhoto,
     srcActivity: $common.srcActivity,
     srcBanner: $common.srcBanner,
     banList: [],
@@ -9,6 +10,15 @@ Page({
     pageSize: 5, // 每页显示条数
     listData: [],
     listenCallbackNum: 0, //本页面三个接口，监听请求全部完成
+  },
+  lookYouImage(e) { //查看头像
+    let index = e.currentTarget.dataset.index;
+    let listData = this.data.listData;
+    let srcForIdPhoto = this.data.srcForIdPhoto;
+    let image = listData[index].TeaIDPhoto ? srcForIdPhoto + listData[index].TeaIDPhoto : listData[index].TeaAvaUrl;
+    wx.previewImage({
+      urls: [image],
+    })
   },
   getBannerData() { //获取轮播图数据
     $common.request(

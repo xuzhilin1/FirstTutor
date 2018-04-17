@@ -49,5 +49,54 @@ module.exports = {
   }, {
     id: 16,
     area: '崇明区',
+  }],
+  areaShanghaiEn: [{
+    id: 1,
+    area: 'Huangpu District',
+  }, {
+    id: 2,
+    area: 'Xuhui District',
+  }, {
+    id: 3,
+    area: 'Jing\'an District',
+  }, {
+    id: 4,
+    area: 'Changning District',
+  }, {
+    id: 5,
+    area: 'Minhang District',
+  }, {
+    id: 6,
+    area: 'Yangpu District',
+  }, {
+    id: 7,
+    area: 'Jiading District',
+  }, {
+    id: 8,
+    area: 'Qingpu District',
+  }, {
+    id: 9,
+    area: 'Songjiang District',
+  }, {
+    id: 10,
+    area: 'Pudong New Area',
+  }, {
+    id: 11,
+    area: 'Baoshan District',
+  }, {
+    id: 12,
+    area: 'Putuo District',
+  }, {
+    id: 13,
+    area: 'Hongkou District',
+  }, {
+    id: 14,
+    area: 'Jinshan District',
+  }, {
+    id: 15,
+    area: 'Fengxian District',
+  }, {
+    id: 16,
+    area: 'Chongming District',
   }]
 }

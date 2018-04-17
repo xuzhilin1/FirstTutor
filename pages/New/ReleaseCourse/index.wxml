@@ -2,7 +2,7 @@
   <picker class='flex1' value="{{courseTypeIndex}}" range="{{courseType}}" bindchange="bindCourseType">
     <view class='flex picker aitems-center '>
       <view class="fon-30 flex aitems-center yanse ">
-        <view class='width-135'> 课程类型 </view>
+        <view class='width-left'>Type</view>
         <view class='ca'>{{courseType[courseTypeIndex]}}</view>
       </view>
     </view>
@@ -12,14 +12,14 @@
 
 <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
   <view class='flex1 aitems-center  fon-30 flex '>
-    <view class='width-135'>课程名称</view>
+    <view class='width-left'>Title</view>
     <input bindinput='bindCourseName' class='ca' value='{{courseName}}' placeholder='请填写课程名称'></input>
   </view>
 </view>
 
 <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
   <view class='flex1 aitems-center  fon-30 flex page-box'>
-    <view class='width-135'>{{courseTypeIndex!=0?"课程总价":"课程价格"}}</view>
+    <view class='width-left'>{{courseTypeIndex!=0?"Total":"Total"}}</view>
     <text>¥</text>
     <input type='digit' maxlength='10' placeholder='0' bindinput='bindCourseAllPrice' class='ca' value='{{courseAllPrice}}'></input>
   </view>
@@ -27,14 +27,14 @@
 
 <view wx:if="{{courseTypeIndex!==0}}" class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
   <view class='flex1 aitems-center  fon-30 flex '>
-    <view class='width-135'>上课人数</view>
+    <view class='width-left'>Class number</view>
     <input class='ca' value='{{courseNumPeople}}' disabled='disabled'></input>
   </view>
 </view>
 
 <view wx:if="{{courseTypeIndex!==0}}" class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
   <view class='flex1 aitems-center  fon-30 flex page-box'>
-    <view class='width-135'>学员单价</view>
+    <view class='width-left'>Unit Price</view>
     <text>¥</text>
     <input class='ca' value='{{coursePrice}}' disabled='disabled'></input>
   </view>
@@ -44,7 +44,7 @@
   <picker class='flex1' value="{{durationIndex}}" range="{{duration}}" bindchange="bindDuration">
     <view class='flex picker aitems-center '>
       <view class="fon-30 flex aitems-center yanse ">
-        <view class='width-135'> 课程时长 </view>
+        <view class='width-left'>duration</view>
         <view class='ca'>{{duration[courseDurationIndex]}}小时</view>
       </view>
     </view>
@@ -54,7 +54,7 @@
 
 <view bindtap='classTime' class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
   <view class='flex1 aitems-center  fon-30 flex '>
-    <view class='width-135'>时间段</view>
+    <view class='width-left'>period</view>
     <view class='ca'>{{courseTime.length>0?"已完善":"待完善"}}</view>
   </view>
   <image mode='widthFix' style='width:20rpx;' src='../../images/jian_13.png'></image>
@@ -62,10 +62,10 @@
 
 <view bindtap='teachers' class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
   <view class='flex1 aitems-center  fon-30 flex '>
-    <view class='width-135'>课程介绍</view>
+    <view class='width-left'>introduce</view>
     <view class='ca'>{{isCourseIntroduce?"已完善":"待完善"}}</view>
   </view>
   <image mode='widthFix' style='width:20rpx;' src='../../images/jian_13.png'></image>
 </view>
 
-<button bindtap='submit' class='btn purple-bg margin-t-60 white'>保存</button>
+<button bindtap='submit' class='btn purple-bg margin-t-60 white'>save</button>

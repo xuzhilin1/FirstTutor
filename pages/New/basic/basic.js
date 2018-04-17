@@ -48,15 +48,15 @@ Page({
     let qualifs = [];
     let phone = this.data.phone;
     if (!teacherFor.TeaName) {
-      $common.showModal('请完善基本资料');
+      $common.showModal('Please improve basic information!', false, false, 'OK', 'Prompt');
       return;
     }
     if (!teacherFor.TeaDescript) {
-      $common.showModal('请填写教师介绍');
+      $common.showModal('Please fill in the teacher\'s introduction!', false, false, 'OK', 'Prompt');
       return;
     }
     if (teacherFor.TeaQualif.length < 0) {
-      $common.showModal('请上传教师资质');
+      $common.showModal('Please upload teacher qualification!', false, false, 'OK', 'Prompt');
       return;
     }
     // if (!teacherFor.TeaIdPhoto) {
@@ -68,11 +68,11 @@ Page({
     //   return;
     // }
     if (!teacherFor.TeaClaArea) {
-      $common.showModal('请选择上课区域');
+      $common.showModal('Please select class area!', false, false, 'OK', 'Prompt');
       return;
     }
     if (!$common.phoneReg.test(phone)) {
-      $common.showModal('请填写正确的手机号');
+      $common.showModal('Please fill in the correct phone number!', false, false, 'OK', 'Prompt');
       return;
     }
     for (let i = 0, len = teacherFor.TeaQualif.length; i < len; i++) {
@@ -106,14 +106,14 @@ Page({
             data[i].QfsCreateOn = true;
           }
           app.globalData.teacherFor.TeaQualif = data;
-          $common.showModal('保存成功!');
+          $common.showModal('Saved successfully!', false, false, 'OK', 'Prompt');
         } else {
           switch (res) {
             case 1:
-              $common.showModal('资料保存失败');
+              $common.showModal('Failed to save data!', false, false, 'OK', 'Prompt');
               break;
             case 2:
-              $common.showModal('基本资料保存失败');
+              $common.showModal('Failed to save basic data!', false, false, 'OK', 'Prompt');
               break;
           }
         }
@@ -142,7 +142,7 @@ Page({
   uploadPhoto() { //上传证件照
     $common.chooseImage(function (res) {
       let image = res.tempFilePaths[0];
-      wx.showLoading({ title: '正在上传' });
+      wx.showLoading({ title: 'uploading...' });
       wx.uploadFile({
         url: $common.config.UpLoadForTeaFile,
         filePath: image,
@@ -158,25 +158,25 @@ Page({
           } else {
             switch (data.errType) {
               case 1:
-                $common.showModal('文件类型不正确');
+                $common.showModal('Incorrect file type', false, false, 'OK', 'Prompt');
                 break;
               case 2:
-                $common.showModal('未上传文件');
+                $common.showModal('No file uploaded', false, false, 'OK', 'Prompt');
                 break;
               case 3:
-                $common.showModal('图片上传支持.gif| .jpg| .jpeg|.png');
+                $common.showModal('Image upload support.gif| .jpg| .jpeg|.png', false, false, 'OK', 'Prompt');
                 break;
               case 4:
-                $common.showModal('上传失败');
+                $common.showModal('upload failed', false, false, 'OK', 'Prompt');
                 break;
               case 5:
-                $common.showModal('视频格式不正确');
+                $common.showModal('The video format is incorrect', false, false, 'OK', 'Prompt');
                 break;
             }
           }
         },
         fail: () => {
-          $common.showModal('亲~网络不给力哦，请稍后重试');
+          $common.showModal('Pro-network does not work Oh, please try again later', false, false, 'OK', 'Prompt');
         },
         complete: (res) => {
           wx.hideLoading();
@@ -187,7 +187,7 @@ Page({
   uploadVideo() { //上传上课视频
     $common.chooseVideo(function (res) {
       let url = res.tempFilePath;//文件路径
-      wx.showLoading({ title: '正在上传' });
+      wx.showLoading({ title: 'uploading...' });
       const uploadTask = wx.uploadFile({
         url: $common.config.UpLoadForTeaFile,
         filePath: url,
@@ -203,25 +203,25 @@ Page({
           } else {
             switch (data.errType) {
               case 1:
-                $common.showModal('文件类型不正确');
+                $common.showModal('Incorrect file type', false, false, 'OK', 'Prompt');
                 break;
               case 2:
-                $common.showModal('未上传文件');
+                $common.showModal('No file uploaded', false, false, 'OK', 'Prompt');
                 break;
               case 3:
-                $common.showModal('图片上传支持.gif| .jpg| .jpeg|.png');
+                $common.showModal('Image upload support.gif| .jpg| .jpeg|.png', false, false, 'OK', 'Prompt');
                 break;
               case 4:
-                $common.showModal('上传失败');
+                $common.showModal('upload failed', false, false, 'OK', 'Prompt');
                 break;
               case 5:
-                $common.showModal('视频格式不正确');
+                $common.showModal('The video format is incorrect', false, false, 'OK', 'Prompt');
                 break;
             }
           }
         },
         fail: () => {
-          $common.showModal('亲~网络不给力哦，请稍后重试');
+          $common.showModal('Pro-network does not work Oh, please try again later', false, false, 'OK', 'Prompt');
         },
         complete: (res) => {
           wx.hideLoading();
@@ -236,7 +236,7 @@ Page({
   },
   getTeacherDetail() { //获取教师基本信息
     app.globalData.teacherFor = [];
-    wx.showLoading({ title: '努力加载中...' });
+    wx.showLoading({ title: 'Hard loading...' });
     $common.request(
       "POST",
       $common.config.GetForTeaDetailInfo,
@@ -253,16 +253,16 @@ Page({
         } else {
           switch (res.data.errType) {
             case 1:
-              $common.showModal('参数有误');
+              $common.showModal('The parameter is wrong', false, false, 'OK', 'Prompt');
               break;
             case 2:
-              $common.showModal('未知错误');
+              $common.showModal('unknown mistake', false, false, 'OK', 'Prompt');
               break;
           }
         }
       },
       (res) => {
-        $common.showModal('亲~网络不给力哦，请稍后重试');
+        $common.showModal('Pro-network does not work Oh, please try again later', false, false, 'OK', 'Prompt');
       },
       (res) => {
         wx.hideLoading();
@@ -271,7 +271,7 @@ Page({
     )
   },
   courArea() { //上课区域，转码
-    let arr = $static.areaShanghai;
+    let arr = $static.areaShanghaiEn;
     let area = app.globalData.teacherFor.TeaClaArea;
     area = area.split(',');
     let data = [];

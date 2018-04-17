@@ -16,9 +16,9 @@ Page({
     let status = this.data.status;
     if (input.trim().length <= 0) {
       if (status == 0) {
-        $common.showModal('请填写教师介绍');
+        $common.showModal('Please fill in the teacher\'s introduction', false, false, 'OK', 'Prompt');
       } else if (status == 1) {
-        $common.showModal('请填写课程介绍');
+        $common.showModal('Please fill in the course description', false, false, 'OK', 'Prompt');
       }
       return;
     }
@@ -59,13 +59,13 @@ Page({
       titleText = "";
     switch (status) {
       case 0: //教师介绍
-        placeholder = '请填写教师介绍，最多不超过1000个字符';
-        titleText = '教师介绍';
+        placeholder = 'Please fill in the instructor\'s description, up to 1000 characters';
+        titleText = 'Teacher introduction';
         this.teacherIntroduceContext();
         break;
       case 1:  //课程介绍
-        placeholder = '请填写课程介绍，最多不超过1000个字符';
-        titleText = '课程介绍';
+        placeholder = 'Please complete the course description, up to 1000 characters';
+        titleText = 'Course Introduction';
         this.courseIntroduceContext();
         break;
     }

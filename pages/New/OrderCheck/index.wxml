@@ -30,3 +30,6 @@
     <view wx:if='{{item.FgtType==2}}' bindtap='orderDetail' data-index='{{index}}' class='border AnNiu white purple-bg'>订单详情</view>
   </view>
 </view>
+<view wx:if='{{cogList.length<=0}}' class='noData'>
+  暂无数据
+</view>

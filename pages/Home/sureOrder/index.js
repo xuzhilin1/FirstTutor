@@ -2,6 +2,7 @@ const $common = require('../../../utils/common.js');
 Page({
   //页面分为两种情况，1，单独购买 = 团长购买 2，团员购买
   data: {
+    srcForIdPhoto: $common.srcForIdPhoto,
     isPage: false,
     startCourseTime: '', //上课时间
     courseAddress: '', //上课 地址
@@ -20,6 +21,14 @@ Page({
     corOpenG: {}, //拼团信息
     weekTime: '', //上课时间段
     weekTimeData: {}, //上课时间段数据
+  },
+  lookYouImage() { //查看头像
+    let listData = this.data.teacher;
+    let srcForIdPhoto = this.data.srcForIdPhoto;
+    let image = listData.TeaIDPhoto ? srcForIdPhoto + listData.TeaIDPhoto : listData.TeaAvaUrl;
+    wx.previewImage({
+      urls: [image],
+    })
   },
   initCourseTimeLong() { //初始话上课时间数据
     let weekTimeData = this.data.weekTimeData;

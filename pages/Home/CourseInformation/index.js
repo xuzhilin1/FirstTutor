@@ -2,6 +2,7 @@
 const $common = require('../../../utils/common.js');
 Page({
   data: {
+    srcForIdPhoto: $common.srcForIdPhoto,
     isPage: false,//页面是否显示
     FgtType: 1, //1 拼团 2 单独购买
     purple: 'purple-bg white',
@@ -14,6 +15,14 @@ Page({
     timeList: [], // 页面展示上课时间表 
     fgtList: {}, //推荐
     orderBeDel: 0, //1 订单已删除  0 未删除
+  },
+  lookYouImage() { //查看头像
+    let listData = this.data.tea;
+    let srcForIdPhoto = this.data.srcForIdPhoto;
+    let image = listData.TeaIDPhoto ? srcForIdPhoto + listData.TeaIDPhoto : listData.TeaAvaUrl;
+    wx.previewImage({
+      urls: [image],
+    })
   },
   onlineChart() { //立即沟通
     let TeaUserId = this.data.tea.TeaUserId;
