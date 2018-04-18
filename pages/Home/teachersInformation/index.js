@@ -28,6 +28,19 @@ Page({
     allComment: false,
     listenCallbackNum: 0, //本页面三个接口，监听请求全部完成
   },
+  lookqualifImage(e) { //查看外教资质
+    let image = e.currentTarget.dataset.image;
+    let srcImg = this.data.srcImg;
+    let qualifInfo = this.data.qualifInfo;
+    let imageArr = []; //引用值修改，不直接赋值
+    qualifInfo.forEach(function (target, index) {
+      imageArr.push(`${srcImg}${target}`);
+    });
+    wx.previewImage({
+      current: `${srcImg}${image}`,
+      urls: imageArr,
+    })
+  },
   lookYouImage() { //查看头像
     let listData = this.data.teaInfo;
     let srcForIdPhoto = this.data.srcForIdPhoto;

@@ -7,7 +7,7 @@ Page({
     banList: [],
     activity: {},
     pageIndex: 1, // 第几页
-    pageSize: 5, // 每页显示条数
+    pageSize: 10, // 本页面默认给十条
     listData: [],
     listenCallbackNum: 0, //本页面三个接口，监听请求全部完成
   },
@@ -244,10 +244,10 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function (res) {
-    wx.showLoading({ title: '努力加载中...' });
-    this.getListData(true, () => {
-      wx.hideLoading();
-    });
+    // wx.showLoading({ title: '努力加载中...' });
+    // this.getListData(true, () => {
+    //   wx.hideLoading();
+    // });
   },
 
   /**

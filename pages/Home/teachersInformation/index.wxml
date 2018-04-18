@@ -91,7 +91,7 @@
       <view class='fon-30 padding-l-20 border-l-2 c2b'>外教资质</view>
     </view>
     <view wx:if='{{qualifInfo.length>0}}' class='bg-fff zizhi-box'>
-      <image wx:for='{{qualifInfo}}' wx:key='{{index}}' class='img-ziZhi' mode='widthFix' src='{{srcImg}}{{item}}'></image>
+      <image bindtap='lookqualifImage' data-image='{{item}}' wx:for='{{qualifInfo}}' wx:key='{{index}}' class='img-ziZhi' mode='widthFix' src='{{srcImg}}{{item}}'></image>
     </view>
   </view>
   <!-- 最新评论 -->

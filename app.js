@@ -1,11 +1,7 @@
 //app.js
 App({
   onLaunch: function () {
-    wx.getUserInfo({
-      complete: (res) => {
-        console.log(res);
-      }
-    })
+
   },
   globalData: {
     userInfo: null,

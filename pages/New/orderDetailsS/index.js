@@ -1,4 +1,4 @@
-// 学生查看订单详情
+// 订单详情，学生
 const $common = require('../../../utils/common.js');
 Page({
   data: {

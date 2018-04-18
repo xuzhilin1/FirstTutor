@@ -97,16 +97,19 @@ Page({
         } else {
           switch (res.data.errType) {
             case 1:
-              $common.showModal('参数错误');
+              // $common.showModal('参数错误');
+              $common.showModal('unknown mistake');
               break;
             case 2:
-              $common.showModal('未知错误');
+              // $common.showModal('未知错误');
+              $common.showModal('unknown mistake');
               break;
           }
         }
       },
       (res) => {
-        $common.showModal('亲~网络不给力哦，请稍后重试');
+        // $common.showModal('亲~网络不给力哦，请稍后重试');
+        $common.showModal('Pro-network does not work Oh, please try again later', false, false, 'OK', 'Prompt');
       },
       (res) => {
         wx.hideLoading();

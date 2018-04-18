@@ -74,23 +74,28 @@ Page({
       courseIntroduce = this.data.courseIntroduce,
       isCourseIntroduce = this.data.isCourseIntroduce;
     if (courseName.trim().length <= 0) {
-      $common.showModal('请填写课程名称');
+      // $common.showModal('请填写课程名称');
+      $common.showModal('Please fill in the course name', false, false, 'OK', 'Prompt');
       return;
     }
     if (!courseAllPrice) {
-      $common.showModal('请填写课程价格');
+      // $common.showModal('请填写课程价格');
+      $common.showModal('Please fill in the course price', false, false, 'OK', 'Prompt');
       return;
     }
     if (isNaN(courseAllPrice) && Number(courseAllPrice).toFixed(2) < 0) {
-      $common.showModal('请填写有效的价格');
+      // $common.showModal('请填写有效的价格');
+      $common.showModal('Please fill in a valid price', false, false, 'OK', 'Prompt');
       return;
     }
     if (courseTime.length <= 0) {
-      $common.showModal('请选择时间段');
+      // $common.showModal('请选择时间段');
+      $common.showModal('Please select time period', false, false, 'OK', 'Prompt');
       return;
     }
     if (!isCourseIntroduce) {
-      $common.showModal('请填写课程介绍');
+      // $common.showModal('请填写课程介绍');
+      $common.showModal('Please fill in the course description', false, false, 'OK', 'Prompt');
       return;
     }
     if (this.data.status === 0) {
@@ -134,7 +139,7 @@ Page({
       (res) => {
         if (res.data.res) {
           wx.showToast({
-            title: '修改成功',
+            title: 'success',
             icon: 'success',
             duration: 1500,
           })
@@ -146,16 +151,19 @@ Page({
         } else {
           switch (res.data.errType) {
             case 1:
-              $common.showModal('参数不正确');
+              // $common.showModal('参数不正确');
+              $common.showModal('unknown mistake', false, false, 'OK', 'Prompt');
               break;
             case 2:
-              $common.showModal('未知错误');
+              // $common.showModal('未知错误');
+              $common.showModal('unknown mistake', false, false, 'OK', 'Prompt');
               break;
           }
         }
       },
       (res) => {
-        $common.showModal('亲~网络不给力哦，请稍后重试');
+        // $common.showModal('亲~网络不给力哦，请稍后重试');
+        $common.showModal('Pro-network does not work Oh, please try again later', false, false, 'OK', 'Prompt');
       },
       (res) => {
       }
@@ -192,19 +200,23 @@ Page({
         } else {
           switch (res.data.errType) {
             case 1:
-              $common.showModal('参数有误');
+              // $common.showModal('参数有误');
+              $common.showModal('unknown mistake', false, false, 'OK', 'Prompt');
               break;
             case 2:
-              $common.showModal('未知异常');
+              // $common.showModal('未知异常');
+              $common.showModal('unknown mistake', false, false, 'OK', 'Prompt');
               break;
             case 3:
-              $common.showModal('未知错误');
+              // $common.showModal('未知错误');
+              $common.showModal('unknown mistake', false, false, 'OK', 'Prompt');
               break;
           }
         }
       },
       (res) => {
-        $common.showModal('亲~网络不给力哦，请稍后重试');
+        // $common.showModal('亲~网络不给力哦，请稍后重试');
+        $common.showModal('Pro-network does not work Oh, please try again later', false, false, 'OK', 'Prompt');
       },
       (res) => {
       }
@@ -247,16 +259,19 @@ Page({
         } else {
           switch (res.data.errType) {
             case 1:
-              $common.showModal('参数有误');
+              // $common.showModal('参数有误');
+              $common.showModal('unknown mistake', false, false, 'OK', 'Prompt');
               break;
             case 2:
-              $common.showModal('未知错误');
+              // $common.showModal('未知错误');
+              $common.showModal('unknown mistake', false, false, 'OK', 'Prompt');
               break;
           }
         }
       },
       (res) => {
-        $common.showModal('亲~网络不给力哦，请稍后重试');
+        // $common.showModal('亲~网络不给力哦，请稍后重试');
+        $common.showModal('Pro-network does not work Oh, please try again later', false, false, 'OK', 'Prompt');
       },
       (res) => {
         wx.hideLoading();

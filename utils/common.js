@@ -192,7 +192,7 @@ const wxGetUserInfo = function (callback, callback2) {
           fail: (res) => {
             wx.showModal({
               title: '提示',
-              content: '获取信息失败',
+              content: '获取个人信息失败',
               showCancel: false,
             })
           }
@@ -217,8 +217,10 @@ const refuseModal = function (callback, callback2) { //用户拒绝授权弹框�
           complete: (res) => {
             if (res.authSetting['scope.userInfo']) { //用户已授权
               //发请求
+              console.log('openSetting: ok')
               wxGetUserInfo(callback, callback2);
             } else { //用户未授权
+              console.log('openSetting: no');
               refuseModal(callback, callback2);
             }
           }
@@ -345,41 +347,29 @@ module.exports = {
     callback2 = typeof (callback2) === 'function' ? callback2 : function (res) { };
     let openid = wx.getStorageSync('openid');
     if (openid) return;
-    wx.authorize({ //事先向用户发起授权请求
-      scope: 'scope.userInfo',
+    wx.getUserInfo({
       complete: (res) => {
-        console.log(res);
+        // wx.authorize({ //事先向用户发起授权请求
+        //   scope: 'scope.userInfo',
+        //   complete: (res) => {
+        // console.log(res);
         wx.getSetting({ //查看用户是否授权
           complete: (res) => {
-            console.log(res);
             if (res.authSetting['scope.userInfo']) { //已授权
+              console.log('getSetting: ok');
               //调用获取用户信息的函数
               wxGetUserInfo(callback, callback2);
             } else { //未授权
+              console.log('getSetting: no');
               refuseModal(callback, callback2);
             }
           }
         })
+        //   }
+        // })
       }
-    });
+    })
   },
-  // add(event) {
-  //   let id = event.currentTarget.dataset.id;
-  //   let productCont = this.data.productCont;
-  //   for (let i = 0, len = productCont.length; i < len; i++) {
-  //     let flag = false;
-  //     for (let j = 0, l = productCont[i].length; j < l; j++) {
-  //       if (id = productCont[i][j].id) {
-  //         productCont[i][j].sort++;
-  //         flag = true;
-  //         break;
-  //       }
-  //     }
-  //     if (flag) break;
-  //   }
-  //   this.setData({
-  //     productCont: productCont
-  //   })
-  // }
+
 
 }

@@ -91,7 +91,8 @@ Page({
         }
       },
       (res) => {
-        $common.showModal('亲~网络不给力哦，请稍后重试');
+        // $common.showModal('亲~网络不给力哦，请稍后重试');
+        $common.showModal('Pro-network does not work Oh, please try again later', false, false, 'OK', 'Prompt');
       },
       (res) => {
         wx.hideLoading();

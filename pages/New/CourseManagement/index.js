@@ -9,7 +9,7 @@ Page({
   bindDelete(e) { //删除课程 
     let index = e.currentTarget.dataset.index,
       courInfos = this.data.courInfos;
-    $common.showModal('确定删除该课程？', true, function (res) {
+    $common.showModal('Decide to delete the course?', true, function (res) {
       if (res.confirm) {
         //发请求后删除
         $common.request(
@@ -27,25 +27,29 @@ Page({
             } else {
               switch (res.data.errType) {
                 case 1:
-                  $common.showModal('参数有误');
+                  // $common.showModal('参数有误');
+                  $common.showModal('unknown mistake');
                   break;
                 case 2:
-                  $common.showModal('未知错误');
+                  // $common.showModal('未知错误');
+                  $common.showModal('unknown mistake');
                   break;
                 case 3:
-                  $common.showModal('有人报名，不可删除');
+                  // $common.showModal('有人报名，不可删除');
+                  $common.showModal('Someone sign up, can not be deleted');
                   break;
               }
             }
           },
           (res) => {
-            $common.showModal('亲~网络不给力哦，请稍后重试');
+            // $common.showModal('亲~网络不给力哦，请稍后重试');
+            $common.showModal('Pro-network does not work Oh, please try again later', false, false, 'OK', 'Prompt');
           },
           (res) => {
           }
         )
       }
-    }.bind(this));
+    }.bind(this), 'OK', 'Prompt', 'NO');
   },
   reviseReleaseCourse(e) { //修改课程
     let index = e.currentTarget.dataset.index,
@@ -78,8 +82,9 @@ Page({
   groupList(e) { //成功拼团
     let index = e.currentTarget.dataset.index,
       courInfos = this.data.courInfos;
-    if (courInfos.FGCount <= 0) {
-      $common.showModal('暂无拼团数据');
+    if (courInfos[index].FGCount <= 0) {
+      // $common.showModal('暂无拼团数据');
+      $common.showModal('No group data',false,false,'OK','Prompt');
       return;
     }
     wx.navigateTo({
@@ -146,7 +151,8 @@ Page({
           switch (res.data.errType) {
             case 1:
               //未知错误
-              $common.showModal('未知错误');
+              // $common.showModal('未知错误');
+              $common.showModal('unknown mistake');
               break;
             case 2:
               //未设置课程
@@ -156,7 +162,8 @@ Page({
         }
       },
       (res) => {
-        $common.showModal('亲~网络不给力哦，请稍后重试');
+        // $common.showModal('亲~网络不给力哦，请稍后重试');
+        $common.showModal('Pro-network does not work Oh, please try again later', false, false, 'OK', 'Prompt');
       },
       (res) => {
         wx.hideLoading();
