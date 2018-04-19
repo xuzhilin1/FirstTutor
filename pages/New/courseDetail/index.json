@@ -3,5 +3,8 @@
   "backgroundTextStyle": "light",
   "navigationBarBackgroundColor": "#000",
   "navigationBarTextStyle": "white",
-  "navigationBarTitleText": "课程详情"
+  "navigationBarTitleText": "课程详情",
+  "usingComponents": {
+    "tutor-info": "/component/tutorInfo/tutorInfo"
+  }
 }

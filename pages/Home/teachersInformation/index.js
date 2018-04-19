@@ -28,6 +28,12 @@ Page({
     allComment: false,
     listenCallbackNum: 0, //本页面三个接口，监听请求全部完成
   },
+  onlineChart() { //进入聊天界面
+    let userId = this.data.teaInfo.TeaUserId;
+    wx.navigateTo({
+      url: `../../New/onlineChart/index?userId=${userId}`,
+    })
+  },
   lookqualifImage(e) { //查看外教资质
     let image = e.currentTarget.dataset.image;
     let srcImg = this.data.srcImg;

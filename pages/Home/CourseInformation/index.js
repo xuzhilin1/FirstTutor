@@ -12,17 +12,9 @@ Page({
     course: {}, //课程信息
     timeTables: [], //选择上课时间列表
     weekList: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
-    timeList: [], // 页面展示上课时间表 
+    timeList: [], // 页面展示上课时间表
     fgtList: {}, //推荐
     orderBeDel: 0, //1 订单已删除  0 未删除
-  },
-  lookYouImage() { //查看头像
-    let listData = this.data.tea;
-    let srcForIdPhoto = this.data.srcForIdPhoto;
-    let image = listData.TeaIDPhoto ? srcForIdPhoto + listData.TeaIDPhoto : listData.TeaAvaUrl;
-    wx.previewImage({
-      urls: [image],
-    })
   },
   onlineChart() { //立即沟通
     let TeaUserId = this.data.tea.TeaUserId;
@@ -228,7 +220,7 @@ Page({
   getCourseAndTeacherInfo() { //获取课程和教师信息
     let openid = wx.getStorageSync('openid');
     if (!openid) {
-      $common.getOpenid(null, this.getOpenCallback);
+      $common.getOpenid(this.getOpenCallback);
       return;
     }
     wx.showLoading({ title: '努力加载中...' });
@@ -259,14 +251,16 @@ Page({
           course.CorBuyPrice = course.CorBuyPrice.toFixed(2) < 0.01 ? 0.01 : course.CorBuyPrice.toFixed(2);//保留两位小数
           course.CorPrice = course.CorPrice.toFixed(2) < 0.01 ? 0.01 : course.CorPrice.toFixed(2);
           course.CorGroupPrice = course.CorGroupPrice.toFixed(2) < 0.01 ? 0.01 : course.CorGroupPrice.toFixed(2);
+          let tea = res.data.tea;
+          tea.TeaName = tea.TeaNickName
           this.setData({
             course: course,
-            tea: res.data.tea,
+            tea: tea,
             orderBeDel: res.data.orderBeDel,
             FgtType: res.data.FgtType,
             isPage: true
           })
-          if (course.CorType != 1) { //一对多页面 
+          if (course.CorType != 1) { //一对多页面
             $common.request(
               "POST",
               $common.config.GetCorGroupInfos,

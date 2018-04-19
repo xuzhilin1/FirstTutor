@@ -146,7 +146,7 @@ const config = {
   // 外教-获取某外教所有课程所占用的时间段列表(2018-04-17)
   GetAllTeaTimeTableInfo: `${host}/LittleProgram/TimeTable/GetAllTeaTimeTableInfo`,
 }
-const wxGetUserInfo = function (callback, callback2) {
+const wxGetUserInfo = function (callback) {
   wx.login({
     complete: (res) => {
       console.log(res);
@@ -175,7 +175,6 @@ const wxGetUserInfo = function (callback, callback2) {
                   //保存用户类型
                   wx.setStorageSync('userType', res.data.userType);
                   callback();
-                  callback2();
                 }
               },
               fail: (res) => {
@@ -186,8 +185,7 @@ const wxGetUserInfo = function (callback, callback2) {
                   showCancel: false,
                 })
               }
-            })
-            callback();
+            });
           },
           fail: (res) => {
             wx.showModal({
@@ -207,7 +205,7 @@ const wxGetUserInfo = function (callback, callback2) {
     }
   })
 }
-const refuseModal = function (callback, callback2) { //用户拒绝授权弹框处理
+const refuseModal = function (callback) { //用户拒绝授权弹框处理
   wx.showModal({
     title: '提示',
     content: '您已拒绝授权，无法正常使用FirstTutor，是否重新授权？',
@@ -218,10 +216,10 @@ const refuseModal = function (callback, callback2) { //用户拒绝授权弹框�
             if (res.authSetting['scope.userInfo']) { //用户已授权
               //发请求
               console.log('openSetting: ok')
-              wxGetUserInfo(callback, callback2);
+              wxGetUserInfo(callback);
             } else { //用户未授权
               console.log('openSetting: no');
-              refuseModal(callback, callback2);
+              refuseModal(callback);
             }
           }
         });
@@ -342,9 +340,8 @@ module.exports = {
     });
   },
   //获取openid以及个人头像等信息
-  getOpenid(callback, callback2) {
+  getOpenid(callback) {
     callback = typeof (callback) === 'function' ? callback : function (res) { };
-    callback2 = typeof (callback2) === 'function' ? callback2 : function (res) { };
     let openid = wx.getStorageSync('openid');
     if (openid) return;
     wx.getUserInfo({
@@ -358,10 +355,10 @@ module.exports = {
             if (res.authSetting['scope.userInfo']) { //已授权
               console.log('getSetting: ok');
               //调用获取用户信息的函数
-              wxGetUserInfo(callback, callback2);
+              wxGetUserInfo(callback);
             } else { //未授权
               console.log('getSetting: no');
-              refuseModal(callback, callback2);
+              refuseModal(callback);
             }
           }
         })

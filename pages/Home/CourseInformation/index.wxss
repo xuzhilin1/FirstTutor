@@ -10,52 +10,12 @@
   padding-bottom: 40rpx;
 }
 
-.AnNiu {
-  padding: 13rpx 20rpx;
-  text-align: center;
-  margin: 14rpx 0;
-  margin-left: 10rpx;
-}
-
 .purplea {
   background-color: #e8f0ff;
   width: 93rpx;
   height: 42rpx;
   line-height: 42rpx;
   text-align: center;
-}
-
-.zonga {
-  position: relative;
-  min-width: 255rpx;
-  margin-top: 30rpx;
-  margin-left: 15rpx;
-}
-
-.img-m {
-  height: 300rpx;
-  width: 100%;
-  display: block;
-  border-radius: 10rpx;
-}
-
-.img-xing {
-  width: 25rpx;
-  margin-left: 10rpx;
-}
-
-.di {
-  position: absolute;
-  z-index: 10;
-  left: 0;
-  bottom: 0;
-}
-
-.di2 {
-  position: absolute;
-  z-index: 90;
-  left: 0;
-  bottom: 0;
 }
 
 .QuKuai {
@@ -161,62 +121,6 @@
   height: 100%;
 }
 
-/*  评分  */
-
-.score {
-  position: relative;
-  display: flex;
-}
-
-.score-all {
-  display: flex;
-}
-
-.score-score {
-  display: flex;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 10;
-}
-
-.score-list {
-  width: 26rpx;
-  height: 26rpx;
-  margin-left: 6rpx;
-  display: flex;
-}
-
-.score-img {
-  width: 100%;
-  height: 100%;
-}
-
-.score-image {
-  height: 100%;
-  width: 50%;
-}
-
-.teacher-box {
-  display: flex;
-  justify-content: space-between;
-}
-
-.teacher-l {
-  display: flex;
-  align-items: center;
-}
-
-.teacher-chat {
-  width: 40rpx;
-}
-
-/*  评分 end  */
-
-.no-btn {
-  background: #ececec;
-}
-
 .right-box {
   display: flex;
   flex-direction: column;
@@ -229,6 +133,7 @@
   justify-content: space-between;
   width: 96%;
 }
-.join-group{
+
+.join-group {
   padding-bottom: 1rpx;
 }

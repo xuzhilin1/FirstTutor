@@ -213,9 +213,6 @@
 
 /*  评分 end  */
 
-.no-btn {
-  background: #ececec;
-}
 
 .right-box {
   display: flex;

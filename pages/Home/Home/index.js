@@ -11,15 +11,6 @@ Page({
     listData: [],
     listenCallbackNum: 0, //本页面三个接口，监听请求全部完成
   },
-  lookYouImage(e) { //查看头像
-    let index = e.currentTarget.dataset.index;
-    let listData = this.data.listData;
-    let srcForIdPhoto = this.data.srcForIdPhoto;
-    let image = listData[index].TeaIDPhoto ? srcForIdPhoto + listData[index].TeaIDPhoto : listData[index].TeaAvaUrl;
-    wx.previewImage({
-      urls: [image],
-    })
-  },
   getBannerData() { //获取轮播图数据
     $common.request(
       "POST",
@@ -117,7 +108,7 @@ Page({
   teacherInfo(e) { //跳转外教信息
     let openid = wx.getStorageSync('openid');
     if (openid === null || openid === '') {
-      $common.getOpenid(null, this.studentRegister); //获取用户信息及openid；
+      $common.getOpenid(this.studentRegister); //获取用户信息及openid；
       return;
     }
     let index = e.currentTarget.dataset.index,
@@ -147,7 +138,7 @@ Page({
   getOpenId() { //获取openid
     let openid = wx.getStorageSync('openid');
     if (openid === null || openid === '') {
-      $common.getOpenid(null, this.studentRegister); //获取用户信息及openid；
+      $common.getOpenid(this.studentRegister); //获取用户信息及openid；
       return;
     }
   },

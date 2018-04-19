@@ -3,5 +3,8 @@
   "backgroundTextStyle": "light",
   "navigationBarBackgroundColor": "#000",
   "navigationBarTextStyle": "white",
-  "navigationBarTitleText": "我的点评"
+  "navigationBarTitleText": "我的点评",
+  "usingComponents": {
+    "tutor-info": "/component/tutorInfo/tutorInfo"
+  }
 }

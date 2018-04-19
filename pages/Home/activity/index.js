@@ -80,7 +80,7 @@ Page({
   init(isReach) {
     let openid = wx.getStorageSync('openid');
     if (openid === null || openid === '') {
-      $common.getOpenid(null, this.getOpenIdCallback); //获取用户信息及openid；
+      $common.getOpenid(this.getOpenIdCallback); //获取用户信息及openid；
       return;
     }
     isReach = isReach ? true : false;

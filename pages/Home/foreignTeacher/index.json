@@ -3,5 +3,8 @@
   "backgroundTextStyle": "light",
   "navigationBarBackgroundColor": "#000",
   "navigationBarTextStyle": "white",
-  "navigationBarTitleText": "找外教"
+  "navigationBarTitleText": "找外教",
+  "usingComponents": {
+    "tutor-info": "/component/tutorInfo/tutorInfo"
+  }
 }

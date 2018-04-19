@@ -7,7 +7,6 @@ Page({
     imageCount: 5,
     srcImg: $common.srcImg,
     srcUploadImg: $common.srcUploadImg,
-
   },
   deleteImg(e) { //删除图片
     let index = e.currentTarget.dataset.index,
@@ -30,7 +29,11 @@ Page({
                 imageList: imageList,
                 imageCount: 5 - imageList.length
               })
-              app.globalData.teacherFor.TeaQualif = imageList;
+              let arr = [];
+              for (let i = 0, len = imageList.length; i < len; i++) {
+                arr.push(imageList[i]);
+              }
+              app.globalData.teacherFor.TeaQualif = arr;
             }
           },
           (res) => {
@@ -45,7 +48,11 @@ Page({
           imageList: imageList,
           imageCount: 5 - imageList.length
         })
-        app.globalData.teacherFor.TeaQualif = imageList;
+        let arr = [];
+        for (let i = 0, len = imageList.length; i < len; i++) {
+          arr.push(imageList[i]);
+        }
+        app.globalData.teacherFor.TeaQualif = arr;
       }
     }, 'OK', 'Prompt', 'NO')
   },
@@ -53,12 +60,12 @@ Page({
     let imageList = this.data.imageList,
       imageCount = this.data.imageCount;
     if (imageCount <= 0) return;
-    $common.chooseImage(function (res) {
+    $common.chooseImage((res) => {
       let url = res.tempFilePaths;
       for (let i = 0, len = url.length; i < len; i++) {
         imageList.push({
           QfsPicName: url[i],
-          sqlUpload: false,
+          sqlUpload: false, //未上传过
         })
       }
       imageCount = 5 - imageList.length;
@@ -66,7 +73,7 @@ Page({
         imageList: imageList,
         imageCount: imageCount
       });
-    }.bind(this), imageCount);
+    }, imageCount);
   },
   submit() {  //保存按钮
     let imageList = this.data.imageList;
@@ -84,13 +91,28 @@ Page({
     this.uploadFun(data);
   },
   uploadFun(data) {
-    if (!data.url[data.i]) {
+    if (data.i > data.len-1) { //上传完了
       wx.hideLoading();
+      let imageData = data.arr;
+      let thisArr = [];
+      for (let i = 0, len = imageData.length; i < len; i++ ){
+        thisArr.push(imageData[i]);
+      }
+      app.globalData.teacherFor.TeaQualif = thisArr;
+      wx.navigateBack({
+        delta: 1
+      })
       return;
     }
-    if (data.url[data.i].QfsCreateOn) {
+    if (data.url[data.i].QfsCreateOn) { //从数据库拿到的，不上传
       data.arr.push(data.url[data.i]);
-      data.i = data.i + 1;
+      data.i++;
+      this.uploadFun(data);
+      return;
+    }
+    if (data.url[data.i].sqlUpload) { //上传过的，不上传
+      data.arr.push(data.url[data.i]);
+      data.i++;
       this.uploadFun(data);
       return;
     }
@@ -106,21 +128,13 @@ Page({
         if (resData.res) {
           data.arr.push({
             QfsPicName: resData.imgNames[0],
-            sqlUpload: true
+            sqlUpload: true   //上传过了
           });
         } else { }
       },
       fail: () => {
       },
       complete: (res) => {
-        if (data.i >= data.len - 1) {
-          wx.hideLoading();
-          app.globalData.teacherFor.TeaQualif = data.arr;
-          wx.navigateBack({
-            delta: 1
-          })
-          return;
-        }
         data.i++;
         this.uploadFun(data);
       }
@@ -128,9 +142,12 @@ Page({
   },
   init() {
     let TeaQualif = app.globalData.teacherFor.TeaQualif;
-    let imageList = TeaQualif ? TeaQualif : [];
+    let imageList = [];
+    for (let i = 0, len = TeaQualif.length; i < len; i++) {
+      imageList.push(TeaQualif[i]);
+    }
     this.setData({
-      imageCount: 5 - TeaQualif.length,
+      imageCount: 5 - imageList.length,
       imageList: imageList
     })
   },

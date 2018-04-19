@@ -96,10 +96,8 @@ Page({
   },
   init() {
     let openid = wx.getStorageSync('openid');
-    if (openid === null || openid === '') {
-      $common.getOpenid(function () {
-        this.getMyStatus();
-      }.bind(this));
+    if (!openid) {
+      $common.getOpenid(this.getMyStatus);
       return;
     }
     wx.showLoading({ title: '努力加载中...' });
@@ -115,6 +113,7 @@ Page({
       (res) => {
         if (res.data.res) {
           let userType = res.data.userType;
+          console.log(wx.getStorageSync('userInfo'))
           this.setData({
             userInfo: wx.getStorageSync('userInfo'),
             userType: userType,

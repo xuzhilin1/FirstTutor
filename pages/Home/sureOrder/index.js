@@ -22,14 +22,6 @@ Page({
     weekTime: '', //上课时间段
     weekTimeData: {}, //上课时间段数据
   },
-  lookYouImage() { //查看头像
-    let listData = this.data.teacher;
-    let srcForIdPhoto = this.data.srcForIdPhoto;
-    let image = listData.TeaIDPhoto ? srcForIdPhoto + listData.TeaIDPhoto : listData.TeaAvaUrl;
-    wx.previewImage({
-      urls: [image],
-    })
-  },
   initCourseTimeLong() { //初始话上课时间数据
     let weekTimeData = this.data.weekTimeData;
     let timeListData = this.data.timeListData;
@@ -180,7 +172,7 @@ Page({
         courId: course.CorId, //购买课程ID
         cogMemNum: orderType == 2 ? 1 : course.CorType, //可参团人数（一对一与单独购买为1，团购时为2/3）
         TimId: this.data.weekTimeData.TimId,
-        pName: studentName, //姓名 
+        pName: studentName, //姓名
         pPhone: studentPhone, //手机
         corStartTime: startCourseTime, //上课时间
         corAddress: courseAddress, //上课地址(默认线下协商)
@@ -219,6 +211,7 @@ Page({
                   pagePath: pagePath
                 },
                 (res) => {
+
                   wx.redirectTo({
                     url: '../BuySuccess/index?orderType=' + orderType + '&cogId=' + cogId + '&groupType=' + groupType,
                   })
@@ -401,10 +394,12 @@ Page({
           }
           let course = res.data.course;
           course.CorPrice = course.CorPrice.toFixed(2) < 0.01 ? 0.01 : course.CorPrice.toFixed(2);
+          let teacher = res.data.teacher;
+          teacher.TeaName = teacher.TeaNickName
           this.setData({
             PayPrice: res.data.PayPrice.toFixed(2) < 0.01 ? 0.01 : res.data.PayPrice.toFixed(2),
             course: course,
-            teacher: res.data.teacher,
+            teacher: teacher,
             isPage: true
           });
           this.initCourseTimeLong();
@@ -436,7 +431,7 @@ Page({
   init() {
     let openid = wx.getStorageSync('openid');
     if (!openid) {
-      $common.getOpenid(null, this.getOpenCallback);
+      $common.getOpenid(this.getOpenCallback);
       return;
     }
     this.getNameAndPhone();

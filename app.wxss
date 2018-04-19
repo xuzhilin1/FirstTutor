@@ -390,6 +390,7 @@ page {
 .touxiang-image {
   border-radius: 50%;
 }
+
 /*  暂无数据  */
 
 .noData {
@@ -398,4 +399,10 @@ page {
   text-align: center;
   margin-top: 200rpx;
   color: #888;
+}
+
+/*  选择时间段，不可选按钮样式  */
+
+.no-btn {
+  background: #c8c8c8;
 }

@@ -29,41 +29,12 @@
       </view>
     </view>
     <!-- 课程时长 -->
-    <view class='flex aitems-center height-85 padding-lr-30 bg-fff border-t-1 fon-30 c2b '>
+    <view class='flex aitems-center height-85 padding-lr-30 bg-fff border-t-1 fon-30 c2b border-b-1'>
       课程时长
       <view class='ca margin-l-20'>{{course.courseTimeLong}}小时</view>
     </view>
-    <!--  导师信息  -->
-    <view class='list border-t-1'>
-      <view class='flex aitems-center padding-lr-30 padding-tb-20 bg-fff teacher-box'>
-        <view class='teacher-l'>
-          <image catchtap='lookYouImage' class='touXiang margin-r-20 touxiang-image' src='{{tea.TeaIDPhoto?srcForIdPhoto+tea.TeaIDPhoto:tea.TeaAvaUrl}}'></image>
-          <view class='flex1'>
-            <view class='fon-26 margin-b-10 flex aitems-center '>
-              {{tea.TeaNickName}}
-              <image wx:if='{{tea.TeaAddV==1}}' class='HuangGuan margin-l-10' mode='widthFix' src='../../images/guan_03.png'></image>
-              <!--  星星  -->
-              <view class='score'>
-                <view class='score-all'>
-                  <image wx:for="{{5}}" wx:key='{{index}}' class='score-list' mode='widthFix' src='../../images/hui_07.png'></image>
-                </view>
-                <view class='score-score'>
-                  <view class='score-list' wx:for="{{5}}" wx:for-item='value' wx:for-index='key' wx:key='{{index}}'>
-                    <!--  整星  -->
-                    <image wx:if="{{tea.RewScore - 0.5 > key ? key <= tea.RewScore : key < tea.RewScore - 1}}" class='score-img' src='../../images/xian_05.png'></image>
-                    <!--  半星  -->
-                    <image wx:if="{{tea.RewScore - 0.5 > key ? false : key < tea.RewScore }}" class='score-image' src='../../images/BanXIn_03.png'></image>
-                  </view>
-                </view>
-              </view>
-            </view>
-            <view class='fon-24 c8'>
-              {{tea.TeaAbstract}}
-            </view>
-          </view>
-        </view>
-      </view>
-    </view>
+    <!--  外教信息  -->
+    <tutor-info info-list='{{tea}}' photo-url='{{srcForIdPhoto}}'></tutor-info>
     <!--  参团  -->
     <!--是一对多类型 && 没买过此类课程 && 当前数组有数据 -->
     <view wx:if='{{course.CorType!=1&&course.BeBuyCour<=0&&fgtList.length>0}}' class='bg-fff border-t-1 margin-t-20 padding-lr-30 join-group'>

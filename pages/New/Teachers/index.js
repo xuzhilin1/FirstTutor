@@ -59,7 +59,7 @@ Page({
       titleText = "";
     switch (status) {
       case 0: //教师介绍
-        placeholder = 'Please fill in the instructor\'s description, up to 1000 characters';
+        placeholder = '美式发音/喜欢旅游/明星老师';
         titleText = 'Teacher introduction';
         this.teacherIntroduceContext();
         break;

@@ -3,5 +3,8 @@
   "backgroundTextStyle": "light",
   "navigationBarBackgroundColor": "#000",
   "navigationBarTextStyle": "white",
-  "navigationBarTitleText": "FirstTutor"
+  "navigationBarTitleText": "FirstTutor",
+  "usingComponents": {
+    "tutor-info": "/component/tutorInfo/tutorInfo"
+  }
 }

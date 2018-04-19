@@ -359,6 +359,10 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
+    if (this.data.status === 0) {
+      wx.stopPullDownRefresh();
+      return;
+    }
     this.getAlterCourse();
   },
 

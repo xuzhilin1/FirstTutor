@@ -5,7 +5,7 @@ Page({
   data: {
     teaToe: 0, //外教审核状态， 0 未审核 1 审核通过 2 审核未通过
     teaBeDel: 0, //0 教师未被删除，  1 外教已被删除
-    status: 0, //0 外教资格申请 1 外教基本资料 
+    status: 0, //0 外教资格申请 1 外教基本资料
     userName: '',
     sexArray: [{
       id: 0,
@@ -187,7 +187,7 @@ Page({
     let openid = wx.getStorageSync('openid');
     if (!openid) {
       //判断并获取openId
-      $common.getOpenid(null, this.getForTeaStatus);
+      $common.getOpenid(this.getForTeaStatus);
       return;
     }
     $common.request(

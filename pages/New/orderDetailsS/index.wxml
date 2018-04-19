@@ -20,36 +20,8 @@
   </view>
   <view class='purplea purple fon-24 '>{{course.CorType}}人团</view>
 </view>
-<!--  导师信息  -->
-<view class='flex aitems-center padding-lr-30 padding-tb-20 bg-fff teacher-box'>
-  <view class='teacher-l'>
-    <image catchtap='lookYouImage' style='border-radius:50%;'  class='touXiang margin-r-20' src='{{teacher.TeaIDPhoto?srcForIdPhoto+teacher.TeaIDPhoto:teacher.TeaAvaUrl}}'></image>
-    <view class='flex1'>
-      <view class='fon-26 margin-b-10 flex aitems-center '>
-        {{teacher.TeaNickName}}
-        <image wx:if='{{teacher.TeaAddV==1}}' class='HuangGuan margin-l-10' mode='widthFix' src='../../images/guan_03.png'></image>
-        <!--  星星  -->
-        <view class='score'>
-          <view class='score-all'>
-            <image wx:for="{{5}}" wx:key='{{index}}' class='score-list' mode='widthFix' src='../../images/hui_07.png'></image>
-          </view>
-          <view class='score-score'>
-            <view class='score-list' wx:for="{{5}}" wx:key='{{index}}'>
-              <!--  整星  -->
-              <image wx:if="{{teacher.RewScore - 0.5 > index ? index <= teacher.RewScore : index < teacher.RewScore - 1}}" class='score-img' src='../../images/xian_05.png'></image>
-              <!--  半星  -->
-              <image wx:if="{{teacher.RewScore - 0.5 > index ? false : index < teacher.RewScore }}" class='score-image' src='../../images/BanXIn_03.png'></image>
-            </view>
-          </view>
-        </view>
-      </view>
-      <view class='fon-24 c8'>
-        {{teacher.TeaAbstract}}
-      </view>
-    </view>
-  </view>
-  <image bindtap='onlineChart' mode='widthFix' class='teacher-chat' src='../../images/DuiHua_06.png'></image>
-</view>
+<!--  外教信息  -->
+<tutor-info info-list='{{teacher}}' photo-url='{{srcForIdPhoto}}' chat-image='/pages/images/DuiHua_06.png'></tutor-info>
 <!--  拼团详情  -->
 <view class='margin-t-20 border-t-1 border-b-1'>
   <view wx:if='{{course.CorType!=1&&cog.FgtType==1}}' class='padding-tb-20 border-b-1 padding-lr-30 bg-fff'>
@@ -80,7 +52,7 @@
 
 <view class='border-t-1 border-b-1 margin-t-20 bg-fff padding-b-20'>
   <view class='padding-tb-20 padding-lr-30 bg-fff'>
-    <view class='fon-30 padding-l-20 border-l-2 c2b'>上课地址及外交联系方式</view>
+    <view class='fon-30 padding-l-20 border-l-2 c2b'>上课地址及外教联系方式</view>
   </view>
   <view bindtap='lookAddress' class='padding-50 margin-t-20 bg-fff flex aitems-center fon-26 '>
     <image mode='widthFix' class='address' src='../../images/adddress_14.png'></image>

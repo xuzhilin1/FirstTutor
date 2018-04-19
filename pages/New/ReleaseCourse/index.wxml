@@ -9,7 +9,6 @@
   </picker>
   <image mode='widthFix' style='width:20rpx;' src='../../images/jian_13.png'></image>
 </view>
-
 <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
   <view class='flex1 aitems-center  fon-30 flex '>
     <view class='width-left'>Title</view>
@@ -21,7 +20,7 @@
   <view class='flex1 aitems-center  fon-30 flex page-box'>
     <view class='width-left'>{{courseTypeIndex!=0?"Total":"Total"}}</view>
     <text>¥</text>
-    <input type='digit' maxlength='10' placeholder='0' bindinput='bindCourseAllPrice' class='ca' value='{{courseAllPrice}}'></input>
+    <input type='digit' maxlength='10' placeholder='建议：100-200' bindinput='bindCourseAllPrice' class='ca' value='{{courseAllPrice}}'></input>
   </view>
 </view>
 

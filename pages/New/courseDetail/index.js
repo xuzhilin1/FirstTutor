@@ -2,6 +2,7 @@
 const $common = require('../../../utils/common.js');
 Page({
   data: {
+    srcForIdPhoto: $common.srcForIdPhoto,
     purple: 'purple-bg white',
     courId: null, //课程id
     teaId: null, //教师id
@@ -94,9 +95,12 @@ Page({
               course.courseTimeLong = 2; //2小时
               break;
           }
+          course.CorPrice = course.CorPrice.toFixed(2) > 0.01 ? course.CorPrice.toFixed(2) : 0.01;
+          let tea = res.data.tea;
+          tea.TeaName = tea.TeaNickName;
           this.setData({
             course: course,
-            tea: res.data.tea
+            tea: tea
           })
         } else {
           switch (res.data.errType) {

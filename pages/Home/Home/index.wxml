@@ -23,34 +23,7 @@
     <image class='imgs' src='../../images/LS_05.jpg'></image>
   </view>
 </view>
-<!--  list  -->
-<view bindtap='teacherInfo' data-index='{{index}}' wx:for='{{listData}}' wx:key='{{index}}' class='list border-t-1'>
-  <view class='flex aitems-center padding-lr-30 padding-tb-20 bg-fff teacher-box'>
-    <view class='teacher-l'>
-      <image catchtap='lookYouImage' data-index='{{index}}'  class='touXiang margin-r-20 touxiang-image' src='{{item.TeaIDPhoto?srcForIdPhoto+item.TeaIDPhoto:item.TeaAvaUrl}}'></image>
-      <view class='flex1'>
-        <view class='fon-26 margin-b-10 flex aitems-center '>
-          {{item.TeaName}}
-          <image wx:if='{{item.TeaAddV==1}}' class='HuangGuan margin-l-10' mode='widthFix' src='../../images/guan_03.png'></image>
-          <!--  星星  -->
-          <view class='score'>
-            <view class='score-all'>
-              <image wx:for="{{5}}" wx:key='{{index}}' class='score-list' mode='widthFix' src='../../images/hui_07.png'></image>
-            </view>
-            <view class='score-score'>
-              <view class='score-list' wx:for="{{5}}" wx:for-item='value' wx:for-index='key' wx:key='{{index}}'>
-                <!--  整星  -->
-                <image wx:if="{{item.RewScore - 0.5 > key ? key <= item.RewScore : key < item.RewScore - 1}}" class='score-img' src='../../images/xian_05.png'></image>
-                <!--  半星  -->
-                <image wx:if="{{item.RewScore - 0.5 > key ? false : key < item.RewScore }}" class='score-image' src='../../images/BanXIn_03.png'></image>
-              </view>
-            </view>
-          </view>
-        </view>
-        <view class='fon-24 c8'>
-          {{item.TeaAbstract}}
-        </view>
-      </view>
-    </view>
-  </view>
+<!--  推荐外教列表  -->
+<view bindtap='teacherInfo' data-index='{{index}}' wx:for='{{listData}}' wx:key='{{index}}' class='border-t-1'>
+  <tutor-info info-list='{{item}}' photo-url='{{srcForIdPhoto}}'></tutor-info>
 </view>

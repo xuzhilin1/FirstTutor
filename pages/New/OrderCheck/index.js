@@ -2,25 +2,6 @@
 const $common = require('../../../utils/common.js');
 Page({
   data: {
-    pagesData: [{
-      name: '口语一对多',
-      isGroup: true,
-      paymentTime: '2017-08-06 13:31',
-      groupTime: '2017-08-06 13:31',
-      price: '200',
-      courseTime: '周二上午/9:00-11:00',
-      PaymentNum: 5,
-      groupNum: 2,
-    }, {
-      name: '口语一对一',
-      isGroup: false,
-      paymentTime: '2017-08-06 13:31',
-      groupTime: '2017-08-06 13:31',
-      price: '200',
-      courseTime: '周二上午/9:00-11:00',
-      PaymentNum: 5,
-      groupNum: 2,
-    }],
     cogList: [],
     pageIndex: 1,
     pageSize: 5,

@@ -16,14 +16,6 @@ Page({
     teaAddress: '', //外教地址
     teaPhone: '', //外教联系方式
   },
-  lookYouImage() { //查看头像
-    let listData = this.data.teacher;
-    let srcForIdPhoto = this.data.srcForIdPhoto;
-    let image = listData.TeaIDPhoto ? srcForIdPhoto + listData.TeaIDPhoto : listData.TeaAvaUrl;
-    wx.previewImage({
-      urls: [image],
-    })
-  },
   callPhone(e) { //打电话
     let phone = e.currentTarget.dataset.phone;
     wx.makePhoneCall({
@@ -37,10 +29,10 @@ Page({
   countDown() { // 倒计时
     let leftTime = parseInt(this.data.leftTime);
     leftTime -= 1000;
-    let day = parseInt(leftTime / 1000 / 60 / 60 / 24, 10), //计算剩余的天数 
-      hour = parseInt(leftTime / 1000 / 60 / 60 % 24, 10), //计算剩余的小时 
-      minute = parseInt(leftTime / 1000 / 60 % 60, 10),//计算剩余的分钟 
-      second = parseInt(leftTime / 1000 % 60, 10);//计算剩余的秒数 
+    let day = parseInt(leftTime / 1000 / 60 / 60 / 24, 10), //计算剩余的天数
+      hour = parseInt(leftTime / 1000 / 60 / 60 % 24, 10), //计算剩余的小时
+      minute = parseInt(leftTime / 1000 / 60 % 60, 10),//计算剩余的分钟
+      second = parseInt(leftTime / 1000 % 60, 10);//计算剩余的秒数
     day < 10 && (day = '0' + day);
     hour < 10 && (hour = '0' + hour);
     minute < 10 && (minute = '0' + minute);
@@ -68,7 +60,7 @@ Page({
   getPageInfo() { //获取页面信息
     let openid = wx.getStorageSync('openid');
     if (!openid) {
-      $common.getOpenid(null, this.getPageInfo);
+      $common.getOpenid(this.getPageInfo);
       return;
     }
     wx.showLoading({ title: '努力加载中...' });
@@ -112,17 +104,19 @@ Page({
             }
           }
           course.CorPrice = course.CorPrice.toFixed(2) < 0.01 ? 0.01 : course.CorPrice.toFixed(2);
+          let teacher = res.data.teacher;
+          teacher.TeaName = teacher.TeaNickName;
           this.setData({
             course: course,
-            teacher: res.data.teacher,
+            teacher:teacher,
             cog: cog,
             mem: memData,
             leftTime: leftTime,
             isJoin: isJoin,
             isShowPage: true
           });
-          if (cog.FgtStatus == 1) {    
-              this.countDown(); 
+          if (cog.FgtStatus == 1) {
+              this.countDown();
           }
         } else {
           switch (res.errType) {
@@ -204,7 +198,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
+
   },
 
   /**

@@ -231,3 +231,6 @@ page {
 }
 
 /*  评分 end  */
+.catImage{
+  width: 50rpx;
+}

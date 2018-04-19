@@ -1,6 +1,7 @@
 const $common = require('../../../utils/common.js');
 Page({
   data: {
+    srcForIdPhoto: $common.srcForIdPhoto,
     teaList: [],
     pageIndex: 1,
     pageSize: 5,
@@ -70,6 +71,7 @@ Page({
             pageIndex++;
           }
           for (let i = 0, len = data.length; i < len; i++) {
+            data[i].TeaName = data[i].TeaNickName;
             teaList.push(data[i]);
           }
           let hash = {};

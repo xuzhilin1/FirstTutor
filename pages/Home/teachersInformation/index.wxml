@@ -34,6 +34,7 @@
           </view>
         </view>
       </view>
+      <image bindtap='onlineChart' mode='widthFix' class='catImage' src='/pages/images/DuiHua_0.png'></image>
     </view>
   </view>
   <!--  phone and area  -->
@@ -115,6 +116,5 @@
       </view>
     </view>
   </view>
-  <view bindtap='onlineChart' class='footer fon-30 white purple-bg'>咨询老师</view>
-
+   <view bindtap='onlineChart' class='footer fon-30 white purple-bg'>咨询老师</view> 
 </view>

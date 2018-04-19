@@ -11,20 +11,6 @@ Page({
     teaAddress: '', //外教地址
     teaPhone: '', //外教联系方式
   },
-  lookYouImage() { //查看头像
-    let listData = this.data.teacher;
-    let srcForIdPhoto = this.data.srcForIdPhoto;
-    let image = listData.TeaIDPhoto ? srcForIdPhoto + listData.TeaIDPhoto : listData.TeaAvaUrl;
-    wx.previewImage({
-      urls: [image],
-    })
-  },
-  onlineChart(e) { //立即沟通
-    let userId = this.data.teacher.TeaUserId;
-    wx.navigateTo({
-      url: `../../New/onlineChart/index?userId=${userId}`,
-    })
-  },
   callPhone(e) { //打电话
     let phone = e.currentTarget.dataset.phone;
     wx.makePhoneCall({
@@ -70,6 +56,8 @@ Page({
           showMem.buyTime = this.timeStamp(showMem.OdrBuyDate); //支付时间
           showMem.groupSuccessTime = this.timeStamp(showMem.OdrFgtSuccessTime);//拼团成功时间
           course.CorPrice = course.CorPrice.toFixed(2) < 0.01 ? 0.01 : course.CorPrice.toFixed(2);
+          let teacher = res.data.teacher;
+          teacher.TeaName = teacher.TeaNickName;
           this.setData({
             course: course,
             teacher: res.data.teacher,
