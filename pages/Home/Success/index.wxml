@@ -1,5 +1,5 @@
 <!--pages/Home/Success/index.wxml-->
-<image class='imgas' src='../../images/successs_03.jpg'></image>
+<image class='imgas' src='/images/successs_03.jpg'></image>
 <view class='fon-42 t-center bold'>{{contentText}}</view>
 <button bindtap='goHome' class='border buns bg-fff btn purple fon-37'>去首页逛逛吧</button>
 <button wx:if='{{audit===2}}' bindtap='returnNew' class=' white btn purple-bg fon-37'>返回重新申请</button>

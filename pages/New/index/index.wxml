@@ -3,7 +3,7 @@
     <image class='avatarUrl' src="{{userInfo.avatarUrl}}" background-size="cover"></image>
     <view class='flex aitems-center center'>
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-      <image wx:if='{{vip&&userType===2}}' mode='widthFix' class='Guan' src='../../images/guan_03.png'></image>
+      <image wx:if='{{vip&&userType===2}}' mode='widthFix' class='Guan' src='/images/guan_03.png'></image>
     </view>
   </view>
 </view>
@@ -14,7 +14,7 @@
       <image mode='widthFix' style='width:64rpx; margin-right:20rpx' src='{{item.url}}'></image>
       {{item.title}}
     </view>
-    <image mode='widthFix' style='width:21rpx;' src='../../images/jian_13.png'></image>
+    <image mode='widthFix' style='width:21rpx;' src='/images/jian_13.png'></image>
   </view>
 </view>
 <!--  导师  -->
@@ -24,6 +24,6 @@
       <image mode='widthFix' style='width:64rpx; margin-right:20rpx' src='{{item.url}}'></image>
       {{item.title}}
     </view>
-    <image mode='widthFix' style='width:21rpx;' src='../../images/jian_13.png'></image>
+    <image mode='widthFix' style='width:21rpx;' src='/images/jian_13.png'></image>
   </view>
 </view>

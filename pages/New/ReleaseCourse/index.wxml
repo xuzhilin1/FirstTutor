@@ -7,7 +7,7 @@
       </view>
     </view>
   </picker>
-  <image mode='widthFix' style='width:20rpx;' src='../../images/jian_13.png'></image>
+  <image mode='widthFix' style='width:20rpx;' src='/images/jian_13.png'></image>
 </view>
 <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
   <view class='flex1 aitems-center  fon-30 flex '>
@@ -48,7 +48,7 @@
       </view>
     </view>
   </picker>
-  <image mode='widthFix' style='width:20rpx;' src='../../images/jian_13.png'></image>
+  <image mode='widthFix' style='width:20rpx;' src='/images/jian_13.png'></image>
 </view>
 
 <view bindtap='classTime' class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
@@ -56,7 +56,7 @@
     <view class='width-left'>period</view>
     <view class='ca'>{{courseTime.length>0?"Have been perfected":"To be perfect"}}</view>
   </view>
-  <image mode='widthFix' style='width:20rpx;' src='../../images/jian_13.png'></image>
+  <image mode='widthFix' style='width:20rpx;' src='/images/jian_13.png'></image>
 </view>
 
 <view bindtap='teachers' class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
@@ -64,7 +64,7 @@
     <view class='width-left'>introduce</view>
     <view class='ca'>{{isCourseIntroduce?"Have been perfected":"To be perfect"}}</view>
   </view>
-  <image mode='widthFix' style='width:20rpx;' src='../../images/jian_13.png'></image>
+  <image mode='widthFix' style='width:20rpx;' src='/images/jian_13.png'></image>
 </view>
 
 <button bindtap='submit' class='btn purple-bg margin-t-60 white'>save</button>

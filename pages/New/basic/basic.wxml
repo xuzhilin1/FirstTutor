@@ -4,7 +4,7 @@
     <view class='list-left'>{{item.ZiLiao}}</view>
     <view class='zxx_text_overflow'>{{item.Types}}</view>
   </view>
-  <image mode='widthFix' class='list-image' src='../../images/jian_13.png'></image>
+  <image mode='widthFix' class='list-image' src='/images/jian_13.png'></image>
 </view>
 
 <!--  -->

@@ -15,18 +15,18 @@
   <view class='border-t-1'>
     <view class='flex border-b-1 bg-fff DIZHi aitems-center  between '>
       <view class='flex aitems-center '>
-        <image mode='widthFix' class='imgs-s' src='../../images/time_03.png'></image>
+        <image mode='widthFix' class='imgs-s' src='/images/time_03.png'></image>
         <view class='fon-24 baomi c8'>活动时间</view>
         <view class='fon-24 XianZhi1'>{{atyInfo.startTime}} 至 {{atyInfo.endTime}}</view>
       </view>
     </view>
     <view bindtap='openLoc' class='flex border-b-1 bg-fff DIZHi aitems-center  between '>
       <view class='flex aitems-center '>
-        <image mode='widthFix' class='imgs-s' src='../../images/add_06.png'></image>
+        <image mode='widthFix' class='imgs-s' src='/images/add_06.png'></image>
         <view class='fon-24 baomi c8'>活动地址</view>
         <view class='fon-24 XianZhi1'>{{atyInfo.AtyAddress}}</view>
       </view>
-      <image mode='widthFix' class='img-rrr' src='../../images/jian_13.png'></image>
+      <image mode='widthFix' class='img-rrr' src='/images/jian_13.png'></image>
     </view>
   </view>
   <!-- 外教视频 -->

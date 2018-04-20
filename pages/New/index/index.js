@@ -9,69 +9,69 @@ Page({
     vip: false, //是否vip
     teacherList: [{
       isShow: true,
-      url: '../../images/LI_03.png',
+      url: '/images/LI_03.png',
       title: "Basic Information",
       luJin: '../basic/basic'
     },
     {
       isShow: true,
-      url: '../../images/LI_06.png',
+      url: '/images/LI_06.png',
       title: "Course Management",
       luJin: '../CourseManagement/index'
     },
     {
       isShow: false,
-      url: '../../images/LI_08.png',
+      url: '/images/LI_08.png',
       title: "Demand review",
       luJin: '../NeedSee/index'
     },
     {
       isShow: true,
-      url: '../../images/LI_10.png',
+      url: '/images/LI_10.png',
       title: "Order viewing",
       luJin: '../OrderCheck/index'
     },
     {
       isShow: true,
-      url: '../../images/LI_12.png',
+      url: '/images/LI_12.png',
       title: "Review Management",
       luJin: '../OrdeRreview/index'
     },
     {
       isShow: true,
-      url: '../../images/LI_14.png',
+      url: '/images/LI_14.png',
       title: "Event notification",
       luJin: '../activity/index'
     },
     {
       isShow: true,
-      url: '../../images/LI_16.jpg',
+      url: '/images/LI_16.jpg',
       title: "Online communication",
       luJin: '../Online/index?isTeacher=true'
     }],
     //学生
     studentList: [{
-      url: '../../images/LI_10.png',
+      url: '/images/LI_10.png',
       title: " 我的订单",
       luJin: '../OrderCheckS/index'
     },
     {
-      url: '../../images/LI_06.png',
+      url: '/images/LI_06.png',
       title: " 学习需求",
       luJin: '../NeedSeeS/index'
     },
     {
-      url: '../../images/LI_14.png',
+      url: '/images/LI_14.png',
       title: " 我报名的活动",
       luJin: '../activity/index'
     },
     {
-      url: '../../images/LI_12.png',
+      url: '/images/LI_12.png',
       title: " 我的点评",
       luJin: '../OrdeRreviewS/index'
     },
     {
-      url: '../../images/LI_16.jpg',
+      url: '/images/LI_16.jpg',
       title: " 在线沟通",
       luJin: '../Online/index'
     }],

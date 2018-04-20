@@ -7,7 +7,7 @@
   <!--  一对多  -->
   <view wx:if='{{item.CorType!=1}}' class='middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
     <view class='flex fon-36  c2b '>
-      <image class='QiHao' mode='widthFix' src='../../images/tuan_06.png'></image>
+      <image class='QiHao' mode='widthFix' src='/images/tuan_06.png'></image>
       <view>
         <text>{{item.CorTitle}}</text>
         <view class='c8 fon-24 margin-t-10'>已有{{item.BuyCount}}人购买</view>
@@ -18,7 +18,7 @@
   <!--  一对一  -->
   <view wx:if='{{item.CorType==1}}' class='middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
     <view class='flex fon-36  c2b '>
-      <image class='QiHao' mode='widthFix' src='../../images/qi_03.png'></image>
+      <image class='QiHao' mode='widthFix' src='/images/qi_03.png'></image>
       <text>{{item.CorTitle}}</text>
     </view>
     <view class='bold purple'>¥ {{item.CorPrice}}</view>

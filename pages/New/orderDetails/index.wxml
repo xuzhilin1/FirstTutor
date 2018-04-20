@@ -1,6 +1,6 @@
 <view wx:if='{{course.CorType==1}}' class=' middle-m bg-fff flex aitems-center border-b-1 between padding-lr-30 border-t-1'>
   <view class='flex fon-36  c2b '>
-    <image class='QiHao' mode='widthFix' src='../../images/qi_03.png'></image>
+    <image class='QiHao' mode='widthFix' src='/images/qi_03.png'></image>
     <view>
       <text>{{course.CorTitle}}</text>
       <view class=' fon-24 c8 margin-t-10 '>已有{{course.BuyCount}}人购买</view>
@@ -11,7 +11,7 @@
 
 <view wx:if='{{course.CorType!=1}}' class=' middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
   <view class='flex fon-36  c2b '>
-    <image class='QiHao' mode='widthFix' src='../../images/tuan_06.png'></image>
+    <image class='QiHao' mode='widthFix' src='/images/tuan_06.png'></image>
     <view>
      <text>{{course.CorTitle}}</text>
       <view class='bold bg-fff purple'>¥ {{course.CorPrice}}</view>
@@ -27,17 +27,17 @@
       <image class='orderimg' src='{{item.UserAvaUrl}}'></image>
       {{item.OdrName}}
       <view wx:if='{{cog.FgtType==1&&item.OdrIsHead}}' class='Tuan border fon-24 purple'>团长</view>
-      <image bindtap='onlineChart' data-index='{{index}}' class='Wen' mode='widthFix' src='../../images/DuiHua_06.png'></image>
+      <image bindtap='onlineChart' data-index='{{index}}' class='Wen' mode='widthFix' src='/images/DuiHua_06.png'></image>
     </view>
     <view bindtap='callPhone' data-phone='{{item.OdrPhone}}' class='flex aitens-center'>
-      <image class='phone' mode='widthFix' src='../../images/phone_06.png'></image>
+      <image class='phone' mode='widthFix' src='/images/phone_06.png'></image>
       {{item.OdrPhone}}
     </view>
   </view>
 
 </view>
 <view  bindtap='lookAddress' class='padding-25 bg-fff flex aitems-center fon-26 border-t-1 border-b-1'>
-  <image mode='widthFix' class='address' src='../../images/adddress_14.png'></image>
+  <image mode='widthFix' class='address' src='/images/adddress_14.png'></image>
   上课地址：{{cog.FgtStudyAddress}}
 </view>
 

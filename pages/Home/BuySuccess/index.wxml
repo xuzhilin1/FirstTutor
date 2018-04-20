@@ -1,5 +1,5 @@
 <view class='bg-fff header border-b-1'>
-  <image class='imgas' mode='widthFix' src='../../images/lian_03.jpg'></image>
+  <image class='imgas' mode='widthFix' src='/images/lian_03.jpg'></image>
   <view class='fon-42 t-center bold'>恭喜您，购买成功！</view>
   <button wx:if='{{orderType===2}}' bindtap='goHome' class='margin-t-50 border buns bg-fff btn purple fon-37'>返回首页</button>
   <button wx:if='{{orderType===1}}' bindtap='spellGroup' class='margin-t-50 border buns bg-fff btn purple fon-37'>查看拼团信息</button>
@@ -24,11 +24,11 @@
 </view>
 <view class=' border-b-1'>
   <view bindtap='lookAddress' class='padding-50  padding-tb-20 bg-fff flex aitems-center fon-26 '>
-    <image mode='widthFix' class='address' src='../../images/adddress_14.png'></image>
+    <image mode='widthFix' class='address' src='/images/adddress_14.png'></image>
     {{teaAddress}}
   </view>
   <view  bindtap='callPhone' data-phone='{{teaPhone}}' class='padding-50  padding-tb-20 bg-fff flex aitems-center fon-26 '>
-    <image mode='widthFix' class='address' src='../../images/phone_06.png'></image>
+    <image mode='widthFix' class='address' src='/images/phone_06.png'></image>
     {{teaPhone}}
   </view>
 </view>

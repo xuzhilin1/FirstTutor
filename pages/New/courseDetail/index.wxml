@@ -3,7 +3,7 @@
   <!-- 一对一 -->
   <view wx:if='{{course.CorType==1}}' class=' middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
     <view class='flex fon-36 c2b'>
-      <image class='QiHao' mode='widthFix' src='../../images/qi_03.png'></image>
+      <image class='QiHao' mode='widthFix' src='/images/qi_03.png'></image>
       <view>
         <text>{{course.CorTitle}}</text>
         <view class='c8 margin-t-20 fon-24'>已有{{course.BuyCount}}人参与</view>
@@ -16,7 +16,7 @@
   <!--  一对多  -->
   <view wx:if='{{course.CorType!=1}}' class=' middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
     <view class='flex fon-36  c2b '>
-      <image class='QiHao' mode='widthFix' src='../../images/tuan_06.png'></image>
+      <image class='QiHao' mode='widthFix' src='/images/tuan_06.png'></image>
       <view>
         <text>{{course.CorTitle}}</text>
         <view class='bold bg-fff purple'>¥{{course.CorPrice}}</view>

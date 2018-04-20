@@ -10,7 +10,7 @@
   </view>
   <view class='flex between margin-t-20 aitems-center'>
     <view class='flex aitems-center fon-24 c8'>
-      <image class='address' mode='widthFix' src='../../images/newaddress_07.png'></image>
+      <image class='address' mode='widthFix' src='/images/newaddress_07.png'></image>
       <!-- {{item.AtyAddress}} -->
       <!-- 上海  -->
       {{item.whatTime}}

@@ -6,7 +6,7 @@
     </view>
     <view class=' middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
       <view class='flex fon-36  c2b '>
-        <image class='QiHao' mode='widthFix' src='../../images/tuan_06.png'></image>
+        <image class='QiHao' mode='widthFix' src='/images/tuan_06.png'></image>
         <view>
           {{course.CorTitle}}
           <view class='bold bg-fff purple'>¥ {{course.CorPrice}}</view>

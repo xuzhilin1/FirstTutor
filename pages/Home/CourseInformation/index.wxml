@@ -4,7 +4,7 @@
     <!-- 一对一 -->
     <view wx:if='{{course.CorType==1}}' class=' middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
       <view class='flex fon-36 c2b'>
-        <image class='QiHao' mode='widthFix' src='../../images/qi_03.png'></image>
+        <image class='QiHao' mode='widthFix' src='/images/qi_03.png'></image>
         <view>
           <text>{{course.CorTitle}}</text>
           <view class='c8 margin-t-20 fon-24'>已有{{course.BuyCount}}人参与</view>
@@ -17,7 +17,7 @@
     <!--  一对多  -->
     <view wx:if='{{course.CorType!=1}}' class=' middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
       <view class='flex fon-36  c2b '>
-        <image class='QiHao' mode='widthFix' src='../../images/tuan_06.png'></image>
+        <image class='QiHao' mode='widthFix' src='/images/tuan_06.png'></image>
         <view>
           <text>{{course.CorTitle}}</text>
           <view class='bold bg-fff purple'>¥{{course.CorPrice}}</view>
@@ -43,7 +43,7 @@
           <text>支付开团邀请{{course.CorClaNum}}人参团，人数不足自动退款</text>
           <view bindtap='spellingRules' class='ca margin-l-20'>详细规则</view>
         </view>
-        <image class='Jian' mode='widthFix' src='../../images/jos_03.jpg'></image>
+        <image class='Jian' mode='widthFix' src='/images/jos_03.jpg'></image>
       </view>
       <view>
         <view class='fon-26 padding-tb-20 c2b'>以下小伙伴正在发起拼团，您可以直接参与：</view>
@@ -111,13 +111,13 @@
     <view wx:if='{{course.CorType!=1}}' class='footer1 bg-fff flex border-t-1  aitems-center between'>
       <view class='flex border-r-1 center aitems-center KuanDU'>
         <view bindtap='goHome' class='fon-20 c88 gaoDU'>
-          <image class='fangZI' mode='widthFix' src='../../images/fangzi_07.png'></image>
+          <image class='fangZI' mode='widthFix' src='/images/fangzi_07.png'></image>
           首页
         </view>
       </view>
       <view bindtap='onlineChart' class='flex center aitems-center KuanDU'>
         <view class='fon-20 c88 gaoDU'>
-          <image class='fangZI' mode='widthFix' src='../../images/zixun_09.png'></image>
+          <image class='fangZI' mode='widthFix' src='/images/zixun_09.png'></image>
           咨询
         </view>
       </view>

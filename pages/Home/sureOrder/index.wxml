@@ -4,7 +4,7 @@
       <!-- 一对一 -->
       <view wx:if='{{course.CorType==1}}' class=' middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
         <view class='flex fon-36 c2b'>
-          <image class='QiHao' mode='widthFix' src='../../images/qi_03.png'></image>
+          <image class='QiHao' mode='widthFix' src='/images/qi_03.png'></image>
           <view>
             <text>{{course.CorTitle}}</text>
             <view class='c8 margin-t-20 fon-24'>已有{{course.BuyCount}}人参与</view>
@@ -17,7 +17,7 @@
       <!--  一对多  -->
       <view wx:if='{{course.CorType!=1}}' class=' middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
         <view class='flex fon-36  c2b '>
-          <image class='QiHao' mode='widthFix' src='../../images/tuan_06.png'></image>
+          <image class='QiHao' mode='widthFix' src='/images/tuan_06.png'></image>
           <view>
             <text>{{course.CorTitle}}</text>
             <view class='bold bg-fff purple'>¥{{course.CorPrice}}</view>
@@ -71,7 +71,7 @@
           <input disabled='disabled' value='{{startCourseTime}}' type='text' class='ca list-box-inpu' placeholder-class='ca' placeholder='（请设置上课开始时间）'></input>
         </picker>
       </view>
-      <image mode='widthFix' style='width:20rpx;' src='../../images/jian_13.png'></image>
+      <image mode='widthFix' style='width:20rpx;' src='/images/jian_13.png'></image>
     </view>
     <!--  上课地址  -->
     <view wx:if='{{orderType==2||groupType==1}}' class='flex bg-fff  height-85 padding-lr-30 aitems-center border-b-1 between'>

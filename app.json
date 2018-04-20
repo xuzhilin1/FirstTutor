@@ -56,26 +56,26 @@
       {
         "pagePath": "pages/Home/Home/index",
         "text": "首页",
-        "iconPath": "pages/images/KAN_16.png",
-        "selectedIconPath": "pages/images/LO_13.png"
+        "iconPath": "/images/KAN_16.png",
+        "selectedIconPath": "/images/LO_13.png"
       },
       {
         "pagePath": "pages/Home/foreignTeacher/index",
         "text": "找外教",
-        "iconPath": "pages/images/KAN_18.png",
-        "selectedIconPath": "pages/images/LO_15.png"
+        "iconPath": "/images/KAN_18.png",
+        "selectedIconPath": "/images/LO_15.png"
       },
       {
         "pagePath": "pages/Home/activity/index",
         "text": "活动",
-        "iconPath": "pages/images/KAN_21.png",
-        "selectedIconPath": "pages/images/LO_18.png"
+        "iconPath": "/images/KAN_21.png",
+        "selectedIconPath": "/images/LO_18.png"
       },
       {
         "pagePath": "pages/New/index/index",
         "text": "我",
-        "iconPath": "pages/images/TE_13.png",
-        "selectedIconPath": "pages/images/KAN_13.png"
+        "iconPath": "/images/TE_13.png",
+        "selectedIconPath": "/images/KAN_13.png"
       }
     ]
   }

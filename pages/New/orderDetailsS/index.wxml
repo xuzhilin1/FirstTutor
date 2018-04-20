@@ -1,7 +1,7 @@
 <!-- 一对一 -->
 <view wx:if='{{course.CorType==1}}' class=' middle-m bg-fff flex aitems-center border-b-1 between padding-lr-30 border-t-1'>
   <view class='flex fon-36  c2b '>
-    <image class='QiHao' mode='widthFix' src='../../images/qi_03.png'></image>
+    <image class='QiHao' mode='widthFix' src='/images/qi_03.png'></image>
     <view>
       <text>{{course.CorTitle}}</text>
       <view class=' fon-24 c8 margin-t-10 '>已有{{course.BuyCount}}人购买</view>
@@ -12,7 +12,7 @@
 <!--  一对多  -->
 <view wx:if='{{course.CorType!=1}}' class=' middle-m bg-fff flex aitems-center between padding-lr-30 border-b-1'>
   <view class='flex fon-36  c2b '>
-    <image class='QiHao' mode='widthFix' src='../../images/tuan_06.png'></image>
+    <image class='QiHao' mode='widthFix' src='/images/tuan_06.png'></image>
     <view>
       <text>{{course.CorTitle}}</text>
       <view class='bold bg-fff purple'>¥ {{course.CorPrice}}</view>
@@ -21,7 +21,7 @@
   <view class='purplea purple fon-24 '>{{course.CorType}}人团</view>
 </view>
 <!--  外教信息  -->
-<tutor-info info-list='{{teacher}}' photo-url='{{srcForIdPhoto}}' chat-image='/pages/images/DuiHua_06.png'></tutor-info>
+<tutor-info info-list='{{teacher}}' photo-url='{{srcForIdPhoto}}' chat-image='/images/DuiHua_06.png'></tutor-info>
 <!--  拼团详情  -->
 <view class='margin-t-20 border-t-1 border-b-1'>
   <view wx:if='{{course.CorType!=1&&cog.FgtType==1}}' class='padding-tb-20 border-b-1 padding-lr-30 bg-fff'>
@@ -35,7 +35,7 @@
       <view wx:if='{{cog.FgtType==1&&index==0}}' class='Tuan border fon-24 purple'>团长</view>
     </view>
     <view bindtap='callPhone' data-phone='{{item.OdrPhone}}' class='flex aitens-center'>
-      <image class='phone' mode='widthFix' src='../../images/phone_06.png'></image>
+      <image class='phone' mode='widthFix' src='/images/phone_06.png'></image>
       {{item.OdrPhone}}
     </view>
   </view>
@@ -55,11 +55,11 @@
     <view class='fon-30 padding-l-20 border-l-2 c2b'>上课地址及外教联系方式</view>
   </view>
   <view bindtap='lookAddress' class='padding-50 margin-t-20 bg-fff flex aitems-center fon-26 '>
-    <image mode='widthFix' class='address' src='../../images/adddress_14.png'></image>
+    <image mode='widthFix' class='address' src='/images/adddress_14.png'></image>
     {{teaAddress}}
   </view>
   <view bindtap='callPhone' data-phone='{{teaPhone}}' class='padding-50 margin-t-20 bg-fff flex aitems-center fon-26 '>
-    <image mode='widthFix' class='address' src='../../images/phone_06.png'></image>
+    <image mode='widthFix' class='address' src='/images/phone_06.png'></image>
     {{teaPhone}}
   </view>
 </view>

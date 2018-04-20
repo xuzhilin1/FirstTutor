@@ -7,9 +7,9 @@
 </swiper>
 <view class='bg-fff'>
   <view class='flex aitems-center center'>
-    <image class='imgs' src='../../images/LS_03.png'></image>
+    <image class='imgs' src='/images/LS_03.png'></image>
     <view class='fon-26 Huo c9'>最新活动</view>
-    <image class='imgs' src='../../images/LS_05.jpg'></image>
+    <image class='imgs' src='/images/LS_05.jpg'></image>
   </view>
 </view>
 <view bindtap='activityDetail' class='padding-lr-30 bg-fff'>
@@ -18,9 +18,9 @@
 
 <view class='bg-fff'>
   <view class='flex aitems-center center'>
-    <image class='imgs' src='../../images/LS_03.png'></image>
+    <image class='imgs' src='/images/LS_03.png'></image>
     <view class='fon-26 Huo c9'>推荐外教</view>
-    <image class='imgs' src='../../images/LS_05.jpg'></image>
+    <image class='imgs' src='/images/LS_05.jpg'></image>
   </view>
 </view>
 <!--  推荐外教列表  -->

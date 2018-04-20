@@ -9,7 +9,7 @@
     <!--  单独购买  -->
     <view bindtap='orderDetails' data-index='{{index}}' wx:if='{{item.CorType==1}}' class=' middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
       <view class='flex fon-36  c2b '>
-        <image class='QiHao' mode='widthFix' src='../../images/qi_03.png'></image>
+        <image class='QiHao' mode='widthFix' src='/images/qi_03.png'></image>
         {{item.CorTitle}}
       </view>
       <view class='bold purple'>¥{{item.CorPrice}}</view>
@@ -17,7 +17,7 @@
     <!--  拼团  -->
     <view bindtap='orderDetails' data-index='{{index}}' wx:if='{{item.CorType!=1}}' class=' middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
       <view class='flex fon-36  c2b '>
-        <image class='QiHao' mode='widthFix' src='../../images/tuan_06.png'></image>
+        <image class='QiHao' mode='widthFix' src='/images/tuan_06.png'></image>
         <view>
           {{item.CorTitle}}
           <view class='bold bg-fff purple'>¥{{item.CorPrice}}</view>

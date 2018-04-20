@@ -2,8 +2,8 @@
   <text>给TA打分</text>
   <view class='scoure'>
     <view bindtap='bindScoure' data-index='{{index}}' class='scoure-box' wx:for='{{5}}' wx:key='{{index}}'>
-      <image src='../../images/hui_07.png'></image>
-      <image hidden='{{scoure<=index}}' class='scoure-img' src='../../images/xian_05.png'></image>
+      <image src='/images/hui_07.png'></image>
+      <image hidden='{{scoure<=index}}' class='scoure-img' src='/images/xian_05.png'></image>
     </view>
   </view>
 </view>
