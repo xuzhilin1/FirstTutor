@@ -30,15 +30,17 @@
     </view>
   </view>
   <!-- 外教视频 -->
-  <view wx:if='{{atyInfo.AtyVideoName}}' class='padding-tb-20 bg-fff margin-t-20  border-b-1 border-t-1 padding-lr-30'>
-    <view class='fon-30 padding-l-20 border-l-2 c2b'>活动视频</view>
-  </view>
-  <view wx:if='{{atyInfo.AtyVideoName}}' class='sepa bg-fff'>
-    <video class='video' src="{{srcActivityVideo}}{{atyInfo.AtyVideoName}}" controls></video>
-  </view>
+  <block wx:if='{{atyInfo.AtyVideoName}}'>
+    <view class='border-b-1 margin-t-20'>
+      <modular-title title-context='活动视频'></modular-title>
+    </view>
+    <view class='sepa bg-fff'>
+      <video class='video' src="{{srcActivityVideo}}{{atyInfo.AtyVideoName}}" controls></video>
+    </view>
+  </block>
   <!-- 活动介绍 -->
-  <view class='padding-tb-20 bg-fff margin-t-20 border-t-1 border-b-1 padding-lr-30'>
-    <view class='fon-30 padding-l-20 border-l-2 c2b'>活动介绍</view>
+  <view class='border-b-1 margin-t-20 border-t-1'>
+    <modular-title title-context='活动介绍'></modular-title>
   </view>
   <view class='context'>
     <view class="wxParse">

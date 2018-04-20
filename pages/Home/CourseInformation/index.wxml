@@ -62,10 +62,10 @@
     </view>
     <!--end  -->
     <!--  选择上课时间  -->
-    <view class='bg-fff padding-b-20 margin-t-20'>
-      <view class='padding-tb-20 margin-b-20 border-b-1 padding-lr-30'>
-        <view class='fon-30 padding-l-20 border-l-2 c2b'>选择时间段</view>
-      </view>
+    <view class='border-b-1 margin-t-20'>
+      <modular-title title-context='选择时间段'></modular-title>
+    </view>
+    <view class='bg-fff padding-b-20'>
       <view class='flex  fon-24 padding-lr-30 between warp'>
         <view wx:for='{{weekList}}' wx:key='{{index}}' class='QuKuai c8'>{{item}}</view>
       </view>
@@ -84,16 +84,15 @@
       </view>
     </view>
     <!--  课程介绍  -->
-    <view class='padding-tb-20 border-b-1 bg-fff padding-lr-30 margin-t-20'>
-      <view class='fon-30 padding-l-20 border-l-2 c2b'>课程介绍</view>
+    <view class='border-b-1 margin-t-20'>
+      <modular-title title-context='课程介绍'></modular-title>
     </view>
     <view class='padding-lr-30 bg-fff fon-24 padding-tb-20'>
-
       <view class='c72'>{{course.CorDescript}}</view>
     </view>
     <!-- 定金说明 -->
-    <view class='height-85 flex margin-t-20 border-t-1 aitems-center bg-fff  border-b-1  padding-lr-30'>
-      <view class='fon-30 padding-l-20 border-l-2 c2b'>订金说明</view>
+    <view class='border-b-1 margin-t-20'>
+      <modular-title title-context='订金说明'></modular-title>
     </view>
     <view class='padding-lr-30 fon-24  c88 bg-fff padding-tb-40'>
       <text>平台预收课程费用{{tea.TeaDepositPer}}%作为订金，剩余费用学生扣除订金后支付给外教。</text>

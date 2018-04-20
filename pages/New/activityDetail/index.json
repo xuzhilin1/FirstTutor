@@ -3,5 +3,8 @@
   "backgroundTextStyle": "light",
   "navigationBarBackgroundColor": "#000",
   "navigationBarTextStyle": "white",
-  "navigationBarTitleText": "活动详情"
+  "navigationBarTitleText": "活动详情",
+  "usingComponents": {
+    "modular-title": "/component/modularTitle/modularTitle"
+  }
 }

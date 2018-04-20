@@ -5,6 +5,7 @@
   "navigationBarTextStyle": "white",
   "navigationBarTitleText": "确认订单",
   "usingComponents": {
-    "tutor-info": "/component/tutorInfo/tutorInfo"
+    "tutor-info": "/component/tutorInfo/tutorInfo",
+    "modular-title": "/component/modularTitle/modularTitle"
   }
 }

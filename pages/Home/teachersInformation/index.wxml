@@ -74,31 +74,37 @@
   </view>
   <!-- 外教介绍 -->
   <view id="_teacherIntroduce" class="margin-b-20  border-t-1">
-    <view wx:if='{{teaInfo.TeaDescript}}' class='padding-tb-20 border-b-1 bg-fff padding-lr-30'>
-      <view class='fon-30 padding-l-20 border-l-2 c2b'>外教介绍</view>
-    </view>
-    <view wx:if='{{teaInfo.TeaDescript}}' class='padding-lr-30 bg-fff fon-24 padding-tb-20'>
-      <view class='c72'>{{teaInfo.TeaDescript}}</view>
-    </view>
+    <block wx:if='{{teaInfo.TeaDescript}}'>
+      <view class='border-b-1'>
+        <modular-title title-context='外教介绍'></modular-title>
+      </view>
+      <view wx:if='{{teaInfo.TeaDescript}}' class='padding-lr-30 bg-fff fon-24 padding-tb-20'>
+        <view class='c72'>{{teaInfo.TeaDescript}}</view>
+      </view>
+    </block>
     <!-- 外教视频 -->
-    <view wx:if='{{teaInfo.TeaAudio}}' class='padding-tb-20 bg-fff margin-t-20  border-b-1 border-t-1 padding-lr-30'>
-      <view class='fon-30 padding-l-20 border-l-2 c2b'>外教视频</view>
-    </view>
-    <view wx:if='{{teaInfo.TeaAudio}}' class='sepa bg-fff'>
-      <video class='video' src="{{srcVideo}}{{teaInfo.TeaAudio}}" controls></video>
-    </view>
+    <block wx:if='{{teaInfo.TeaAudio}}'>
+      <view class='border-b-1 margin-t-20'>
+        <modular-title title-context='外教视频'></modular-title>
+      </view>
+      <view class='sepa bg-fff'>
+        <video class='video' src="{{srcVideo}}{{teaInfo.TeaAudio}}" controls></video>
+      </view>
+    </block>
     <!--  外教资质  -->
-    <view wx:if='{{qualifInfo.length>0}}' class='padding-tb-20 bg-fff margin-t-20  border-b-1 border-t-1 padding-lr-30'>
-      <view class='fon-30 padding-l-20 border-l-2 c2b'>外教资质</view>
-    </view>
-    <view wx:if='{{qualifInfo.length>0}}' class='bg-fff zizhi-box'>
-      <image bindtap='lookqualifImage' data-image='{{item}}' wx:for='{{qualifInfo}}' wx:key='{{index}}' class='img-ziZhi' mode='widthFix' src='{{srcImg}}{{item}}'></image>
-    </view>
+    <block wx:if='{{qualifInfo.length>0}}'>
+      <view class='border-b-1 margin-t-20'>
+        <modular-title title-context='外教资质'></modular-title>
+      </view>
+      <view class='bg-fff zizhi-box'>
+        <image bindtap='lookqualifImage' data-image='{{item}}' wx:for='{{qualifInfo}}' wx:key='{{index}}' class='img-ziZhi' mode='widthFix' src='{{srcImg}}{{item}}'></image>
+      </view>
+    </block>
   </view>
   <!-- 最新评论 -->
   <view hidden='{{comment.length<=0}}' id="_evaluate" class='bg-fff margin-b-20'>
-    <view class='padding-tb-20 border-b-1 bg-fff padding-lr-30'>
-      <view class='fon-30 padding-l-20 border-l-2 c2b'>最新评论</view>
+    <view class='border-b-1 margin-t-20'>
+      <modular-title title-context='最新评论'></modular-title>
     </view>
     <view class='padding-lr-30'>
       <view hidden='{{index>=2&&!allComment}}' wx:for='{{comment}}' wx:key='{{index}}' class='border-b-1 padding-tb-20'>
@@ -116,5 +122,5 @@
       </view>
     </view>
   </view>
-   <view bindtap='onlineChart' class='footer fon-30 white purple-bg'>咨询老师</view>
+  <view bindtap='onlineChart' class='footer fon-30 white purple-bg'>咨询老师</view>
 </view>

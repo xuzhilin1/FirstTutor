@@ -3,5 +3,8 @@
   "backgroundTextStyle": "light",
   "navigationBarBackgroundColor": "#000",
   "navigationBarTextStyle": "white",
-  "navigationBarTitleText": "时间段"
+  "navigationBarTitleText": "时间段",
+  "usingComponents": {
+    "modular-title": "/component/modularTitle/modularTitle"
+  }
 }

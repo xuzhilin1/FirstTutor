@@ -1,5 +1,5 @@
-<view class='padding-tb-20 margin-b-20 border-b-1 padding-lr-30'>
-  <view class='fon-30 padding-l-20 border-l-2 c2b'>选择时间段</view>
+<view class='border-b-1'>
+  <modular-title title-context='选择上课时间'></modular-title>
 </view>
 <view class='flex  fon-24 padding-lr-30 between warp'>
   <view wx:for='{{weekList}}' wx:key='{{index}}' class='QuKuai c8'>{{item}}</view>

@@ -2,8 +2,9 @@
 
 .search-box {
   width: 100%;
-  padding: 20rpx 30rpx 0 30rpx;
+  padding: 20rpx 30rpx;
   box-sizing: border-box;
+  background: #ffffff;
 }
 
 .search {
@@ -34,7 +35,6 @@
 
 .table-wrapper {
   box-sizing: border-box;
-  margin-top: 20rpx;
   padding: 20rpx 30rpx;
   border-top: 1px solid #e0e0e0;
   border-bottom: 1px solid #e0e0e0;
@@ -43,6 +43,7 @@
   align-items: center;
   -webkit-align-items: center;
   justify-content: space-between;
+  background: #ffffff;
 }
 
 .table-item {

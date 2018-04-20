@@ -24,8 +24,8 @@
 <tutor-info info-list='{{teacher}}' photo-url='{{srcForIdPhoto}}' chat-image='/images/DuiHua_06.png'></tutor-info>
 <!--  拼团详情  -->
 <view class='margin-t-20 border-t-1 border-b-1'>
-  <view wx:if='{{course.CorType!=1&&cog.FgtType==1}}' class='padding-tb-20 border-b-1 padding-lr-30 bg-fff'>
-    <view class='fon-30 padding-l-20 border-l-2 c2b'>拼团详情</view>
+  <view wx:if='{{course.CorType!=1&&cog.FgtType==1}}' class='border-b-1'>
+    <modular-title title-context='拼团详情'></modular-title>
   </view>
   <!--  显示条件， 为团类型，单是不为单独购买  -->
   <view wx:if='{{course.CorType!=1&&cog.FgtType==1}}' wx:for='{{mem}}' wx:key='{{index}}' class='flex fon-30 c2b bg-fff padding-25 aitems-center between border-b-1'>
@@ -51,9 +51,7 @@
 </view>
 
 <view class='border-t-1 border-b-1 margin-t-20 bg-fff padding-b-20'>
-  <view class='padding-tb-20 padding-lr-30 bg-fff'>
-    <view class='fon-30 padding-l-20 border-l-2 c2b'>上课地址及外教联系方式</view>
-  </view>
+  <modular-title title-context='上课地址及外教联系方式'></modular-title>
   <view bindtap='lookAddress' class='padding-50 margin-t-20 bg-fff flex aitems-center fon-26 '>
     <image mode='widthFix' class='address' src='/images/adddress_14.png'></image>
     {{teaAddress}}

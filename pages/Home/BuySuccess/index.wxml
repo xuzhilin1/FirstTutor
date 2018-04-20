@@ -5,7 +5,7 @@
   <button wx:if='{{orderType===1}}' bindtap='spellGroup' class='margin-t-50 border buns bg-fff btn purple fon-37'>查看拼团信息</button>
   <button bindtap='bindShowPoster' class='margin-t-50 white btn purple-bg fon-37'>点击生成海报</button>
   <view class='fon-24 dibu'>
-   {{poster.PstAbstract}}
+    {{poster.PstAbstract}}
   </view>
   <view wx:if='{{isPoster}}' class='model'>
     <view class='modle-main'>
@@ -19,15 +19,15 @@
     </view>
   </view>
 </view>
-<view class='padding-tb-20 margin-t-20 bg-fff border-t-1 padding-lr-30'>
-  <view class='fon-30 padding-l-20 border-l-2 c2b'>上课地址及外教联系方式</view>
+<view class='margin-t-20 border-t-1'>
+  <modular-title title-context='上课地址及外教联系方式'></modular-title>
 </view>
 <view class=' border-b-1'>
   <view bindtap='lookAddress' class='padding-50  padding-tb-20 bg-fff flex aitems-center fon-26 '>
     <image mode='widthFix' class='address' src='/images/adddress_14.png'></image>
     {{teaAddress}}
   </view>
-  <view  bindtap='callPhone' data-phone='{{teaPhone}}' class='padding-50  padding-tb-20 bg-fff flex aitems-center fon-26 '>
+  <view bindtap='callPhone' data-phone='{{teaPhone}}' class='padding-50  padding-tb-20 bg-fff flex aitems-center fon-26 '>
     <image mode='widthFix' class='address' src='/images/phone_06.png'></image>
     {{teaPhone}}
   </view>

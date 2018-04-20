@@ -142,8 +142,8 @@
     </view>
     <!--  拼团详情  -->
     <view class='border-b-1'>
-      <view class='padding-tb-20 border-b-1 padding-lr-30 bg-fff'>
-        <view class='fon-30 padding-l-20 border-l-2 c2b'>拼团详情</view>
+      <view class='border-b-1'>
+        <modular-title title-context='拼团详情'></modular-title>
       </view>
       <view wx:for='{{mem}}' wx:key='{{index}}' class='flex fon-30 c2b bg-fff   padding-25 aitems-center between border-b-1'>
         <view class='flex aitems-center'>
@@ -161,8 +161,8 @@
   <!--  购买过课程-拼团成功 ----   END -->
   <!--  外教联系方式  -->
   <block wx:if='{{cog.FgtStatus!=3}}'>
-    <view class='padding-tb-20 margin-t-20 bg-fff border-t-1 padding-lr-30'>
-      <view class='fon-30 padding-l-20 border-l-2 c2b'>上课地址及外教联系方式</view>
+    <view class='border-t-1 margin-t-20'>
+      <modular-title title-context='上课地址及外教联系方式'></modular-title>
     </view>
     <view class='border-b-1 margin-b-20'>
       <view bindtap='lookAddress' class='padding-50  padding-tb-20 bg-fff flex aitems-center fon-26 '>
