@@ -5,6 +5,7 @@
   "navigationBarTextStyle": "white",
   "navigationBarTitleText": "时间段",
   "usingComponents": {
-    "modular-title": "/component/modularTitle/modularTitle"
+    "modular-title": "/component/modularTitle/modularTitle",
+    "time-slot": "/component/timeSlot/timeSlot"
   }
 }

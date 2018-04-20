@@ -401,8 +401,3 @@ page {
   color: #888;
 }
 
-/*  选择时间段，不可选按钮样式  */
-
-.no-btn {
-  background: #c8c8c8;
-}

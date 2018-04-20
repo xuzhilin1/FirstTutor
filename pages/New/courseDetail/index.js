@@ -3,7 +3,6 @@ const $common = require('../../../utils/common.js');
 Page({
   data: {
     srcForIdPhoto: $common.srcForIdPhoto,
-    purple: 'purple-bg white',
     courId: null, //课程id
     teaId: null, //教师id
     listenCallbackNum: 0,
@@ -16,58 +15,6 @@ Page({
   goHome() { //返回首页
     wx.switchTab({
       url: '../../Home/Home/index',
-    })
-  },
-  initPageData() { //初始化上课时间
-    //周几就用数字1234567代替，时间段就用1（上午），2（下午1），3（下午2），4（晚上）代替
-    let arr = [];
-    for (let i = 0; i < 28; i++) { //0不可选 1可选 2 选中
-      if (i < 7) {
-        arr.push({
-          timeName: '上午',
-          timeType: 0,
-        });
-        continue;
-      }
-      if (i < 14) {
-        arr.push({
-          timeName: '下午1',
-          timeType: 0,
-        });
-        continue;
-      }
-      if (i < 21) {
-        arr.push({
-          timeName: '下午2',
-          timeType: 0,
-        });
-        continue;
-      }
-      if (i < 28) {
-        arr.push({
-          timeName: '晚上',
-          timeType: 0,
-        });
-        continue;
-      }
-    }
-    this.setData({
-      timeList: arr
-    })
-  },
-  bindTime(e) {  // 选择
-    let index = e.currentTarget.dataset.index,
-      timeList = this.data.timeList;
-    //0 无法选中 1 未选 2 已选
-    if (timeList[index].timeType === 0) return;
-    for (let i = 0, len = timeList.length; i < len; i++) {
-      if (timeList[i].timeType === 2) {
-        timeList[i].timeType = 1;
-      }
-    }
-    timeList[index].timeType = 2;
-    this.setData({
-      timeList: timeList
     })
   },
   getCourseAndTeacherInfo() { //获取课程和教师信息
@@ -148,7 +95,6 @@ Page({
           this.setData({
             timeTables: res.data.timeTables
           });
-          this.updateTimeList();
         } else {
           switch (res.data.errType) {
             case 1:
@@ -168,37 +114,6 @@ Page({
         this.stopModal();
       }
     );
-  },
-  updateTimeList() { //刷新时间列表
-    let timeTables = this.data.timeTables,
-      timeList = this.data.timeList;
-    timeTables.forEach(function (target, index) {
-      let week = target.TimAfw,//周几
-        time = target.TimClaTime; //上午、下午1、下午2、晚上
-      //改时间段已被购买，或不向学生展示
-      if (target.TimBePurch === 1 || target.TimCanUse === 0) { return }
-      let arr = [];
-      switch (time) {
-        case 1:
-          arr = [0, 1, 2, 3, 4, 5, 6];
-          break;
-        case 2:
-          arr = [7, 8, 9, 10, 11, 12, 13];
-          break;
-        case 3:
-          arr = [14, 15, 16, 17, 18, 19, 20];
-          break;
-        case 4:
-          arr = [21, 22, 23, 24, 25, 26, 27];
-          break;
-      }
-      let nowIndex = arr[week - 1]; //当前所改变的数组下标
-      timeList[nowIndex].timeType = 1;
-      timeList[nowIndex].TimId = target.TimId;
-    });
-    this.setData({
-      timeList: timeList
-    })
   },
   addListenCallbackNum() {
     let num = parseInt(this.data.listenCallbackNum);
@@ -229,7 +144,6 @@ Page({
       courId: courId,
       teaId: teaId
     })
-    this.initPageData();
     this.init();
   },
   /**

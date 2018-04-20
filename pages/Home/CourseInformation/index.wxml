@@ -65,24 +65,8 @@
     <view class='border-b-1 margin-t-20'>
       <modular-title title-context='选择时间段'></modular-title>
     </view>
-    <view class='bg-fff padding-b-20'>
-      <view class='flex  fon-24 padding-lr-30 between warp'>
-        <view wx:for='{{weekList}}' wx:key='{{index}}' class='QuKuai c8'>{{item}}</view>
-      </view>
-      <view class='flex  fon-26 padding-lr-30 between warp'>
-        <view wx:for='{{timeList}}' data-index='{{index}}' bindtap='bindTime' wx:key='{{index}}' class='QuKuai QuKuaia {{item.timeType===2?purple:null}} {{item.timeType===0?"no-btn":""}}'>{{item.timeName}}</view>
-      </view>
-      <view class='flex padding-lr-30   margin-t-20'>
-        <view class='flex zhushi'>
-          <view class='Zhu white purple-bg fon-20'>注</view>
-          <view class='flex1 fon-22'>
-            <view class='margin-b-10'>上午：课程区间9-12点；下午1：课程区间12-15点；</view>
-            <view class='margin-b-10'>下午2:课程区间15-18点；晚上：课程区间18-21点；</view>
-            <view class='margin-b-10'>具体时间自行商量，时间表仅供参考</view>
-          </view>
-        </view>
-      </view>
-    </view>
+    <!--  时间段选择组件  -->
+    <time-slot time-tables='{{timeTables}}' bindSonTime='SonTime'></time-slot>
     <!--  课程介绍  -->
     <view class='border-b-1 margin-t-20'>
       <modular-title title-context='课程介绍'></modular-title>

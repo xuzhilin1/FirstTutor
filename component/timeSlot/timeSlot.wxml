@@ -1,22 +1,18 @@
 <!--component/timeSlot/timeSlot.wxml-->
-<!--  选择上课时间  -->
-<view class='bg-fff padding-b-20 margin-t-20'>
-  <view class='padding-tb-20 margin-b-20 border-b-1 padding-lr-30'>
-    <view class='fon-30 padding-l-20 border-l-2 c2b'>选择时间段</view>
+<view class='wrapper border-box'>
+  <view class='week border-box'>
+    <view wx:for='{{weekList}}' wx:key='{{index}}' class='week-list border-box'>{{item}}</view>
   </view>
-  <view class='flex  fon-24 padding-lr-30 between warp'>
-    <view wx:for='{{weekList}}' wx:key='{{index}}' class='QuKuai c8'>{{item}}</view>
+  <view class='week border-box'>
+    <view bindtap='_selectTime' data-index='{{index}}' wx:for='{{timeList}}' wx:key='{{index}}' class='week-list week-list-border {{item.timeType===2?"select":""}} {{item.timeType===0?"no-change":""}}'>{{item.timeName}}</view>
   </view>
-  <view class='flex  fon-26 padding-lr-30 between warp'>
-    <view wx:for='{{timeList}}' data-index='{{index}}' bindtap='bindTime' wx:key='{{index}}' class='QuKuai QuKuaia {{item.timeType===2?purple:null}} {{item.timeType===0?"no-btn":""}}'>{{item.timeName}}</view>
-  </view>
-  <view class='flex padding-lr-30   margin-t-20'>
-    <view class='flex zhushi'>
-      <view class='Zhu white purple-bg fon-20'>注</view>
-      <view class='flex1 fon-22'>
-        <view class='margin-b-10'>上午：课程区间9-12点；下午1：课程区间12-15点；</view>
-        <view class='margin-b-10'>下午2:课程区间15-18点；晚上：课程区间18-21点；</view>
-        <view class='margin-b-10'>具体时间自行商量，时间表仅供参考</view>
+  <view class='pour border-box'>
+    <view class='pour-box border-box'>
+      <view class='pour-title'>注</view>
+      <view class='pour-context border-box'>
+        <view class='pour-list border-box'>上午：课程区间9-12点；下午1：课程区间12-15点；</view>
+        <view class='pour-list border-box'>下午2:课程区间15-18点；晚上：课程区间18-21点；</view>
+        <view class='pour-list border-box'>具体时间自行商量，时间表仅供参考</view>
       </view>
     </view>
   </view>

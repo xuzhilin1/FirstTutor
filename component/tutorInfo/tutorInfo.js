@@ -2,6 +2,7 @@
 /*
   author: guo
   date: 2018-04-19
+  use: 展示外教个人信息
  */
 Component({
   /**
