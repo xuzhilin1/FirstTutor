@@ -29,3 +29,12 @@
   width: 28rpx;
   margin-left: 10rpx;
 }
+
+.din {
+  width: 15rpx;
+  height: 15rpx;
+  border-radius: 50%;
+  /* background-color: #008753; */
+  background-color: #f00;
+  margin-left: 15rpx;
+}

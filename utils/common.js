@@ -145,6 +145,10 @@ const config = {
   GetUserInfo: `${host}/LittleProgram/UserInfo/GetUserInfo`,
   // 外教-获取某外教所有课程所占用的时间段列表(2018-04-17)
   GetAllTeaTimeTableInfo: `${host}/LittleProgram/TimeTable/GetAllTeaTimeTableInfo`,
+  // 获取未读消息数量（2018-04-19）
+  GetUnReadMsgCount: `${host}/LittleProgram/ChatRecord/GetUnReadMsgCount`,
+  // 外教--个人信息--未读订单数量（2018-04-20）
+  GetNotCheckedOrderCount: `${host}/LittleProgram/CorOpenGroup/GetNotCheckedOrderCount`,
 }
 const wxGetUserInfo = function (callback) {
   wx.login({

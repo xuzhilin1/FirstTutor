@@ -3,47 +3,57 @@ const app = getApp();
 const $common = require('../../../utils/common.js');
 Page({
   data: {
+    notCNum: 0, //订单未读
+    unReadC: 0, //未读消息，大于0，有
     isPageShow: false, //页面初始不显示
     userInfo: {},
     userType: 1, //1 学生 2 导师 0 未知,
-    vip: false, //是否vip
+    vip: false, //是否vip,
+    teaId: -1, //外教id
     teacherList: [{
+      id: 1,
       isShow: true,
       url: '/images/LI_03.png',
       title: "Basic Information",
       luJin: '../basic/basic'
     },
     {
+      id: 2,
       isShow: true,
       url: '/images/LI_06.png',
       title: "Course Management",
       luJin: '../CourseManagement/index'
     },
     {
+      id: 3,
       isShow: false,
       url: '/images/LI_08.png',
       title: "Demand review",
       luJin: '../NeedSee/index'
     },
     {
+      id: 4,
       isShow: true,
       url: '/images/LI_10.png',
       title: "Order viewing",
       luJin: '../OrderCheck/index'
     },
     {
+      id: 5,
       isShow: true,
       url: '/images/LI_12.png',
       title: "Review Management",
       luJin: '../OrdeRreview/index'
     },
     {
+      id: 6,
       isShow: true,
       url: '/images/LI_14.png',
       title: "Event notification",
       luJin: '../activity/index'
     },
     {
+      id: 7,
       isShow: true,
       url: '/images/LI_16.jpg',
       title: "Online communication",
@@ -89,7 +99,8 @@ Page({
           teacherList[2].isShow = vip ? true : false;
           this.setData({
             vip: vip,
-            teacherList: teacherList
+            teacherList: teacherList,
+            teaId: res.data.teaId
           });
         }
       }.bind(this));
@@ -199,7 +210,74 @@ Page({
       url: url,
     })
   },
+  getMsgCount() { //获取未读消息数量
+    let openid = wx.getStorageSync('openid');
+    if (!openid) {
+      return;
+    }
+    $common.request(
+      'POST',
+      $common.config.GetUnReadMsgCount,
+      {
+        openId: openid
+      },
+      (res) => {
+        if (res.data.res) {
+          this.setData({
+            unReadC: parseInt(res.data.unReadC)
+          })
+        } else {
+          switch (res.data.errType) {
+            case 1:
+              //参数不正确
+              break;
+            case 2:
+              //未知错误
+              break;
+          }
+        }
+      },
+      (res) => {
 
+      },
+      (res) => {
+        console.log(res);
+      }
+    )
+  },
+  getMsgOrderCount() { //获取订单未读消息
+    let teaId = this.data.teaId;
+    if (teaId === -1) return;
+    $common.request(
+      'POST',
+      $common.config.GetNotCheckedOrderCount,
+      {
+        teaId: teaId
+      },
+      (res) => {
+        if (res.data.res) {
+          this.setData({
+            notCNum: parseInt(res.data.notCNum)
+          })
+        } else {
+          switch (res.data.errType) {
+            case 1:
+              //参数错误
+              break;
+            case 2:
+              //未知错误
+              break;
+          }
+        }
+      },
+      (res) => {
+
+      },
+      (res) => {
+        console.log(res);
+      }
+    )
+  },
   onLoad: function (options) {
 
   },
@@ -211,7 +289,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getMsgCount();
+    this.getMsgOrderCount();
   },
 
   /**
