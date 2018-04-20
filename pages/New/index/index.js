@@ -91,7 +91,7 @@ Page({
       "POST",
       $common.config.GetForTeaStatus,
       { openId: wx.getStorageSync('openid') },
-      function (res) {
+      (res) => {
         if (res.data.res) {
           wx.setStorageSync("teacherStatusInfo", res.data);
           let vip = res.data.teaAddV ? res.data.teaAddV : false; //vip才能查看需求
@@ -103,7 +103,12 @@ Page({
             teaId: res.data.teaId
           });
         }
-      }.bind(this));
+      },
+      (res) => { },
+      (res) => {
+        this.getMsgOrderCount();
+      }
+    );
   },
   init() {
     let openid = wx.getStorageSync('openid');
