@@ -28,35 +28,35 @@ Page({
       id: 3,
       isShow: false,
       url: '/images/LI_08.png',
-      title: "Demand review",
+      title: "Requirement Check",
       luJin: '../NeedSee/index'
     },
     {
       id: 4,
       isShow: true,
       url: '/images/LI_10.png',
-      title: "Order viewing",
+      title: "Order Check",
       luJin: '../OrderCheck/index'
     },
     {
       id: 5,
       isShow: true,
       url: '/images/LI_12.png',
-      title: "Review Management",
+      title: "Comment Management",
       luJin: '../OrdeRreview/index'
     },
     {
       id: 6,
       isShow: true,
       url: '/images/LI_14.png',
-      title: "Event notification",
+      title: "Activity Notification",
       luJin: '../activity/index'
     },
     {
       id: 7,
       isShow: true,
       url: '/images/LI_16.jpg',
-      title: "Online communication",
+      title: "Your Messages",
       luJin: '../Online/index?isTeacher=true'
     }],
     //学生
@@ -129,7 +129,6 @@ Page({
       (res) => {
         if (res.data.res) {
           let userType = res.data.userType;
-          console.log(wx.getStorageSync('userInfo'))
           this.setData({
             userInfo: wx.getStorageSync('userInfo'),
             userType: userType,
@@ -246,7 +245,6 @@ Page({
 
       },
       (res) => {
-        console.log(res);
       }
     )
   },
@@ -279,7 +277,6 @@ Page({
 
       },
       (res) => {
-        console.log(res);
       }
     )
   },

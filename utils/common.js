@@ -153,12 +153,10 @@ const config = {
 const wxGetUserInfo = function (callback) {
   wx.login({
     complete: (res) => {
-      console.log(res);
       if (res.code) {
         let code = res.code;
         wx.getUserInfo({
           success: (res) => {
-            console.log(res);
             let userInfo = res.userInfo;
             wx.setStorageSync("userInfo", userInfo);//本地存储个人信息
             //发请求
@@ -172,7 +170,6 @@ const wxGetUserInfo = function (callback) {
               header: { 'content-type': 'application/json' },
               method: 'POST',
               success: (res) => {
-                console.log(res);
                 if (res.data.res) {
                   //保存openid
                   wx.setStorageSync('openid', res.data.openid);
@@ -182,7 +179,6 @@ const wxGetUserInfo = function (callback) {
                 }
               },
               fail: (res) => {
-                console.log(res);
                 wx.showModal({
                   title: '提示',
                   content: '亲~网络不给力哦，请稍后重试',
@@ -219,10 +215,8 @@ const refuseModal = function (callback) { //用户拒绝授权弹框处理
           complete: (res) => {
             if (res.authSetting['scope.userInfo']) { //用户已授权
               //发请求
-              console.log('openSetting: ok')
               wxGetUserInfo(callback);
             } else { //用户未授权
-              console.log('openSetting: no');
               refuseModal(callback);
             }
           }
@@ -348,20 +342,17 @@ module.exports = {
     callback = typeof (callback) === 'function' ? callback : function (res) { };
     let openid = wx.getStorageSync('openid');
     if (openid) return;
-    wx.getUserInfo({
+    // wx.getUserInfo({
+    //   complete: (res) => {
+    wx.authorize({ //事先向用户发起授权请求
+      scope: 'scope.userInfo',
       complete: (res) => {
-        // wx.authorize({ //事先向用户发起授权请求
-        //   scope: 'scope.userInfo',
-        //   complete: (res) => {
-        // console.log(res);
         wx.getSetting({ //查看用户是否授权
           complete: (res) => {
             if (res.authSetting['scope.userInfo']) { //已授权
-              console.log('getSetting: ok');
               //调用获取用户信息的函数
               wxGetUserInfo(callback);
             } else { //未授权
-              console.log('getSetting: no');
               refuseModal(callback);
             }
           }
