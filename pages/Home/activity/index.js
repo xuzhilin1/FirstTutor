@@ -16,7 +16,7 @@ Page({
     let index = e.currentTarget.dataset.index,
       atyList = this.data.atyList;
     wx.navigateTo({
-      url: '../../New/activityDetail/index?isSign=' + 1 + '&atyId=' + atyList[index].AtyId,
+      url: `/pages/New/activityDetail/index?isSign=1&atyId=${atyList[index].AtyId}`,
     })
   },
   timeStamp(time) { //时间戳转换为日期

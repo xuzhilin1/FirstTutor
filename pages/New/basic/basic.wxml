@@ -10,10 +10,10 @@
 <!--  -->
 <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
   <view class='flex1 aitems-center  fon-30 flex '>
-    <view style='width:220rpx;'>Phone</view>
+    <view style='width:220rpx;'>Contact Number</view>
     <input style='width:75%;' bindinput='bindPhone' class='ca' type='number' maxlength='11' value='{{phone}}' placeholder='unfilled'></input>
   </view>
 </view>
 <!--  -->
 
-<button bindtap='submit' class='btn purple-bg margin-t-60 white'>save</button>
+<button bindtap='submit' class='btn purple-bg margin-t-60 white'>Save</button>

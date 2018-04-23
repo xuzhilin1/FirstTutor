@@ -19,7 +19,7 @@
     </view>
     <!-- 左边  start  -->
     <view wx:if='{{item.CrdBeMySelf==0}}' class='core-you'>
-      <image mode='widthFix' class='core-image' src='{{youImage}}'></image>
+      <image bindtap='courseInfo' mode='widthFix' class='core-image' src='{{youImage}}'></image>
       <view class='core-box-you'>
         <view class='core-left'>
           <view class='core-left-1'></view>

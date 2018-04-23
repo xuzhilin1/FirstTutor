@@ -23,6 +23,8 @@
   width: 150rpx;
   border-radius: 50%;
   height: 150rpx;
+  display: block;
+  margin: 0 auto;
 }
 
 .Guan {

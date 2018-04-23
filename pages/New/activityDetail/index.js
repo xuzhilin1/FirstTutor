@@ -19,8 +19,9 @@ Page({
   activitySign() {
     let alreadySignUp = this.data.alreadySignUp;
     if (alreadySignUp > 0) return;
+    let AtyPrice = this.data.atyInfo.AtyPrice;
     wx.navigateTo({
-      url: '../../Home/activitySign/index?atyId=' + this.data.atyId,
+      url: `/pages/Home/activitySign/index?atyId=${this.data.atyId}&price=${AtyPrice}`,
     })
   },
   timeStamp(time) { //时间戳转换为日期

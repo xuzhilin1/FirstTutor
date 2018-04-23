@@ -72,6 +72,10 @@ const config = {
   GetAtyDesInfo: `${host}/LittleProgram/Activity/GetAtyDesInfo`,
   //学生--活动报名(2018-04-04)
   AtySignUp: `${host}/LittleProgram/Activity/AtySignUp`,
+  //活动--取消活动付费（2018-04-23）
+  CanCelPay: `${host}/LittleProgram/Activity/CanCelPay`,
+  //活动--报名支付成功调用（2018-04-23）
+  PayMentSuccess: `${host}/LittleProgram/Activity/PayMentSuccess`,
   /*
     我的
    */
@@ -342,11 +346,11 @@ module.exports = {
     callback = typeof (callback) === 'function' ? callback : function (res) { };
     let openid = wx.getStorageSync('openid');
     if (openid) return;
-    // wx.getUserInfo({
-    //   complete: (res) => {
-    wx.authorize({ //事先向用户发起授权请求
-      scope: 'scope.userInfo',
+    wx.getUserInfo({
       complete: (res) => {
+        // wx.authorize({ //事先向用户发起授权请求
+        //   scope: 'scope.userInfo',
+        //   complete: (res) => {
         wx.getSetting({ //查看用户是否授权
           complete: (res) => {
             if (res.authSetting['scope.userInfo']) { //已授权

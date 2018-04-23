@@ -67,7 +67,7 @@ Page({
   },
   spellingRules() { //详细规则
     wx.navigateTo({
-      url: '../SpellingRules/index',
+      url: '/pages/static/SpellingRules/index',
     })
   },
   goHome() { //首页

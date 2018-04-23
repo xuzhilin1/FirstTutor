@@ -99,7 +99,7 @@ Page({
     })
     if (isTeacher) { //外教，改标题为英文版
       wx.setNavigationBarTitle({
-        title: 'Online communication',
+        title: 'Your Messages',
       })
     }
   },

@@ -5,31 +5,31 @@ Page({
   data: {
     pagesList: [
       {
-        ZiLiao: 'Basic info',
+        ZiLiao: 'Basic Information',
         Types: 'Imperfect',
         url: '../Abasic/index?status=1'
       },
       {
-        ZiLiao: 'Introduce',
+        ZiLiao: 'Tutor Introduction',
         Types: 'unfilled',
         url: '../Teachers/index?status=0'
       },
       {
-        ZiLiao: 'Qualification',
+        ZiLiao: 'Tutor Certificate',
         Types: 'Not uploaded',
         url: '../qualification/index'
       },
       {
-        ZiLiao: 'ID Photo',
+        ZiLiao: 'Head Shot',
         Types: 'Not uploaded',
       },
       {
-        ZiLiao: 'Class video',
+        ZiLiao: 'Teaching Video',
         Types: 'Not uploaded',
 
       },
       {
-        ZiLiao: 'Class area',
+        ZiLiao: 'Teaching Area',
         Types: 'Not selected',
         url: '../area/index'
       }

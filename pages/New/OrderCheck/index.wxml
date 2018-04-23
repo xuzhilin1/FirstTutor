@@ -1,8 +1,8 @@
 <view wx:for='{{cogList}}' wx:key='{{index}}' class='margin-t-20'>
   <view class='flex fon-26 border-t-1 bg-f9 c8 height-75 between padding-lr-30 aitems-center'>
-    <view>一对{{item.whatNum}}</view>
-    <view wx:if='{{item.CorType==1}}'>购买时间：{{item.courseBuyTime}}</view>
-    <view wx:if='{{item.CorType!=1}}'>成团时间：{{item.openTime}}</view>
+    <view>One to {{item.whatNum}}</view>
+    <view wx:if='{{item.CorType==1}}'>Buying Time：{{item.courseBuyTime}}</view>
+    <view wx:if='{{item.CorType!=1}}'>Group Buying Time：{{item.openTime}}</view>
   </view>
   <!--  一对多  -->
   <view wx:if='{{item.CorType!=1}}' class='middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
@@ -10,10 +10,10 @@
       <image class='QiHao' mode='widthFix' src='/images/tuan_06.png'></image>
       <view>
         <text>{{item.CorTitle}}</text>
-        <view class='c8 fon-24 margin-t-10'>已有{{item.BuyCount}}人购买</view>
+        <view class='c8 fon-24 margin-t-10'>Order Placed by {{item.BuyCount}} People</view>
       </view>
     </view>
-    <view class='purplea purple fon-24 '>{{item.CorType}}人团</view>
+    <view class='purplea purple fon-24 '>Group of {{item.CorType}} People</view>
   </view>
   <!--  一对一  -->
   <view wx:if='{{item.CorType==1}}' class='middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
@@ -25,9 +25,11 @@
   </view>
 
   <view class='flex fon-24 border-t-1 border-b-1 padding-lr-30  aitems-center bg-fff between'>
-    <view class='fon-26 c8'>上课时间：{{item.ClaStudyTime}}{{item.FgtStartTime}}</view>
-    <view wx:if='{{item.FgtType==1}}' bindtap='orderDetail' data-index='{{index}}' class='border AnNiu white purple-bg'>拼团详情</view>
-    <view wx:if='{{item.FgtType==2}}' bindtap='orderDetail' data-index='{{index}}' class='border AnNiu white purple-bg'>订单详情</view>
+    <view class='fon-26 c8'>Course Time：{{item.week}}/{{item.FgtStartTime}}</view>
+    <!--  拼团详情  -->
+    <view wx:if='{{item.FgtType==1}}' bindtap='orderDetail' data-index='{{index}}' class='border AnNiu white purple-bg'>Group Details</view>
+    <!--  订单详情  -->
+    <view wx:if='{{item.FgtType==2}}' bindtap='orderDetail' data-index='{{index}}' class='border AnNiu white purple-bg'>Order Details</view>
   </view>
 </view>
 <view wx:if='{{cogList.length<=0}}' class='noData'>

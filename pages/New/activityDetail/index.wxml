@@ -10,7 +10,9 @@
   </swiper>
   <view class='middle-middle bg-fff'>
     <view class='fon-32 margin-b-20'>{{atyInfo.AtyTitle}}</view>
-    <view class='fon-24 c8'>已报名{{atyInfo.AtyPartNum}}人/{{atyInfo.AtyNumOPer}}人</view>
+    <view class='fon-24 c8'>
+      <text class='activity-price'>¥ {{atyInfo.AtyPrice}}</text> 已报名{{atyInfo.AtyPartNum}}人/{{atyInfo.AtyNumOPer}}人
+    </view>
   </view>
   <view class='border-t-1'>
     <view class='flex border-b-1 bg-fff DIZHi aitems-center  between '>

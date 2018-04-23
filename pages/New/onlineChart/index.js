@@ -13,6 +13,12 @@ Page({
     userId: -1,
     newDataCount: 0, //自己发送与接收数据之和
   },
+  courseInfo() { //跳转到课程信息
+    let teaId = this.data.userId;
+    wx.navigateTo({
+      url: `/pages/Home/teachersInformation/index?data=${teaId}`,
+    })
+  },
   removeDuplicate(thisArr, thisId) { //去重
     let hash = {};
     let newArr = thisArr.reduce(function (item, target, index) {
@@ -200,7 +206,7 @@ Page({
     let isTeacher = options.isTeacher ? true : false;
     if (isTeacher) { //外教，改标题为英文版
       wx.setNavigationBarTitle({
-        title: 'Online communication',
+        title: 'Your Messages',
       })
     }
     let userId = options.userId;

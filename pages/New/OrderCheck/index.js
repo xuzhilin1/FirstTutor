@@ -1,5 +1,6 @@
 // pages/New/OrderCheck/index.js
 const $common = require('../../../utils/common.js');
+const $translate = require('../../../utils/translate.js');
 Page({
   data: {
     cogList: [],
@@ -52,15 +53,16 @@ Page({
             let whatNum = '';
             switch (data[i].CorType) {
               case 1:
-                whatNum = '一';
+                whatNum = 'One';
                 break;
               case 2:
-                whatNum = '二';
+                whatNum = 'Two';
                 break;
               case 3:
-                whatNum = '三';
+                whatNum = 'Three';
                 break;
             }
+            data[i].week = $translate.translateWeekEn(data[i].ClaStudyTime);
             data[i].whatNum = whatNum;
             data[i].courseBuyTime = this.timeStamp(data[i].OdrBuyDate); 
             data[i].openTime = this.timeStamp(data[i].FgtOpenTime); 

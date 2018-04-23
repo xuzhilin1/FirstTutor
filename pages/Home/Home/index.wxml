@@ -19,7 +19,7 @@
 <view class='bg-fff'>
   <view class='flex aitems-center center'>
     <image class='imgs' src='/images/LS_03.png'></image>
-    <view class='fon-26 Huo c9'>推荐外教</view>
+    <view class='fon-26 Huo c9'>{{isEnglish?'我的同事':'推荐外教'}}</view>
     <image class='imgs' src='/images/LS_05.jpg'></image>
   </view>
 </view>

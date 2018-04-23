@@ -1,10 +1,10 @@
 <view class='big-outer'>
   <view wx:for='{{courInfos}}' wx:key='{{index}}' class='margin-t-20'>
     <view class='flex fon-26 border-t-1 bg-f9 c8 height-75 between padding-lr-30 aitems-center'>
-      <view wx:if='{{item.CorCanView==0}}'>未审核</view>
-      <view wx:if='{{item.CorCanView==1}}'>审核通过</view>
-      <view wx:if='{{item.CorCanView==2}}'>审核未通过</view>
-      <view>发布时间：{{item.showTime}}</view>
+      <view wx:if='{{item.CorCanView==0}}'>To be Approved</view>
+      <view wx:if='{{item.CorCanView==1}}'>Approved</view>
+      <view wx:if='{{item.CorCanView==2}}'>Approval Failed</view>
+      <view>Launch Time：{{item.showTime}}</view>
     </view>
     <!--  单独购买  -->
     <view bindtap='orderDetails' data-index='{{index}}' wx:if='{{item.CorType==1}}' class=' middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
@@ -23,17 +23,17 @@
           <view class='bold bg-fff purple'>¥{{item.CorPrice}}</view>
         </view>
       </view>
-      <view class='purplea purple fon-24 '>{{item.CorType}}人团</view>
+      <view class='purplea purple fon-24 '>Group of {{item.CorType}} People</view>
     </view>
     <view class='flex fon-24 border-t-1 border-b-1 padding-lr-30 aitems-center bg-fff j-right'>
-      <view bindtap='bindDelete' data-index='{{index}}' class='purple AnNiu border'>删除课程</view>
-      <view bindtap='groupList' data-index='{{index}}' wx:if='{{item.CorType!=1&&item.CorCanView==1}}' class='border AnNiu white purple-bg'>成功拼团 {{item.FGCount}}</view>
-      <view bindtap='orderDetails' data-index='{{index}}' wx:if='{{item.CorCanView==1&&item.CorType==1}}' class='border AnNiu white purple-bg'>查看课程</view>
-      <view bindtap='reviseReleaseCourse' data-index='{{index}}' wx:if='{{item.CorCanView==0}}' class='border AnNiu white purple-bg'>修改课程</view>
+      <view bindtap='bindDelete' data-index='{{index}}' class='purple AnNiu border'>Delete Course</view>
+      <view bindtap='groupList' data-index='{{index}}' wx:if='{{item.CorType!=1&&item.CorCanView==1}}' class='border AnNiu white purple-bg'>Group Buying Effective {{item.FGCount}}</view>
+      <view bindtap='orderDetails' data-index='{{index}}' wx:if='{{item.CorCanView==1&&item.CorType==1}}' class='border AnNiu white purple-bg'>Check Course</view>
+      <view bindtap='reviseReleaseCourse' data-index='{{index}}' wx:if='{{item.CorCanView==0}}' class='border AnNiu white purple-bg'>Modify Course</view>
     </view>
   </view>
   <view wx:if='{{courInfos.length<=0}}' class='noData'>
-    暂未发布课程
+    No Data
   </view>
-  <view bindtap='releaseCourse' class='footer fon-30 white purple-bg'>Create a course</view>
+  <view bindtap='releaseCourse' class='footer fon-30 white purple-bg'>Launch Course</view>
 </view>

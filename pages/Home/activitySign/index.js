@@ -6,6 +6,7 @@ Page({
     phone: '',
     remark: '',
     atyId: -1, //活动id
+    price: 0.01
   },
   bindUserName(e) { //姓名
     this.setData({
@@ -46,6 +47,54 @@ Page({
       },
       (res) => {
         if (res.data.res) {
+          let paras = res.data.paras;
+          let adrId = res.data.adrId;
+          let suId = res.data.suId;
+          if (paras) { //要付钱
+            wx.requestPayment({
+              'timeStamp': paras.timeStamp,
+              'nonceStr': paras.nonceStr,
+              'package': paras.package,
+              'signType': 'MD5',
+              'paySign': paras.paySign,
+              'success': (res) => {
+                console.log(res);
+                $common.request(
+                  'POST',
+                  $common.config.PayMentSuccess,
+                  {
+                    atyId: this.data.atyId,
+                    openId: wx.getStorageSync('openid'),
+                    pagePath: `pages/Home/Success/index?status=1`
+                  },
+                  (res) => {
+
+                  },
+                  (res) => {
+
+                  },
+                  (res) => {
+                    wx.navigateTo({ //跳转到报名成功页面
+                      url: '/pages/Home/Success/index?status=1',
+                    })
+                  }
+                )
+              },
+              'fail': (res) => {
+                console.log(res);
+                $common.request(
+                  'POST',
+                  $common.config.CanCelPay,
+                  {
+                    suId: suId,
+                    adrId: adrId,
+                    atyId: this.data.atyId
+                  }
+                )
+              }
+            })
+          }
+          return;
           wx.navigateTo({ //跳转到报名成功页面
             url: '../Success/index?status=1',
           })
@@ -70,6 +119,7 @@ Page({
         $common.showModal('亲~网络不给力哦，请稍后重试');
       },
       (res) => {
+        console.log(res);
         wx.hideLoading();
         wx.stopPullDownRefresh();
       }
@@ -82,7 +132,8 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      atyId: options.atyId
+      atyId: options.atyId,
+      price: options.price
     })
   },
 

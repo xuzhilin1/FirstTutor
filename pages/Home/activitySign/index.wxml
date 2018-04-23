@@ -17,5 +17,12 @@
       <input type='text' bindinput='bindRemark' value='{{remark}}' class='c2b list-textArea' placeholder='' placeholder-class='ca'></input>
     </view>
   </view>
-  <view bindtap='submit' class='footer white fon-30 JieShu footer-btn'>立即报名</view>
+  <!-- <view bindtap='submit' class='footer white fon-30 JieShu footer-btn'>立即报名</view> -->
+  <view class='footer'>
+    <view class='fon-26 footer-btn-l'>
+      <view class='margin-r-10'>支付订金</view>
+      <view class='fon-30 bold purple'> ¥ {{price}}</view>
+    </view>
+    <view bindtap='submit' class='white fon-32 cs purple-bg footer-btn-r'>立即报名</view>
+  </view>
 </view>

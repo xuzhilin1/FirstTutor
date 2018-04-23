@@ -3,6 +3,7 @@ const app = getApp();
 const $common = require('../../../utils/common.js');
 Page({
   data: {
+    isEnglish: false, //是否显示英文页面，默认显示中文
     notCNum: 0, //订单未读
     unReadC: 0, //未读消息，大于0，有
     isPageShow: false, //页面初始不显示
@@ -86,6 +87,16 @@ Page({
       luJin: '../Online/index'
     }],
   },
+  loading() {
+    let userType = this.data.userType;
+    let text = '';
+    if (userType === 2) { //外教身份
+      text = 'Loading...'
+    } else { //学生身份
+      text = '努力加载中...'
+    }
+    return text;
+  },
   getIsVip(callback) {//获取外教是否为vip
     $common.request(
       "POST",
@@ -116,7 +127,7 @@ Page({
       $common.getOpenid(this.getMyStatus);
       return;
     }
-    wx.showLoading({ title: '努力加载中...' });
+    wx.showLoading({ title: this.loading() });
     this.getMyStatus();
   },
   getMyStatus() { //获取我的用户类型
@@ -293,6 +304,20 @@ Page({
   onShow: function () {
     this.getMsgCount();
     this.getMsgOrderCount();
+    let isEnglish = wx.getStorageSync('isEnglish');
+    this.setData({
+      isEnglish: isEnglish ? true : false
+    })
+    let text = '';
+    if (isEnglish) {
+      text = '找学生';
+    } else {
+      text = '找外教';
+    }
+    wx.setTabBarItem({
+      index: 1,
+      text: text
+    })
   },
 
   /**

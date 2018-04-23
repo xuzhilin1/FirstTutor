@@ -6,7 +6,7 @@ Page({
     lnList: [],
     pageIndex: 1,
     pageSize: 5,
-    addressData: $static.areaShanghai
+    addressData: $static.areaShanghaiEn
   },
   seeDetail(e) { //立即沟通
     let index = e.currentTarget.dataset.index,
@@ -39,39 +39,39 @@ Page({
           for (let i = 0, len = data.length; i < len; i++) {
             switch (data[i].NedClaTime) {
               case 1:
-                data[i].time = '上午';
+                data[i].time = 'Morning';
                 break;
               case 2:
-                data[i].time = '下午1';
+                data[i].time = 'Afternoon1';
                 break;
               case 3:
-                data[i].time = '下午2';
+                data[i].time = 'Afternoon2';
                 break;
               case 4:
-                data[i].time = '晚上';
+                data[i].time = 'Evening';
                 break;
             }
             switch (parseInt(data[i].NedCorAfw)) {
               case 1:
-                data[i].week = '一';
+                data[i].week = 'Monday';
                 break;
               case 2:
-                data[i].week = '二';
+                data[i].week = 'Tuesday';
                 break;
               case 3:
-                data[i].week = '三';
+                data[i].week = 'Wednesday';
                 break;
               case 4:
-                data[i].week = '四';
+                data[i].week = 'Thursday';
                 break;
               case 5:
-                data[i].week = '五';
+                data[i].week = 'Friday';
                 break;
               case 6:
-                data[i].week = '六';
+                data[i].week = 'Saturday';
                 break;
               case 7:
-                data[i].week = '日';
+                data[i].week = 'Sunday';
                 break;
             }
             for (let j = 0, l = addressData.length; j < l; j++) {

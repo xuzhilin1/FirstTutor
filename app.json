@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/Home/Home/index",
     "pages/New/index/index",
+    "pages/static/SpellingRules/index",
+    "pages/Home/Home/index",
     "pages/New/Abasic/index",
     "pages/Home/BuySuccess/index",
     "pages/New/NeedSeeS/index",
@@ -26,7 +27,6 @@
     "pages/Home/teachersInformation/index",
     "pages/Home/activitySign/index",
     "pages/Home/Learningneeds/index",
-    "pages/Home/SpellingRules/index",
     "pages/New/orderDetailsS/index",
     "pages/New/GroupList/index",
     "pages/New/releaseRemark/index",
@@ -45,7 +45,7 @@
     "navigationBarTitleText": "FirstTutor",
     "navigationBarTextStyle": "white",
     "enablePullDownRefresh": true,
-    "backgroundTextStyle": "dark"
+    "backgroundTextStyle": "light"
   },
   "tabBar": {
     "color": "#848383",

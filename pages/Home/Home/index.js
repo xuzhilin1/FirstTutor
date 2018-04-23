@@ -1,6 +1,7 @@
 const $common = require('../../../utils/common.js');
 Page({
   data: {
+    isEnglish: false,
     srcForIdPhoto: $common.srcForIdPhoto,
     srcActivity: $common.srcActivity,
     srcBanner: $common.srcBanner,
@@ -207,7 +208,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    let isEnglish = wx.getStorageSync('isEnglish');
+    this.setData({
+      isEnglish: isEnglish ? true : false
+    })
   },
 
   /**
