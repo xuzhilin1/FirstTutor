@@ -90,3 +90,11 @@
   margin-right: 10rpx;
   color: #f09f4b;
 }
+
+.baomi-en {
+  width: 220rpx;
+}
+
+.XianZhi1 {
+  width: 350rpx;
+}

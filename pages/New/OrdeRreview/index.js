@@ -1,4 +1,6 @@
-// pages/New/OrdeRreview/index.js
+/**
+ * 点评管理
+ */
 const $common = require('../../../utils/common.js');
 Page({
   data: {
@@ -55,19 +57,19 @@ Page({
           //       rewList.push(data[i]);
           //     }
           //   } else {//没有返回东西，报错了,显示原文
-              for (let i = 0, len = data.length; i < len; i++) {
-                rewList.push(data[i]);
-              }
+          for (let i = 0, len = data.length; i < len; i++) {
+            rewList.push(data[i]);
+          }
           //   }
-            let hash = {};
-            let newArr = rewList.reduce(function (item, next) {//数组依据RewId去重
-              hash[next.RewId] ? '' : hash[next.RewId] = true && item.push(next);
-              return item
-            }, []);
-            this.setData({
-              rewList: newArr,
-              pageIndex: pageIndex,
-            })
+          let hash = {};
+          let newArr = rewList.reduce(function (item, next) {//数组依据RewId去重
+            hash[next.RewId] ? '' : hash[next.RewId] = true && item.push(next);
+            return item
+          }, []);
+          this.setData({
+            rewList: newArr,
+            pageIndex: pageIndex,
+          })
           // });
         } else {
           switch (res.data.errType) {

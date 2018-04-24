@@ -1,4 +1,6 @@
-// pages/New/activity/index.js
+/**
+ * 我报名的活动
+ */
 const $common = require('../../../utils/common.js');
 Page({
   data: {
@@ -60,7 +62,7 @@ Page({
       (res) => {
         if (res.data.res) {
           let data = res.data.atyInfos;
-          let atyInfos = isReach ? this.setData.isReach : [];
+          let atyInfos = isReach ? this.data.atyInfos : [];
           if (data.length >= pageSize) {
             pageIndex++;
           }

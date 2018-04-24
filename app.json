@@ -1,8 +1,12 @@
 {
   "pages": [
-    "pages/New/index/index",
-    "pages/static/SpellingRules/index",
     "pages/Home/Home/index",
+    "pages/New/index/index",
+    "pages/me/templateMessage/templateMessage",
+    "pages/me/commonProblem/commonProblem",
+    "pages/me/feedback/feedback",
+    "pages/me/help/help",
+    "pages/static/SpellingRules/index",
     "pages/New/Abasic/index",
     "pages/Home/BuySuccess/index",
     "pages/New/NeedSeeS/index",

@@ -22,11 +22,9 @@ page {
 }
 
 .XianZhi1 {
-  word-wrap: break-word;
   overflow: hidden;
-  -webkit-line-clamp: 1;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .flex1 {
@@ -400,4 +398,3 @@ page {
   margin-top: 200rpx;
   color: #888;
 }
-

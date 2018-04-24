@@ -1,9 +1,10 @@
-// pages/New/ClassTime/index.js
+/**
+ * 选择时间段
+ */
 const $common = require('../../../utils/common.js');
 const app = getApp();
 Page({
   data: {
-    weekList: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
     timeList: [],
     timeNoTables: -1, //哪些时间不能选
   },

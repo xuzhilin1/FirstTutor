@@ -1,4 +1,6 @@
-// pages/New/onlineChart/index.js
+/**
+ * 在线沟通
+ */
 const $common = require('../../../utils/common.js');
 let SocketTask;
 Page({

@@ -1,28 +1,64 @@
-<view class='big-outer'>
-  <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between bg-fff'>
-    <view class='flex1 aitems-center  fon-30 flex '>
-      <view class='width-135 c2b margin-r-10 box-box'>姓名：</view>
-      <input type='text' bindinput='bindUserName' value='{{userName}}' class='c2b list-textArea' placeholder='请输入姓名' placeholder-class='ca'></input>
+<!--
+  中文版
+  -->
+<block wx:if='{{false}}'>
+  <view class='big-outer'>
+    <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between bg-fff'>
+      <view class='flex1 aitems-center  fon-30 flex '>
+        <view class='width-135 c2b margin-r-10 box-box'>姓名：</view>
+        <input type='text' bindinput='bindUserName' value='{{userName}}' class='c2b list-textArea' placeholder='请输入姓名' placeholder-class='ca'></input>
+      </view>
+    </view>
+    <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between bg-fff'>
+      <view class='flex1 aitems-center  fon-30 flex '>
+        <view class='width-150 c2b margin-r-10 box-box'>手机：</view>
+        <input type='number' maxlength='11' bindinput='bindPhone' value='{{phone}}' class='c2b list-textArea' placeholder='请输入手机号' placeholder-class='ca'></input>
+      </view>
+    </view>
+    <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between bg-fff'>
+      <view class='flex1 aitems-center  fon-30 flex '>
+        <view class='width-150 c2b margin-r-10 box-box'>备注：</view>
+        <input type='text' bindinput='bindRemark' value='{{remark}}' class='c2b list-textArea' placeholder='' placeholder-class='ca'></input>
+      </view>
+    </view>
+    <view class='footer'>
+      <view class='fon-26 footer-btn-l'>
+        <view class='margin-r-10'>支付订金</view>
+        <view class='fon-30 bold' style='color:#f09f4b;'> ¥ {{price}}</view>
+      </view>
+      <view bindtap='submit' class='white fon-32 cs purple-bg footer-btn-r'>立即报名</view>
     </view>
   </view>
-  <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between bg-fff'>
-    <view class='flex1 aitems-center  fon-30 flex '>
-      <view class='width-150 c2b margin-r-10 box-box'>手机：</view>
-      <input type='number' maxlength='11' bindinput='bindPhone' value='{{phone}}' class='c2b list-textArea' placeholder='请输入手机号' placeholder-class='ca'></input>
+</block>
+<!--
+  英文版
+  -->
+<block wx:if='{{true}}'>
+  <view class='big-outer'>
+    <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between bg-fff'>
+      <view class='flex1 aitems-center  fon-30 flex '>
+        <view class='width-135 c2b margin-r-10 box-box'>Name：</view>
+        <input type='text' bindinput='bindUserName' value='{{userName}}' class='c2b list-textArea' placeholder='Please enter your name' placeholder-class='ca'></input>
+      </view>
+    </view>
+    <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between bg-fff'>
+      <view class='flex1 aitems-center  fon-30 flex '>
+        <view class='width-150 c2b margin-r-10 box-box'>Phone：</view>
+        <input type='number' maxlength='11' bindinput='bindPhone' value='{{phone}}' class='c2b list-textArea' placeholder='Please enter your phone number.' placeholder-class='ca'></input>
+      </view>
+    </view>
+    <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between bg-fff'>
+      <view class='flex1 aitems-center  fon-30 flex '>
+        <view class='width-150 c2b margin-r-10 box-box'>Other：</view>
+        <input type='text' bindinput='bindRemark' value='{{remark}}' class='c2b list-textArea' placeholder='' placeholder-class='ca'></input>
+      </view>
+    </view>
+    <view class='footer'>
+      <view class='fon-26 footer-btn-l'>
+        <view class='margin-r-10'>The deposit</view>
+        <view class='fon-30 bold' style='color:#f09f4b;'> ¥ {{price}}</view>
+      </view>
+      <view bindtap='submit' class='white fon-32 cs purple-bg footer-btn-r'>Sign up now</view>
     </view>
   </view>
-  <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between bg-fff'>
-    <view class='flex1 aitems-center  fon-30 flex '>
-      <view class='width-150 c2b margin-r-10 box-box'>备注：</view>
-      <input type='text' bindinput='bindRemark' value='{{remark}}' class='c2b list-textArea' placeholder='' placeholder-class='ca'></input>
-    </view>
-  </view>
-  <!-- <view bindtap='submit' class='footer white fon-30 JieShu footer-btn'>立即报名</view> -->
-  <view class='footer'>
-    <view class='fon-26 footer-btn-l'>
-      <view class='margin-r-10'>支付订金</view>
-      <view class='fon-30 bold purple'> ¥ {{price}}</view>
-    </view>
-    <view bindtap='submit' class='white fon-32 cs purple-bg footer-btn-r'>立即报名</view>
-  </view>
-</view>
+</block>

@@ -8,7 +8,7 @@
 <view class='bg-fff'>
   <view class='flex aitems-center center'>
     <image class='imgs' src='/images/LS_03.png'></image>
-    <view class='fon-26 Huo c9'>最新活动</view>
+    <view class='fon-26 Huo c9'>{{isEn?'Latest Activity':'最新活动'}}</view>
     <image class='imgs' src='/images/LS_05.jpg'></image>
   </view>
 </view>
@@ -19,7 +19,7 @@
 <view class='bg-fff'>
   <view class='flex aitems-center center'>
     <image class='imgs' src='/images/LS_03.png'></image>
-    <view class='fon-26 Huo c9'>{{'推荐外教'}}</view>
+    <view class='fon-26 Huo c9'>{{isEn?'Recommend Tutor':'推荐外教'}}</view>
     <image class='imgs' src='/images/LS_05.jpg'></image>
   </view>
 </view>
@@ -27,3 +27,4 @@
 <view bindtap='teacherInfo' data-index='{{index}}' wx:for='{{listData}}' wx:key='{{index}}' class='border-t-1'>
   <tutor-info info-list='{{item}}' photo-url='{{srcForIdPhoto}}'></tutor-info>
 </view>
+<change-type bindisEnEvent='isEnEvent'></change-type>

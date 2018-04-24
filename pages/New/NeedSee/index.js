@@ -1,4 +1,6 @@
-// pages/New/NeedSee/index.js
+/**
+ * 需求列表
+ */
 const $common = require('../../../utils/common.js');
 const $static = require('../../../utils/static.js');
 Page({

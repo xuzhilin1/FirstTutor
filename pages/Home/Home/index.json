@@ -5,6 +5,7 @@
   "navigationBarTextStyle": "white",
   "navigationBarTitleText": "FirstTutor",
   "usingComponents": {
-    "tutor-info": "/component/tutorInfo/tutorInfo"
+    "tutor-info": "/component/tutorInfo/tutorInfo",
+    "change-type": "/component/changeType/changeType"
   }
 }

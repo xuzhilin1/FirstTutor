@@ -1,4 +1,6 @@
-// pages/New/activityDetail/index.js
+/**
+ * 活动立即报名
+ */
 const $common = require('../../../utils/common.js');
 Page({
   data: {

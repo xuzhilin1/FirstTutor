@@ -55,9 +55,22 @@ Page({
     {
       id: 7,
       isShow: true,
-      url: '/images/LI_16.jpg',
+      url: '/images/LI_16.png',
       title: "Your Messages",
       luJin: '../Online/index?isTeacher=true'
+    },
+    {
+      id: 8,
+      isShow: true,
+      url: '/images/problem.png',
+      title: "帮助与反馈",
+      luJin: '/pages/me/help/help'
+    }, {
+      id: 9,
+      isShow: true,
+      url: '/images/message.png',
+      title: "模板消息设置",
+      luJin: '/pages/me/templateMessage/templateMessage'
     }],
     //学生
     studentList: [{
@@ -81,9 +94,13 @@ Page({
       luJin: '../OrdeRreviewS/index'
     },
     {
-      url: '/images/LI_16.jpg',
+      url: '/images/LI_16.png',
       title: " 在线沟通",
       luJin: '../Online/index'
+    }, {
+      url: '/images/problem.png',
+      title: "帮助与反馈",
+      luJin: '/pages/me/help/help'
     }],
   },
   loading() {

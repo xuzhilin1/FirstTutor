@@ -29,6 +29,7 @@ Page({
       case 1: //活动报名
         titleText = '活动报名成功';
         contentText = '恭喜您报名成功！';
+        this.getPosterInfo();
         break;
     }
     wx.setNavigationBarTitle({
@@ -38,8 +39,7 @@ Page({
       contentText: contentText
     })
   },
-  bindShowPoster() { //生成海报
-    wx.showLoading({ title: '努力加载中...' });
+  getPosterInfo() {//生成海报
     $common.request(
       'POST',
       $common.config.GetPosterInfo,
@@ -49,19 +49,22 @@ Page({
           let poster = res.data.poster;
           this.setData({
             poster: poster,
-            isPoster: true
+
           })
         } else {
           $common.showModal('未知错误');
         }
       },
       (res) => {
-        $common.showModal('亲~网络不给力哦，请稍后重试');
+        // $common.showModal('亲~网络不给力哦，请稍后重试');
       },
       (res) => {
         wx.hideLoading();
       }
     )
+  },
+  bindShowPoster() {
+    isPoster: true
   },
   bindIsPoster() { //海报隐藏
     this.setData({

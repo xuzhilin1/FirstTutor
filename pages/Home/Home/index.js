@@ -1,6 +1,7 @@
 const $common = require('../../../utils/common.js');
 Page({
   data: {
+    isEn: false, //显示中英文
     srcForIdPhoto: $common.srcForIdPhoto,
     srcActivity: $common.srcActivity,
     srcBanner: $common.srcBanner,
@@ -195,6 +196,7 @@ Page({
       },
     );
   },
+
   onLoad(options) {
     this.init();
     this.getOpenId();
@@ -202,12 +204,13 @@ Page({
   onReady() {
 
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
+  isEnEvent(res) { //判断当前显示中英文
+    this.setData({
+      isEn: wx.getStorageSync('isEn')
+    })
+  },
   onShow: function () {
-
+    this.isEnEvent();
   },
 
   /**

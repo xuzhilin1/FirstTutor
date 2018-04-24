@@ -2,6 +2,7 @@
 const $common = require('../../../utils/common.js');
 Page({
   data: {
+    isEn:false,
     srcActivity: $common.srcActivity,
     pageIndex: 1,
     pageSize: 5,
@@ -148,12 +149,16 @@ Page({
    */
   onReady: function () {
   },
-
+  isEnEvent(res) { //判断当前显示中英文
+    this.setData({
+      isEn: wx.getStorageSync('isEn')
+    })
+  },
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.isEnEvent();
   },
 
   /**

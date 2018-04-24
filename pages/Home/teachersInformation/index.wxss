@@ -92,11 +92,11 @@ page {
 
 /*滚动条不显示 */
 
- ::-webkit-scrollbar {
+::-webkit-scrollbar {
   width: 0;
   height: 0;
   color: transparent;
-} 
+}
 
 .navbar {
   flex: none;
@@ -231,6 +231,19 @@ page {
 }
 
 /*  评分 end  */
-.catImage{
+
+.catImage {
   width: 50rpx;
+}
+
+.chat-tea {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  font-size: 30rpx;
+}
+
+.chat-tea image {
+  margin-bottom: 10rpx;
 }

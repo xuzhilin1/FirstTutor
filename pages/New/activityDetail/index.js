@@ -1,4 +1,6 @@
-// pages/New/activityDetail/index.js
+/**
+ * 活动详情
+ */
 const $common = require('../../../utils/common.js');
 const WxParse = require('../../../wxParse/wxParse.js'); //字符串转换为微信页面
 Page({

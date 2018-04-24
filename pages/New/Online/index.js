@@ -1,4 +1,6 @@
-// pages/New/Online/index.js
+/**
+ * 在线沟通列表
+ */
 const $common = require('../../../utils/common.js');
 Page({
   data: {

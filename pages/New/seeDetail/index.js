@@ -1,4 +1,6 @@
-// pages/New/seeDetail/index.js
+/**
+ * 需求查看
+ */
 const $common = require('../../../utils/common.js');
 const $static = require('../../../utils/static.js');
 const $translate = require('../../../utils/translate.js');

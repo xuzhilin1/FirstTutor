@@ -1,3 +1,6 @@
+/**
+ * 课程管理
+ */
 const $common = require('../../../utils/common.js');
 const app = getApp();
 Page({

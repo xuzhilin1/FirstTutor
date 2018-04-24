@@ -3,7 +3,7 @@
   "backgroundTextStyle": "light",
   "navigationBarBackgroundColor": "#000",
   "navigationBarTextStyle": "white",
-  "navigationBarTitleText": "时间段",
+  "navigationBarTitleText": "Select Time Slot",
   "usingComponents": {
     "modular-title": "/component/modularTitle/modularTitle",
     "time-slot": "/component/timeSlot/timeSlot"

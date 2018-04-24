@@ -153,6 +153,10 @@ const config = {
   GetUnReadMsgCount: `${host}/LittleProgram/ChatRecord/GetUnReadMsgCount`,
   // 外教--个人信息--未读订单数量（2018-04-20）
   GetNotCheckedOrderCount: `${host}/LittleProgram/CorOpenGroup/GetNotCheckedOrderCount`,
+  // 获取帮助与反馈内容（2018-04-24）
+  GetUserHelp: `${host}/LittleProgram/HelpAndFeedBack/GetUserHelp`,
+  // 发表反馈信息（2018-04-24）
+  PublishFeedBack: `${host}/LittleProgram/HelpAndFeedBack/PublishFeedBack`,
 }
 const wxGetUserInfo = function (callback) {
   wx.login({
