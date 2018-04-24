@@ -1,5 +1,6 @@
 const $common = require('../../../utils/common.js');
 const app = getApp();
+const $translate = require('../../../utils/translate.js');
 Page({
   data: {
     courId: -1,
@@ -55,15 +56,16 @@ Page({
             let whatNum = '';
             switch (data[i].FgtMemNum) {
               case 1:
-                whatNum = '一';
+                whatNum = 'One';
                 break;
               case 2:
-                whatNum = '二';
+                whatNum = 'Two';
                 break;
               case 3:
-                whatNum = '三';
+                whatNum = 'Three';
                 break;
             }
+            data[i].week = $translate.translateWeekEn(data[i].ClaStudyTime);
             data[i].whatNum = whatNum;
             data[i].showTime = this.timeStamp(data[i].FgtOpenTime); //时间戳转换为时间
             cogList.push(data[i]);
@@ -73,6 +75,7 @@ Page({
             hash[next.FgtId] ? '' : hash[next.FgtId] = true && item.push(next);
             return item
           }, []);
+          course.CorType = newArr[0].FgtMemNum;
           course.CorPrice = course.CorPrice.toFixed(2);
           this.setData({
             cogList: newArr,

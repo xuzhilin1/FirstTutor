@@ -1,58 +1,33 @@
 <!--pages/Home/CourseInformation/index.wxml-->
 <view class='big-outer'>
-  <!-- 一对一 -->
-  <view wx:if='{{course.CorType==1}}' class=' middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
-    <view class='flex fon-36 c2b'>
-      <image class='QiHao' mode='widthFix' src='/images/qi_03.png'></image>
-      <view>
-        <text>{{course.CorTitle}}</text>
-        <view class='c8 margin-t-20 fon-24'>已有{{course.BuyCount}}人参与</view>
-      </view>
-    </view>
-    <view class='fon-30 '>
-      <view class='bold bg-fff margin-t-10 purple'>¥{{course.CorPrice}}</view>
-    </view>
-  </view>
-  <!--  一对多  -->
-  <view wx:if='{{course.CorType!=1}}' class=' middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
-    <view class='flex fon-36  c2b '>
-      <image class='QiHao' mode='widthFix' src='/images/tuan_06.png'></image>
-      <view>
-        <text>{{course.CorTitle}}</text>
-        <view class='bold bg-fff purple'>¥{{course.CorPrice}}</view>
-      </view>
-    </view>
-    <view class='right-box'>
-      <view class='fon-24 margin-b-10 ca'>已有{{course.BuyCount}}人参与</view>
-      <view class='purplea purple fon-24 '>{{course.CorClaNum}}人团</view>
-    </view>
-  </view>
+  <tea-course course='{{course}}' other='{{true}}'></tea-course>
   <!-- 课程时长 -->
   <view class='flex aitems-center height-85 padding-lr-30 bg-fff border-t-1 fon-30 c2b border-b-1'>
-    课程时长
+    Course Duration
     <view class='ca margin-l-20'>{{course.courseTimeLong}}小时</view>
   </view>
   <!--  外教信息  -->
   <tutor-info info-list='{{tea}}' photo-url='{{srcForIdPhoto}}'></tutor-info>
   <!--  选择上课时间  -->
   <view class='border-b-1 margin-t-20'>
-    <modular-title title-context='选择时间段'></modular-title>
+    <modular-title title-context='Select Time Slot'></modular-title>
   </view>
   <!--  时间段选择组件  -->
   <time-slot time-tables='{{timeTables}}'></time-slot>
   <!--  课程介绍  -->
   <view class='border-b-1 margin-t-20'>
-    <modular-title title-context='课程介绍'></modular-title>
+    <modular-title title-context='Course Introduction'></modular-title>
   </view>
   <view class='padding-lr-30 bg-fff fon-24 padding-tb-20'>
     <view class='c72'>{{course.CorDescript}}</view>
   </view>
   <!-- 定金说明 -->
   <view class='border-b-1 margin-t-20'>
-    <modular-title title-context='订金说明'></modular-title>
+    <modular-title title-context='Statement on Deposit'></modular-title>
   </view>
   <view class='padding-lr-30 fon-24  c88 bg-fff padding-tb-40'>
-    平台预收课程费用{{tea.TeaDepositPer}}%作为订金，剩余费用学生扣除订金后支付给外教。
+    Students pay the tutor course fees offline, less the deposit (i.e. {{tea.TeaDepositPer}}% of the total fee for the first course paid by students to FirstTutor online) from the payable for the first course to tutor. The deposit is the one-off lump sum
+    fee charged by FirstTutor for its platform service.
   </view>
-  <view bindtap='goHome' class='footer fon-30 white purple-bg'>返回首页</view>
+  <view bindtap='goHome' class='footer fon-30 white purple-bg'>Homepage</view>
 </view>

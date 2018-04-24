@@ -1,25 +1,16 @@
 <view class='big-outer'>
   <view wx:for='{{cogList}}' wx:key='{{index}}' class='margin-t-20'>
     <view class='flex fon-26 border-t-1 bg-f9 c8 height-75 between padding-lr-30 aitems-center'>
-      <view>一对{{item.whatNum}}</view>
-      <view>成团时间：{{item.showTime}}</view>
+      <view>One to {{item.whatNum}}</view>
+      <view>Group Buying Time：{{item.showTime}}</view>
     </view>
-    <view class=' middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
-      <view class='flex fon-36  c2b '>
-        <image class='QiHao' mode='widthFix' src='/images/tuan_06.png'></image>
-        <view>
-          {{course.CorTitle}}
-          <view class='bold bg-fff purple'>¥ {{course.CorPrice}}</view>
-        </view>
-      </view>
-      <view class='purplea purple fon-24 '>{{item.FgtMemNum}}人团</view>
-    </view>
+    <tea-course course='{{course}}'></tea-course>
     <view class='flex fon-24 border-t-1 border-b-1 padding-lr-30 aitems-center bg-fff box-footer'>
-      <view class='box-time c8'>上课时间:{{item.ClaStudyTime}}{{item.FgtStartTime}}</view>
-      <view bindtap='orderDetails' data-index='{{index}}' class='border AnNiu white purple-bg'>拼团详情</view>
+      <view class='box-time c8'>Course Time:{{item.week}}/{{item.FgtStartTime}}</view>
+      <view bindtap='orderDetails' data-index='{{index}}' class='border AnNiu white purple-bg'>Group Details</view>
     </view>
   </view>
 </view>
 <view wx:if='{{cogList.length<=0}}' class='noData'>
-  暂无数据
+  No data
 </view>

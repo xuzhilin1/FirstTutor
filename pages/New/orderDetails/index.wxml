@@ -1,58 +1,36 @@
-<view wx:if='{{course.CorType==1}}' class=' middle-m bg-fff flex aitems-center border-b-1 between padding-lr-30 border-t-1'>
-  <view class='flex fon-36  c2b '>
-    <image class='QiHao' mode='widthFix' src='/images/qi_03.png'></image>
-    <view>
-      <text>{{course.CorTitle}}</text>
-      <view class=' fon-24 c8 margin-t-10 '>已有{{course.BuyCount}}人购买</view>
-    </view>
-  </view>
-  <view class='bold purple'>¥ {{course.CorPrice}}</view>
-</view>
-
-<view wx:if='{{course.CorType!=1}}' class=' middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
-  <view class='flex fon-36  c2b '>
-    <image class='QiHao' mode='widthFix' src='/images/tuan_06.png'></image>
-    <view>
-     <text>{{course.CorTitle}}</text>
-      <view class='bold bg-fff purple'>¥ {{course.CorPrice}}</view>
-    </view>
-  </view>
-  <view class='purplea purple fon-24 '>{{course.CorType}}人团</view>
-</view>
-<!--  -->
-
+<!-- 头部课程信息 -->
+<tea-course other='{{false}}' course='{{course}}'></tea-course>
 <view class='margin-t-20'>
-  <view wx:for='{{MemList}}' wx:key='{{index}}' class='flex fon-30 c2b bg-fff  border-t-1 padding-25 aitems-center between'>
-    <view class='flex aitems-center'>
+  <view wx:for='{{MemList}}' wx:key='{{index}}' class='stu-list'>
+    <view class='stu-left'>
       <image class='orderimg' src='{{item.UserAvaUrl}}'></image>
-      {{item.OdrName}}
-      <view wx:if='{{cog.FgtType==1&&item.OdrIsHead}}' class='Tuan border fon-24 purple'>团长</view>
+      <view class='stu-name'>{{item.OdrName}}</view>
+      <view wx:if='{{cog.FgtType==1&&item.OdrIsHead}}' class='Tuan border fon-24 purple'>Group leader</view>
       <image bindtap='onlineChart' data-index='{{index}}' class='Wen' mode='widthFix' src='/images/DuiHua_06.png'></image>
     </view>
-    <view bindtap='callPhone' data-phone='{{item.OdrPhone}}' class='flex aitens-center'>
+    <view bindtap='callPhone' data-phone='{{item.OdrPhone}}' class='stu-right'>
       <image class='phone' mode='widthFix' src='/images/phone_06.png'></image>
       {{item.OdrPhone}}
     </view>
   </view>
-
 </view>
-<view  bindtap='lookAddress' class='padding-25 bg-fff flex aitems-center fon-26 border-t-1 border-b-1'>
+<view bindtap='lookAddress' class='padding-25 bg-fff flex aitems-center fon-26 border-t-1 border-b-1'>
   <image mode='widthFix' class='address' src='/images/adddress_14.png'></image>
-  上课地址：{{cog.FgtStudyAddress}}
+  <view class='address-text'>Address for Attending Course ：{{cog.FgtStudyAddress}}</view>
 </view>
 
 <view class='padding-25 margin-t-20 fon-24 border-t-1 border-b-1 bg-fff'>
   <block wx:if='{{course.CorType==1}}'>
-    <view class='margin-b-20 '>订单号：{{MemList[0].OdrOutradeno}}</view>
-    <view class='margin-b-20 '>下单时间：{{MemList[0].orderCreatTime}}</view>
-    <view class='margin-b-20 '>支付时间：{{MemList[0].orderBuyTime}}</view>
+    <view class='margin-b-20 '>Order Number：{{MemList[0].OdrOutradeno}}</view>
+    <view class='margin-b-20 '>Order Placement Time：{{MemList[0].orderCreatTime}}</view>
+    <view class='margin-b-20 '>Paying Time：{{MemList[0].orderBuyTime}}</view>
   </block>
   <block wx:if='{{course.CorType!=1}} '>
-    <view class='margin-b-20 '>团编号：{{cog.FgtNumber}}</view>
-    <view class='margin-b-20 '>开团时间：{{cog.courseStartTime}}</view>
-    <view class='margin-b-20 '>结束时间：{{cog.courseEndTime}}</view>
+    <view class='margin-b-20 '>Group Number：{{cog.FgtNumber}}</view>
+    <view class='margin-b-20 '>Start Time for Group Buying：{{cog.courseStartTime}}</view>
+    <view class='margin-b-20 '>Ending Time for Group Buying：{{cog.courseEndTime}}</view>
   </block>
-  <view class='margin-b-20 '>上课时间段：{{MemList[0].TimStr}}</view>
-  <view class='margin-b-20 '>课程时长：{{course.courseTimeLong}}小时</view>
-  <view class='margin-b-20 '>上课时间：{{cog.FgtStartTime}}</view>
+  <view class='margin-b-20 '>Course Time Slot：{{MemList[0].TimStr}}</view>
+  <view class='margin-b-20 '>Course Duration：{{course.courseTimeLong}}小时</view>
+  <view class='margin-b-20 '>Course Time：{{cog.FgtStartTime}}</view>
 </view>

@@ -61,7 +61,7 @@ Page({
         }
       },
       (res) => {
-        $common.showModal('亲~网络不给力哦，请稍后重试');
+        // $common.showModal('亲~网络不给力哦，请稍后重试');
       },
       (res) => {
         this.addListenCallbackNum();
@@ -107,7 +107,7 @@ Page({
         }
       },
       (res) => {
-        $common.showModal('亲~网络不给力哦，请稍后重试');
+        // $common.showModal('亲~网络不给力哦，请稍后重试');
       },
       (res) => {
         this.addListenCallbackNum();
@@ -133,7 +133,7 @@ Page({
     }
   },
   init() {
-    wx.showLoading({ title: '努力加载中...' });
+    wx.showLoading({ title: 'Loading...' });
     this.getCourseAndTeacherInfo();
     this.getCourTime();
   },

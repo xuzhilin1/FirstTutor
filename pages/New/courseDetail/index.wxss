@@ -1,23 +1,5 @@
 /* pages/Home/CourseInformation/index.wxss */
 
-.QiHao {
-  width: 42rpx;
-  margin-right: 14rpx;
-}
-
-.middle-m {
-  padding-top: 30rpx;
-  padding-bottom: 40rpx;
-}
-
-.purplea {
-  background-color: #e8f0ff;
-  width: 93rpx;
-  height: 42rpx;
-  line-height: 42rpx;
-  text-align: center;
-}
-
 .footer {
   position: fixed;
   left: 0;
@@ -30,11 +12,4 @@
 
 .big-outer {
   padding-bottom: 100rpx;
-}
-
-.right-box {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-end;
 }

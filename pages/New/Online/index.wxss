@@ -11,10 +11,6 @@
   padding: 25rpx 30rpx;
 }
 
-.neirong {
-  margin-top: 20rpx;
-}
-
 .din {
   width: 15rpx;
   height: 15rpx;

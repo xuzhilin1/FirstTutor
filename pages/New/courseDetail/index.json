@@ -3,10 +3,11 @@
   "backgroundTextStyle": "light",
   "navigationBarBackgroundColor": "#000",
   "navigationBarTextStyle": "white",
-  "navigationBarTitleText": "课程详情",
+  "navigationBarTitleText": "Course Details",
   "usingComponents": {
     "tutor-info": "/component/tutorInfo/tutorInfo",
     "modular-title": "/component/modularTitle/modularTitle",
-    "time-slot": "/component/timeSlot/timeSlot"
+    "time-slot": "/component/timeSlot/timeSlot",
+    "tea-course": "/component/teaCourse/teaCourse"
   }
 }

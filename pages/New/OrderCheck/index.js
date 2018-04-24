@@ -11,7 +11,7 @@ Page({
     let index = e.currentTarget.dataset.index,
       cogList = this.data.cogList;
     wx.navigateTo({
-      url: `../orderDetails/index?cogId=${cogList[index].FgtId}`,
+      url: `/pages/New/orderDetails/index?cogId=${cogList[index].FgtId}`,
     })
   },
   timeStamp(time) { //时间戳转换为日期

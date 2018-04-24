@@ -64,7 +64,7 @@ Page({
         this.teacherIntroduceContext();
         break;
       case 1:  //课程介绍
-        placeholder = 'Please complete the course description, up to 1000 characters';
+        placeholder = 'Please fill in the course introduction, Maximum of 1000 Characters';
         titleText = 'Course Introduction';
         this.courseIntroduceContext();
         break;

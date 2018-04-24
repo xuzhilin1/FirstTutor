@@ -3,5 +3,8 @@
   "backgroundTextStyle": "light",
   "navigationBarBackgroundColor": "#000",
   "navigationBarTextStyle": "white",
-  "navigationBarTitleText": "Course Management"
+  "navigationBarTitleText": "Course Management",
+  "usingComponents": {
+    "tea-course": "/component/teaCourse/teaCourse"
+  }
 }

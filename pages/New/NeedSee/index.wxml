@@ -16,5 +16,5 @@
   </view>
 </view>
 <view wx:if='{{lnList.length<=0}}' class='noData'>
-  暂无数据
+  No Data
 </view>

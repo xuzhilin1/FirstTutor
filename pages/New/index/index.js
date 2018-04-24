@@ -3,7 +3,6 @@ const app = getApp();
 const $common = require('../../../utils/common.js');
 Page({
   data: {
-    isEnglish: false, //是否显示英文页面，默认显示中文
     notCNum: 0, //订单未读
     unReadC: 0, //未读消息，大于0，有
     isPageShow: false, //页面初始不显示
@@ -304,20 +303,7 @@ Page({
   onShow: function () {
     this.getMsgCount();
     this.getMsgOrderCount();
-    let isEnglish = wx.getStorageSync('isEnglish');
-    this.setData({
-      isEnglish: isEnglish ? true : false
-    })
-    let text = '';
-    if (isEnglish) {
-      text = '找学生';
-    } else {
-      text = '找外教';
-    }
-    wx.setTabBarItem({
-      index: 1,
-      text: text
-    })
+
   },
 
   /**

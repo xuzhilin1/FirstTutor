@@ -4,12 +4,6 @@
   border-bottom: 1px solid #e0e0e0;
 }
 
-.img-l {
-  width: 150rpx;
-  height: 150rpx;
-  margin-right: 34rpx;
-}
-
 .height-102 {
   height: 102rpx;
 }

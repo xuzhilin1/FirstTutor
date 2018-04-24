@@ -6,25 +6,7 @@
       <view wx:if='{{item.CorCanView==2}}'>Approval Failed</view>
       <view>Launch Time：{{item.showTime}}</view>
     </view>
-    <!--  单独购买  -->
-    <view bindtap='orderDetails' data-index='{{index}}' wx:if='{{item.CorType==1}}' class=' middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
-      <view class='flex fon-36  c2b '>
-        <image class='QiHao' mode='widthFix' src='/images/qi_03.png'></image>
-        {{item.CorTitle}}
-      </view>
-      <view class='bold purple'>¥{{item.CorPrice}}</view>
-    </view>
-    <!--  拼团  -->
-    <view bindtap='orderDetails' data-index='{{index}}' wx:if='{{item.CorType!=1}}' class=' middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
-      <view class='flex fon-36  c2b '>
-        <image class='QiHao' mode='widthFix' src='/images/tuan_06.png'></image>
-        <view>
-          {{item.CorTitle}}
-          <view class='bold bg-fff purple'>¥{{item.CorPrice}}</view>
-        </view>
-      </view>
-      <view class='purplea purple fon-24 '>Group of {{item.CorType}} People</view>
-    </view>
+    <tea-course bindtap='orderDetails' data-index='{{index}}' other='{{false}}' course='{{item}}'></tea-course>
     <view class='flex fon-24 border-t-1 border-b-1 padding-lr-30 aitems-center bg-fff j-right'>
       <view bindtap='bindDelete' data-index='{{index}}' class='purple AnNiu border'>Delete Course</view>
       <view bindtap='groupList' data-index='{{index}}' wx:if='{{item.CorType!=1&&item.CorCanView==1}}' class='border AnNiu white purple-bg'>Group Buying Effective {{item.FGCount}}</view>

@@ -1,27 +1,10 @@
 /* pages/New/CourseManagement/index.wxss */
 
-.QiHao {
-  width: 42rpx;
-  margin-right: 14rpx;
-}
-
-.middle-m {
-  padding-top: 30rpx;
-  padding-bottom: 40rpx;
-}
-
 .AnNiu {
   padding: 13rpx 20rpx;
   text-align: center;
   margin: 14rpx 0;
   margin-left: 10rpx;
-}
-
-.purplea {
-  background-color: #e8f0ff;
-  padding: 4rpx 10rpx;
-  text-align: center;
-  border-radius: 5px;
 }
 
 .footer {

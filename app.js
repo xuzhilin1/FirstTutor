@@ -1,7 +1,6 @@
 //app.js
 App({
-  onLaunch: function () {
-    // wx.setStorageSync('isEnglish', true);
+  onLaunch: function (){
   },
   globalData: {
     userInfo: null,
