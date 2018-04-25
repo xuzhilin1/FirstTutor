@@ -323,11 +323,24 @@ Page({
 
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
+  isEnEvent(res) { //判断当前显示中英文
+    let isEn = wx.getStorageSync('isEn');
+    this.setData({
+      isEn: isEn
+    });
+    let text = '';
+    if (isEn) {
+      text = 'Course information';
+    } else {
+      text = '课程信息';
+    }
+    wx.setNavigationBarTitle({
+      title: text
+    })
+  },
   onShow: function () {
     this.init();
+    this.isEnEvent();
   },
 
   /**

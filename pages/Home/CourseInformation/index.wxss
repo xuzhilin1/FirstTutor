@@ -17,6 +17,13 @@
   line-height: 42rpx;
   text-align: center;
 }
+.purplea-en {
+  background-color: #e8f0ff;
+  height: 42rpx;
+  line-height: 42rpx;
+  text-align: center;
+  padding: 0 6rpx
+}
 
 
 .footer {
@@ -110,4 +117,10 @@
 
 .join-group {
   padding-bottom: 1rpx;
+}
+.gaoDU{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }

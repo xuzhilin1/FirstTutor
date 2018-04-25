@@ -1,4 +1,7 @@
-<view>
+<!--
+  中文版
+  -->
+<block wx:if='{{!isEn}}'>
   <!--  teacher userInfo  -->
   <view id='_headerTop' class='ZuiShang'>
     <image class='bg-image' src='/images/bg-all_02.jpg'></image>
@@ -38,7 +41,6 @@
         <image bindtap='onlineChart' mode='widthFix' class='catImage' src='/images/DuiHua_0.png'></image>
         <view>联系老师</view>
       </view>
-
     </view>
   </view>
   <!--  phone and area  -->
@@ -127,4 +129,136 @@
     </view>
   </view>
   <view bindtap='onlineChart' class='footer fon-30 white purple-bg'>咨询老师</view>
-</view>
+</block>
+<!--
+  英文版
+  -->
+<block wx:if='{{isEn}}'>
+  <!--  teacher userInfo  -->
+  <view id='_headerTop' class='ZuiShang'>
+    <image class='bg-image' src='/images/bg-all_02.jpg'></image>
+    <view class='white flex aitems-center padding-lr-30 padding-tb-20 teacher-box header-box'>
+      <view class='teacher-l'>
+        <image catchtap='lookYouImage' class='touXiang margin-r-20 touxiang-image touxiang-image-t' src='{{teaInfo.TeaIDPhoto?srcForIdPhoto+teaInfo.TeaIDPhoto:teaInfo.TeaAvaUrl}}'></image>
+        <view class='flex1'>
+          <view class='fon-26 margin-b-10 flex aitems-center '>
+            <text>{{teaInfo.TeaName}}</text>
+            <image wx:if='{{teaInfo.TeaGender===1}}' class='HuangGuan margin-l-10' mode='widthFix' src='/images/nan.png'></image>
+            <image wx:if='{{teaInfo.TeaGender===0}}' class='HuangGuan margin-l-10' mode='widthFix' src='/images/nv.png'></image>
+            <image wx:if='{{teaInfo.TeaAddV==1}}' class='HuangGuan margin-l-10' mode='widthFix' src='/images/guan.png'></image>
+            <!--  星星  -->
+            <view class='score'>
+              <view class='score-all'>
+                <image wx:for="{{5}}" wx:key='{{index}}' class='score-list' mode='widthFix' src='/images/hui_07.png'></image>
+              </view>
+              <view class='score-score'>
+                <view class='score-list' wx:for="{{5}}" wx:for-item='value' wx:for-index='key' wx:key='{{index}}'>
+                  <!--  整星  -->
+                  <image wx:if="{{teaInfo.RewScore - 0.5 > key ? key <= teaInfo.RewScore : key < teaInfo.RewScore - 1}}" class='score-img' src='/images/xian_05.png'></image>
+                  <!--  半星  -->
+                  <image wx:if="{{teaInfo.RewScore - 0.5 > key ? false : key < teaInfo.RewScore }}" class='score-image' src='/images/BanXIn_03.png'></image>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class='fon-24  white margin-t-10 margin-b-10'>
+            <text>{{teaInfo.TeaNation}}/{{teaInfo.TeaUniversity}}</text>
+          </view>
+          <view class='fon-24  white'>
+            <text>{{teaInfo.TeaAbstract}}</text>
+          </view>
+        </view>
+      </view>
+      <view class='chat-tea'>
+        <image bindtap='onlineChart' mode='widthFix' class='catImage' src='/images/DuiHua_0.png'></image>
+        <view>Contact Tutor</view>
+      </view>
+    </view>
+  </view>
+  <!--  phone and area  -->
+  <view class='border-t-1 border-b-1 margin-t-20'>
+    <view bindtap='callPhone' data-phone='{{teaInfo.TeaPhone}}' class='padding-50  padding-tb-20 bg-fff flex aitems-center fon-24 '>
+      <image mode='widthFix' class='address' src='/images/phone_06.png'></image>
+      <view class='c8 margin-r-20'>Contact Number</view>
+      <text wx:if='{{teaInfo.TeaPhone==="{-msg:notbuy-}"}}'>You can view it after purchase.</text>
+      <text wx:else>{{teaInfo.TeaPhone}}</text>
+    </view>
+    <view class='padding-50  padding-tb-20 bg-fff flex aitems-center fon-24 '>
+      <image mode='widthFix' class='address' src='/images/adddress_14.png'></image>
+      <view class='c8 margin-r-20'>Teaching Area</view>
+      <black wx:for='{{areaList}}' wx:key='{{index}}'>
+        <text wx:if='{{index!=0}}'>、</text>{{item.area}}
+      </black>
+    </view>
+  </view>
+  <!-- table  -->
+  <view class="navbar margin-t-20 border-b-1 border-t-1">
+    <view wx:for="{{navbarListEn}}" data-index='{{index}}' class="item {{0 ==index ? 'active' : ''}}" wx:key="unique" bindtap="bindNavbar">{{item.context}}
+    </view>
+  </view>
+  <!-- 课程列表  -->
+  <view class="margin-b-20">
+    <view bindtap='courseInfo' data-index='{{index}}' wx:for='{{courseList}}' wx:key='{{index}}' class=' middle-m bg-fff padding-tb-20 flex aitems-center between padding-lr-30 border-b-1'>
+      <view class='flex fon-36  c2b '>
+        <image wx:if='{{item.CorType!=1}}' class='QiHao' mode='widthFix' src='/images/tuan_06.png'></image>
+        <image wx:else class='QiHao' mode='widthFix' src='/images/qi_03.png'></image>
+        <view>
+          <text>{{item.CorTitle}}</text>
+          <view class=' bg-fff c8 margin-t-10 fon-24 purple'>{{item.BuyCount}} People buy</view>
+        </view>
+      </view>
+      <view class=' purple bold fon-30 '>¥{{item.CorPrice}}</view>
+    </view>
+  </view>
+  <!-- 外教介绍 -->
+  <view id="_teacherIntroduce" class="margin-b-20  border-t-1">
+    <block wx:if='{{teaInfo.TeaDescript}}'>
+      <view class='border-b-1'>
+        <modular-title title-context='Tutor introduce'></modular-title>
+      </view>
+      <view wx:if='{{teaInfo.TeaDescript}}' class='padding-lr-30 bg-fff fon-24 padding-tb-20'>
+        <view class='c72'>{{teaInfo.TeaDescript}}</view>
+      </view>
+    </block>
+    <!-- 外教视频 -->
+    <block wx:if='{{teaInfo.TeaAudio}}'>
+      <view class='border-b-1 margin-t-20'>
+        <modular-title title-context='Tutor video'></modular-title>
+      </view>
+      <view class='sepa bg-fff'>
+        <video class='video' src="{{srcVideo}}{{teaInfo.TeaAudio}}" controls></video>
+      </view>
+    </block>
+    <!--  外教资质  -->
+    <block wx:if='{{qualifInfo.length>0}}'>
+      <view class='border-b-1 margin-t-20'>
+        <modular-title title-context='Tutor qualification'></modular-title>
+      </view>
+      <view class='bg-fff zizhi-box'>
+        <image bindtap='lookqualifImage' data-image='{{item}}' wx:for='{{qualifInfo}}' wx:key='{{index}}' class='img-ziZhi' mode='widthFix' src='{{srcImg}}{{item}}'></image>
+      </view>
+    </block>
+  </view>
+  <!-- 最新评论 -->
+  <view hidden='{{comment.length<=0}}' id="_evaluate" class='bg-fff margin-b-20'>
+    <view class='border-b-1 margin-t-20'>
+      <modular-title title-context='The latest comments'></modular-title>
+    </view>
+    <view class='padding-lr-30'>
+      <view hidden='{{index>=2&&!allComment}}' wx:for='{{comment}}' wx:key='{{index}}' class='border-b-1 padding-tb-20'>
+        <view class='flex aitems-center'>
+          <image class='touxiang' src='{{item.UserAvaUrl}}'></image>
+          <view class='flex1 comment-info'>
+            <view class='fon-24 margin-b-10'>{{item.UserNickName}}</view>
+            <view class='fon-24 margin-b-10 c8'>{{item.showTime}}</view>
+          </view>
+        </view>
+        <view class='fon-26 comment'>{{item.RewComment}}</view>
+      </view>
+      <view bindtap='lookAllComment' wx:if='{{totalCount>2&&!allComment}}' class='fon-24 padding-tb-20 c8'>
+        Expand all {{totalCount}} comments.
+      </view>
+    </view>
+  </view>
+  <view bindtap='onlineChart' class='footer fon-30 white purple-bg'>Consulting Tutor</view>
+</block>

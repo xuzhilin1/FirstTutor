@@ -15,11 +15,10 @@
 <view bindtap='activityDetail' class='padding-lr-30 bg-fff'>
   <image class='img-m' src='{{srcActivity}}{{activity.AtyImgPath}}'></image>
 </view>
-
 <view class='bg-fff'>
   <view class='flex aitems-center center'>
     <image class='imgs' src='/images/LS_03.png'></image>
-    <view class='fon-26 Huo c9'>{{isEn?'Recommend Tutor':'推荐外教'}}</view>
+    <view class='fon-26 Huo c9'>{{isEn?'My colleague':'推荐外教'}}</view>
     <image class='imgs' src='/images/LS_05.jpg'></image>
   </view>
 </view>

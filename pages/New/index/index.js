@@ -311,13 +311,14 @@ Page({
 
   },
   onReady: function () {
-    this.init();
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    this.init();
     this.getMsgCount();
     this.getMsgOrderCount();
 

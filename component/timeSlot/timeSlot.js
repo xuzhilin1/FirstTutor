@@ -48,7 +48,7 @@ const timeList = (function () {
   }
   return arr;
 }());
-const timeListEn = (function() {
+const timeListEn = (function () {
   //周几就用数字1234567代替，时间段就用1（AM），2（PM1），3（PM2），4（PM3）代替
   //0 无法选中 1 未选 2 已选
   let arr = [];
@@ -163,9 +163,20 @@ Component({
   },
   data: {
     weekList: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
-    timeList: timeList
+    timeList: timeList,
+    isEn: false
   },
   attached() {
+    let isEn = wx.getStorageSync('isEn');
+    this.setData({
+      isEn: isEn
+    })
+    if (isEn) {
+      this.setData({
+        weekList: ['Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'],
+        timeList: timeListEn
+      })
+    }
   },
   methods: {
     _selectTime(e) { //选择时间触发

@@ -1,7 +1,11 @@
+/**
+ * 外教信息
+ */
 const $common = require('../../../utils/common.js');
 const $static = require('../../../utils/static.js');
 Page({
   data: {
+    isEn: false,
     srcForIdPhoto: $common.srcForIdPhoto,
     srcImg: $common.srcImg,
     srcVideo: $common.srcVideo,
@@ -18,6 +22,16 @@ Page({
     }, {
       id: '_evaluate',
       context: '历史评价'
+    }],
+    navbarListEn: [{
+      id: '_course',
+      context: 'Provide course'
+    }, {
+      id: '_teacherIntroduce',
+      context: 'Tutor Introduce'
+    }, {
+      id: '_evaluate',
+      context: 'Evaluation'
     }],
     courseList: [], //课程列表
     qualifInfo: [], //外教资质图片
@@ -249,6 +263,7 @@ Page({
     this.getCommentData();
   },
 
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -263,12 +278,26 @@ Page({
    */
   onReady: function () {
   },
-
+  isEnEvent(res) { //判断当前显示中英文
+    let isEn = wx.getStorageSync('isEn');
+    this.setData({
+      isEn: isEn
+    });
+    let text = '';
+    if (isEn) {
+      text = 'Tutor information';
+    } else {
+      text = '外教信息';
+    }
+    wx.setNavigationBarTitle({
+      title: text
+    })
+  },
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.isEnEvent();
   },
 
   /**

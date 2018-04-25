@@ -79,7 +79,6 @@ Component({
       }
     },
     changeSuccess() { //切换成功后执行的函数
-      console.log(this);
       let isEn = this.data.isEn;
       this.setData({
         isEn: !isEn
