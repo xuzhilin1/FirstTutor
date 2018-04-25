@@ -1,0 +1,26 @@
+/* pages/New/Abasic/index.wxss */
+
+page {
+  background-color: #fff;
+}
+
+.input-width {
+  width: 90%;
+  padding-left: 0;
+}
+
+.width-left {
+  width: 236rpx;
+}
+
+.width-l {
+  width: 190rpx;
+}
+
+.tiaokuan {
+  padding: 20rpx 40rpx;
+}
+
+.save-btn {
+  margin-bottom: 20rpx;
+}

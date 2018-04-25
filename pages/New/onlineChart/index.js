@@ -217,7 +217,6 @@ Page({
       userId: userId
     });
     let openid = wx.getStorageSync('openid');
-    var socketOpen = false;
     //建立连接
     wx.connectSocket({
       url: `${$common.webStock}?userId=${openid}&tarUserId=${userId}`,

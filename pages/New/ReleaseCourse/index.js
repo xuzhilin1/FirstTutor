@@ -2,7 +2,7 @@ const $common = require('../../../utils/common.js');
 const app = getApp();
 Page({
   data: {
-    status: 0,
+    status: 0, //3外教申请进入
     courseNumPeople: '1', //人数
     isCourseIntroduce: false, //课程介绍是否显示
     courseIntroduce: '', //课程介绍
@@ -98,7 +98,7 @@ Page({
       $common.showModal('Please fill in the course description', false, false, 'OK', 'Prompt');
       return;
     }
-    if (this.data.status === 0) {
+    if (this.data.status === 0 || this.data.status === 3) {
       this.releaseCourse(
         courseTypeIndex + 1,
         courseName,
@@ -192,10 +192,17 @@ Page({
             icon: 'success',
             duration: 1500,
           })
+          let status = this.data.status;
           setTimeout(() => {
-            wx.navigateBack({
-              delta: 1
-            })
+            if (status === 3) { //外教申请发布课程，进入
+              wx.switchTab({
+                url: '/pages/Home/Home/index',
+              });
+            } else if (status === 0) {
+              wx.navigateBack({
+                delta: 1
+              })
+            }
           }, 1500);
         } else {
           switch (res.data.errType) {

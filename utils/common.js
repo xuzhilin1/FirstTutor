@@ -10,6 +10,8 @@ const mapKey = new QQMapWX({
 });
 const MD5 = require('./md5.js');
 const phoneReg = /^1[34578]\d{9}$/; // 正则手机号码
+const passportReg = /^1[45][0-9]{7}|G[0-9]{8}|P[0-9]{7}|S[0-9]{7,8}|D[0-9]+$/; //正则护照
+const emailReg = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,5}$/; //正则邮箱
 const srcImg = `${host}/QualifImgs/`; //图片
 const srcUploadImg = `${host}/ImgCatch/`; //上传图片 
 const srcVideo = `${host}/QuaLifAudios/`; //视频
@@ -56,6 +58,8 @@ const config = {
   DeleteOgoById: `${host}/LittleProgram/OpenGrpOrder/DeleteOgoById`,
   // 订单页--获取外教上课地址与手机号(2018-04-09)
   GetTeaAddressPhone: `${host}/LittleProgram/CorOpenGroup/GetTeaAddressPhone`,
+  // 用户--更改用户类型（2018-04-23）
+  ChangeUserType: `${host}/LittleProgram/UserInfo/ChangeUserType`,
   /*
     找外教
    */
@@ -236,7 +240,9 @@ const refuseModal = function (callback) { //用户拒绝授权弹框处理
 module.exports = {
   webStock: webStock,
   config: config,
+  passportReg: passportReg,
   phoneReg: phoneReg,
+  emailReg: emailReg,
   srcImg: srcImg,
   srcUploadImg: srcUploadImg,
   srcVideo: srcVideo,

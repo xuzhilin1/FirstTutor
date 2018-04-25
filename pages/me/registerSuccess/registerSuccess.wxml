@@ -1,0 +1,8 @@
+<!--pages/me/registerSuccess/registerSuccess.wxml-->
+
+<image class='image' mode='widthFix' src='/images/lingdai.png'></image>
+<view class='content'>Through teacher certification, the issue of effective teacher qualification.</view>
+<view class='other'>P.S.：After certification, you must issue a course to activate the teacher's qualification.</view>
+<view class='footer'>
+  <button bindtap='releaseCourse' class='btn purple-bg white'>Launch Course</button>
+</view>
