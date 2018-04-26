@@ -157,11 +157,19 @@ Page({
           });
           this.resetArea();
         } else {
-          $common.showModal('未知错误，请稍后重试');
+          if (wx.getStorageSync('isEn')) {
+            $common.showModal('Unknown Error', false, false, 'Ok', 'Reminder');
+          } else {
+            $common.showModal('未知错误，请稍后重试');
+          }
         }
       },
       (res) => {
-        $common.showModal('亲~网络不给力哦，请稍后重试');
+        if (wx.getStorageSync('isEn')) {
+          $common.showModal('Unknown Error', false, false, 'Ok', 'Reminder');
+        } else {
+          $common.showModal('未知错误，请稍后重试');
+        }
       },
       (res) => {
         this.addListenCallbackNum();
@@ -195,7 +203,13 @@ Page({
   getCommentData(isLook) { //获取评论
     isLook = typeof isLook === 'undefined' ? false : true; //是否为点击查看所有评论进入
     if (isLook) {
-      wx.showLoading({ title: '努力加载中...' });
+      let text = '';
+      if (wx.getStorageSync('isEn')) {
+        text = 'Loading...';
+      } else {
+        text = '努力加载中...';
+      }
+      wx.showLoading({ title: text });
     }
     $common.request(
       "POST",
@@ -250,23 +264,24 @@ Page({
     let num = parseInt(this.data.listenCallbackNum);
     if (num >= 3) { //本页面有三个接口
       wx.hideLoading();
-      wx.stopPullDownRefresh();
       this.setData({
         listenCallbackNum: 0
       })
     }
   },
   init() {
-    wx.showLoading({ title: '努力加载中...' });
+    let isEn = wx.getStorageSync('isEn');
+    let text = "";
+    if (isEn) {
+      text = 'Loading...';
+    } else {
+      text = '努力加载中...';
+    }
+    wx.showLoading({ title: text });
     this.getTeacherData();
     this.getCourseData();
     this.getCommentData();
   },
-
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
     this.setData({
       teaId: options.data
@@ -318,6 +333,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
+    wx.stopPullDownRefresh();
     this.init();
   },
 

@@ -75,16 +75,16 @@ module.exports = {
     let data;
     switch (parseInt(res)) {
       case 1:
-        data = 'Morning';
+        data = 'AM';
         break;
       case 2:
-        data = 'Afternoon1';
+        data = 'PM1';
         break;
       case 3:
-        data = 'Afternoon2';
+        data = 'PM2';
         break;
       case 4:
-        data = 'Evening';
+        data = 'PM3';
         break;
     }
     return data;

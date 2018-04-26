@@ -1,4 +1,5 @@
 const $common = require('../../../utils/common.js');
+const $translate = require('../../../utils/translate.js');
 Page({
   //页面分为两种情况，1，单独购买 = 团长购买 2，团员购买
   data: {
@@ -27,8 +28,8 @@ Page({
     let timeListData = this.data.timeListData;
     let course = this.data.course;
     let timeList = [];
-    switch (weekTimeData.time) {
-      case '上午':
+    switch (weekTimeData.TimClaTime) {
+      case 1:
         switch (course.CorLenOfCla) {
           case 1:
             timeList = timeListData.slice(0, 5);
@@ -41,7 +42,7 @@ Page({
             break;
         }
         break;
-      case '下午1':
+      case 2:
         switch (course.CorLenOfCla) {
           case 1:
             timeList = timeListData.slice(6, 11);
@@ -54,7 +55,7 @@ Page({
             break;
         }
         break;
-      case '下午2':
+      case 3:
         switch (course.CorLenOfCla) {
           case 1:
             timeList = timeListData.slice(12, 17);
@@ -67,7 +68,7 @@ Page({
             break;
         }
         break;
-      case '晚上':
+      case 4:
         switch (course.CorLenOfCla) {
           case 1:
             timeList = timeListData.slice(18, 23);
@@ -88,25 +89,17 @@ Page({
   },
   initCourseTimeData() { //初始化上课时间段数据
     let weekTimeData = this.data.weekTimeData;
-    let i = parseInt(weekTimeData.index);
-    let week = '';
-    if (i === 0 || i === 7 || i === 14 || i === 21) {
-      week = '周一';
-    } else if (i === 1 || i === 8 || i === 15 || i === 22) {
-      week = '周二';
-    } else if (i === 2 || i === 9 || i === 16 || i === 23) {
-      week = '周三';
-    } else if (i === 3 || i === 10 || i === 17 || i === 24) {
-      week = '周四';
-    } else if (i === 4 || i === 11 || i === 18 || i === 25) {
-      week = '周五';
-    } else if (i === 5 || i === 12 || i === 19 || i === 26) {
-      week = '周六';
-    } else if (i === 6 || i === 13 || i === 20 || i === 27) {
-      week = '周日';
+    let isEn = wx.getStorageSync('isEn');
+    let week, time;
+    if (isEn) {
+      week = $translate.translateWeekEn(weekTimeData.TimAfw);
+      time = $translate.translateTimeEn(weekTimeData.TimClaTime);
+    } else {
+      week = $translate.translateWeek(weekTimeData.TimAfw);
+      time = $translate.translateTime(weekTimeData.TimClaTime);
     }
     this.setData({
-      weekTime: `${week}/${weekTimeData.time}`,
+      weekTime: `${week}/${time}`,
     })
   },
   bindStudentName(e) { //姓名
@@ -148,16 +141,29 @@ Page({
       studentPhone = this.data.studentPhone,
       startCourseTime = this.data.startCourseTime,
       courseAddress = this.data.courseAddress ? this.data.courseAddress : '线下协商';
+    let isEn = wx.getStorageSync('isEn');
     if (studentName.trim().length <= 0) {
-      $common.showModal('请输入姓名');
+      if (isEn) {
+        $common.showModal('Please fill in your name.', false, false, 'Ok', 'Reminder');
+      } else {
+        $common.showModal('请输入姓名');
+      }
       return;
     }
     if (!$common.phoneReg.test(studentPhone)) {
-      $common.showModal('请输入正确的手机号');
+      if (isEn) {
+        $common.showModal('Please fill in the correct phone number.', false, false, 'Ok', 'Reminder');
+      } else {
+        $common.showModal('请输入正确的手机号');
+      }
       return;
     }
     if (!startCourseTime) {
-      $common.showModal('请选择上课时间');
+      if (isEn) {
+        $common.showModal('Please select time slot.', false, false, 'Ok', 'Reminder');
+      } else {
+        $common.showModal('请选择上课时间');
+      }
       return;
     }
     let orderType = this.data.orderType,
@@ -218,14 +224,14 @@ Page({
                   if (res.data.res) {
 
                   } else {
-                    switch (res.data.errType) {
-                      case 1:
-                        $common.showModal('发送模板消息，参数错误');
-                        break;
-                      case 2:
-                        $common.showModal('发送模板消息，未知错误');
-                        break;
-                    }
+                    // switch (res.data.errType) {
+                    //   case 1:
+                    //     $common.showModal('发送模板消息，参数错误');
+                    //     break;
+                    //   case 2:
+                    //     $common.showModal('发送模板消息，未知错误');
+                    //     break;
+                    // }
                   }
                 },
                 (res) => {
@@ -247,17 +253,17 @@ Page({
                   if (res.data.res) {
 
                   } else {
-                    switch (res.data.errType) {
-                      case 1:
-                        //$common.showModal('参数错误');
-                        break;
-                      case 2:
-                        //$common.showModal('未知错误');
-                        break;
-                      case 3:
-                        //$common.showModal('服务器出错');
-                        break;
-                    }
+                    // switch (res.data.errType) {
+                    //   case 1:
+                    //     //$common.showModal('参数错误');
+                    //     break;
+                    //   case 2:
+                    //     //$common.showModal('未知错误');
+                    //     break;
+                    //   case 3:
+                    //     //$common.showModal('服务器出错');
+                    //     break;
+                    // }
                   }
                 },
                 (res) => {
@@ -270,33 +276,39 @@ Page({
 
           })
         } else {
+          let isEn = wx.getStorageSync('isEn');
           switch (res.data.errType) {
-            case 1:
-              $common.showModal('参数有误');
-              break;
-            case 2:
-              $common.showModal('未知错误');
-              break;
             case 3:
-              $common.showModal('该课程该时间段已被他人抢占先机啦~');
-              break;
-            case 4:
-              $common.showModal('获取信息出错');
-              break;
-            case 5:
-              $common.showModal('拼团信息添加失败');
-              break;
-            case 6:
-              $common.showModal('cogId不正确或者服务器出错');
+              if (isEn) {
+                $common.showModal('It\'s been preempted by others.', false, false, 'Ok', 'Reminder');
+              } else {
+                $common.showModal('该课程该时间段已被他人抢占先机啦~');
+              }
               break;
             case 7:
-              $common.showModal('该团已经结束');
+              if (isEn) {
+                $common.showModal('The group is over.', false, false, 'Ok', 'Reminder');
+              } else {
+                $common.showModal('该团已经结束');
+              }
               break;
+            default:
+              if (isEn) {
+                $common.showModal('Unknown Error', false, false, 'Ok', 'Reminder');
+              } else {
+                $common.showModal('未知错误');
+              }
           }
         }
       },
       (res) => {
-        $common.showModal('亲~网络不给力哦，请稍后重试');
+        let isEn = wx.getStorageSync('isEn');
+        if (isEn) {
+          $common.showModal('Unknown Error', false, false, 'Ok', 'Reminder');
+        } else {
+          $common.showModal('未知错误');
+        }
+
       },
       (res) => {
       }
@@ -356,9 +368,15 @@ Page({
       }
     )
   },
-
   getOrderInfo() { //获取订单 信息
-    wx.showLoading({ title: '努力加载中...' });
+    let isEn = wx.getStorageSync('isEn');
+    let text = '';
+    if (isEn) {
+      text = 'Loading...';
+    } else {
+      text = '努力加载中...';
+    }
+    wx.showLoading({ title: text });
     $common.request(
       "POST",
       $common.config.GetOrderInfos,
@@ -404,18 +422,19 @@ Page({
           });
           this.initCourseTimeLong();
         } else {
-          switch (res.data.errType) {
-            case 1:
-              $common.showModal('courId不正确');
-              break;
-            case 2:
-              $common.showModal('未知错误 ');
-              break;
+          if (isEn) {
+            $common.showModal('Unknown Error', false, false, 'Ok', 'Reminder');
+          } else {
+            $common.showModal('未知错误 ');
           }
         }
       },
       (res) => {
-        $common.showModal('亲~网络不给力哦，请稍后重试');
+        if (isEn) {
+          $common.showModal('Unknown Error', false, false, 'Ok', 'Reminder');
+        } else {
+          $common.showModal('未知错误 ');
+        }
       },
       (res) => {
         wx.hideLoading();
@@ -461,11 +480,23 @@ Page({
    */
   onReady: function () {
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
+  isEnEvent(res) { //判断当前显示中英文
+    let isEn = wx.getStorageSync('isEn');
+    this.setData({
+      isEn: isEn
+    });
+    let text = '';
+    if (isEn) {
+      text = 'Make sure the order';
+    } else {
+      text = '确认订单';
+    }
+    wx.setNavigationBarTitle({
+      title: text
+    })
+  },
   onShow: function () {
+    this.isEnEvent();
     this.init();
   },
 
@@ -487,6 +518,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
+    wx.stopPullDownRefresh();
     this.init();
   },
 

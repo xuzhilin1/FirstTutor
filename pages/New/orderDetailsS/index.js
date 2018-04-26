@@ -22,7 +22,14 @@ Page({
     $common.getAddress(address);
   },
   init() {
-    wx.showLoading({ title: '努力加载中...' });
+    let isEn = wx.getStorageSync('isEn');
+    let text = '';
+    if (isEn) {
+      text = 'Loading...';
+    } else {
+      text = '努力加载中...'
+    }
+    wx.showLoading({ title: text });
     $common.request(
       "POST",
       $common.config.LookUpFigroupInfo,
@@ -66,18 +73,19 @@ Page({
             showMem: showMem
           });
         } else {
-          switch (res.errType) {
-            case 1:
-              $common.showModal('参数错误');
-              break;
-            case 2:
-              $common.showModal('未知错误');
-              break;
+          if (isEn) {
+            $common.showModal('Unknown Error', false, false, 'Ok', 'Reminder');
+          } else {
+            $common.showModal('未知错误');
           }
         }
       },
       (res) => {
-        $common.showModal('亲~网络不给力哦，请稍后重试');
+        if (isEn) {
+          $common.showModal('Unknown Error', false, false, 'Ok', 'Reminder');
+        } else {
+          $common.showModal('未知错误');
+        }
       },
       (res) => {
         wx.hideLoading();
@@ -86,6 +94,7 @@ Page({
     )
   },
   deleteOrder() { //删除订单
+    let isEn = wx.getStorageSync('isEn');
     $common.request(
       'POST',
       $common.config.DeleteOgoById,
@@ -94,7 +103,8 @@ Page({
       },
       (res) => {
         if (res.data.res) {
-          $common.showModal('删除成功', false, (res) => {
+          let text = isEn ? 'Delete the success' : '删除成功';
+          $common.showModal(text, false, (res) => {
             if (res.confirm) {
               wx.redirectTo({
                 url: '../../Home/teachersInformation/index?data=' + this.data.teacher.TeaId,
@@ -102,19 +112,10 @@ Page({
             }
           });
         } else {
-          switch (res.data.errType) {
-            case 1:
-              $common.showModal('参数有误');
-              break;
-            case 2:
-              $common.showModal('未知错误');
-              break;
-            case 3:
-              $common.showModal('订单不存在');
-              break;
-            case 4:
-              $common.showModal('删除失败');
-              break;
+          if (isEn) {
+            $common.showModal('Unknown Error', false, false, 'Ok', 'Reminder');
+          } else {
+            $common.showModal('未知错误');
           }
         }
       },
@@ -189,11 +190,23 @@ Page({
 
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
+  isEnEvent(res) { //判断当前显示中英文
+    let isEn = wx.getStorageSync('isEn');
+    this.setData({
+      isEn: isEn
+    });
+    let text = '';
+    if (isEn) {
+      text = 'Order Details';
+    } else {
+      text = '订单详情';
+    }
+    wx.setNavigationBarTitle({
+      title: text
+    })
+  },
   onShow: function () {
-
+    this.isEnEvent();
   },
 
   /**
@@ -214,6 +227,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
+    wx.stopPullDownRefresh();
     this.init();
   },
 

@@ -10,7 +10,11 @@
       <view class='purplea purple fon-32 bold'>¥{{item.NedMinPrice}} - ¥{{item.NedMaxPrice}}</view>
     </view>
     <view class='flex fon-24 border-t-1 border-b-1 padding-lr-30  aitems-center bg-fff between'>
-      <view class='fon-26 c8'>Browsed by {{item.BrowingTimes}} People</view>
+      <view class='fon-26 c8 image-box'>
+      <image mode='widthFix' class='url-image' src='{{item.StuAvaUrl}}'></image>
+        <image mode='widthFix' class='url-gender' src='{{item.StuGender==0?"/images/nv.png":"/images/nan.png"}}'></image>
+      <text class='image-t-l'>Age {{item.StuAge}}</text> | <text class='image-t-r'>Views {{item.BrowingTimes}}</text>
+      </view>
       <view bindtap='seeDetail' data-index='{{index}}' class='border AnNiu white purple-bg'>Online Contact</view>
     </view>
   </view>

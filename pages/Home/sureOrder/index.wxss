@@ -61,3 +61,7 @@
 .list-box-inpu {
   width: 100%;
 }
+
+.width-l {
+  width: 256rpx;
+}

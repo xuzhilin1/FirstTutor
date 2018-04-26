@@ -4,7 +4,7 @@ Page({
   data: {
     srcForIdPhoto: $common.srcForIdPhoto,
     addressData: $static.areaShanghaiEn,
-    input: '', //课程名
+    input: '', //课程名/学生名
     listData: [],
     areaList: [], //区域
     areaIndex: 0,
@@ -91,7 +91,12 @@ Page({
     this.setData({
       input: e.detail.value.trim()
     })
-    this.getListData();
+    let isEn = this.data.isEn;
+    if (isEn) {
+      this.getListDataEn();
+    } else {
+      this.getListData();
+    }
   },
   bindAreaChange(e) { //区域
     this.setData({
@@ -133,7 +138,12 @@ Page({
     this.getListData();
   },
   searchClick() { //点击搜索
-    this.getListData();
+    let isEn = this.data.isEn;
+    if (isEn) {
+      this.getListDataEn();
+    } else {
+      this.getListData();
+    }
   },
   getTradData() { //获取商圈信息
     $common.request(
@@ -239,7 +249,8 @@ Page({
       $common.config.GetAllLearnNeeds,
       {
         pageIndex: pageIndexEn,
-        pageSize: pageSizeEn
+        pageSize: pageSizeEn,
+        searchKey: this.data.input
       },
       (res) => {
         if (res.data.res) {
@@ -375,7 +386,7 @@ Page({
     let isEn = this.data.isEn;
     if (isEn) { //找学生
       this.data.pageIndexEn = 1;
-      thisgetListDataEn();
+      this.getListDataEn();
     } else { //找外教
       this.setData({
         input: '',

@@ -19,8 +19,23 @@ Page({
       title: ' 四、等待成团中如何退款？',
       context: ['拼团有效期后，未达成相应参团人数的要求，则该团失败，系统会自动退款。']
     }];
+    let arrEn = [{
+      title: 'I. the validity of the group.',
+      context: ['It is valid for 24 hours from the time of the opening, and if the distance is less than 24 hours, the end time of the activity shall prevail.']
+    }, {
+      title: 'II.the group succeeds.',
+      context: ['During the validity period of the group, the number of users paid to the participating group will be successful.']
+    }, {
+      title: 'III.Spell group failure.',
+      context: [
+        'After the period of validity, the group failed to reach the corresponding number of participants.',
+        'The system will handle the refund within 1-7 working days. The original route will be returned to the original payment account within 1-10 working days after the system is processed.']
+    }, {
+      title: 'Ⅳ.How can I get a refund in the group?',
+      context: ['After the validity of the group, no corresponding number of participants is required, the group fails, and the system will refund automatically.']
+    }];
     this.setData({
-      pagesData: arr
+      pagesData: this.data.isEn ? arrEn : arr
     })
   },
 
@@ -32,14 +47,22 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    this.getPagesData();
+
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
+  isEnEvent(res) { //判断当前显示中英文
+    let isEn = wx.getStorageSync('isEn');
+    this.setData({
+      isEn: isEn
+    });
+    let text = isEn ? "Rules of the group" : "拼团规则";
+    wx.setNavigationBarTitle({
+      title: text
+    })
+    this.getPagesData();
+  },
   onShow: function () {
-
+    this.isEnEvent();
   },
 
   /**

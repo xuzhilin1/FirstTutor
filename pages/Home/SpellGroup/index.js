@@ -63,7 +63,9 @@ Page({
       $common.getOpenid(this.getPageInfo);
       return;
     }
-    wx.showLoading({ title: '努力加载中...' });
+    let isEn = wx.getStorageSync('isEn');
+    let text = isEn ? "Loading..." : "努力加载中...";
+    wx.showLoading({ title: text });
     $common.request(
       'POST',
       $common.config.LookUpFigroupInfo,
@@ -108,7 +110,7 @@ Page({
           teacher.TeaName = teacher.TeaNickName;
           this.setData({
             course: course,
-            teacher:teacher,
+            teacher: teacher,
             cog: cog,
             mem: memData,
             leftTime: leftTime,
@@ -116,21 +118,22 @@ Page({
             isShowPage: true
           });
           if (cog.FgtStatus == 1) {
-              this.countDown();
+            this.countDown();
           }
         } else {
-          switch (res.errType) {
-            case 1:
-              $common.showModal('参数错误');
-              break;
-            case 2:
-              $common.showModal('未知错误');
-              break;
+          if (isEn) {
+            $common.showModal('Unknown Error', false, false, 'Ok', 'Reminder');
+          } else {
+            $common.showModal('未知错误');
           }
         }
       },
       (res) => {
-        $common.showModal('亲~网络不给力哦，请稍后重试');
+        if (isEn) {
+          $common.showModal('Unknown Error', false, false, 'Ok', 'Reminder');
+        } else {
+          $common.showModal('未知错误');
+        }
       },
       (res) => {
         wx.hideLoading();
@@ -200,12 +203,18 @@ Page({
   onReady: function () {
 
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
+  isEnEvent(res) { //判断当前显示中英文
+    let isEn = wx.getStorageSync('isEn');
+    this.setData({
+      isEn: isEn
+    });
+    let text = isEn ? "Group" : "拼团";
+    wx.setNavigationBarTitle({
+      title: text
+    })
+  },
   onShow: function () {
-
+    this.isEnEvent();
   },
 
   /**

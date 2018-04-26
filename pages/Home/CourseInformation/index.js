@@ -29,7 +29,11 @@ Page({
   orderDetail() { //查看购买详情
     let orderBeDel = parseInt(this.data.orderBeDel);
     if (orderBeDel === 1) {
-      $common.showModal('订单已删除');
+      if (this.data.isEn) {
+        $common.showModal('The order has been deleted.', false, false, 'Ok', 'Reminder');
+      } else {
+        $common.showModal('订单已删除');
+      }
       return;
     }
     if (this.data.FgtType == 2) { //1 拼团 2 单独购买
@@ -52,13 +56,19 @@ Page({
         thisData = {
           index: i,
           time: timeList[i].timeName,
-          TimId: timeList[i].TimId
+          TimId: timeList[i].TimId,
+          TimAfw : timeList[i].TimAfw, //周几
+          TimClaTime: timeList[i].TimClaTime
         };
         flage = true;
       }
     }
     if (!flage) {
-      $common.showModal('请选择时间段');
+      if (this.data.isEn) {
+        $common.showModal('Please select time slot.', false, false, 'Ok', 'Reminder');
+      } else {
+        $common.showModal('请选择时间段');
+      }
       return;
     }
     wx.navigateTo({
@@ -93,13 +103,19 @@ Page({
         thisData = {
           index: i,
           time: timeList[i].timeName,
-          TimId: timeList[i].TimId
+          TimId: timeList[i].TimId,
+          TimAfw: timeList[i].TimAfw, //周几
+          TimClaTime: timeList[i].TimClaTime //哪个时间段
         };
         flage = true;
       }
     }
     if (!flage) {
-      $common.showModal('请选择时间段');
+      if (this.data.isEn) {
+        $common.showModal('Please select time slot.', false, false, 'Ok', 'Reminder');
+      } else {
+        $common.showModal('请选择时间段');
+      }
       return;
     }
     wx.navigateTo({
@@ -116,13 +132,19 @@ Page({
         thisData = {
           index: i,
           time: timeList[i].timeName,
-          TimId: timeList[i].TimId
+          TimId: timeList[i].TimId,
+          TimAfw: timeList[i].TimAfw, //周几
+          TimClaTime: timeList[i].TimClaTime
         };
         flage = true;
       }
     }
     if (!flage) {
-      $common.showModal('请选择时间段');
+      if (this.data.isEn) {
+        $common.showModal('Please select time slot.', false, false, 'Ok', 'Reminder');
+      } else {
+        $common.showModal('请选择时间段');
+      }
       return;
     }
     wx.navigateTo({
@@ -175,7 +197,13 @@ Page({
       $common.getOpenid(this.getOpenCallback);
       return;
     }
-    wx.showLoading({ title: '努力加载中...' });
+    let text = '';
+    if (this.data.isEn) {
+      text = 'Loading...';
+    } else {
+      text = '努力加载中...';
+    }
+    wx.showLoading({ title: text });
     $common.request(
       "POST",
       $common.config.GetCourseInfo,
@@ -239,18 +267,19 @@ Page({
             )
           }
         } else {
-          switch (res.data.errType) {
-            case 1:
-              //未知错误
-              break;
-            case 2:
-              //课程不存在
-              break;
+          if (wx.getStorageSync('isEn')) {
+            $common.showModal('Unknown Error', false, false, 'Ok', 'Reminder');
+          } else {
+            $common.showModal('未知错误，请稍后重试');
           }
         }
       },
       (res) => {
-        $common.showModal('亲~网络不给力哦，请稍后重试');
+        if (wx.getStorageSync('isEn')) {
+          $common.showModal('Unknown Error', false, false, 'Ok', 'Reminder');
+        } else {
+          $common.showModal('未知错误，请稍后重试');
+        }
       },
       (res) => {
         wx.hideLoading();
@@ -287,18 +316,19 @@ Page({
           });
           // this.updateTimeList();
         } else {
-          switch (res.data.errType) {
-            case 1:
-              //未知错误
-              break;
-            case 2:
-              //未设置课程时间
-              break;
+          if (wx.getStorageSync('isEn')) {
+            $common.showModal('Unknown Error', false, false, 'Ok', 'Reminder');
+          } else {
+            $common.showModal('未知错误，请稍后重试');
           }
         }
       },
       (res) => {
-        $common.showModal('亲~网络不给力哦，请稍后重试');
+        if (wx.getStorageSync('isEn')) {
+          $common.showModal('Unknown Error', false, false, 'Ok', 'Reminder');
+        } else {
+          $common.showModal('未知错误，请稍后重试');
+        }
       },
       (res) => {
       }
@@ -339,8 +369,8 @@ Page({
     })
   },
   onShow: function () {
-    this.init();
     this.isEnEvent();
+    this.init();
   },
 
   /**
@@ -361,6 +391,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
+    wx.stopPullDownRefresh();
     this.init();
   },
 

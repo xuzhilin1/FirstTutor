@@ -224,6 +224,19 @@ page {
 .teacher-l {
   display: flex;
   align-items: center;
+  box-sizing: border-box;
+  width: 70%;
+}
+
+.dingkuan-box {
+  flex-wrap: wrap;
+  box-sizing: border-box;
+}
+
+.dingkuan {
+  width: 60%;
+  box-sizing: border-box;
+  border: 1px solid red;
 }
 
 .teacher-chat {

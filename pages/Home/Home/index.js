@@ -24,11 +24,11 @@ Page({
             banList: banList
           })
         } else {
-          $common.showModal('未知错误，请稍后重试');
+          // $common.showModal('未知错误，请稍后重试');
         }
       }.bind(this),
       function (res) {
-        $common.showModal('亲~网络不给力哦，请稍后重试');
+        // $common.showModal('亲~网络不给力哦，请稍后重试');
       },
       function (res) {
         this.addListenCallbackNum();
@@ -47,11 +47,11 @@ Page({
             activity: res.data.activity
           })
         } else {
-          $common.showModal('未知错误，请稍后重试');
+          // $common.showModal('未知错误，请稍后重试');
         }
       }.bind(this),
       (res) => {
-        $common.showModal('亲~网络不给力哦，请稍后重试');
+        // $common.showModal('亲~网络不给力哦，请稍后重试');
       },
       function (res) {
         this.addListenCallbackNum();
@@ -93,11 +93,11 @@ Page({
             listData: newArr
           })
         } else {
-          $common.showModal('未知错误，请稍后重试');
+          // $common.showModal('未知错误，请稍后重试');
         }
       },
       (res) => {
-        $common.showModal('亲~网络不给力哦，请稍后重试');
+        // $common.showModal('亲~网络不给力哦，请稍后重试');
       },
       (res) => {
         this.addListenCallbackNum();
@@ -131,7 +131,14 @@ Page({
     })
   },
   init() { //进入页面初始化
-    wx.showLoading({ title: '努力加载中...' });
+    let isEn = wx.getStorageSync('isEn');
+    let text = "";
+    if (isEn) {
+      text = 'Loading...';
+    } else {
+      text = '努力加载中...';
+    }
+    wx.showLoading({ title: text });
     this.getBannerData();
     this.getActivity();
     this.getListData();
@@ -154,7 +161,6 @@ Page({
     let num = parseInt(this.data.listenCallbackNum);
     if (num >= 3) { //本页面有三个接口
       wx.hideLoading();
-      wx.stopPullDownRefresh();
       this.setData({
         listenCallbackNum: 0
       })
@@ -231,6 +237,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
+    wx.stopPullDownRefresh();
     this.init();
   },
 
@@ -238,10 +245,6 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function (res) {
-    // wx.showLoading({ title: '努力加载中...' });
-    // this.getListData(true, () => {
-    //   wx.hideLoading();
-    // });
   },
 
   /**

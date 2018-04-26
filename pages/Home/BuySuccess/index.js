@@ -44,11 +44,11 @@ Page({
             poster: poster,
           })
         } else {
-          $common.showModal('未知错误');
+          // $common.showModal('未知错误');
         }
       },
       (res) => {
-        $common.showModal('亲~网络不给力哦，请稍后重试');
+        // $common.showModal('亲~网络不给力哦，请稍后重试');
       },
       (res) => {
         // wx.hideLoading();
@@ -71,7 +71,9 @@ Page({
               this.saveImage();
             },
             fail: (res) => {
-              $common.showModal('是否授权保存到相册?', true, (res) => {
+              let isEn = wx.getStorageSync('isEn');
+              let text = isEn ? "Whether or not authorized?" : "是否授权保存到相册？"
+              $common.showModal(text, true, (res) => {
                 if (res.confirm) {
                   wx.openSetting({
                     success: (res) => {
@@ -90,6 +92,7 @@ Page({
     })
   },
   saveImage() { //保存图片
+    let isEn = wx.getStorageSync(isEn);
     let srcPoster = this.data.srcPoster,
       url = this.data.poster.PstImgName;
     let filePath = `${srcPoster}${url}`;
@@ -104,15 +107,17 @@ Page({
               this.setData({ //海报隐藏
                 isPoster: false
               })
+              let text = isEn ? "success" : "保存成功";
               wx.showToast({
-                title: '保存成功',
+                title: text,
                 icon: 'success',
                 duration: 2000
               })
             },
             fail: (res) => {
+              let text = isEn ? "failure" : "保存失败";
               wx.showToast({
-                title: '保存失败',
+                title: text,
                 icon: 'none',
                 duration: 2000
               })
@@ -123,7 +128,7 @@ Page({
         }
       },
       fail: (res) => {
-        $common.showModal('亲~网络不给力哦，请稍后重试');
+        $common.showModal('Unknown Error', false, false, 'Ok', 'Reminder');
       }
     })
   },
@@ -201,11 +206,18 @@ Page({
 
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
+  isEnEvent(res) { //判断当前显示中英文
+    let isEn = wx.getStorageSync('isEn');
+    this.setData({
+      isEn: isEn
+    });
+    let text = isEn ? "Buy success" : "购买成功";
+    wx.setNavigationBarTitle({
+      title: text
+    })
+  },
   onShow: function () {
-
+    this.isEnEvent();
   },
 
   /**

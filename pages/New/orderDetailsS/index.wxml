@@ -3,45 +3,95 @@
 </view>
 <!--  外教信息  -->
 <tutor-info info-list='{{teacher}}' photo-url='{{srcForIdPhoto}}' chat-image='/images/DuiHua_06.png'></tutor-info>
-<!--  拼团详情  -->
-<view class='margin-t-20 border-t-1 border-b-1'>
-  <view wx:if='{{course.CorType!=1&&cog.FgtType==1}}' class='border-b-1'>
-    <modular-title title-context='拼团详情'></modular-title>
-  </view>
-  <!--  显示条件， 为团类型，单是不为单独购买  -->
-  <view wx:if='{{course.CorType!=1&&cog.FgtType==1}}' wx:for='{{mem}}' wx:key='{{index}}' class='flex fon-30 c2b bg-fff padding-25 aitems-center between border-b-1'>
-    <view class='flex aitems-center'>
-      <image class='orderimg image-radius' src='{{item.UserAvaUrl}}'></image>
-      {{item.OdrName}}
-      <view wx:if='{{cog.FgtType==1&&index==0}}' class='Tuan border fon-24 purple'>团长</view>
+<!--  
+  中文版
+  -->
+<block wx:if='{{!isEn}}'>
+  <!--  拼团详情  -->
+  <view class='margin-t-20 border-t-1 border-b-1'>
+    <view wx:if='{{course.CorType!=1&&cog.FgtType==1}}' class='border-b-1'>
+      <modular-title title-context='拼团详情'></modular-title>
     </view>
-    <view bindtap='callPhone' data-phone='{{item.OdrPhone}}' class='flex aitens-center'>
-      <image class='phone' mode='widthFix' src='/images/phone_06.png'></image>
-      {{item.OdrPhone}}
+    <!--  显示条件， 为团类型，单是不为单独购买  -->
+    <view wx:if='{{course.CorType!=1&&cog.FgtType==1}}' wx:for='{{mem}}' wx:key='{{index}}' class='flex fon-30 c2b bg-fff padding-25 aitems-center between border-b-1'>
+      <view class='flex aitems-center'>
+        <image class='orderimg image-radius' src='{{item.UserAvaUrl}}'></image>
+        {{item.OdrName}}
+        <view wx:if='{{cog.FgtType==1&&index==0}}' class='Tuan border fon-24 purple'>团长</view>
+      </view>
+      <view bindtap='callPhone' data-phone='{{item.OdrPhone}}' class='flex aitens-center'>
+        <image class='phone' mode='widthFix' src='/images/phone_06.png'></image>
+        {{item.OdrPhone}}
+      </view>
+    </view>
+    <view class='padding-25 fon-24 bg-fff'>
+      <view class='margin-b-20 '>订单号：{{showMem.OdrOutradeno}}</view>
+      <view class='margin-b-20 '>下单时间：{{showMem.orderTime}}</view>
+      <view class='margin-b-20 '>支付时间：{{showMem.buyTime}}</view>
+      <view wx:if='{{course.CorType!=1}}' class='margin-b-20 '>拼团成功时间：{{showMem.groupSuccessTime}}</view>
+      <view class='margin-b-20 '>上课时间段：{{showMem.TimStr}}</view>
+      <view class='margin-b-20 '>课程时长：{{course.courseTimeLong}}小时</view>
+      <view class='margin-b-20 '>上课时间：{{cog.StartTime}}</view>
     </view>
   </view>
-  <view class='padding-25 fon-24 bg-fff'>
-    <view class='margin-b-20 '>订单号：{{showMem.OdrOutradeno}}</view>
-    <view class='margin-b-20 '>下单时间：{{showMem.orderTime}}</view>
-    <view class='margin-b-20 '>支付时间：{{showMem.buyTime}}</view>
-    <view wx:if='{{course.CorType!=1}}' class='margin-b-20 '>拼团成功时间：{{showMem.groupSuccessTime}}</view>
-    <view class='margin-b-20 '>上课时间段：{{showMem.TimStr}}</view>
-    <view class='margin-b-20 '>课程时长：{{course.courseTimeLong}}小时</view>
-    <view class='margin-b-20 '>上课时间：{{cog.StartTime}}</view>
+  <view class='border-t-1 border-b-1 margin-t-20 bg-fff padding-b-20'>
+    <modular-title title-context='上课地址及外教联系方式'></modular-title>
+    <view bindtap='lookAddress' class='padding-50 margin-t-20 bg-fff flex aitems-center fon-26 '>
+      <image mode='widthFix' class='address' src='/images/adddress_14.png'></image>
+      {{teaAddress}}
+    </view>
+    <view bindtap='callPhone' data-phone='{{teaPhone}}' class='padding-50 margin-t-20 bg-fff flex aitems-center fon-26 '>
+      <image mode='widthFix' class='address' src='/images/phone_06.png'></image>
+      {{teaPhone}}
+    </view>
   </view>
-</view>
-
-<view class='border-t-1 border-b-1 margin-t-20 bg-fff padding-b-20'>
-  <modular-title title-context='上课地址及外教联系方式'></modular-title>
-  <view bindtap='lookAddress' class='padding-50 margin-t-20 bg-fff flex aitems-center fon-26 '>
-    <image mode='widthFix' class='address' src='/images/adddress_14.png'></image>
-    {{teaAddress}}
+  <view wx:if='{{cog.FgtStatus==3}}' class='flex center btn-fa'>
+    <view bindtap='deleteOrder' class='btn flex center fon-32 bg-fff purple padding-tb-20 border btn-radius'>删除订单</view>
   </view>
-  <view bindtap='callPhone' data-phone='{{teaPhone}}' class='padding-50 margin-t-20 bg-fff flex aitems-center fon-26 '>
-    <image mode='widthFix' class='address' src='/images/phone_06.png'></image>
-    {{teaPhone}}
+</block>
+<!--  
+  英文版
+  -->
+<block wx:if='{{isEn}}'>
+  <!--  拼团详情  -->
+  <view class='margin-t-20 border-t-1 border-b-1'>
+    <view wx:if='{{course.CorType!=1&&cog.FgtType==1}}' class='border-b-1'>
+      <modular-title title-context='Group Buying Details'></modular-title>
+    </view>
+    <!--  显示条件， 为团类型，单是不为单独购买  -->
+    <view wx:if='{{course.CorType!=1&&cog.FgtType==1}}' wx:for='{{mem}}' wx:key='{{index}}' class='flex fon-30 c2b bg-fff padding-25 aitems-center between border-b-1'>
+      <view class='flex aitems-center'>
+        <image class='orderimg image-radius' src='{{item.UserAvaUrl}}'></image>
+        {{item.OdrName}}
+        <view wx:if='{{cog.FgtType==1&&index==0}}' class='Tuan border fon-24 purple'>Group Head</view>
+      </view>
+      <view bindtap='callPhone' data-phone='{{item.OdrPhone}}' class='flex aitens-center'>
+        <image class='phone' mode='widthFix' src='/images/phone_06.png'></image>
+        {{item.OdrPhone}}
+      </view>
+    </view>
+    <view class='padding-25 fon-24 bg-fff'>
+      <view class='margin-b-20 '>Order Number：{{showMem.OdrOutradeno}}</view>
+      <view class='margin-b-20 '>Order Placement Time：{{showMem.orderTime}}</view>
+      <view class='margin-b-20 '>Paying Time：{{showMem.buyTime}}</view>
+      <view wx:if='{{course.CorType!=1}}' class='margin-b-20 '>Group Buying Effective Time：{{showMem.groupSuccessTime}}</view>
+      <view class='margin-b-20 '>Course Time：{{showMem.TimStr}}</view>
+      <view class='margin-b-20 '>Course Duration：{{course.courseTimeLong}}小时</view>
+      <view class='margin-b-20 '>Class time：{{cog.StartTime}}</view>
+    </view>
   </view>
-</view>
-<view wx:if='{{cog.FgtStatus==3}}' class='flex center btn-fa'>
-  <view bindtap='deleteOrder' class='btn flex center fon-32 bg-fff purple padding-tb-20 border btn-radius'>删除订单</view>
-</view>
+  <view class='border-t-1 border-b-1 margin-t-20 bg-fff padding-b-20'>
+    <modular-title title-context='Class address and contact information for tutor.'></modular-title>
+    <view bindtap='lookAddress' class='padding-50 margin-t-20 bg-fff flex aitems-center fon-26 '>
+      <image mode='widthFix' class='address' src='/images/adddress_14.png'></image>
+      {{teaAddress}}
+    </view>
+    <view bindtap='callPhone' data-phone='{{teaPhone}}' class='padding-50 margin-t-20 bg-fff flex aitems-center fon-26 '>
+      <image mode='widthFix' class='address' src='/images/phone_06.png'></image>
+      {{teaPhone}}
+    </view>
+  </view>
+  <view wx:if='{{cog.FgtStatus==3}}' class='flex center btn-fa'>
+    <view bindtap='deleteOrder' class='btn flex center fon-32 bg-fff purple padding-tb-20 border btn-radius'>Detail Order</view>
+  </view>
+</block>

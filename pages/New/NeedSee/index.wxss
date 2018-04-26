@@ -15,3 +15,25 @@
 .wrapper>view:nth-child(1) {
   margin-top: 0;
 }
+.image-box {
+  display: flex;
+  align-items: center;
+}
+
+.url-image {
+  width: 50rpx;
+  border-radius: 50%;
+  margin-right: 10rpx;
+}
+
+.url-gender {
+  width: 24rpx;
+  border-radius: 50%;
+  margin-right: 10rpx;
+}
+.image-t-l{
+  margin-right: 6rpx;
+}
+.image-t-r{
+  margin-left: 6rpx;
+}

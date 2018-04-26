@@ -51,6 +51,7 @@
   height: 42rpx;
   padding: 0 6rpx;
   line-height: 42rpx;
+  border-radius: 6rpx;
 }
 
 .left {
