@@ -83,9 +83,48 @@ Component({
       this.setData({
         isEn: !isEn
       })
+      this.changeTabBar();
       wx.setStorageSync('isEn', !isEn);
       this.triggerEvent('isEnEvent', null);
       this.data.falg = true;
+    },
+    changeTabBar() { //切换底部文字
+      let isEn = this.data.isEn;
+      if (!isEn) { //显示中文
+        wx.setTabBarItem({
+          index: 0,
+          text: '首页',
+        });
+        wx.setTabBarItem({
+          index: 1,
+          text: '找外教',
+        });
+        wx.setTabBarItem({
+          index: 2,
+          text: '活动',
+        })
+        wx.setTabBarItem({
+          index: 3,
+          text: '我',
+        })
+      } else { //显示英文
+        wx.setTabBarItem({
+          index: 0,
+          text: 'Home',
+        });
+        wx.setTabBarItem({
+          index: 1,
+          text: 'Lookup stdnt',
+        });
+        wx.setTabBarItem({
+          index: 2,
+          text: 'Activity',
+        })
+        wx.setTabBarItem({
+          index: 3,
+          text: 'Me',
+        })
+      }
     },
     getForTeaStatus() { //获取外教信息
       $common.request(
@@ -168,5 +207,6 @@ Component({
     this.setData({
       isEn: wx.getStorageSync('isEn')
     })
+    this.changeTabBar();
   },
 })

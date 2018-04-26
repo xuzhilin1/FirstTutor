@@ -3,6 +3,7 @@ const $static = require('../../../utils/static.js');
 Page({
   data: {
     srcForIdPhoto: $common.srcForIdPhoto,
+    addressData: $static.areaShanghaiEn,
     input: '', //课程名
     listData: [],
     areaList: [], //区域
@@ -21,6 +22,9 @@ Page({
     isPriceAll: false,
     pageIndex: 1, //分页
     pageSize: 10, //每页多少数据
+    pageIndexEn: 1,
+    pageSizeEn: 10,
+    pageListEn: [],
   },
   initArea() { //初始化区域
     let data = [{
@@ -150,7 +154,7 @@ Page({
       }
     );
   },
-  getListData(isRefresh) { //获取页面list
+  getListData(isRefresh) { //获取找外教页面list
     isRefresh = isRefresh ? true : false; //true 上拉， false重新加载
     wx.showLoading({ title: '努力加载中...' });
     let pageIndex = isRefresh ? this.data.pageIndex : 1,
@@ -223,9 +227,100 @@ Page({
       priceIndex: [-1, -1],
     })
   },
-  init() {
-    this.getTradData();
-    this.getListData();
+  getListDataEn(isReach) { //获取找学生页面list
+    isReach = isReach ? true : false;
+    let teaId = wx.getStorageSync('teacherStatusInfo').teaId;
+    let pageIndexEn = isReach ? this.data.pageIndexEn : 1,
+      pageSizeEn = this.data.pageSizeEn;
+    let pageListEn = isReach ? this.data.pageListEn : [];//上拉加载push，下拉刷新，重新获取
+    wx.showLoading({ title: 'Loading...' });
+    $common.request(
+      "POST",
+      $common.config.GetAllLearnNeeds,
+      {
+        pageIndex: pageIndexEn,
+        pageSize: pageSizeEn
+      },
+      (res) => {
+        if (res.data.res) {
+          let data = res.data.lnList;
+          let addressData = this.data.addressData;
+          if (data.length >= pageSizeEn) {
+            pageIndexEn++;
+          }
+          for (let i = 0, len = data.length; i < len; i++) {
+            switch (data[i].NedClaTime) {
+              case 1:
+                data[i].time = 'AM';
+                break;
+              case 2:
+                data[i].time = 'PM1';
+                break;
+              case 3:
+                data[i].time = 'PM2';
+                break;
+              case 4:
+                data[i].time = 'PM3';
+                break;
+            }
+            switch (parseInt(data[i].NedCorAfw)) {
+              case 1:
+                data[i].week = 'Monday';
+                break;
+              case 2:
+                data[i].week = 'Tuesday';
+                break;
+              case 3:
+                data[i].week = 'Wednesday';
+                break;
+              case 4:
+                data[i].week = 'Thursday';
+                break;
+              case 5:
+                data[i].week = 'Friday';
+                break;
+              case 6:
+                data[i].week = 'Saturday';
+                break;
+              case 7:
+                data[i].week = 'Sunday';
+                break;
+            }
+            for (let j = 0, l = addressData.length; j < l; j++) {
+              if (addressData[j].id === data[i].NedClaArea) {
+                data[i].address = addressData[j].area
+              }
+            }
+            pageListEn.push(data[i]);
+          }
+          let hash = {};
+          let newArr = pageListEn.reduce(function (item, next) {//数组依据NedId去重
+            hash[next.NedId] ? '' : hash[next.NedId] = true && item.push(next);
+            return item
+          }, []);
+          this.setData({
+            pageListEn: newArr,
+            pageIndexEn: pageIndexEn,
+          })
+        } else {
+          $common.showModal('Unknown Error', false, false, 'OK', 'Prompt');
+        }
+      },
+      (res) => {
+        $common.showModal('Unknown Error', false, false, 'OK', 'Prompt');
+      },
+      (res) => {
+        wx.hideLoading();
+        wx.stopPullDownRefresh();
+      }
+    )
+  },
+  seeDetail(e) { //立即沟通
+    let index = e.currentTarget.dataset.index,
+      lnList = this.data.pageListEn;
+    wx.navigateTo({
+      url: `/pages/New/seeDetail/index?nedId=${lnList[index].NedId}`,
+    })
   },
   /**
    * 生命周期函数--监听页面加载
@@ -234,21 +329,30 @@ Page({
     this.initArea();
     this.initPriceInterval();
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
   onReady: function () {
 
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-    this.init();
+  isEnEvent(res) { //判断当前显示中英文
+    let isEn = wx.getStorageSync('isEn');
+    this.setData({
+      isEn: isEn
+    });
+    if (isEn) { //找学生
+      wx.setNavigationBarTitle({
+        title: 'Lookup stdnt'
+      })
+      this.getListDataEn();
+    } else { //找外教
+      wx.setNavigationBarTitle({
+        title: '找外教'
+      })
+      this.getListData();
+    }
   },
-
+  onShow: function () {
+    this.isEnEvent();
+    this.getTradData();
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */
@@ -267,22 +371,34 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    this.setData({
-      input: '',
-      areaIndex: 0,
-      tradIndex: 0,
-      timeIndex: 0,
-      priceIndex: [0, 0],
-      isPriceAll: true
-    })
-    this.init();
+    wx.stopPullDownRefresh();
+    let isEn = this.data.isEn;
+    if (isEn) { //找学生
+      this.data.pageIndexEn = 1;
+      thisgetListDataEn();
+    } else { //找外教
+      this.setData({
+        input: '',
+        areaIndex: 0,
+        tradIndex: 0,
+        timeIndex: 0,
+        priceIndex: [0, 0],
+        isPriceAll: true
+      })
+      this.getTradData();
+    }
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    this.getListData(true);
+    let isEn = this.data.isEn;
+    if (isEn) { //找学生
+      this.getListDataEn(true);
+    } else { //找外教
+      this.getListData(true);
+    }
   },
 
   /**

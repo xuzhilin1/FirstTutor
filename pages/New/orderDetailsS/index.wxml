@@ -1,24 +1,5 @@
-<!-- 一对一 -->
-<view wx:if='{{course.CorType==1}}' class=' middle-m bg-fff flex aitems-center border-b-1 between padding-lr-30 border-t-1'>
-  <view class='flex fon-36  c2b '>
-    <image class='QiHao' mode='widthFix' src='/images/qi_03.png'></image>
-    <view>
-      <text>{{course.CorTitle}}</text>
-      <view class=' fon-24 c8 margin-t-10 '>已有{{course.BuyCount}}人购买</view>
-    </view>
-  </view>
-  <view class='bold purple'>¥ {{course.CorPrice}}</view>
-</view>
-<!--  一对多  -->
-<view wx:if='{{course.CorType!=1}}' class=' middle-m bg-fff flex aitems-center between padding-lr-30 border-b-1'>
-  <view class='flex fon-36  c2b '>
-    <image class='QiHao' mode='widthFix' src='/images/tuan_06.png'></image>
-    <view>
-      <text>{{course.CorTitle}}</text>
-      <view class='bold bg-fff purple'>¥ {{course.CorPrice}}</view>
-    </view>
-  </view>
-  <view class='purplea purple fon-24 '>{{course.CorType}}人团</view>
+<view class='border-b-1'>
+  <stu-course course='{{course}}'></stu-course>
 </view>
 <!--  外教信息  -->
 <tutor-info info-list='{{teacher}}' photo-url='{{srcForIdPhoto}}' chat-image='/images/DuiHua_06.png'></tutor-info>

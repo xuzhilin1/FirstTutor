@@ -1,10 +1,14 @@
 /* pages/Home/foreignTeacher/index.wxss */
 
+page {
+  background: #fff;
+}
+
 .search-box {
   width: 100%;
   padding: 20rpx 30rpx;
   box-sizing: border-box;
-  background: #ffffff;
+  background: #fff;
 }
 
 .search {
@@ -36,14 +40,13 @@
 .table-wrapper {
   box-sizing: border-box;
   padding: 20rpx 30rpx;
-  border-top: 1px solid #e0e0e0;
   border-bottom: 1px solid #e0e0e0;
   font-size: 26rpx;
   display: flex;
   align-items: center;
   -webkit-align-items: center;
   justify-content: space-between;
-  background: #ffffff;
+  background: #fff;
 }
 
 .table-item {
@@ -53,4 +56,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.middle-m {
+  padding-top: 30rpx;
+  padding-bottom: 40rpx;
+}
+
+.AnNiu {
+  padding: 13rpx 20rpx;
+  text-align: center;
+  margin: 14rpx 0;
+  margin-left: 10rpx;
 }

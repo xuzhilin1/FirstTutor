@@ -1,36 +1,10 @@
 <!--pages/Home/CourseInformation/index.wxml-->
+<stu-course course='{{course}}'></stu-course>
 <!--  
   中文版
   -->
 <block wx:if='{{isPage&&!isEn}}'>
   <view class='big-outer'>
-    <!-- 一对一 -->
-    <view wx:if='{{course.CorType==1}}' class=' middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
-      <view class='flex fon-36 c2b'>
-        <image class='QiHao' mode='widthFix' src='/images/qi_03.png'></image>
-        <view>
-          <text>{{course.CorTitle}}</text>
-          <view class='c8 margin-t-20 fon-24'>已有{{course.BuyCount}}人参与</view>
-        </view>
-      </view>
-      <view class='fon-30 '>
-        <view class='bold bg-fff margin-t-10 purple'>¥{{course.CorPrice}}</view>
-      </view>
-    </view>
-    <!--  一对多  -->
-    <view wx:if='{{course.CorType!=1}}' class=' middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
-      <view class='flex fon-36  c2b '>
-        <image class='QiHao' mode='widthFix' src='/images/tuan_06.png'></image>
-        <view>
-          <text>{{course.CorTitle}}</text>
-          <view class='bold bg-fff purple'>¥{{course.CorPrice}}</view>
-        </view>
-      </view>
-      <view class='right-box'>
-        <view class='fon-24 margin-b-10 ca'>已有{{course.BuyCount}}人参与</view>
-        <view class='purplea purple fon-24 '>{{course.CorClaNum}}人团</view>
-      </view>
-    </view>
     <!-- 课程时长 -->
     <view class='flex aitems-center height-85 padding-lr-30 bg-fff border-t-1 fon-30 c2b border-b-1'>
       课程时长
@@ -128,33 +102,6 @@
   -->
 <block wx:if='{{isPage&&isEn}}'>
   <view class='big-outer'>
-    <!-- 一对一 -->
-    <view wx:if='{{course.CorType==1}}' class=' middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
-      <view class='flex fon-36 c2b'>
-        <image class='QiHao' mode='widthFix' src='/images/qi_03.png'></image>
-        <view>
-          <text>{{course.CorTitle}}</text>
-          <view class='c8 margin-t-20 fon-24'>{{course.BuyCount}} People Applied</view>
-        </view>
-      </view>
-      <view class='fon-30 '>
-        <view class='bold bg-fff margin-t-10 purple'>¥{{course.CorPrice}}</view>
-      </view>
-    </view>
-    <!--  一对多  -->
-    <view wx:if='{{course.CorType!=1}}' class=' middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
-      <view class='flex fon-36  c2b '>
-        <image class='QiHao' mode='widthFix' src='/images/tuan_06.png'></image>
-        <view>
-          <text>{{course.CorTitle}}</text>
-          <view class='bold bg-fff purple'>¥{{course.CorPrice}}</view>
-        </view>
-      </view>
-      <view class='right-box'>
-        <view class='fon-24 margin-b-10 ca'>{{course.BuyCount}} People Applied</view>
-        <view class='purplea-en purple fon-24 '>Group of {{course.CorClaNum}} People</view>
-      </view>
-    </view>
     <!-- 课程时长 -->
     <view class='flex aitems-center height-85 padding-lr-30 bg-fff border-t-1 fon-30 c2b border-b-1'>
       课程时长

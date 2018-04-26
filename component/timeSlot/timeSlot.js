@@ -1,10 +1,9 @@
-// component/timeSlot/timeSlot.js
 /*
   author: guo
   date: 2018-04-20
   use: 选择时间段
  */
-const timeList = (function () {
+const timeListData = function () {
   //周几就用数字1234567代替，时间段就用1（上午），2（下午1），3（下午2），4（晚上）代替
   //0 无法选中 1 未选 2 已选
   let arr = [];
@@ -47,8 +46,8 @@ const timeList = (function () {
     }
   }
   return arr;
-}());
-const timeListEn = (function () {
+};
+const timeListDataEn = function () {
   //周几就用数字1234567代替，时间段就用1（AM），2（PM1），3（PM2），4（PM3）代替
   //0 无法选中 1 未选 2 已选
   let arr = [];
@@ -91,20 +90,31 @@ const timeListEn = (function () {
     }
   }
   return arr;
-}());
+};
 Component({
   properties: {
     timeTables: {
       type: Array,
       observer(res) { //页面把数据传过来触发，哪些课程可以选
-        let timeTables = res,
-          timeList = this.data.timeList;
+        let timeTables = res;
         if (timeTables.length <= 0) return; //第一次或没有值，不管他
+        let isEn = wx.getStorageSync('isEn');
+        let timeList = [],
+          weekList = [];
+        if (isEn) { //显示英文
+          timeList = timeListDataEn();
+          weekList = ['Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'];
+        } else { //显示中文
+          timeList = timeListData();
+          weekList = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
+        }
+        let n = 0;
         for (let i = 0, len = timeTables.length; i < len; i++) {
           //该时间段已被购买，或不向学生展示
           if (timeTables[i].TimBePurch === 1 || timeTables[i].TimCanUse === 0) continue;
           for (let j = 0, l = timeList.length; j < l; j++) {
             if (timeTables[i].TimAfw == timeList[j].TimAfw && timeTables[i].TimClaTime == timeList[j].TimClaTime) { //相同
+              n++;
               timeList[j].timeType = 1;
               timeList[j].TimId = timeTables[i].TimId;
               break;
@@ -112,7 +122,9 @@ Component({
           }
         }
         this.setData({
-          timeList: timeList
+          timeList: timeList,
+          weekList: weekList,
+          isEn: isEn
         });
         this.triggerEvent('SonTime', { timeList: timeList });//将数据返回给父组件
       }
@@ -122,7 +134,16 @@ Component({
       observer(res) {//页面把数据传过来触发，哪些课程不能选
         let timeNoTables = res;
         if (timeNoTables === -1) return; //第一次传的默认值，不管他
-        let timeList = this.data.timeList;
+        let isEn = wx.getStorageSync('isEn');
+        let timeList = [],
+          weekList = [];
+        if (isEn) { //显示英文
+          timeList = timeListDataEn();
+          weekList = ['Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'];
+        } else { //显示中文
+          timeList = timeListData();
+          weekList = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
+        }
         for (let j = 0, l = timeList.length; j < l; j++) {
           timeList[j].timeType = 1;
         }
@@ -148,35 +169,13 @@ Component({
         this.triggerEvent('SonTime', { timeList: timeList });//将数据返回给父组件
       }
     },
-    isEn: { //是否显示英文版
-      type: Boolean,
-      value: false,
-      observer(res) {
-        if (res) {
-          this.setData({
-            weekList: ['Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'],
-            timeList: timeListEn
-          })
-        }
-      }
-    }
   },
   data: {
-    weekList: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
-    timeList: timeList,
+    weekList: [],
+    timeList: [],
     isEn: false
   },
   attached() {
-    let isEn = wx.getStorageSync('isEn');
-    this.setData({
-      isEn: isEn
-    })
-    if (isEn) {
-      this.setData({
-        weekList: ['Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'],
-        timeList: timeListEn
-      })
-    }
   },
   methods: {
     _selectTime(e) { //选择时间触发

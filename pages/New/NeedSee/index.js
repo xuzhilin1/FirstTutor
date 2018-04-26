@@ -23,7 +23,7 @@ Page({
     let pageIndex = isReach ? this.data.pageIndex : 1,
       pageSize = this.data.pageSize;
     let lnList = isReach ? this.data.lnList : [];//上拉加载push，下拉刷新，重新获取
-    wx.showLoading({ title: '努力加载中...' });
+    wx.showLoading({ title: 'Loading...' });
     $common.request(
       "POST",
       $common.config.GetAllLearnNeeds,
@@ -41,16 +41,16 @@ Page({
           for (let i = 0, len = data.length; i < len; i++) {
             switch (data[i].NedClaTime) {
               case 1:
-                data[i].time = 'Morning';
+                data[i].time = 'AM';
                 break;
               case 2:
-                data[i].time = 'Afternoon1';
+                data[i].time = 'PM1';
                 break;
               case 3:
-                data[i].time = 'Afternoon2';
+                data[i].time = 'PM2';
                 break;
               case 4:
-                data[i].time = 'Evening';
+                data[i].time = 'PM3';
                 break;
             }
             switch (parseInt(data[i].NedCorAfw)) {
@@ -93,15 +93,11 @@ Page({
             pageIndex: pageIndex,
           })
         } else {
-          switch (res.data.errType) {
-            case 1:
-              $common.showModal('参数错误');
-              break;
-          }
+          $common.showModal('Unknown Error', false, false, 'OK', 'Prompt');
         }
       },
       (res) => {
-        $common.showModal('亲~网络不给力哦，请稍后重试');
+        $common.showModal('Unknown Error', false, false, 'OK', 'Prompt');
       },
       (res) => {
         wx.hideLoading();

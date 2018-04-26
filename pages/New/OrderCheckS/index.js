@@ -93,6 +93,15 @@ Page({
                 data[i].CourseInfo.courseTimeLong = 2;
                 break;
             }
+            let status = data[i].FgtType;
+            if (status == 1) {
+              data[i].CourseInfo.CorType = 2;
+              data[i].CourseInfo.BuyCount = data[i].FgtAttCount;
+            } else {
+              data[i].CourseInfo.CorType = 1;
+              data[i].CourseInfo.BuyCount = data[i].CourseInfo.CorBuyCount;
+            }
+            data[i].CourseInfo.CorClaNum = data[i].FgtMemNum;
             infoList.push(data[i]);
           }
           let hash = {};

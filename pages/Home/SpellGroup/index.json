@@ -6,6 +6,7 @@
   "navigationBarTitleText": "拼团",
   "usingComponents": {
     "tutor-info": "/component/tutorInfo/tutorInfo",
-    "modular-title": "/component/modularTitle/modularTitle"
+    "modular-title": "/component/modularTitle/modularTitle",
+    "stu-course": "/component/stuCourse/stuCourse"
   }
 }

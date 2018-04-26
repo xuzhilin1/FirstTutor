@@ -5,9 +5,6 @@
   use: 展示外教个人信息
  */
 Component({
-  /**
-   * 组件的属性列表
-   */
   properties: {
     chatImage: { //聊天图片
       type: String,
@@ -32,17 +29,9 @@ Component({
       }
     }
   },
-
-  /**
-   * 组件的初始数据
-   */
   data: {
 
   },
-
-  /**
-   * 组件的方法列表
-   */
   methods: {
     lookYouImage() { //点击查看头像
       let data = this.data.infoList,

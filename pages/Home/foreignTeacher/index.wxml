@@ -1,69 +1,95 @@
 <!--  header  -->
-<view class='search-box'>
+<view class='search-box border-b-1'>
   <view class='search'>
     <image bindtap='searchClick' class='img-top' src='/images/search.png'></image>
-    <input bindinput='bindInput' value='{{input}}' class='flex1 fon-26' placeholder-class='fon-26' placeholder='课程名称'></input>
+    <input bindinput='bindInput' value='{{input}}' class='flex1 fon-26' placeholder-class='fon-26' placeholder='{{isEn?"Student Name":"课程名称"}}'></input>
   </view>
 </view>
-<!--  table  -->
-<view class='table-wrapper'>
-  <!--  区域  -->
-  <view class='table-item'>
-    <view>
-      <picker class=' flex' value="{{areaIndex}}" range="{{areaList}}" range-key='area' bindchange="bindAreaChange">
-        <view class='flex picker aitems-center '>
-          <view class="fon-26 flex aitems-center yanse ">
-            <view class='c72'>{{!isArea?"区域":areaList[areaIndex].area}}</view>
-            <image mode='widthFix' class='xia margin-l-10' src='/images/xia_07.jpg'></image>
+<!--  中文版找外教  -->
+<block wx:if='{{!isEn}}'>
+  <!--  table  -->
+  <view class='table-wrapper'>
+    <!--  区域  -->
+    <view class='table-item'>
+      <view>
+        <picker class=' flex' value="{{areaIndex}}" range="{{areaList}}" range-key='area' bindchange="bindAreaChange">
+          <view class='flex picker aitems-center '>
+            <view class="fon-26 flex aitems-center yanse ">
+              <view class='c72'>{{!isArea?"区域":areaList[areaIndex].area}}</view>
+              <image mode='widthFix' class='xia margin-l-10' src='/images/xia_07.jpg'></image>
+            </view>
           </view>
-        </view>
-      </picker>
+        </picker>
+      </view>
+    </view>
+    <!--  商圈  -->
+    <view class='table-item'>
+      <view>
+        <picker class=' flex' range-key='TaName' value="{{tradIndex}}" range="{{tradList}}" bindchange="bindCourseType">
+          <view class='flex picker aitems-center '>
+            <view class="fon-26 flex aitems-center yanse ">
+              <view class='c72'>{{!isTrad?"商圈":tradList[tradIndex].TaName}}</view>
+              <image mode='widthFix' class='xia margin-l-10' src='/images/xia_07.jpg'></image>
+            </view>
+          </view>
+        </picker>
+      </view>
+    </view>
+    <!-- 时间段 -->
+    <view class='table-item'>
+      <view>
+        <picker class=' flex' value="{{timeIndex}}" range="{{timeList}}" bindchange="bindTimeChange">
+          <view class='flex picker aitems-center '>
+            <view class="fon-26 flex aitems-center yanse ">
+              <view class='c72'>{{!isTime?"时间段":timeList[timeIndex]}}</view>
+              <image mode='widthFix' class='xia margin-l-10' src='/images/xia_07.jpg'></image>
+            </view>
+          </view>
+        </picker>
+      </view>
+    </view>
+    <!--  价格区间  -->
+    <view class='table-item'>
+      <view>
+        <picker mode='multiSelector' class=' flex' value="{{priceIndex}}" range="{{priceList}}" bindchange="bindPriceChange">
+          <view class='flex picker aitems-center '>
+            <view class="fon-26 flex aitems-center yanse ">
+              <view class='c72'>{{!isPrice?"价格区间":isPriceAll?"所有价格":priceList[0][priceIndex[0]] + '-' + priceList[1][priceIndex[1]]}}</view>
+              <image mode='widthFix' class='xia margin-l-10' src='/images/xia_07.jpg'></image>
+            </view>
+          </view>
+        </picker>
+      </view>
     </view>
   </view>
-  <!--  商圈  -->
-  <view class='table-item'>
-    <view>
-      <picker class=' flex' range-key='TaName' value="{{tradIndex}}" range="{{tradList}}" bindchange="bindCourseType">
-        <view class='flex picker aitems-center '>
-          <view class="fon-26 flex aitems-center yanse ">
-            <view class='c72'>{{!isTrad?"商圈":tradList[tradIndex].TaName}}</view>
-            <image mode='widthFix' class='xia margin-l-10' src='/images/xia_07.jpg'></image>
-          </view>
+  <!--  list  -->
+  <view bindtap='teacherInfo' data-index='{{index}}' wx:for='{{listData}}' wx:key='{{index}}' class='list border-b-1'>
+    <tutor-info info-list='{{item}}' photo-url='{{srcForIdPhoto}}'></tutor-info>
+  </view>
+  <view wx:if='{{listData.length<=0}}' class='noData'>
+    暂无数据
+  </view>
+</block>
+<!--  
+  英文版找学生
+  -->
+<block wx:if='{{isEn}}'>
+  <view wx:for='{{pageListEn}}' wx:key='{{index}}'>
+    <view class=' middle-m bg-fff flex aitems-center between padding-lr-30'>
+      <view class='flex fon-36  c2b '>
+        <view>
+          {{item.NedCorName}}
+          <view class='c8  fon-24 margin-t-20'>{{item.address}} | {{item.week}} | {{item.time}}</view>
         </view>
-      </picker>
+      </view>
+      <view class='purplea purple fon-32 bold'>¥{{item.NedMinPrice}} - ¥{{item.NedMaxPrice}}</view>
+    </view>
+    <view class='flex fon-24 border-t-1 border-b-1 padding-lr-30  aitems-center bg-fff between'>
+      <view class='fon-26 c8'>Browsed by {{item.BrowingTimes}} People</view>
+      <view bindtap='seeDetail' data-index='{{index}}' class='border AnNiu white purple-bg'>Online Contact</view>
     </view>
   </view>
-  <!-- 时间段 -->
-  <view class='table-item'>
-    <view>
-      <picker class=' flex' value="{{timeIndex}}" range="{{timeList}}" bindchange="bindTimeChange">
-        <view class='flex picker aitems-center '>
-          <view class="fon-26 flex aitems-center yanse ">
-            <view class='c72'>{{!isTime?"时间段":timeList[timeIndex]}}</view>
-            <image mode='widthFix' class='xia margin-l-10' src='/images/xia_07.jpg'></image>
-          </view>
-        </view>
-      </picker>
-    </view>
+  <view wx:if='{{pageListEn.length<=0}}' class='noData'>
+    No Data
   </view>
-  <!--  价格区间  -->
-  <view class='table-item'>
-    <view>
-      <picker mode='multiSelector' class=' flex' value="{{priceIndex}}" range="{{priceList}}" bindchange="bindPriceChange">
-        <view class='flex picker aitems-center '>
-          <view class="fon-26 flex aitems-center yanse ">
-            <view class='c72'>{{!isPrice?"价格区间":isPriceAll?"所有价格":priceList[0][priceIndex[0]] + '-' + priceList[1][priceIndex[1]]}}</view>
-            <image mode='widthFix' class='xia margin-l-10' src='/images/xia_07.jpg'></image>
-          </view>
-        </view>
-      </picker>
-    </view>
-  </view>
-</view>
-<!--  list  -->
-<view bindtap='teacherInfo' data-index='{{index}}' wx:for='{{listData}}' wx:key='{{index}}' class='list border-b-1'>
-  <tutor-info info-list='{{item}}' photo-url='{{srcForIdPhoto}}'></tutor-info>
-</view>
-<view wx:if='{{listData.length<=0}}' class='noData'>
-  暂无数据
-</view>
+</block>

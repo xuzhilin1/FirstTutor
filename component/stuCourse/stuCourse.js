@@ -1,23 +1,23 @@
-// component/stuCourse/stuCourse.js
+/**
+ * author: guo
+ * date: 2018-4-25
+ * use: 学生课程信息样式
+ */
 Component({
-  /**
-   * 组件的属性列表
-   */
   properties: {
-
+    course: {
+      type: Object,
+    }
   },
-
-  /**
-   * 组件的初始数据
-   */
   data: {
-
+    isEn: false,
   },
-
-  /**
-   * 组件的方法列表
-   */
   methods: {
 
+  },
+  attached() {
+    this.setData({
+      isEn: wx.getStorageSync('isEn')
+    })
   }
 })

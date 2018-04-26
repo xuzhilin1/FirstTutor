@@ -1,50 +1,23 @@
 <block wx:if='{{isPage}}'>
   <view class='big-outer'>
-    <view class=''>
-      <!-- 一对一 -->
-      <view wx:if='{{course.CorType==1}}' class=' middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
-        <view class='flex fon-36 c2b'>
-          <image class='QiHao' mode='widthFix' src='/images/qi_03.png'></image>
-          <view>
-            <text>{{course.CorTitle}}</text>
-            <view class='c8 margin-t-20 fon-24'>已有{{course.BuyCount}}人参与</view>
-          </view>
-        </view>
-        <view class='fon-30 '>
-          <view class='bold bg-fff margin-t-10 purple'>¥{{course.CorPrice}}</view>
-        </view>
-      </view>
-      <!--  一对多  -->
-      <view wx:if='{{course.CorType!=1}}' class=' middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
-        <view class='flex fon-36  c2b '>
-          <image class='QiHao' mode='widthFix' src='/images/tuan_06.png'></image>
-          <view>
-            <text>{{course.CorTitle}}</text>
-            <view class='bold bg-fff purple'>¥{{course.CorPrice}}</view>
-          </view>
-        </view>
-        <view class='right-box'>
-          <view class='fon-24 margin-b-10 ca'>已有{{course.BuyCount}}人参与</view>
-          <view class='purplea purple fon-24 '>{{course.CorType}}人团</view>
-        </view>
-      </view>
-      <view class='flex aitems-center height-85 padding-lr-30 bg-fff border-t-1 fon-30 c2b '>
-        课程时长
-        <view class='ca margin-l-20'>{{course.courseTimeLong}}小时</view>
-      </view>
-      <view class='flex aitems-center height-85  padding-lr-30 bg-fff border-t-1 fon-30 c2b '>
-        上课时间段
-        <view class='ca margin-l-20 week-time'>{{weekTime}}</view>
-      </view>
-      <view wx:if='{{groupType==2}}' class='flex aitems-center height-85  padding-lr-30 bg-fff border-t-1 fon-30 c2b '>
-        上课时间
-        <view class='ca margin-l-20'>{{startCourseTime}}</view>
-      </view>
-      <view wx:if='{{groupType==2}}' class='flex aitems-center height-85  padding-lr-30 bg-fff border-t-1 fon-30 c2b'>
-        上课地点
-        <view class='ca margin-l-20'>{{courseAddress}}</view>
-      </view>
+    <stu-course course='{{course}}'></stu-course>
+    <view class='flex aitems-center height-85 padding-lr-30 bg-fff border-t-1 fon-30 c2b '>
+      课程时长
+      <view class='ca margin-l-20'>{{course.courseTimeLong}}小时</view>
     </view>
+    <view class='flex aitems-center height-85  padding-lr-30 bg-fff border-t-1 fon-30 c2b '>
+      上课时间段
+      <view class='ca margin-l-20 week-time'>{{weekTime}}</view>
+    </view>
+    <view wx:if='{{groupType==2}}' class='flex aitems-center height-85  padding-lr-30 bg-fff border-t-1 fon-30 c2b '>
+      上课时间
+      <view class='ca margin-l-20'>{{startCourseTime}}</view>
+    </view>
+    <view wx:if='{{groupType==2}}' class='flex aitems-center height-85  padding-lr-30 bg-fff border-t-1 fon-30 c2b'>
+      上课地点
+      <view class='ca margin-l-20'>{{courseAddress}}</view>
+    </view>
+
     <!--  外教信息  -->
     <view class='border-t-1'>
       <tutor-info info-list='{{teacher}}' photo-url='{{srcForIdPhoto}}'></tutor-info>

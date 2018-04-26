@@ -9,31 +9,7 @@
     <view wx:if='{{item.FgtMemNum==1&&item.OdrPayType==2}}' class='color-block'>退款中</view>
     <view wx:if='{{item.FgtMemNum==1&&item.OdrPayType==3}}' class='color-block'>已退款</view>
   </view>
-  <!--  一对多  -->
-  <view wx:if='{{item.FgtType==1}}' class='middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
-    <view class='flex fon-36  c2b '>
-      <image class='QiHao' mode='widthFix' src='/images/tuan_06.png'></image>
-      <view>
-        <text>{{item.CourseInfo.CorTitle}}</text>
-        <view class='purple price'>¥{{item.CourseInfo.CorPrice}}</view>
-      </view>
-    </view>
-    <view class='box-right'>
-      <view class='c8 fon-24 margin-t-10 box-right-num'>已有{{item.FgtAttCount}}参与</view>
-      <view class='purplea purple fon-24'>{{item.FgtMemNum}}人团</view>
-    </view>
-  </view>
-  <!--  一对一  -->
-  <view wx:if='{{item.FgtType==2}}' class='middle-m bg-fff flex aitems-center between padding-lr-30 border-t-1'>
-    <view>
-      <view class='flex fon-36  c2b '>
-        <image class='QiHao' mode='widthFix' src='/images/qi_03.png'></image>
-        <text>{{item.CourseInfo.CorTitle}}</text>
-      </view>
-      <view class='c8 fon-24 margin-t-10 num-margin-l'>已有{{item.CourseInfo.CorBuyCount}}人购买</view>
-    </view>
-    <view class='bold purple'>¥ {{item.CourseInfo.CorPrice}}</view>
-  </view>
+  <stu-course course='{{item.CourseInfo}}'></stu-course>
   <view class='info'>
     <view class='info-name'>
       <image class='info-image' src='{{item.UserInfo.UserAvaUrl}}'></image>
