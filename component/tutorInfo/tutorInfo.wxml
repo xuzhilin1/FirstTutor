@@ -2,9 +2,10 @@
 <view class='wrapper border-box'>
   <view class='box-left border-box'>
     <image catchtap='lookYouImage' data-index='{{index}}' class='head-image' src='{{infoList.TeaIDPhoto ? photoUrl + infoList.TeaIDPhoto : infoList.TeaAvaUrl}}'></image>
-    <view class='border-box'>
+    <view class='border-box box-content'>
       <view class='box-uername border-box'>
-        {{infoList.TeaName}}
+        <text>{{infoList.TeaName}}</text>
+        <view class='box-image'>
         <image wx:if='{{infoList.TeaAddV==1}}' class='vip' mode='widthFix' src='/images/guan_03.png'></image>
         <!--  星星  -->
         <view class='score'>
@@ -19,6 +20,7 @@
               <image wx:if="{{infoList.RewScore - 0.5 > key ? false : key < infoList.RewScore }}" class='score-image' src='/images/BanXIn_03.png'></image>
             </view>
           </view>
+        </view>
         </view>
       </view>
       <view class='box-context border-box'>

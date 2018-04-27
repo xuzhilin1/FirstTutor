@@ -103,11 +103,9 @@
     <input bindinput='bindSynopsis' class='ca input-width' placeholder='Maximum of 40 Characters' value='{{synopsis}}' maxlength='40'></input>
   </view>
 </view>
-<view class='flex height-85 aitems-center tiaokuan'>
-  <checkbox bindtap='bindcheckbox' checked='{{false}}' color='green'></checkbox>
-  <view class='ca fon-30'>我已接收并阅读
-    <text class='purple'>《条款与条件》</text>
-  </view>
+<view class='tiaokuan'>
+  <checkbox bindtap='bindcheckbox' checked='{{false}}' color='#22A415'></checkbox>
+  <text class='ca fon-30'>I have accepted and read <text class='tiaokuan-text'>Terms and conditions</text></text>
 </view>
 
 <button bindtap='submit' class='btn purple-bg white save-btn'>Submit</button>

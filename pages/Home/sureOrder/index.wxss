@@ -3,6 +3,10 @@
   margin-right: 14rpx;
 }
 
+.big-outer {
+  padding-bottom: 100rpx;
+}
+
 .middle-m {
   padding-top: 30rpx;
   padding-bottom: 40rpx;
@@ -64,4 +68,20 @@
 
 .width-l {
   width: 256rpx;
+}
+
+.agreement {
+  width: 100%;
+  padding: 30rpx;
+  font-size: 24rpx;
+  box-sizing: border-box;
+}
+
+.agreement checkbox {
+  transform: scale(0.8);
+}
+
+.agreement-text {
+  color: #7c99d0;
+  font-style: italic;
 }

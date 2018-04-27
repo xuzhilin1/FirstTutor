@@ -1,3 +1,15 @@
+<view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
+  <view class='flex1 aitems-center  fon-30 flex '>
+    <view class='width-150 ca margin-r-10'>姓名</view>
+    <input type='text' bindinput='bindName' value='{{userName}}' class='c2b list-textArea' placeholder='未填写' placeholder-class='ca'></input>
+  </view>
+</view>
+<view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
+  <view class='flex1 aitems-center  fon-30 flex '>
+    <view class='width-150 ca margin-r-10'>手机号</view>
+    <input type='number' maxlength='11' bindinput='bindPhone' value='{{phone}}' class='c2b list-textArea' placeholder='未填写' placeholder-class='ca'></input>
+  </view>
+</view>
 <view class='flex height-85 border-b-1 padding-lr-30  between aitems-center'>
   <picker class='flex1' value="{{areaIndex}}" range="{{areaList}}" range-key='area' bindchange="bindareaChange">
     <view class='flex picker aitems-center '>
@@ -48,6 +60,23 @@
   <view class='flex1 aitems-center  fon-30 flex '>
     <view class='width-150 ca margin-r-10'>上课地址</view>
     <input type='text' bindinput='bindAddress' value='{{address}}' class='c2b list-textArea' placeholder='未填写' placeholder-class='ca'></input>
+  </view>
+</view>
+<view class='flex height-85 border-b-1 padding-lr-30  between aitems-center'>
+  <picker class='flex1' value="{{sexIndex}}" range-key='data' range="{{sexData}}" bindchange="bindSexChange">
+    <view class='flex picker aitems-center '>
+      <view class="fon-30 flex aitems-center yanse ">
+        <view class='width-135 ca'>性别</view>
+        <view class='c2b'>{{sexData[sexIndex].data}}</view>
+      </view>
+    </view>
+  </picker>
+  <image mode='widthFix' style='width:20rpx;' src='/images/jian_13.png'></image>
+</view>
+<view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
+  <view class='flex1 aitems-center  fon-30 flex '>
+    <view class='width-150 ca margin-r-10'>年龄</view>
+    <input type='number' maxlength='3' bindinput='bindAge' value='{{age}}' class='c2b list-textArea' placeholder='未填写' placeholder-class='ca'></input>
   </view>
 </view>
 <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>

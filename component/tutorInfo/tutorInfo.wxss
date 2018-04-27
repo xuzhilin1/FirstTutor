@@ -25,10 +25,26 @@
   margin-right: 20rpx;
 }
 
+.box-content {
+  width: 76%;
+}
+
 .box-uername {
   margin-bottom: 10rpx;
   font-size: 26rpx;
   align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.box-uername::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+.box-image {
+  float: left;
   display: flex;
 }
 
@@ -75,6 +91,7 @@
   height: 100%;
   width: 50%;
 }
-.chatImage{
+
+.chatImage {
   width: 40rpx;
 }

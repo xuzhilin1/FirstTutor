@@ -169,6 +169,10 @@ Component({
         this.triggerEvent('SonTime', { timeList: timeList });//将数据返回给父组件
       }
     },
+    isRadio: { //是否为单选
+      type: Boolean,
+      value: false,
+    }
   },
   data: {
     weekList: [],
@@ -182,7 +186,17 @@ Component({
       let index = e.currentTarget.dataset.index;
       let timeList = this.data.timeList;
       if (timeList[index].timeType === 0) return;
-      timeList[index].timeType = timeList[index].timeType === 1 ? 2 : 1;
+      let isRadio = this.data.isRadio;
+      if (isRadio) { //单选
+        for (let i = 0, len = timeList.length; i < len; i++) {
+          if (timeList[i].timeType !== 0) {
+            timeList[i].timeType = 1;
+          }
+        }
+        timeList[index].timeType = 2;
+      } else { //多选
+        timeList[index].timeType = timeList[index].timeType === 1 ? 2 : 1;
+      }
       this.setData({
         timeList: timeList
       })

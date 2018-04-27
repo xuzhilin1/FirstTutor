@@ -22,6 +22,10 @@ Page({
     corOpenG: {}, //拼团信息
     weekTime: '', //上课时间段
     weekTimeData: {}, //上课时间段数据
+    isCheck: false,
+  },
+  checkChange() { //协议选中
+    this.data.isCheck = !this.data.isCheck;
   },
   initCourseTimeLong() { //初始话上课时间数据
     let weekTimeData = this.data.weekTimeData;
@@ -163,6 +167,14 @@ Page({
         $common.showModal('Please select time slot.', false, false, 'Ok', 'Reminder');
       } else {
         $common.showModal('请选择上课时间');
+      }
+      return;
+    }
+    if (!this.data.isCheck) {
+      if (isEn) {
+        $common.showModal('Please read and agree to "The FirstTutor service agreement"', false, false, 'Ok', 'Reminder');
+      } else {
+        $common.showModal('请阅读并同意《FirstTutor服务协议》');
       }
       return;
     }

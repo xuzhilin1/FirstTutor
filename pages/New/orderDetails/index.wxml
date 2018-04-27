@@ -1,17 +1,8 @@
 <!-- 头部课程信息 -->
 <tea-course other='{{false}}' course='{{course}}'></tea-course>
 <view class='margin-t-20'>
-  <view wx:for='{{MemList}}' wx:key='{{index}}' class='stu-list'>
-    <view class='stu-left'>
-      <image class='orderimg' src='{{item.UserAvaUrl}}'></image>
-      <view class='stu-name'>{{item.OdrName}}</view>
-      <view wx:if='{{cog.FgtType==1&&item.OdrIsHead}}' class='Tuan border fon-24 purple'>Group leader</view>
-      <image bindtap='onlineChart' data-index='{{index}}' class='Wen' mode='widthFix' src='/images/DuiHua_06.png'></image>
-    </view>
-    <view bindtap='callPhone' data-phone='{{item.OdrPhone}}' class='stu-right'>
-      <image class='phone' mode='widthFix' src='/images/phone_06.png'></image>
-      {{item.OdrPhone}}
-    </view>
+  <view wx:for='{{MemList}}' wx:key='{{index}}' class='border-t-1'>
+    <group-member member-info='{{item}}' is-head='{{index===0?true:false}}' is-chat='{{true}}'></group-member>
   </view>
 </view>
 <view bindtap='lookAddress' class='padding-25 bg-fff flex aitems-center fon-26 border-t-1 border-b-1'>

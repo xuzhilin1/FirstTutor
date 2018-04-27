@@ -134,16 +134,8 @@
         <view class='border-b-1'>
           <modular-title title-context='拼团详情'></modular-title>
         </view>
-        <view wx:for='{{mem}}' wx:key='{{index}}' class='flex fon-30 c2b bg-fff   padding-25 aitems-center between border-b-1'>
-          <view class='flex aitems-center'>
-            <image class='orderimg image-radius' src='{{item.UserAvaUrl}}'></image>
-            {{item.OdrName}}
-            <view wx:if='{{index===0}}' class='Tuan border fon-24 purple'>团长</view>
-          </view>
-          <view bindtap='callPhone' data-phone='{{item.OdrPhone}}' class='flex aitens-center'>
-            <image class='phone' mode='widthFix' src='/images/phone_06.png'></image>
-            {{item.OdrPhone}}
-          </view>
+        <view wx:for='{{mem}}' wx:key='{{index}}' class='border-b-1'>
+          <group-member member-info='{{item}}' is-head='{{index===0?true:false}}'></group-member>
         </view>
       </view>
     </block>
@@ -192,7 +184,7 @@
           <view class='text1'></view>
           <view class='waiceng' wx:for='{{mem}}' wx:key='{{index}}'>
             <image class='Soa' src='{{item.UserAvaUrl}}'></image>
-            <view wx:if='{{index==0}}' class='white fon-18 tuanZhang purple-bg'>Group Head</view>
+            <view wx:if='{{index==0}}' class='white fon-18 tuanZhang purple-bg'>Group leader</view>
           </view>
           <view class='waiceng' wx:if='{{cog.FgtMemNum - cog.FgtAttCount >= 1}}'>
             <view class='wen'>？</view>
@@ -218,7 +210,7 @@
           <view class='text1'></view>
           <view class='waiceng' wx:for='{{mem}}' wx:key='{{index}}'>
             <image class='Soa' src='{{item.UserAvaUrl}}'></image>
-            <view wx:if='{{index==0}}' class='white fon-18 tuanZhang purple-bg'>Group Head</view>
+            <view wx:if='{{index==0}}' class='white fon-18 tuanZhang purple-bg'>Group leader</view>
           </view>
           <view class='waiceng' wx:if='{{cog.FgtMemNum - cog.FgtAttCount == 1}}'>
             <view class='wen'>？</view>
@@ -244,7 +236,7 @@
           <view class='text1'></view>
           <view class='waiceng' wx:for='{{mem}}' wx:key='{{index}}'>
             <image class='Soa' src='{{item.UserAvaUrl}}'></image>
-            <view wx:if='{{index==0}}' class='white fon-18 tuanZhang purple-bg'>Group Head</view>
+            <view wx:if='{{index==0}}' class='white fon-18 tuanZhang purple-bg'>Group leader</view>
           </view>
           <view class='waiceng' wx:if='{{cog.FgtMemNum - cog.FgtAttCount == 1}}'>
             <view class='wen'>？</view>
@@ -269,7 +261,7 @@
           <view class='text1'></view>
           <view class='waiceng' wx:for='{{mem}}' wx:key='{{index}}'>
             <image class='Soa' src='{{item.UserAvaUrl}}'></image>
-            <view wx:if='{{index==0}}' class='white fon-18 tuanZhang purple-bg'>Group Head</view>
+            <view wx:if='{{index==0}}' class='white fon-18 tuanZhang purple-bg'>Group leader</view>
           </view>
         </view>
       </view>
@@ -299,16 +291,8 @@
         <view class='border-b-1'>
           <modular-title title-context='Group Details'></modular-title>
         </view>
-        <view wx:for='{{mem}}' wx:key='{{index}}' class='flex fon-30 c2b bg-fff   padding-25 aitems-center between border-b-1'>
-          <view class='flex aitems-center'>
-            <image class='orderimg image-radius' src='{{item.UserAvaUrl}}'></image>
-            {{item.OdrName}}
-            <view wx:if='{{index===0}}' class='Tuan border fon-24 purple'>Group Head</view>
-          </view>
-          <view bindtap='callPhone' data-phone='{{item.OdrPhone}}' class='flex aitens-center'>
-            <image class='phone' mode='widthFix' src='/images/phone_06.png'></image>
-            {{item.OdrPhone}}
-          </view>
+        <view wx:for='{{mem}}' wx:key='{{index}}' class='border-b-1'>
+          <group-member member-info='{{item}}' is-head='{{index===0?true:false}}'></group-member>
         </view>
       </view>
     </block>

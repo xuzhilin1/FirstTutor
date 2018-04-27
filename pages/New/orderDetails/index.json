@@ -5,6 +5,7 @@
   "navigationBarTextStyle": "white",
   "navigationBarTitleText": "Order Details",
   "usingComponents": {
-    "tea-course": "/component/teaCourse/teaCourse"
+    "tea-course": "/component/teaCourse/teaCourse",
+    "group-member": "/component/groupMember/groupMember"
   }
 }

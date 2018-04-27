@@ -18,6 +18,24 @@ Page({
     address: '',
     course: '',
     other: '',
+    userName: '',
+    phone: '',
+    age: '',
+    sexData: [{
+      id: 0,
+      data: '女',
+    }, {
+      id: 1,
+      data: '男'
+    }],
+    sexIndex: 0,
+    StuId: -1,
+  },
+  bindName(e) { //姓名
+    this.data.userName = e.detail.value;
+  },
+  bindPhone(e) { //手机号
+    this.data.phone = e.detail.value;
   },
   bindareaChange(e) { //区域
     this.setData({
@@ -49,6 +67,14 @@ Page({
       address: e.detail.value
     })
   },
+  bindSexChange(e) { //性别
+    this.setData({
+      sexIndex: parseInt(e.detail.value)
+    })
+  },
+  bindAge(e) { //年龄
+    this.data.age = e.detail.value
+  },
   bindCourse(e) { //课程
     this.setData({
       course: e.detail.value
@@ -68,8 +94,26 @@ Page({
       address = this.data.address,
       course = this.data.course,
       other = this.data.other;
+    let userName = this.data.userName,
+      phone = this.data.phone,
+      sexData = this.data.sexData,
+      sexIndex = this.data.sexIndex,
+      age = this.data.age;
+    if (userName.trim().length <= 0) {
+      $common.showModal('请填写姓名');
+      return;
+    }
+    if (!$common.phoneReg.test(phone)) {
+      $common.showModal('请填写正确的手机号');
+      return;
+    }
     if (address.trim().length <= 0) {
       $common.showModal('请填写上课地址');
+      return;
+    }
+
+    if (isNaN(parseInt(age)) || parseInt(age) < 0) {
+      $common.showModal('请填写正确的年龄');
       return;
     }
     if (course.trim().length <= 0) {
@@ -77,13 +121,20 @@ Page({
       return;
     }
     let status = this.data.status;
+    let student = {
+      StuName: userName,
+      StuGender: sexData[sexIndex].id,
+      StuAge: age,
+      StuPhone: phone,
+      StuId: this.data.StuId
+    }
     if (status === 1) { //发布需求
-      this.saveData(course, address, week, minPrice, maxPrice, other, time, area.id);
+      this.saveData(course, address, week, minPrice, maxPrice, other, time, area.id, student);
     } else if (status === 2) { //修改需求
-      this.reviseData(course, address, week, minPrice, maxPrice, other, time, area.id);
+      this.reviseData(course, address, week, minPrice, maxPrice, other, time, area.id, student);
     }
   },
-  reviseData(NedCorName, NedAddress, NedCorAfw, NedMinPrice, NedMaxPrice, NedOther, NedClaTime, NedClaArea) { //修改需求
+  reviseData(NedCorName, NedAddress, NedCorAfw, NedMinPrice, NedMaxPrice, NedOther, NedClaTime, NedClaArea, stuInfo) { //修改需求
     $common.request(
       'POST',
       $common.config.AlterMyLearnNeedInfo,
@@ -98,7 +149,8 @@ Page({
           NedOther: NedOther, //其他要求
           NedClaTime: NedClaTime, //上课时间段（1 上午，2 下午1，3 下午2，4 晚上）
           NedClaArea: NedClaArea, //所在区域
-        }
+        },
+        stuInfo: stuInfo
       },
       (res) => {
         if (res.data.res) {
@@ -129,7 +181,7 @@ Page({
       }
     )
   },
-  saveData(NedCorName, NedAddress, NedCorAfw, NedMinPrice, NedMaxPrice, NedOther, NedClaTime, NedClaArea) { //发布需求
+  saveData(NedCorName, NedAddress, NedCorAfw, NedMinPrice, NedMaxPrice, NedOther, NedClaTime, NedClaArea, student) { //发布需求
     $common.request(
       'POST',
       $common.config.ReleaseMyLearnNeed,
@@ -144,7 +196,8 @@ Page({
           NedOther: NedOther, //其他要求
           NedClaTime: NedClaTime, //上课时间段（1 上午，2 下午1，3 下午2，4 晚上）
           NedClaArea: NedClaArea, //所在区域
-        }
+        },
+        student: student
       },
       (res) => {
         if (res.data.res) {
@@ -212,6 +265,12 @@ Page({
             (pariceList[i] == data.NedMinPrice) && (minIndex = i);
             (pariceList[i] == data.NedMaxPrice) && (maxIndex = i);
           }
+          let student = res.data.stuInfo;
+          let userName = student.StuName,
+            phone = student.StuPhone,
+            StuId = student.StuId,
+            age = student.StuAge,
+            sexIndex = student.StuGender;
           this.setData({
             address: data.NedAddress,
             course: data.NedCorName,
@@ -220,6 +279,11 @@ Page({
             weekIndex: parseInt(data.NedCorAfw) - 1,
             timeIndex: parseInt(data.NedClaTime) - 1,
             priceIndex: [minIndex, maxIndex],
+            userName: userName,
+            phone: phone,
+            StuId: StuId,
+            age: age,
+            sexIndex: sexIndex
           })
         } else {
           switch (res.data.errType) {

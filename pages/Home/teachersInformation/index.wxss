@@ -1,27 +1,5 @@
 /* pages/Home/teachersInformation/index.wxss */
 
-.wrapper-scroll {
-  width: 100vw;
-  height: 100vh;
-  box-sizing: border-box;
-}
-
-.zonga {
-  position: relative;
-  min-width: 255rpx;
-  margin-top: 30rpx;
-  margin-left: 15rpx;
-}
-
-.img-m {
-  height: 300rpx;
-  width: 100%;
-  display: block;
-  border-radius: 10rpx;
-}
-
-/*  */
-
 .bg-image {
   width: 100%;
   height: 100%;
@@ -32,15 +10,54 @@
 }
 
 .ZuiShang {
-  height: 200rpx;
   position: relative;
-}
-
-.header-box {
-  width: 100%;
-  height: 100%;
   box-sizing: border-box;
 }
+
+.zuishang-box {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  padding: 30rpx;
+  color: #fff;
+  align-items: center;
+}
+
+.zuishang-left {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  width: 70%;
+}
+
+.zuishang-context {
+  flex: 1;
+}
+
+.zuishang-image {
+  display: flex;
+}
+
+.z-float {
+  float: left;
+}
+
+.zuishang-list::after {
+  clear: both;
+  display: block;
+  content: '';
+}
+
+.zuishang-right {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  font-size: 30rpx;
+}
+
 
 .touxiang-image-t {
   border: 6rpx solid #96add9;
@@ -51,23 +68,16 @@
   margin-right: 10rpx;
 }
 
-.padding-25 {
-  padding: 25rpx 30rpx 25rpx 30rpx;
-}
 
 .address {
   width: 26rpx;
   margin-right: 25rpx;
 }
 
-page {
+/* page {
   height: 100%;
-}
+} */
 
-.scr {
-  position: relative;
-  height: 100%;
-}
 
 .touxiang {
   width: 98rpx;
@@ -236,7 +246,6 @@ page {
 .dingkuan {
   width: 60%;
   box-sizing: border-box;
-  border: 1px solid red;
 }
 
 .teacher-chat {

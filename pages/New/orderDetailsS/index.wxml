@@ -3,7 +3,7 @@
 </view>
 <!--  外教信息  -->
 <tutor-info info-list='{{teacher}}' photo-url='{{srcForIdPhoto}}' chat-image='/images/DuiHua_06.png'></tutor-info>
-<!--  
+<!--
   中文版
   -->
 <block wx:if='{{!isEn}}'>
@@ -13,16 +13,8 @@
       <modular-title title-context='拼团详情'></modular-title>
     </view>
     <!--  显示条件， 为团类型，单是不为单独购买  -->
-    <view wx:if='{{course.CorType!=1&&cog.FgtType==1}}' wx:for='{{mem}}' wx:key='{{index}}' class='flex fon-30 c2b bg-fff padding-25 aitems-center between border-b-1'>
-      <view class='flex aitems-center'>
-        <image class='orderimg image-radius' src='{{item.UserAvaUrl}}'></image>
-        {{item.OdrName}}
-        <view wx:if='{{cog.FgtType==1&&index==0}}' class='Tuan border fon-24 purple'>团长</view>
-      </view>
-      <view bindtap='callPhone' data-phone='{{item.OdrPhone}}' class='flex aitens-center'>
-        <image class='phone' mode='widthFix' src='/images/phone_06.png'></image>
-        {{item.OdrPhone}}
-      </view>
+    <view wx:for='{{mem}}' wx:key='{{index}}' wx:if='{{course.CorType!=1&&cog.FgtType==1}}' class='border-b-1'>
+      <group-member member-info='{{item}}' is-head='{{index===0?true:false}}'></group-member>
     </view>
     <view class='padding-25 fon-24 bg-fff'>
       <view class='margin-b-20 '>订单号：{{showMem.OdrOutradeno}}</view>
@@ -49,7 +41,7 @@
     <view bindtap='deleteOrder' class='btn flex center fon-32 bg-fff purple padding-tb-20 border btn-radius'>删除订单</view>
   </view>
 </block>
-<!--  
+<!--
   英文版
   -->
 <block wx:if='{{isEn}}'>
@@ -59,16 +51,8 @@
       <modular-title title-context='Group Buying Details'></modular-title>
     </view>
     <!--  显示条件， 为团类型，单是不为单独购买  -->
-    <view wx:if='{{course.CorType!=1&&cog.FgtType==1}}' wx:for='{{mem}}' wx:key='{{index}}' class='flex fon-30 c2b bg-fff padding-25 aitems-center between border-b-1'>
-      <view class='flex aitems-center'>
-        <image class='orderimg image-radius' src='{{item.UserAvaUrl}}'></image>
-        {{item.OdrName}}
-        <view wx:if='{{cog.FgtType==1&&index==0}}' class='Tuan border fon-24 purple'>Group Head</view>
-      </view>
-      <view bindtap='callPhone' data-phone='{{item.OdrPhone}}' class='flex aitens-center'>
-        <image class='phone' mode='widthFix' src='/images/phone_06.png'></image>
-        {{item.OdrPhone}}
-      </view>
+    <view wx:for='{{mem}}' wx:key='{{index}}' wx:if='{{course.CorType!=1&&cog.FgtType==1}}' class='border-b-1'>
+      <group-member member-info='{{item}}' is-head='{{index===0?true:false}}'></group-member>
     </view>
     <view class='padding-25 fon-24 bg-fff'>
       <view class='margin-b-20 '>Order Number：{{showMem.OdrOutradeno}}</view>

@@ -7,6 +7,9 @@ Component({
   properties: {
     course: {
       type: Object,
+      observer(res){
+        console.log(res);
+      }
     }
   },
   data: {
