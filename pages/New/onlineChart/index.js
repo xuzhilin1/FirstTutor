@@ -5,7 +5,6 @@ const $common = require('../../../utils/common.js');
 let SocketTask;
 Page({
   data: {
-    isTeacher: false,// true 外教。 false 学生
     value: '', //聊天框的初始内容
     myImage: '',
     youImage: '',
@@ -85,6 +84,7 @@ Page({
     }).exec();
   },
   getImage() { //获取头像
+    let isEn = wx.getStorageSync('isEn');
     $common.request(
       'POST',
       $common.config.GetUserInfo,
@@ -99,14 +99,14 @@ Page({
             youImage: res.data.tarAvaUrl
           })
         } else {
-          switch (res.data.errType) {
-            case 1:
-              $common.showModal('参数错误');
-              break;
-            case 2:
-              $common.showModal('获取头像失败');
-              break;
-          }
+          // switch (res.data.errType) {
+          //   case 1:
+          //     $common.showModal('参数错误');
+          //     break;
+          //   case 2:
+          //     $common.showModal('获取头像失败');
+          //     break;
+          // }
         }
       },
       (res) => {
@@ -139,7 +139,9 @@ Page({
     let pageIndex = isReach ? this.data.pageIndex : 1,
       pageSize = this.data.pageSize,
       newDataCount = this.data.newDataCount;
-    wx.showLoading({ title: '努力加载中...' });
+    let isEn = wx.getStorageSync('isEn');
+    let text = isEn ? 'Loading...' : '努力加载中...';
+    wx.showLoading({ title: text });
     $common.request(
       'POST',
       $common.config.GetChatRecord,
@@ -170,20 +172,20 @@ Page({
             pageIndex: pageIndex
           })
         } else {
-          switch (res.data.errType) {
-            case 1:
-              //参数错误
-              break;
-            case 2:
-              //userId不正确
-              break;
-            case 3:
-              //获取记录失败
-              break;
-            case 4:
-              //更改消息状态失败
-              break;
-          }
+          // switch (res.data.errType) {
+          //   case 1:
+          //     //参数错误
+          //     break;
+          //   case 2:
+          //     //userId不正确
+          //     break;
+          //   case 3:
+          //     //获取记录失败
+          //     break;
+          //   case 4:
+          //     //更改消息状态失败
+          //     break;
+          // }
         }
       },
       (res) => {
@@ -205,15 +207,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let isTeacher = options.isTeacher ? true : false;
-    if (isTeacher) { //外教，改标题为英文版
-      wx.setNavigationBarTitle({
-        title: 'Your Messages',
-      })
-    }
     let userId = options.userId;
     this.setData({
-      isTeacher: isTeacher,
       userId: userId
     });
     let openid = wx.getStorageSync('openid');
@@ -269,10 +264,18 @@ Page({
 
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
+  isEnEvent(res) { //判断当前显示中英文
+    let isEn = wx.getStorageSync('isEn');
+    this.setData({
+      isEn: isEn
+    });
+    let text = isEn ? "Your Messages" : "在线沟通";
+    wx.setNavigationBarTitle({
+      title: text
+    })
+  },
   onShow: function () {
+    this.isEnEvent();
     this.init();
   },
 

@@ -2,7 +2,7 @@
 const $common = require('../../../utils/common.js');
 Page({
   data: {
-    isEn:false,
+    isEn: false,
     srcActivity: $common.srcActivity,
     pageIndex: 1,
     pageSize: 5,
@@ -85,7 +85,9 @@ Page({
       return;
     }
     isReach = isReach ? true : false;
-    wx.showLoading({ title: '努力加载中...' });
+    let isEn = wx.getStorageSync('isEn');
+    let text = isEn ? 'Loading...' : '努力加载中...';
+    wx.showLoading({ title: text });
     let pageIndex = isReach ? this.data.pageIndex : 1,
       pageSize = this.data.pageSize;
     $common.request(
@@ -117,18 +119,15 @@ Page({
             pageIndex: pageIndex
           })
         } else {
-          switch (res.data.errType) {
-            case 1:
-              $common.showModal('参数有误');
-              break;
-            case 2:
-              $common.showModal('未知错误');
-              break;
+          if (isEn) {
+            $common.showModal('Unknown Error', false, false, 'Ok', 'Reminder');
+          } else {
+            $common.showModal('未知错误');
           }
         }
       },
       (res) => {
-        $common.showModal('亲~网络不给力哦，请稍后重试');
+        $common.showModal('Unknown Error', false, false, 'Ok', 'Reminder');
       },
       (res) => {
         wx.hideLoading();
@@ -150,13 +149,15 @@ Page({
   onReady: function () {
   },
   isEnEvent(res) { //判断当前显示中英文
+    let isEn = wx.getStorageSync('isEn');
     this.setData({
-      isEn: wx.getStorageSync('isEn')
+      isEn: isEn
+    });
+    let text = isEn ? "Activity" : "活动";
+    wx.setNavigationBarTitle({
+      title: text
     })
   },
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow: function () {
     this.isEnEvent();
   },

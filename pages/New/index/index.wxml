@@ -9,24 +9,27 @@
     </view>
   </view>
 </view>
-<!--  学生  -->
-<view wx:if='{{isPageShow&&userType!=2}}' class='fon-32 ffoter bg-fff '>
-  <view wx:for="{{studentList}}" wx:key='{{index}}' data-url='{{item.luJin}}' bindtap='jump' class='flex lasta between height-102  padding-lr-30 border-t-1 aitems-center'>
-    <view class='flex  aitems-center'>
-      <image mode='widthFix' style='width:44rpx; margin-right:20rpx' src='{{item.url}}'></image>
-      {{item.title}}
+<!--  列表出现条件，有openid  -->
+<block wx:if='{{openid}}'>
+  <!--  学生  -->
+  <view wx:if='{{isPageShow&&userType!=2}}' class='fon-32 ffoter bg-fff '>
+    <view wx:for="{{studentList}}" wx:key='{{index}}' data-url='{{item.luJin}}' bindtap='jump' class='flex lasta between height-102  padding-lr-30 border-t-1 aitems-center'>
+      <view class='flex  aitems-center'>
+        <image mode='widthFix' style='width:44rpx; margin-right:20rpx' src='{{item.url}}'></image>
+        {{item.title}}
+      </view>
+      <image mode='widthFix' style='width:21rpx;' src='/images/jian_13.png'></image>
     </view>
-    <image mode='widthFix' style='width:21rpx;' src='/images/jian_13.png'></image>
   </view>
-</view>
-<!--  导师  -->
-<view wx:if='{{isPageShow&&userType==2}}' class='fon-32 ffoter bg-fff '>
-  <view wx:if='{{item.isShow}}' wx:for="{{teacherList}}" wx:key='{{index}}' data-url='{{item.luJin}}' bindtap='jump' class='flex lasta between height-102  padding-lr-30 border-t-1 aitems-center'>
-    <view class='flex  aitems-center'>
-      <image mode='widthFix' style='width:44rpx; margin-right:20rpx' src='{{item.url}}'></image>
-      {{item.title}}
-      <view wx:if='{{(item.id===4&&notCNum>0)||(item.id===7&&unReadC>0)}}' class='din'></view>
+  <!--  导师  -->
+  <view wx:if='{{isPageShow&&userType==2}}' class='fon-32 ffoter bg-fff '>
+    <view wx:if='{{item.isShow}}' wx:for="{{teacherList}}" wx:key='{{index}}' data-url='{{item.luJin}}' bindtap='jump' class='flex lasta between height-102  padding-lr-30 border-t-1 aitems-center'>
+      <view class='flex  aitems-center'>
+        <image mode='widthFix' style='width:44rpx; margin-right:20rpx' src='{{item.url}}'></image>
+        {{item.title}}
+        <view wx:if='{{(item.id===4&&notCNum>0)||(item.id===7&&unReadC>0)}}' class='din'></view>
+      </view>
+      <image mode='widthFix' style='width:21rpx;' src='/images/jian_13.png'></image>
     </view>
-    <image mode='widthFix' style='width:21rpx;' src='/images/jian_13.png'></image>
   </view>
-</view>
+</block>

@@ -29,7 +29,7 @@ Page({
     let pageIndex = isReach ? this.data.pageIndex : 1,
       pageSize = this.data.pageSize;
     let rewList = isReach ? this.data.rewList : [];//上拉加载push，下拉刷新，重新获取
-    wx.showLoading({ title: '努力加载中...' });
+    wx.showLoading({ title: 'Loading...' });
     $common.request(
       "POST",
       $common.config.GetAllRewAboutMe,
@@ -49,18 +49,9 @@ Page({
             data[i].showTime = this.timeStamp(data[i].RewCreateOn);
             translate.push(data[i].RewComment);
           }
-          // $common.translate(translate.join('\n'), (res) => { //调用翻译文本
-          //   let trans_result = res.data.trans_result;
-          //   if (trans_result && trans_result.length > 0) { //翻译成功了
-          //     for (let i = 0, len = data.length; i < len; i++) {
-          //       data[i].RewComment = trans_result[i].dst;
-          //       rewList.push(data[i]);
-          //     }
-          //   } else {//没有返回东西，报错了,显示原文
           for (let i = 0, len = data.length; i < len; i++) {
             rewList.push(data[i]);
           }
-          //   }
           let hash = {};
           let newArr = rewList.reduce(function (item, next) {//数组依据RewId去重
             hash[next.RewId] ? '' : hash[next.RewId] = true && item.push(next);
@@ -70,20 +61,12 @@ Page({
             rewList: newArr,
             pageIndex: pageIndex,
           })
-          // });
         } else {
-          switch (res.data.errType) {
-            case 1:
-              $common.showModal('参数错误');
-              break;
-            case 2:
-              $common.showModal('未知错误');
-              break;
-          }
+          $common.showModal('Unknown Error', false, false, 'Ok', 'Reminder');
         }
       },
       (res) => {
-        $common.showModal('亲~网络不给力哦，请稍后重试');
+        $common.showModal('Unknown Error', false, false, 'Ok', 'Reminder');
       },
       (res) => {
         wx.hideLoading();

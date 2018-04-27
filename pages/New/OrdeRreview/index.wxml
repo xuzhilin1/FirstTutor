@@ -10,5 +10,5 @@
   </view>
 </view>
 <view wx:if='{{rewList.length<=0}}' class='noData'>
-  暂无数据
+  No Data
 </view>

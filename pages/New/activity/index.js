@@ -48,7 +48,9 @@ Page({
   },
   init(isReach) {
     isReach = isReach ? true : false;
-    wx.showLoading({ title: '努力加载中...' });
+    let isEn = wx.getStorageSync('isEn');
+    let text = isEn ? 'Loading...' : '努力加载中...';
+    wx.showLoading({ title: text });
     let pageIndex = isReach ? this.data.pageIndex : 1,
       pageSize = this.data.pageSize;
     $common.request(
@@ -81,18 +83,19 @@ Page({
             pageIndex: pageIndex
           })
         } else {
-          switch (res.data.errType) {
-            case 1:
-              $common.showModal('参数有误');
-              break;
-            case 2:
-              $common.showModal('未知错误');
-              break;
+          if (isEn) {
+            $common.showModal('Unknown Error', false, false, 'Ok', 'Reminder');
+          } else {
+            $common.showModal('未知错误');
           }
         }
       },
       (res) => {
-
+        if (isEn) {
+          $common.showModal('Unknown Error', false, false, 'Ok', 'Reminder');
+        } else {
+          $common.showModal('未知错误');
+        }
       },
       (res) => {
         wx.hideLoading();
@@ -108,11 +111,18 @@ Page({
   onReady: function () {
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
+  isEnEvent(res) { //判断当前显示中英文
+    let isEn = wx.getStorageSync('isEn');
+    this.setData({
+      isEn: isEn
+    });
+    let text = isEn ? "Activity Signed Up" : "我报名的活动";
+    wx.setNavigationBarTitle({
+      title: text
+    })
+  },
   onShow: function () {
-
+    this.isEnEvent();
   },
 
   /**

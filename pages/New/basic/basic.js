@@ -48,15 +48,15 @@ Page({
     let qualifs = [];
     let phone = this.data.phone;
     if (!teacherFor.TeaName) {
-      $common.showModal('Please improve basic information!', false, false, 'OK', 'Prompt');
+      $common.showModal('Please fill in your brief introduction.', false, false, 'OK', 'Reminder');
       return;
     }
     if (!teacherFor.TeaDescript) {
-      $common.showModal('Please fill in the teacher\'s introduction!', false, false, 'OK', 'Prompt');
+      $common.showModal('Please fill in the tutor introduction.', false, false, 'OK', 'Reminder');
       return;
     }
     if (teacherFor.TeaQualif.length < 0) {
-      $common.showModal('Please upload teacher qualification!', false, false, 'OK', 'Prompt');
+      $common.showModal('Please upload the tutor certificate picture.', false, false, 'OK', 'Reminder');
       return;
     }
     // if (!teacherFor.TeaIdPhoto) {
@@ -68,11 +68,11 @@ Page({
     //   return;
     // }
     if (!teacherFor.TeaClaArea) {
-      $common.showModal('Please select class area!', false, false, 'OK', 'Prompt');
+      $common.showModal('Please select the acceptable teaching area.', false, false, 'OK', 'Reminder');
       return;
     }
     if (!$common.phoneReg.test(phone)) {
-      $common.showModal('Please fill in the correct phone number!', false, false, 'OK', 'Prompt');
+      $common.showModal('Please fill in the correct phone number.', false, false, 'OK', 'Reminder');
       return;
     }
     for (let i = 0, len = teacherFor.TeaQualif.length; i < len; i++) {
@@ -106,16 +106,9 @@ Page({
             data[i].QfsCreateOn = true;
           }
           app.globalData.teacherFor.TeaQualif = data;
-          $common.showModal('Saved successfully!', false, false, 'OK', 'Prompt');
+          $common.showModal('Successfully Saved', false, false, 'OK', 'Reminder');
         } else {
-          switch (res) {
-            case 1:
-              $common.showModal('Failed to save data!', false, false, 'OK', 'Prompt');
-              break;
-            case 2:
-              $common.showModal('Failed to save basic data!', false, false, 'OK', 'Prompt');
-              break;
-          }
+          $common.showModal('Not Saved', false, false, 'OK', 'Reminder');
         }
       },
       (res) => {
@@ -156,27 +149,11 @@ Page({
             app.globalData.teacherFor.TeaIdPhoto = data.imgName;
             this.init();
           } else {
-            switch (data.errType) {
-              case 1:
-                $common.showModal('Incorrect file type', false, false, 'OK', 'Prompt');
-                break;
-              case 2:
-                $common.showModal('No file uploaded', false, false, 'OK', 'Prompt');
-                break;
-              case 3:
-                $common.showModal('Image upload support.gif| .jpg| .jpeg|.png', false, false, 'OK', 'Prompt');
-                break;
-              case 4:
-                $common.showModal('upload failed', false, false, 'OK', 'Prompt');
-                break;
-              case 5:
-                $common.showModal('The video format is incorrect', false, false, 'OK', 'Prompt');
-                break;
-            }
+            $common.showModal('Upload Failed', false, false, 'OK', 'Reminder');
           }
         },
         fail: () => {
-          $common.showModal('Pro-network does not work Oh, please try again later', false, false, 'OK', 'Prompt');
+          $common.showModal('Unknown Error', false, false, 'OK', 'Reminder');
         },
         complete: (res) => {
           wx.hideLoading();
@@ -188,7 +165,7 @@ Page({
     $common.chooseVideo(function (res) {
       let url = res.tempFilePath;//文件路径
       wx.showLoading({ title: 'uploading...' });
-      const uploadTask = wx.uploadFile({
+      wx.uploadFile({
         url: $common.config.UpLoadForTeaFile,
         filePath: url,
         name: 'file',
@@ -201,42 +178,21 @@ Page({
             app.globalData.teacherFor.TeaAudio = data.vdoName;
             this.init();
           } else {
-            switch (data.errType) {
-              case 1:
-                $common.showModal('Incorrect file type', false, false, 'OK', 'Prompt');
-                break;
-              case 2:
-                $common.showModal('No file uploaded', false, false, 'OK', 'Prompt');
-                break;
-              case 3:
-                $common.showModal('Image upload support.gif| .jpg| .jpeg|.png', false, false, 'OK', 'Prompt');
-                break;
-              case 4:
-                $common.showModal('upload failed', false, false, 'OK', 'Prompt');
-                break;
-              case 5:
-                $common.showModal('The video format is incorrect', false, false, 'OK', 'Prompt');
-                break;
-            }
+            $common.showModal('Upload Failed', false, false, 'OK', 'Reminder');
           }
         },
         fail: () => {
-          $common.showModal('Pro-network does not work Oh, please try again later', false, false, 'OK', 'Prompt');
+          $common.showModal('Unknown Error', false, false, 'OK', 'Reminder');
         },
         complete: (res) => {
           wx.hideLoading();
         }
       });
-      uploadTask.onProgressUpdate((res) => {
-        //console.log('上传进度', res.progress)
-        //console.log('已经上传的数据长度', res.totalBytesSent)
-        //console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend)
-      })
     }.bind(this));
   },
   getTeacherDetail() { //获取教师基本信息
     app.globalData.teacherFor = [];
-    wx.showLoading({ title: 'Hard loading...' });
+    wx.showLoading({ title: 'Loading...' });
     $common.request(
       "POST",
       $common.config.GetForTeaDetailInfo,
@@ -251,18 +207,11 @@ Page({
           app.globalData.teacherFor = res.data.forTea;
           this.init();
         } else {
-          switch (res.data.errType) {
-            case 1:
-              $common.showModal('The parameter is wrong', false, false, 'OK', 'Prompt');
-              break;
-            case 2:
-              $common.showModal('unknown mistake', false, false, 'OK', 'Prompt');
-              break;
-          }
+          $common.showModal('Unknown Error', false, false, 'OK', 'Reminder');
         }
       },
       (res) => {
-        $common.showModal('Pro-network does not work Oh, please try again later', false, false, 'OK', 'Prompt');
+        $common.showModal('Unknown Error', false, false, 'OK', 'Reminder');
       },
       (res) => {
         wx.hideLoading();
@@ -288,8 +237,8 @@ Page({
     if (!app.globalData.teacherFor.TeaQualif) return;
     let teacherFor = app.globalData.teacherFor;
     let pagesList = this.data.pagesList;
-    pagesList[0].Types = teacherFor.TeaName ? 'perfect' : 'Imperfect';//基本资料
-    pagesList[1].Types = teacherFor.TeaDescript ? 'Filled out' : 'unfilled';//教师介绍
+    pagesList[0].Types = teacherFor.TeaName ? 'Completed' : 'To be filled';//基本资料
+    pagesList[1].Types = teacherFor.TeaDescript ? 'Completed' : 'To be filled';//教师介绍
     pagesList[2].Types = teacherFor.TeaQualif.length > 0 ? 'uploaded' : 'Not uploaded';//教师资质
     pagesList[3].Types = teacherFor.TeaIdPhoto ? 'uploaded' : 'Not uploaded';//证件照
     pagesList[4].Types = teacherFor.TeaAudio ? 'uploaded' : 'Not uploaded';//上课视频

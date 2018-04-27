@@ -16,9 +16,11 @@ Page({
     let status = this.data.status;
     if (input.trim().length <= 0) {
       if (status == 0) {
-        $common.showModal('Please fill in the teacher\'s introduction', false, false, 'OK', 'Prompt');
+        //请填写教师介绍
+        $common.showModal('Please fill in the tutor introduction.', false, false, 'OK', 'Reminder');
       } else if (status == 1) {
-        $common.showModal('Please fill in the course description', false, false, 'OK', 'Prompt');
+        //请填写课程介绍
+        $common.showModal('Please fill in the course introduction.', false, false, 'OK', 'Reminder');
       }
       return;
     }
@@ -59,8 +61,9 @@ Page({
       titleText = "";
     switch (status) {
       case 0: //教师介绍
-        placeholder = '美式发音/喜欢旅游/明星老师';
-        titleText = 'Teacher introduction';
+        //美式发音/喜欢旅游/明星老师
+        placeholder = 'accent/hobby/advantage';
+        titleText = 'Tutor introduction';
         this.teacherIntroduceContext();
         break;
       case 1:  //课程介绍

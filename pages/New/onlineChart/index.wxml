@@ -33,6 +33,6 @@
   </view>
   <view id='wrap'></view>
   <view class='footer'>
-    <input bindconfirm='confirm' value='{{value}}' confirm-hold='{{false}}' adjust-position='{{true}}' confirm-type='send' cursor-spacing='{{18}}' type='text' placeholder='请输入...' placeholder-class='placeholder'></input>
+    <input bindconfirm='confirm' value='{{value}}' confirm-hold='{{false}}' adjust-position='{{true}}' confirm-type='send' cursor-spacing='{{18}}' type='text' placeholder='{{isEn?"Please enter the...":"请输入..."}}' placeholder-class='placeholder'></input>
   </view>
 </view>

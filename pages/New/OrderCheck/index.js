@@ -34,7 +34,7 @@ Page({
     let pageIndex = isReach ? this.data.pageIndex : 1,
       pageSize = this.data.pageSize;
     let cogList = isReach ? this.data.cogList : [];//上拉加载push，下拉刷新，重新获取
-    wx.showLoading({ title: '努力加载中...' });
+    wx.showLoading({ title: 'Loading...' });
     $common.request(
       "POST",
       $common.config.GetTeaCogInfoList,
@@ -64,8 +64,8 @@ Page({
             }
             data[i].week = $translate.translateWeekEn(data[i].ClaStudyTime);
             data[i].whatNum = whatNum;
-            data[i].courseBuyTime = this.timeStamp(data[i].OdrBuyDate); 
-            data[i].openTime = this.timeStamp(data[i].FgtOpenTime); 
+            data[i].courseBuyTime = this.timeStamp(data[i].OdrBuyDate);
+            data[i].openTime = this.timeStamp(data[i].FgtOpenTime);
             cogList.push(data[i]);
           }
           let hash = {};
@@ -78,21 +78,11 @@ Page({
             pageIndex: pageIndex,
           })
         } else {
-          switch (res.data.errType) {
-            case 1:
-              // $common.showModal('参数错误');
-              $common.showModal('unknown mistake');
-              break;
-            case 2:
-              // $common.showModal('未知错误');
-              $common.showModal('unknown mistake');
-              break;
-          }
+          $common.showModal('Unknown Error', false, false, 'Ok', 'Reminder');
         }
       },
       (res) => {
-        // $common.showModal('亲~网络不给力哦，请稍后重试');
-        $common.showModal('Pro-network does not work Oh, please try again later', false, false, 'OK', 'Prompt');
+        $common.showModal('Unknown Error', false, false, 'Ok', 'Reminder');
       },
       (res) => {
         wx.hideLoading();
@@ -111,7 +101,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+
   },
 
   /**

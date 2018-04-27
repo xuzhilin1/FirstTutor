@@ -23,7 +23,7 @@ Page({
       }
     })
     if (arr.length <= 0) {
-      $common.showModal('Please select class area!', false, false, 'OK', 'Prompt');
+      $common.showModal('Please select the acceptable teaching area.', false, false, 'OK', 'Reminder');
       return;
     }
     app.globalData.teacherFor.TeaClaArea = arr.join(',');

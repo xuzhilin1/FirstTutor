@@ -25,7 +25,8 @@ Page({
       }
     });
     if (arr.length <= 0) {
-      $common.showModal('请选择时间段');
+      //请选择时间段
+      $common.showModal('Please select time slot.',false, false, 'Ok', 'Reminder');
       return;
     }
     app.globalData.releaseCourse.courseTime = arr;
@@ -47,7 +48,7 @@ Page({
             timeNoTables: data
           })
         } else {
-          $common.showModal('未知错误');
+          $common.showModal('Unknown Error', false, false, 'Ok', 'Reminder');
         }
       },
       (res) => {

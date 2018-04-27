@@ -39,7 +39,7 @@ Page({
     return `${y}-${m}-${d} ${h}:${f}`;
   },
   init() {
-    wx.showLoading({ title: '努力加载中...' });
+    wx.showLoading({ title: 'Loading...' });
     $common.request(
       'POST',
       $common.config.GetTeaOrderInfoList,
@@ -82,24 +82,11 @@ Page({
             course: course
           })
         } else {
-          switch (res.data.errType) {
-            case 1:
-              $common.showModal('参数有误');
-              break;
-            case 2:
-              $common.showModal('获取团信息出错');
-              break;
-            case 3:
-              $common.showModal('获取课程信息失败');
-              break;
-            case 4:
-              $common.showModal('获取团成员订单信息失败');
-              break;
-          }
+          $common.showModal('Unknown Error', false, false, 'Ok', 'Reminder');
         }
       },
       (res) => {
-
+        $common.showModal('Unknown Error', false, false, 'Ok', 'Reminder');
       },
       (res) => {
         wx.hideLoading();

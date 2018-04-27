@@ -69,19 +69,19 @@ Page({
       school = this.data.school,
       synopsis = this.data.synopsis;
     if (userName.trim().length <= 0) {
-      $common.showModal('Please fill in your name', false, false, 'OK', 'Prompt');
+      $common.showModal('Please fill in your name.', false, false, 'OK', 'Reminder');
       return;
     }
     if (weChat.trim().length <= 0) {
-      $common.showModal('Please fill in your WeChat number', false, false, 'OK', 'Prompt');
+      $common.showModal('Please fill in your WeChat Account.', false, false, 'OK', 'Reminder');
       return;
     }
     if (school.trim().length <= 0) {
-      $common.showModal('Please fill in your school', false, false, 'OK', 'Prompt');
+      $common.showModal('Please fill in your University.', false, false, 'OK', 'Reminder');
       return;
     }
     if (synopsis.trim().length <= 0) {
-      $common.showModal('Please fill in your profile', false, false, 'OK', 'Prompt');
+      $common.showModal('Please fill in your brief introduction.', false, false, 'OK', 'Reminder');
       return;
     }
     let status = this.data.status;
@@ -128,22 +128,7 @@ Page({
             url: '../../Home/Success/index?status=0',
           })
         } else {
-          switch (res.data.resType) {
-            case 1:
-              //参数有误
-              $common.showModal('registration failed', false, false, 'OK', 'Prompt');
-              break;
-            case 2:
-              //openid非法
-              $common.showModal('registration failed', false, false, 'OK', 'Prompt');
-              break;
-            case 3:
-              $common.showModal('The tutor has been registered', false, false, 'OK', 'Prompt');
-              break;
-            case 4:
-              $common.showModal('registration failed', false, false, 'OK', 'Prompt');
-              break;
-          }
+          $common.showModal('registration failed', false, false, 'OK', 'Reminder');
         }
       }.bind(this)
     )
@@ -228,7 +213,7 @@ Page({
         this.getForTeaStatus();
         break;
       case 1: //外教基本资料
-        titleText = 'Basic info';
+        titleText = 'Basic information';
         this.initTeacherInfo();
         break;
     }
@@ -267,7 +252,7 @@ Page({
               //用户点击确定，重新请求国籍信息
               this.getCountryInfo();
             }
-          }, 'OK', 'Prompt', 'NO');
+          }, 'OK', 'Reminder', 'NO');
         }
       });
   },

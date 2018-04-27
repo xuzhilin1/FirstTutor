@@ -14,6 +14,7 @@ Page({
     let status = this.data.status;
     let titleText = '',
       contentText = '';
+    let isEn = wx.getStorageSync('isEn');
     switch (status) {
       case 0: //外教资格申请
         titleText = '申请FirstTutor外教资格';
@@ -27,8 +28,13 @@ Page({
         }
         break;
       case 1: //活动报名
-        titleText = '活动报名成功';
-        contentText = '恭喜您报名成功！';
+        if (isEn) {
+          titleText = 'Successful registration';
+          contentText = 'Congratulations on your registration!';
+        } else {
+          titleText = '活动报名成功';
+          contentText = '恭喜您报名成功！';
+        }
         this.getPosterInfo();
         break;
     }
@@ -40,6 +46,7 @@ Page({
     })
   },
   getPosterInfo() {//生成海报
+    let isEn = wx.getStorageSync('isEn');
     $common.request(
       'POST',
       $common.config.GetPosterInfo,
@@ -52,11 +59,19 @@ Page({
 
           })
         } else {
-          $common.showModal('未知错误');
+          if (isEn) {
+            $common.showModal('Unknown Error', false, false, 'Ok', 'Reminder');
+          } else {
+            $common.showModal('未知错误');
+          }
         }
       },
       (res) => {
-        // $common.showModal('亲~网络不给力哦，请稍后重试');
+        if (isEn) {
+          $common.showModal('Unknown Error', false, false, 'Ok', 'Reminder');
+        } else {
+          $common.showModal('未知错误');
+        }
       },
       (res) => {
         wx.hideLoading();
@@ -81,7 +96,9 @@ Page({
               this.saveImage();
             },
             fail: (res) => {
-              $common.showModal('是否授权保存到相册?', true, (res) => {
+              let isEn = wx.getStorageSync('isEn');
+              let text = isEn ? "Whether or not authorized?" : "是否授权保存到相册？";
+              $common.showModal(text, true, (res) => {
                 if (res.confirm) {
                   wx.openSetting({
                     success: (res) => {
@@ -103,6 +120,7 @@ Page({
     let srcPoster = this.data.srcPoster,
       url = this.data.poster.PstImgName;
     let filePath = `${srcPoster}${url}`;
+    let isEn = wx.getStorageSync('isEn');
     wx.downloadFile({  //保存图片必须先下载
       url: filePath,
       success: (res) => {
@@ -114,15 +132,17 @@ Page({
               this.setData({ //海报隐藏
                 isPoster: false
               })
+              let text = isEn ? "Save success" : "保存成功";
               wx.showToast({
-                title: '保存成功',
+                title: text,
                 icon: 'success',
                 duration: 2000
               })
             },
             fail: (res) => {
+              let text = isEn ? "Save failed" : "保存失败";
               wx.showToast({
-                title: '保存失败',
+                title: text,
                 icon: 'none',
                 duration: 2000
               })
@@ -133,7 +153,12 @@ Page({
         }
       },
       fail: (res) => {
-        $common.showModal('亲~网络不给力哦，请稍后重试');
+        if (isEn) {
+          $common.showModal('Unknown Error', false, false, 'Ok', 'Reminder');
+        } else {
+          $common.showModal('未知错误');
+        }
+
       }
     })
   },
@@ -170,11 +195,18 @@ Page({
 
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
+  isEnEvent(res) { //判断当前显示中英文
+    let isEn = wx.getStorageSync('isEn');
+    this.setData({
+      isEn: isEn
+    });
+    let text = isEn ? "Activity Details" : "活动详情";
+    wx.setNavigationBarTitle({
+      title: text
+    })
+  },
   onShow: function () {
-
+    this.isEnEvent();
   },
 
   /**

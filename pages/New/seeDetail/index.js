@@ -13,7 +13,7 @@ Page({
   onlineChart() { //立即沟通
     let userId = this.data.lnd.UserId;
     wx.navigateTo({
-      url: `../../New/onlineChart/index?userId=${userId}&isTeacher=true`,
+      url: `../../New/onlineChart/index?userId=${userId}`,
     })
   },
   complateAddress(res) { //区域
@@ -28,7 +28,7 @@ Page({
     return data;
   },
   init() {
-    wx.showLoading({ title: '努力加载中...' });
+    wx.showLoading({ title: 'Loading...' });
     $common.request(
       'POST',
       $common.config.GetMyLearnNeedInfo,
@@ -46,18 +46,11 @@ Page({
             lnd: data
           })
         } else {
-          switch (res.data.errType) {
-            case 1:
-              $common.showModal('参数错误');
-              break;
-            case 2:
-              $common.showModal('未知错误');
-              break;
-          }
+          $common.showModal('Unknown Error', false, false, 'Ok', 'Reminder');
         }
       },
       (res) => {
-
+        $common.showModal('Unknown Error', false, false, 'Ok', 'Reminder');
       },
       (res) => {
         wx.hideLoading();

@@ -57,7 +57,7 @@ Page({
       isShow: true,
       url: '/images/LI_16.png',
       title: "Your Messages",
-      luJin: '../Online/index?isTeacher=true'
+      luJin: '../Online/index'
     },
     {
       id: 8,
@@ -104,13 +104,8 @@ Page({
     }],
   },
   loading() {
-    let userType = this.data.userType;
-    let text = '';
-    if (userType === 2) { //外教身份
-      text = 'Loading...'
-    } else { //学生身份
-      text = '努力加载中...'
-    }
+    let isEn = wx.getStorageSync('isEn');
+    let text = isEn ? "Loading..." : "努力加载中...";
     return text;
   },
   getIsVip(callback) {//获取外教是否为vip
@@ -170,21 +165,10 @@ Page({
             this.getIsVip();
           }
         } else {
-          switch (res.data.errType) {
-            case 1:
-              //参数不对
-              break;
-            case 2:
-              //异常
-              break;
-            case 3:
-              //未知错误
-              break;
-          }
         }
       },
       (res) => {
-        $common.showModal('亲~网络不给力哦，请稍后重试');
+        // $common.showModal('亲~网络不给力哦，请稍后重试');
       },
       (res) => {
         wx.hideLoading();
@@ -229,13 +213,6 @@ Page({
     );
   },
   jump(e) {  // 跳转
-    let openid = wx.getStorageSync('openid');
-    if (openid === null || openid === '') {
-      $common.showModal('我们需要您的个人信息', false, function () {
-        $common.getOpenid();
-      }.bind(this));
-      return;
-    }
     let url = e.currentTarget.dataset.url;
     wx.navigateTo({
       url: url,
@@ -258,14 +235,7 @@ Page({
             unReadC: parseInt(res.data.unReadC)
           })
         } else {
-          switch (res.data.errType) {
-            case 1:
-              //参数不正确
-              break;
-            case 2:
-              //未知错误
-              break;
-          }
+
         }
       },
       (res) => {
@@ -290,14 +260,7 @@ Page({
             notCNum: parseInt(res.data.notCNum)
           })
         } else {
-          switch (res.data.errType) {
-            case 1:
-              //参数错误
-              break;
-            case 2:
-              //未知错误
-              break;
-          }
+
         }
       },
       (res) => {
@@ -314,14 +277,14 @@ Page({
 
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
+
   onShow: function () {
+    this.setData({
+      openid: wx.getStorageSync('openid')
+    })
     this.init();
     this.getMsgCount();
     this.getMsgOrderCount();
-
   },
 
   /**

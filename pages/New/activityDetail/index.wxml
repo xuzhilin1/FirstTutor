@@ -9,7 +9,7 @@
 <!--  
     中文版
   -->
-<block wx:if='{{false}}'>
+<block wx:if='{{!isEn}}'>
   <view class='middle-middle bg-fff'>
     <view class='fon-32 margin-b-20'>{{atyInfo.AtyTitle}}</view>
     <view class='fon-24 c8'>
@@ -57,7 +57,7 @@
 <!--  
   英文版 
  -->
-<block wx:if='{{true}}'>
+<block wx:if='{{isEn}}'>
   <view class='middle-middle bg-fff'>
     <view class='fon-32 margin-b-20'>{{atyInfo.AtyTitle}}</view>
     <view class='fon-24 c8'>

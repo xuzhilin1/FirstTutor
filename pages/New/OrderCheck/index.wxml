@@ -14,5 +14,5 @@
   </view>
 </view>
 <view wx:if='{{cogList.length<=0}}' class='noData'>
-  暂无数据
+  No Data
 </view>

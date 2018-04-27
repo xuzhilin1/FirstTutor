@@ -4,7 +4,6 @@
 const $common = require('../../../utils/common.js');
 Page({
   data: {
-    isTeacher: false,// true 外教。 false 学生
     infoList: [],
     pageSize: 10,
     pageIndex: 1,
@@ -12,16 +11,9 @@ Page({
   onlineChart(e) { //进入到聊天页面
     let index = e.currentTarget.dataset.index,
       infoList = this.data.infoList;
-    let isTeacher = this.data.isTeacher;
-    if (isTeacher) {
-      wx.navigateTo({
-        url: `../onlineChart/index?userId=${infoList[index].UserId}&isTeacher=true`,
-      })
-    } else {
-      wx.navigateTo({
-        url: `../onlineChart/index?userId=${infoList[index].UserId}`,
-      })
-    }
+    wx.navigateTo({
+      url: `../onlineChart/index?userId=${infoList[index].UserId}`,
+    })
   },
   timeStamp(time) { //时间戳转换为日期
     time = time.replace("/Date(", '').replace(')/', '');
@@ -52,7 +44,9 @@ Page({
     let pageIndex = isReach ? this.data.pageIndex : 1,
       pageSize = this.data.pageSize;
     let infoList = isReach ? this.data.infoList : [];
-    wx.showLoading({ title: '努力加载中...' });
+    let isEn = wx.getStorageSync('isEn');
+    let text = isEn ? 'Lodaing...' : '努力加载中...';
+    wx.showLoading({ title: text });
     $common.request(
       'POST',
       $common.config.GetChatMemRecord,
@@ -74,18 +68,19 @@ Page({
             pageIndex: pageIndex
           })
         } else {
-          switch (res.data.errType) {
-            case 1:
-              $common.showModal('参数有误');
-              break;
-            case 2:
-              $common.showModal('未知错误');
-              break;
+          if (isEn) {
+            $common.showModal('Unknown Error', false, false, 'Ok', 'Reminder');
+          } else {
+            $common.showModal('未知错误');
           }
         }
       },
       (res) => {
-
+        if (isEn) {
+          $common.showModal('Unknown Error', false, false, 'Ok', 'Reminder');
+        } else {
+          $common.showModal('未知错误');
+        }
       },
       (res) => {
         wx.hideLoading();
@@ -95,25 +90,25 @@ Page({
   },
 
   onLoad: function (options) {
-    let isTeacher = options.isTeacher ? true : false;
-    this.setData({
-      isTeacher: isTeacher
-    })
-    if (isTeacher) { //外教，改标题为英文版
-      wx.setNavigationBarTitle({
-        title: 'Your Messages',
-      })
-    }
+
   },
 
   onReady: function () {
 
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
+  isEnEvent(res) { //判断当前显示中英文
+    let isEn = wx.getStorageSync('isEn');
+    this.setData({
+      isEn: isEn
+    });
+    let text = isEn ? "Your Messages" : "在线沟通";
+    wx.setNavigationBarTitle({
+      title: text
+    })
+  },
   onShow: function () {
+    this.isEnEvent();
     this.getPageList();
   },
 

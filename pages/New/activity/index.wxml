@@ -1,5 +1,5 @@
 <!--  中文版  -->
-<block wx:if='{{true}}'>
+<block wx:if='{{!isEn}}'>
   <view wx:for='{{atyInfos}}' wx:key='{{index}}' class='outer margin-b-20 bg-fff'>
     <view class='flex between'>
       <image class='imga' src='{{srcActivity}}{{item.AtyImgPath}}'></image>
@@ -22,7 +22,7 @@
   </view>
 </block>
 <!--  英文版  -->
-<block wx:if='{{false}}'>
+<block wx:if='{{isEn}}'>
   <view wx:for='{{atyInfos}}' wx:key='{{index}}' class='outer margin-b-20 bg-fff'>
     <view class='flex between'>
       <image class='imga' src='{{srcActivity}}{{item.AtyImgPath}}'></image>

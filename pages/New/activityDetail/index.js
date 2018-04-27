@@ -47,7 +47,9 @@ Page({
     return status;
   },
   init() {
-    wx.showLoading({ title: '努力加载中...' });
+    let isEn = wx.getStorageSync('isEn');
+    let text = isEn ? 'Loading...' : '努力加载中...';
+    wx.showLoading({ title: text });
     $common.request(
       'POST',
       $common.config.GetAtyDesInfo,
@@ -75,18 +77,15 @@ Page({
             alreadySignUp: res.data.alreadySignUp
           })
         } else {
-          switch (res.data.errType) {
-            case 1:
-              $common.showModal('参数有误');
-              break;
-            case 2:
-              $common.showModal('未知错误');
-              break;
+          if (isEn) {
+            $common.showModal('Unknown Error', false, false, 'Ok', 'Reminder');
+          } else {
+            $common.showModal('未知错误');
           }
         }
       },
       (res) => {
-        $common.showModal('亲~网络不给力哦，请稍后重试');
+        $common.showModal('Unknown Error', false, false, 'Ok', 'Reminder');
       },
       (res) => {
         wx.hideLoading();
@@ -116,11 +115,18 @@ Page({
 
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
+  isEnEvent(res) { //判断当前显示中英文
+    let isEn = wx.getStorageSync('isEn');
+    this.setData({
+      isEn: isEn
+    });
+    let text = isEn ? "Activity Details" : "活动详情";
+    wx.setNavigationBarTitle({
+      title: text
+    })
+  },
   onShow: function () {
-
+    this.isEnEvent();
   },
 
   /**

@@ -1,7 +1,7 @@
 <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
   <view class='flex1 aitems-center  fon-30 flex '>
-    <view class='width-left'>Names</view>
-    <input bindinput='bindUserName' class='ca input-width' value='{{userName}}' placeholder='unfilled'></input>
+    <view class='width-left'>Name</view>
+    <input bindinput='bindUserName' class='ca input-width' value='{{userName}}' placeholder='To be Filled in'></input>
   </view>
 </view>
 
@@ -33,7 +33,7 @@
 <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
   <view class='flex1 aitems-center  fon-30 flex '>
     <view class='width-left'>WeChat</view>
-    <input bindinput='bindWeChat' class='ca input-width' value='{{weChat}}' placeholder='unfilled'></input>
+    <input bindinput='bindWeChat' class='ca input-width' value='{{weChat}}' placeholder='To be Filled in'></input>
   </view>
 </view>
 
@@ -52,14 +52,14 @@
 <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
   <view class='flex1 aitems-center  fon-30 flex '>
     <view class='width-left'>University</view>
-    <input bindinput='bindSchool' class='ca input-width' value='{{school}}' placeholder='unfilled'></input>
+    <input bindinput='bindSchool' class='ca input-width' value='{{school}}' placeholder='To be Filled in'></input>
   </view>
 </view>
 
 <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
   <view class='flex1 aitems-center  fon-30 flex '>
-    <view class='width-left'>Introduction</view>
-    <input bindinput='bindSynopsis' class='ca input-width' placeholder='Fill in up to 40 characters' value='{{synopsis}}' maxlength='40'></input>
+    <view class='width-left'>Brief Introduction</view>
+    <input bindinput='bindSynopsis' class='ca input-width' placeholder='Maximum of 40 Characters' value='{{synopsis}}' maxlength='40'></input>
   </view>
 </view>
 

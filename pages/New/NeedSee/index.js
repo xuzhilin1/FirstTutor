@@ -3,6 +3,7 @@
  */
 const $common = require('../../../utils/common.js');
 const $static = require('../../../utils/static.js');
+const $translate = require('../../../utils/translate.js');
 Page({
   data: {
     lnList: [],
@@ -39,43 +40,8 @@ Page({
             pageIndex++;
           }
           for (let i = 0, len = data.length; i < len; i++) {
-            switch (data[i].NedClaTime) {
-              case 1:
-                data[i].time = 'AM';
-                break;
-              case 2:
-                data[i].time = 'PM1';
-                break;
-              case 3:
-                data[i].time = 'PM2';
-                break;
-              case 4:
-                data[i].time = 'PM3';
-                break;
-            }
-            switch (parseInt(data[i].NedCorAfw)) {
-              case 1:
-                data[i].week = 'Monday';
-                break;
-              case 2:
-                data[i].week = 'Tuesday';
-                break;
-              case 3:
-                data[i].week = 'Wednesday';
-                break;
-              case 4:
-                data[i].week = 'Thursday';
-                break;
-              case 5:
-                data[i].week = 'Friday';
-                break;
-              case 6:
-                data[i].week = 'Saturday';
-                break;
-              case 7:
-                data[i].week = 'Sunday';
-                break;
-            }
+            data[i].time = $translate.translateTimeEn(data[i].NedClaTime);
+            data[i].week = $translate.translateWeekEn(parseInt(data[i].NedCorAfw));
             for (let j = 0, l = addressData.length; j < l; j++) {
               if (addressData[j].id === data[i].NedClaArea) {
                 data[i].address = addressData[j].area

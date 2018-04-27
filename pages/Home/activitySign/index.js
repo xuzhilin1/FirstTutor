@@ -29,12 +29,21 @@ Page({
     let userName = this.data.userName,
       phone = this.data.phone,
       remark = this.data.remark;
+    let isEn = wx.getStorageSync('isEn');
     if (userName.trim().length <= 0) {
-      $common.showModal('请输入姓名');
+      if (isEn) {
+        $common.showModal('Please fill in your name.', false, false, 'Ok', 'Reminder');
+      } else {
+        $common.showModal('请输入姓名');
+      }
       return;
     }
     if (!$common.phoneReg.test(phone)) {
-      $common.showModal('请输入正确的手机号');
+      if (isEn) {
+        $common.showModal('Please fill in the correct phone number.', false, false, 'Ok', 'Reminder');
+      } else {
+        $common.showModal('请输入正确的手机号');
+      }
       return;
     }
     $common.request(
@@ -98,27 +107,32 @@ Page({
           }
           return;
           wx.navigateTo({ //跳转到报名成功页面
-            url: '../Success/index?status=1',
+            url: '/pages/Home/Success/index?status=1',
           })
         } else {
           switch (res.data.errType) {
-            case 1:
-              $common.showModal('参数有误');
-              break;
-            case 2:
-              $common.showModal('未知错误');
-              break;
             case 3:
-              $common.showModal('报名人数已满');
+              if (isEn) {
+                $common.showModal('The enrollment is full.', false, false, 'Ok', 'Reminder');
+              } else {
+                $common.showModal('报名人数已满');
+              }
               break;
-            case 2:
-              $common.showModal('报名失败');
-              break;
+            default:
+              if (isEn) {
+                $common.showModal('Unknown Error', false, false, 'Ok', 'Reminder');
+              } else {
+                $common.showModal('未知错误');
+              }
           }
         }
       },
       (res) => {
-        $common.showModal('亲~网络不给力哦，请稍后重试');
+        if (isEn) {
+          $common.showModal('Unknown Error', false, false, 'Ok', 'Reminder');
+        } else {
+          $common.showModal('未知错误');
+        }
       },
       (res) => {
         console.log(res);
@@ -145,12 +159,18 @@ Page({
   onReady: function () {
 
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
+  isEnEvent(res) { //判断当前显示中英文
+    let isEn = wx.getStorageSync('isEn');
+    this.setData({
+      isEn: isEn
+    });
+    let text = isEn ? "Activity Details" : "活动详情";
+    wx.setNavigationBarTitle({
+      title: text
+    })
+  },
   onShow: function () {
-
+    this.isEnEvent();
   },
 
   /**

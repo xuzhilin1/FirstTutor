@@ -1,7 +1,7 @@
 <!--
   中文版
   -->
-<block wx:if='{{false}}'>
+<block wx:if='{{!isEn}}'>
   <view class='big-outer'>
     <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between bg-fff'>
       <view class='flex1 aitems-center  fon-30 flex '>
@@ -33,7 +33,7 @@
 <!--
   英文版
   -->
-<block wx:if='{{true}}'>
+<block wx:if='{{isEn}}'>
   <view class='big-outer'>
     <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between bg-fff'>
       <view class='flex1 aitems-center  fon-30 flex '>

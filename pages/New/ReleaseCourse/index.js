@@ -7,7 +7,7 @@ Page({
     isCourseIntroduce: false, //课程介绍是否显示
     courseIntroduce: '', //课程介绍
     courseTime: [], //上课时间段
-    courseType: ['一对一', '一对二', '一对三'],
+    courseType: ['One to One', 'One to Two', 'One to Three'],
     courseTypeIndex: 0, //课程类型下标,
     courseName: '', //课程名称
     coursePrice: '0',
@@ -75,27 +75,27 @@ Page({
       isCourseIntroduce = this.data.isCourseIntroduce;
     if (courseName.trim().length <= 0) {
       // $common.showModal('请填写课程名称');
-      $common.showModal('Please fill in the course name', false, false, 'OK', 'Prompt');
+      $common.showModal('Please fill in the course name.', false, false, 'OK', 'Reminder');
       return;
     }
     if (!courseAllPrice) {
       // $common.showModal('请填写课程价格');
-      $common.showModal('Please fill in the course price', false, false, 'OK', 'Prompt');
+      $common.showModal('Please fill in the course price', false, false, 'OK', 'Reminder');
       return;
     }
     if (isNaN(courseAllPrice) && Number(courseAllPrice).toFixed(2) < 0) {
       // $common.showModal('请填写有效的价格');
-      $common.showModal('Please fill in a valid price', false, false, 'OK', 'Prompt');
+      $common.showModal('Please fill in a valid price', false, false, 'OK', 'Reminder');
       return;
     }
     if (courseTime.length <= 0) {
       // $common.showModal('请选择时间段');
-      $common.showModal('Please select time period', false, false, 'OK', 'Prompt');
+      $common.showModal('Please select time period', false, false, 'OK', 'Reminder');
       return;
     }
     if (!isCourseIntroduce) {
       // $common.showModal('请填写课程介绍');
-      $common.showModal('Please fill in the course description', false, false, 'OK', 'Prompt');
+      $common.showModal('Please fill in the course description', false, false, 'OK', 'Reminder');
       return;
     }
     if (this.data.status === 0 || this.data.status === 3) {
@@ -149,21 +149,11 @@ Page({
             })
           }, 1500);
         } else {
-          switch (res.data.errType) {
-            case 1:
-              // $common.showModal('参数不正确');
-              $common.showModal('unknown mistake', false, false, 'OK', 'Prompt');
-              break;
-            case 2:
-              // $common.showModal('未知错误');
-              $common.showModal('unknown mistake', false, false, 'OK', 'Prompt');
-              break;
-          }
+          $common.showModal('Unknown Error', false, false, 'OK', 'Reminder');
         }
       },
       (res) => {
-        // $common.showModal('亲~网络不给力哦，请稍后重试');
-        $common.showModal('Pro-network does not work Oh, please try again later', false, false, 'OK', 'Prompt');
+        $common.showModal('Unknown Error', false, false, 'OK', 'Reminder');
       },
       (res) => {
       }
@@ -188,7 +178,7 @@ Page({
       (res) => {
         if (res.data.res) {
           wx.showToast({
-            title: '发布成功',
+            title: 'Success',
             icon: 'success',
             duration: 1500,
           })
@@ -205,25 +195,11 @@ Page({
             }
           }, 1500);
         } else {
-          switch (res.data.errType) {
-            case 1:
-              // $common.showModal('参数有误');
-              $common.showModal('unknown mistake', false, false, 'OK', 'Prompt');
-              break;
-            case 2:
-              // $common.showModal('未知异常');
-              $common.showModal('unknown mistake', false, false, 'OK', 'Prompt');
-              break;
-            case 3:
-              // $common.showModal('未知错误');
-              $common.showModal('unknown mistake', false, false, 'OK', 'Prompt');
-              break;
-          }
+          $common.showModal('Unknown Error', false, false, 'OK', 'Reminder');
         }
       },
       (res) => {
-        // $common.showModal('亲~网络不给力哦，请稍后重试');
-        $common.showModal('Pro-network does not work Oh, please try again later', false, false, 'OK', 'Prompt');
+        $common.showModal('Unknown Error', false, false, 'OK', 'Reminder');
       },
       (res) => {
       }
@@ -231,7 +207,7 @@ Page({
   },
 
   getAlterCourse() { //修改课程，获取课程信息
-    wx.showLoading({ title: '努力加载中...' });
+    wx.showLoading({ title: 'Loading...' });
     let CorId = this.data.CorId;
     $common.request(
       "POST",
@@ -264,21 +240,11 @@ Page({
           this.init();
           this.changePrice();
         } else {
-          switch (res.data.errType) {
-            case 1:
-              // $common.showModal('参数有误');
-              $common.showModal('unknown mistake', false, false, 'OK', 'Prompt');
-              break;
-            case 2:
-              // $common.showModal('未知错误');
-              $common.showModal('unknown mistake', false, false, 'OK', 'Prompt');
-              break;
-          }
+          $common.showModal('Unknown Error', false, false, 'OK', 'Reminder');
         }
       },
       (res) => {
-        // $common.showModal('亲~网络不给力哦，请稍后重试');
-        $common.showModal('Pro-network does not work Oh, please try again later', false, false, 'OK', 'Prompt');
+        $common.showModal('Unknown Error', false, false, 'OK', 'Reminder');
       },
       (res) => {
         wx.hideLoading();
@@ -321,10 +287,10 @@ Page({
     })
     switch (status) {
       case 0: //发布课程
-        titleText = 'Publishing courses';
+        titleText = 'Launch Course';
         break;
       case 1: //修改课程
-        titleText = 'Modify course';
+        titleText = 'Modify Course';
         this.getAlterCourse();
         break;
     }
