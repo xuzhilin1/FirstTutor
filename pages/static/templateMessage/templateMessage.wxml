@@ -1,0 +1,22 @@
+<!--pages/static/templateMessage/templateMessage.wxml-->
+<view class='header'>
+  <view class='fon-30'>
+    Why do I need to set up template message push?
+  </view>
+  <text class='fon-24 c8'>
+  Due to the small program does not support the initiative micro letter issued by the template, in order to facilitate a foreign teacher in a timely manner to understand whether there are new orders and students consulting, we will through micro public letter number and message way push related notice to you, please according to the following two steps to set template messages.
+  </text>
+</view>
+<view class='item'>
+  <view class='title fon-28 border-b-1'>
+    Step one, focus on WeChat public.
+  </view>
+</view>
+<view class='item'>
+  <view class='title fon-28 border-b-1'>
+    Step two, enter the WeChat public number to bind.
+  </view>
+  <view class='item-context fon-24'>
+    Click the WeChat public number custom menu "教师绑定" to bind the mobile phone number (the phone number is consistent with the registered foreign phone number). Once the binding is successful, you can receive an order or a notification of your reply.
+  </view>
+</view>

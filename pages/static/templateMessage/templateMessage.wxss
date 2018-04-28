@@ -1,0 +1,22 @@
+/* pages/static/templateMessage/templateMessage.wxss */
+
+.header {
+  width: 100%;
+  background: #fff;
+  box-sizing: border-box;
+  padding: 30rpx;
+}
+
+.title {
+  font-weight: bold;
+  padding: 30rpx;
+}
+
+.item {
+  background: #fff;
+  margin-top: 20rpx;
+}
+
+.item-context {
+  padding: 30rpx;
+}

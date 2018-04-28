@@ -5,22 +5,56 @@ const $common = require('../../../utils/common.js');
 Page({
   data: {
     input: '',
-    placeholder: '请填写意见，最多不超过1000个字符',
+    userName: '',
+    phone: ''
+  },
+  bindUserName(e) { //姓名
+    this.data.userName = e.detail.value;
+  },
+  bindPhone(e) { //电话
+    this.data.phone = e.detail.value;
   },
   bindInput(e) {
     this.data.input = e.detail.value;
   },
   submit() {
-    let input = this.data.input;
+    let input = this.data.input,
+      userName = this.data.userName,
+      phone = this.data.phone;
+    let isEn = wx.getStorageSync('isEn');
+    if (userName.trim().length <= 0) {
+      if (isEn) {
+        $common.showModal('Please fill in your name', false, false, 'Ok', 'Reminder');
+      } else {
+        $common.showModal('请填写您的姓名');
+      }
+      return;
+    }
+    if (!$common.phoneReg.test(phone)) {
+      if (isEn) {
+        $common.showModal('Please fill in the correct phone number', false, false, 'Ok', 'Reminder');
+      } else {
+        $common.showModal('请填写正确的手机号');
+      }
+      return;
+    }
     if (input.trim().length <= 0) {
-      $common.showModal('请填写反馈意见');
+      if (isEn) {
+        $common.showModal('Please fill in the comments', false, false, 'Ok', 'Reminder');
+      } else {
+        $common.showModal('请填写您的反馈意见');
+      }
       return;
     }
     $common.request(
       'POST',
       $common.config.PublishFeedBack,
       {
-        fbkCon: input,
+        fbkC: {
+          FbkPhone: phone,
+          FbkCon: input,
+          FbkName: userName
+        },
         openId: wx.getStorageSync('openid')
       },
       (res) => {
@@ -36,7 +70,11 @@ Page({
           }, 1500)
         } else {
           //1 参数不正确 2 未知错误
-          $common.showModal('未知错误');
+          if (isEn) {
+            $common.showModal('Unknown Error', false, false, 'Ok', 'Reminder');
+          } else {
+            $common.showModal('未知错误');
+          }
         }
       },
       (res) => {
@@ -58,11 +96,18 @@ Page({
   onReady: function () {
 
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
+  isEnEvent() {
+    let isEn = wx.getStorageSync('isEn');
+    this.setData({
+      isEn: isEn
+    })
+    let text = isEn ? "Feedback" : "意见反馈";
+    wx.setNavigationBarTitle({
+      title: text
+    })
+  },
   onShow: function () {
+    this.isEnEvent();
   },
 
   /**

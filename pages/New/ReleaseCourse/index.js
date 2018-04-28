@@ -293,6 +293,9 @@ Page({
         titleText = 'Modify Course';
         this.getAlterCourse();
         break;
+      case 3: //教师注册发布课程
+        titleText = 'Launch Course';
+        break;
     }
     wx.setNavigationBarTitle({
       title: titleText,

@@ -17,6 +17,7 @@ Page({
     passport: '',
     email: '',
     certificate: [],
+    idPicture: '',
     video: "",
     sexIndex: 0,
     age: '30',
@@ -47,6 +48,36 @@ Page({
   },
   bindemail(e) { //邮箱
     this.data.email = e.detail.value;
+  },
+  uploadidPicture() { //上传证件照
+    $common.chooseImage(function (res) {
+      let image = res.tempFilePaths[0];
+      wx.showLoading({ title: 'uploading...' });
+      wx.uploadFile({
+        url: $common.config.UpLoadForTeaFile,
+        filePath: image,
+        name: 'file',
+        formData: {
+          fileType: 1
+        },
+        success: (res) => {
+          let data = JSON.parse(res.data);
+          if (data.res) {
+            this.setData({
+              idPicture: data.imgName
+            })
+          } else {
+            $common.showModal('Upload Failed', false, false, 'OK', 'Reminder');
+          }
+        },
+        fail: () => {
+          $common.showModal('Unknown Error', false, false, 'OK', 'Reminder');
+        },
+        complete: (res) => {
+          wx.hideLoading();
+        }
+      })
+    }.bind(this), 1);
   },
   uploadCertificate() { //上传资质
     wx.navigateTo({
@@ -118,6 +149,7 @@ Page({
       passport = this.data.passport,
       email = this.data.email,
       certificate = this.data.certificate,
+      idPicture = this.data.idPicture,
       video = this.data.video,
       age = this.data.age,
       weChat = this.data.weChat,
@@ -146,6 +178,10 @@ Page({
       $common.showModal('Please upload the tutor certificate picture.', false, false, 'Ok', 'Reminder');
       return;
     }
+    if (!idPicture) {
+      $common.showModal('Please upload the Head Shot.', false, false, 'Ok', 'Reminder');
+      return;
+    }
     if (!video) {
       $common.showModal('Please upload the tutor class video.', false, false, 'Ok', 'Reminder');
       return;
@@ -163,7 +199,7 @@ Page({
       return;
     }
     if (!checkbox) {
-      $common.showModal('请阅读并同意条款', false, false, 'Ok', 'Prompt');
+      $common.showModal('Please read and agree to the "Terms and conditions.', false, false, 'Ok', 'Prompt');
       return;
     }
     let arr = [];
@@ -205,7 +241,7 @@ Page({
             })
           }
         } else {
-          if (res.data.errType == 3) {//已注册
+          if (res.data.resType == 3) {//已注册
             wx.switchTab({
               url: '/pages/Home/Home/index',
             })

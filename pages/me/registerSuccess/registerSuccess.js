@@ -6,7 +6,12 @@ Page({
   data: {
 
   },
-  releaseCourse() {
+  templateMessage() { //设置模板消息
+    wx.navigateTo({
+      url: '/pages/static/templateMessage/templateMessage',
+    })
+  },
+  releaseCourse() { //发布课程
     wx.navigateTo({
       url: '/pages/New/ReleaseCourse/index?status=3',
     })

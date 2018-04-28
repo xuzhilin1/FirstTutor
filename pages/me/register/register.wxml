@@ -38,6 +38,16 @@
     <input bindinput='bindemail' class='ca input-width' value='{{email}}' placeholder='To be Filled in'></input>
   </view>
 </view>
+<!--  上传证件照  -->
+<view bindtap='uploadidPicture' class='flex height-85 border-b-1 padding-lr-30  between aitems-center'>
+  <view class='flex picker aitems-center '>
+    <view class="fon-30 flex aitems-center yanse ">
+      <view class='width-l'>Head Shot</view>
+      <view class='ca'>{{idPicture?"Uploaded":"Not Uploaded"}}</view>
+    </view>
+  </view>
+  <image mode='widthFix' style='width:20rpx;' src='/images/jian_13.png'></image>
+</view>
 <!--  上传资质  -->
 <view bindtap='uploadCertificate' class='flex height-85 border-b-1 padding-lr-30  between aitems-center'>
   <view class='flex picker aitems-center '>

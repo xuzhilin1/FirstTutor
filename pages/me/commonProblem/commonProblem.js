@@ -8,7 +8,9 @@ Page({
 
   },
   init() {
-    wx.showLoading({ title: '努力加载...' });
+    let isEn = wx.getStorageSync('isEn');
+    let text = isEn ? "Loading..." : "努力加载...";
+    wx.showLoading({ title: text });
     $common.request(
       'POST',
       $common.config.GetUserHelp,
@@ -44,11 +46,18 @@ Page({
     this.init();
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
+  isEnEvent() {
+    let isEn = wx.getStorageSync('isEn');
+    this.setData({
+      isEn: isEn
+    })
+    let text = isEn ? "Common problems" : "常见问题";
+    wx.setNavigationBarTitle({
+      title: text
+    })
+  },
   onShow: function () {
-
+    this.isEnEvent();
   },
 
   /**

@@ -8,7 +8,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    phone: '021-54245895'
+    phone: '',
+    weChat: ''
   },
   call() { //打电话
     wx.makePhoneCall({
@@ -26,7 +27,9 @@ Page({
     })
   },
   init() {
-    wx.showLoading({ title: '努力加载...' });
+    let isEn = wx.getStorageSync('isEn');
+    let text = isEn ? "Loading..." : "努力加载...";
+    wx.showLoading({ title: text });
     $common.request(
       'POST',
       $common.config.GetUserHelp,
@@ -36,7 +39,8 @@ Page({
       (res) => {
         if (res.data.res) {
           this.setData({
-            phone: res.data.UhPhone
+            phone: res.data.UhPhone,
+            weChat: res.data.UhWeChatNum
           })
         }
       },
@@ -63,11 +67,18 @@ Page({
 
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
+  isEnEvent() {
+    let isEn = wx.getStorageSync('isEn');
+    this.setData({
+      isEn: isEn
+    })
+    let text = isEn ? "Help and feedback" : "帮助与反馈";
+    wx.setNavigationBarTitle({
+      title: text
+    })
+  },
   onShow: function () {
-
+    this.isEnEvent();
   },
 
   /**
@@ -88,6 +99,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
+    wx.stopPullDownRefresh();
     this.init();
   },
 

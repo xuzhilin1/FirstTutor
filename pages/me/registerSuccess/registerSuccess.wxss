@@ -36,3 +36,9 @@ page {
   left: 0;
   width: 100%;
 }
+.btn-k{
+  background: #ffffff;
+  border: 1px solid #7c99d0;
+  margin-bottom: 20rpx;
+  color: #7c99d0;
+}

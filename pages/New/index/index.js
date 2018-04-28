@@ -63,14 +63,14 @@ Page({
       id: 8,
       isShow: true,
       url: '/images/problem.png',
-      title: "帮助与反馈",
+      title: "Help and feedback",
       luJin: '/pages/me/help/help'
     }, {
       id: 9,
       isShow: true,
       url: '/images/message.png',
-      title: "模板消息设置",
-      luJin: '/pages/me/templateMessage/templateMessage'
+      title: "Set template message",
+      luJin: '/pages/static/templateMessage/templateMessage'
     }],
     //学生
     studentList: [{
