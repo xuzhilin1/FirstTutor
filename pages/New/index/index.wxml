@@ -5,14 +5,14 @@
     <view class='flex aitems-center center'>
       <open-data class="userinfo-nickname" type="userNickName" lang="zh_CN"></open-data>
       <!-- <text class="userinfo-nickname">{{userInfo.nickName}}</text>  -->
-      <image wx:if='{{vip&&userType===2}}' mode='widthFix' class='Guan' src='/images/guan_03.png'></image>
+      <image wx:if='{{vip&&isEn}}' mode='widthFix' class='Guan' src='/images/guan_03.png'></image>
     </view>
   </view>
 </view>
 <!--  列表出现条件，有openid  -->
 <block wx:if='{{openid}}'>
   <!--  学生  -->
-  <view wx:if='{{isPageShow&&userType!=2}}' class='fon-32 ffoter bg-fff '>
+  <view wx:if='{{!isEn}}' class='fon-32 ffoter bg-fff '>
     <view wx:for="{{studentList}}" wx:key='{{index}}' data-url='{{item.luJin}}' bindtap='jump' class='flex lasta between height-102  padding-lr-30 border-t-1 aitems-center'>
       <view class='flex  aitems-center'>
         <image mode='widthFix' style='width:44rpx; margin-right:20rpx' src='{{item.url}}'></image>
@@ -22,7 +22,7 @@
     </view>
   </view>
   <!--  导师  -->
-  <view wx:if='{{isPageShow&&userType==2}}' class='fon-32 ffoter bg-fff '>
+  <view wx:if='{{isEn}}' class='fon-32 ffoter bg-fff '>
     <view wx:if='{{item.isShow}}' wx:for="{{teacherList}}" wx:key='{{index}}' data-url='{{item.luJin}}' bindtap='jump' class='flex lasta between height-102  padding-lr-30 border-t-1 aitems-center'>
       <view class='flex  aitems-center'>
         <image mode='widthFix' style='width:44rpx; margin-right:20rpx' src='{{item.url}}'></image>

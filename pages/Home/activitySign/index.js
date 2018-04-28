@@ -11,19 +11,13 @@ Page({
     price: 0.01
   },
   bindUserName(e) { //姓名
-    this.setData({
-      userName: e.detail.value
-    })
+    this.data.userName = e.detail.value;
   },
   bindPhone(e) { //手机号
-    this.setData({
-      phone: e.detail.value
-    })
+    this.data.phone = e.detail.value;
   },
   bindRemark(e) { //备注
-    this.setData({
-      remark: e.detail.value
-    })
+    this.data.remark = e.detail.value;
   },
   submit() { //立即报名
     let userName = this.data.userName,
@@ -72,7 +66,7 @@ Page({
                 console.log(res);
                 $common.request(
                   'POST',
-                  $common.config.PayMentSuccess,
+                  $common.config.PayMentSuccessActivity,
                   {
                     atyId: this.data.atyId,
                     openId: wx.getStorageSync('openid'),

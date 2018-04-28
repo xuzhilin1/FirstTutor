@@ -91,6 +91,10 @@ Page({
     )
   },
   onLoad: function (options) {
+    let pageType = options.userType && parseInt(options.userType) === 2 ? true : false;
+    if (pageType) { //页面由模板消息进入，身份必须为外教
+      wx.setStorageSync('isEn', true);
+    }
     this.init();
   },
   onReady: function () {

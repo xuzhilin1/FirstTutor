@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/Home/Home/index",
+    "pages/Home/activitySign/index",
     "pages/me/register/register",
     "pages/static/templateMessage/templateMessage",
     "pages/me/registerSuccess/registerSuccess",
@@ -31,7 +32,6 @@
     "pages/New/onlineChart/index",
     "pages/New/ReleaseCourse/index",
     "pages/Home/teachersInformation/index",
-    "pages/Home/activitySign/index",
     "pages/Home/Learningneeds/index",
     "pages/New/orderDetailsS/index",
     "pages/New/GroupList/index",

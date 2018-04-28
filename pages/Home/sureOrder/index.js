@@ -229,7 +229,6 @@ Page({
                   pagePath: pagePath
                 },
                 (res) => {
-
                   wx.redirectTo({
                     url: '../BuySuccess/index?orderType=' + orderType + '&cogId=' + cogId + '&groupType=' + groupType,
                   })
@@ -250,6 +249,8 @@ Page({
 
                 },
                 (res) => {
+                  console.log(res);
+                  console.log(1212);
                 },
               )
             },

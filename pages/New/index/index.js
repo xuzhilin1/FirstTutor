@@ -5,7 +5,6 @@ Page({
   data: {
     notCNum: 0, //订单未读
     unReadC: 0, //未读消息，大于0，有
-    isPageShow: false, //页面初始不显示
     userInfo: {},
     userType: 1, //1 学生 2 导师 0 未知,
     vip: false, //是否vip,
@@ -138,6 +137,19 @@ Page({
       $common.getOpenid(this.getMyStatus);
       return;
     }
+    let isEn = wx.getStorageSync('isEn');
+    if (isEn) { //外教
+      wx.setNavigationBarTitle({
+        title: 'Me',
+      })
+      this.getIsVip();
+    } else {//用户身份不是外教,调用注册，防止首页不接收授权
+      this.studentRegister();
+      wx.setNavigationBarTitle({
+        title: '我',
+      })
+    }
+    return;
     wx.showLoading({ title: this.loading() });
     this.getMyStatus();
   },
@@ -154,7 +166,6 @@ Page({
           this.setData({
             userInfo: wx.getStorageSync('userInfo'),
             userType: userType,
-            isPageShow: true,
           });
           if (parseInt(userType) !== 2) {//用户身份不是外教,调用注册，防止首页不接收授权
             this.studentRegister();
@@ -276,15 +287,17 @@ Page({
   onReady: function () {
 
   },
-
-
   onShow: function () {
+    let isEn = wx.getStorageSync('isEn');
     this.setData({
-      openid: wx.getStorageSync('openid')
+      openid: wx.getStorageSync('openid'),
+      isEn: isEn
     })
     this.init();
     this.getMsgCount();
-    this.getMsgOrderCount();
+    if (isEn) {
+      this.getMsgOrderCount();
+    }
   },
 
   /**
@@ -305,7 +318,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    wx.stopPullDownRefresh();
     this.init();
   },
 

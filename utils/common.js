@@ -78,8 +78,8 @@ const config = {
   AtySignUp: `${host}/LittleProgram/Activity/AtySignUp`,
   //活动--取消活动付费（2018-04-23）
   CanCelPay: `${host}/LittleProgram/Activity/CanCelPay`,
-  //活动--报名支付成功调用（2018-04-23）
-  PayMentSuccess: `${host}/LittleProgram/Activity/PayMentSuccess`,
+  // 学生--活动支付成功，模版消息发送（2018-04-03）
+  PayMentSuccessActivity: `${host}/LittleProgram/Activity/PayMentSuccess`,
   /*
     我的
    */
