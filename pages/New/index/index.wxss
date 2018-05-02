@@ -13,12 +13,18 @@
   height: 300rpx;
 }
 
-.avatarUrl {
+.avatarUrl-box {
   width: 150rpx;
-  border-radius: 50%;
   height: 150rpx;
-  display: block;
+  border-radius: 50%;
   margin: 0 auto;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.avatarUrl {
+  width: 100%;
+  height: 100%;
 }
 
 .Guan {
