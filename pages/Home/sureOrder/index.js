@@ -327,42 +327,6 @@ Page({
       }
     );
   },
-  studentRegister() { //学生注册
-    $common.request(
-      "POST",
-      $common.config.RisStudent,
-      {
-        openId: wx.getStorageSync('openid')
-      },
-      (res) => {
-        if (res.data.res) {
-          switch (res.data.rtnType) {
-            case 1:
-              //注册成功
-              break;
-            case 2:
-              //改账号被禁用,无法访问程序,
-              break;
-            case 3:
-              //账户正常
-              break;
-          }
-        } else {
-          switch (res.data.errType) {
-            case 1:
-              //发生异常
-              break;
-            case 2:
-              //openId错误
-              break;
-            case 3:
-              //未知错误
-              break;
-          }
-        }
-      },
-    );
-  },
   getNameAndPhone() { //获取姓名和手机号
     $common.request(
       'POST',
@@ -458,7 +422,7 @@ Page({
   getOpenCallback() {
     this.getNameAndPhone();
     this.getOrderInfo();
-    this.studentRegister();
+    $common.studentRegister();
   },
   init() {
     let openid = wx.getStorageSync('openid');

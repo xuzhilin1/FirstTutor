@@ -39,46 +39,10 @@ Page({
       areaList: data
     })
   },
-  studentRegister() { //学生注册
-    $common.request(
-      "POST",
-      $common.config.RisStudent,
-      {
-        openId: wx.getStorageSync('openid')
-      },
-      (res) => {
-        if (res.data.res) {
-          switch (res.data.rtnType) {
-            case 1:
-              //注册成功
-              break;
-            case 2:
-              //改账号被禁用,无法访问程序,
-              break;
-            case 3:
-              //账户正常
-              break;
-          }
-        } else {
-          switch (res.data.errType) {
-            case 1:
-              //发生异常
-              break;
-            case 2:
-              //openId错误
-              break;
-            case 3:
-              //未知错误
-              break;
-          }
-        }
-      },
-    );
-  },
   teacherInfo(e) { //跳转外教信息
     let openid = wx.getStorageSync('openid');
     if (openid === null || openid === '') {
-      $common.getOpenid(this.studentRegister); //防止用户首页拒绝授权，本页面再次注册
+      $common.getOpenid($common.studentRegister); //防止用户首页拒绝授权，本页面再次注册
       return;
     }
     let index = e.currentTarget.dataset.index,

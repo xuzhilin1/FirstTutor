@@ -144,7 +144,7 @@ Page({
       })
       this.getIsVip();
     } else {//用户身份不是外教,调用注册，防止首页不接收授权
-      this.studentRegister();
+      $common.studentRegister();
       wx.setNavigationBarTitle({
         title: '我',
       })
@@ -168,7 +168,7 @@ Page({
             userType: userType,
           });
           if (parseInt(userType) !== 2) {//用户身份不是外教,调用注册，防止首页不接收授权
-            this.studentRegister();
+            $common.studentRegister();
           } else { //用户是外教，调用是否是vip//切换为英文
             wx.setNavigationBarTitle({
               title: 'Me',
@@ -186,42 +186,6 @@ Page({
         wx.stopPullDownRefresh();
       }
     )
-  },
-  studentRegister() { //学生注册
-    $common.request(
-      "POST",
-      $common.config.RisStudent,
-      {
-        openId: wx.getStorageSync('openid')
-      },
-      (res) => {
-        if (res.data.res) {
-          switch (res.data.rtnType) {
-            case 1:
-              //注册成功
-              break;
-            case 2:
-              //改账号被禁用,无法访问程序,
-              break;
-            case 3:
-              //账户正常
-              break;
-          }
-        } else {
-          switch (res.data.errType) {
-            case 1:
-              //发生异常
-              break;
-            case 2:
-              //openId错误
-              break;
-            case 3:
-              //未知错误
-              break;
-          }
-        }
-      },
-    );
   },
   jump(e) {  // 跳转
     let url = e.currentTarget.dataset.url;

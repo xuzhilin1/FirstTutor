@@ -151,45 +151,9 @@ Page({
       url: '../sureOrder/index?corId=' + course.CorId + '&orderType=' + 1 + '&groupType=' + 1 + '&cogId=' + -1 + '&weekTime=' + JSON.stringify(thisData),
     })
   },
-  studentRegister() { //学生注册
-    $common.request(
-      "POST",
-      $common.config.RisStudent,
-      {
-        openId: wx.getStorageSync('openid')
-      },
-      (res) => {
-        if (res.data.res) {
-          switch (res.data.rtnType) {
-            case 1:
-              //注册成功
-              break;
-            case 2:
-              //改账号被禁用,无法访问程序,
-              break;
-            case 3:
-              //账户正常
-              break;
-          }
-        } else {
-          switch (res.data.errType) {
-            case 1:
-              //发生异常
-              break;
-            case 2:
-              //openId错误
-              break;
-            case 3:
-              //未知错误
-              break;
-          }
-        }
-      },
-    );
-  },
   getOpenCallback() {
     this.getCourseAndTeacherInfo();
-    this.studentRegister();
+    $common.studentRegister();
   },
   getCourseAndTeacherInfo() { //获取课程和教师信息
     let openid = wx.getStorageSync('openid');
