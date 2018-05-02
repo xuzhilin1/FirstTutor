@@ -4,6 +4,16 @@
   border-bottom: 1px solid #e0e0e0;
 }
 
+.lasta {
+  background: #fff;
+  font-size: 32rpx;
+  border-radius: 0;
+}
+
+.lasta::after {
+  border: none;
+}
+
 .height-102 {
   height: 102rpx;
 }

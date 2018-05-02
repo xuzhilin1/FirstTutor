@@ -134,7 +134,7 @@ Page({
   init() {
     let openid = wx.getStorageSync('openid');
     if (!openid) {
-      $common.getOpenid(this.getMyStatus);
+      $common.getOpenid(this.getMyStatus.bind(this));
       return;
     }
     let isEn = wx.getStorageSync('isEn');
@@ -169,6 +169,9 @@ Page({
           });
           if (parseInt(userType) !== 2) {//用户身份不是外教,调用注册，防止首页不接收授权
             $common.studentRegister();
+            wx.setNavigationBarTitle({
+              title: '我',
+            })
           } else { //用户是外教，调用是否是vip//切换为英文
             wx.setNavigationBarTitle({
               title: 'Me',
@@ -187,8 +190,13 @@ Page({
       }
     )
   },
-  jump(e) {  // 跳转
+  getUserInfo(e) { //获取用户头像等信息
     let url = e.currentTarget.dataset.url;
+    let userInfo = e.detail.userInfo;
+    if (!userInfo) return;
+    $common.getUserInfo(userInfo, this.jump.bind(this, url));
+  },
+  jump(url) {  // 跳转
     wx.navigateTo({
       url: url,
     })

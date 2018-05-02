@@ -82,6 +82,8 @@ Page({
             pageIndex++;
           }
           for (let i = 0, len = data.length; i < len; i++) {
+            let price = parseFloat(data[i].CourseInfo.CorPrice);
+            data[i].CourseInfo.CorPrice = price.toFixed(2) < 0.01 ? 0.01 : price.toFixed(2);
             switch (data[i].CourseInfo.CorLenOfCla) {
               case 1:
                 data[i].CourseInfo.courseTimeLong = 1;

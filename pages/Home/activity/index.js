@@ -9,11 +9,6 @@ Page({
     atyList: [],
   },
   activityDetail(e) {
-    let openid = wx.getStorageSync('openid');
-    if (openid === null || openid === '') {
-      $common.getOpenid(); //获取用户信息及openid；
-      return;
-    }
     let index = e.currentTarget.dataset.index,
       atyList = this.data.atyList;
     wx.navigateTo({
@@ -44,8 +39,8 @@ Page({
   },
   init(isReach) {
     let openid = wx.getStorageSync('openid');
-    if (openid === null || openid === '') {
-      $common.getOpenid(this.getOpenIdCallback); //获取用户信息及openid；
+    if (!openid) {
+      $common.getOpenid(this.getOpenIdCallback.bind(this)); //获取用户信息及openid；
       return;
     }
     isReach = isReach ? true : false;

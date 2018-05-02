@@ -85,3 +85,14 @@
   color: #7c99d0;
   font-style: italic;
 }
+
+.submit-button {
+  border-radius: 0rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.submit-button::after {
+  border: none;
+}

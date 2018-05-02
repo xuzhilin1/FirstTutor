@@ -140,6 +140,11 @@ Page({
       courseAddress: e.detail.value
     })
   },
+  getUserInfo(e) { //获取用户头像等信息
+    let userInfo = e.detail.userInfo;
+    if(!userInfo) return;
+    $common.getUserInfo(userInfo, this.submitOrder.bind(this));
+  },
   submitOrder() { //提交订单
     let studentName = this.data.studentName,
       studentPhone = this.data.studentPhone,
@@ -345,7 +350,7 @@ Page({
       }
     )
   },
-  getOrderInfo() { //获取订单 信息
+  getOrderInfo() { //获取订单信息
     let isEn = wx.getStorageSync('isEn');
     let text = '';
     if (isEn) {
@@ -427,7 +432,7 @@ Page({
   init() {
     let openid = wx.getStorageSync('openid');
     if (!openid) {
-      $common.getOpenid(this.getOpenCallback);
+      $common.getOpenid(this.getOpenCallback.bind(this));
       return;
     }
     this.getNameAndPhone();

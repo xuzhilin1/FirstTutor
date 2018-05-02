@@ -73,7 +73,7 @@
           <view class='margin-r-10'>支付订金</view>
           <view class='fon-30 bold purple'> ¥{{PayPrice}}</view>
         </view>
-        <view bindtap='submitOrder' class='white fon-32 cs purple-bg'>提交订单</view>
+        <button open-type='getUserInfo' class='white fon-32 cs purple-bg submit-button' bindgetuserinfo='getUserInfo'>提交订单</button>
       </view>
 
     </block>
@@ -151,9 +151,8 @@
           <view class='margin-r-10'>Price</view>
           <view class='fon-30 bold purple'> ¥{{PayPrice}}</view>
         </view>
-        <view bindtap='submitOrder' class='white fon-32 cs purple-bg'>Submit orders</view>
+        <button open-type='getUserInfo' class='white fon-32 cs purple-bg submit-button' bindgetuserinfo='getUserInfo'>Submit orders</button>
       </view>
-
     </block>
   </view>
 </block>

@@ -85,6 +85,8 @@ const config = {
    */
   //获取用户Openid
   GetSaveUserOpenId: `${host}/LittleProgram/UserInfo/GetSaveUserOpenId`,
+  //更新用户头像与昵称 （2018-05-02）
+  UpdateAvaUrlNick: `${host}/LittleProgram/UserInfo/UpdateAvaUrlNick`,
   //获取国家信息
   GetCountryInfos: `${host}/LittleProgram/Nationality/GetCountryInfos`,
   //外教提交申请
@@ -162,81 +164,8 @@ const config = {
   // 发表反馈信息（2018-04-24）
   PublishFeedBack: `${host}/LittleProgram/HelpAndFeedBack/PublishFeedBack`,
 }
-const wxGetUserInfo = function (callback) {
-  wx.login({
-    complete: (res) => {
-      if (res.code) {
-        let code = res.code;
-        wx.getUserInfo({
-          success: (res) => {
-            let userInfo = res.userInfo;
-            wx.setStorageSync("userInfo", userInfo);//本地存储个人信息
-            //发请求
-            wx.request({
-              url: config.GetSaveUserOpenId,
-              data: {
-                code: code,
-                nickName: userInfo.nickName,
-                avaUrl: userInfo.avatarUrl,
-              },
-              header: { 'content-type': 'application/json' },
-              method: 'POST',
-              success: (res) => {
-                if (res.data.res) {
-                  //保存openid
-                  wx.setStorageSync('openid', res.data.openid);
-                  //保存用户类型
-                  wx.setStorageSync('userType', res.data.userType);
-                  callback();
-                }
-              },
-              fail: (res) => {
-                wx.showModal({
-                  title: '提示',
-                  content: '亲~网络不给力哦，请稍后重试',
-                  showCancel: false,
-                })
-              }
-            });
-          },
-          fail: (res) => {
-            wx.showModal({
-              title: '提示',
-              content: '获取个人信息失败',
-              showCancel: false,
-            })
-          }
-        });
-      } else {
-        wx.showModal({
-          title: '提示',
-          content: '获取信息失败',
-          showCancel: false,
-        })
-      }
-    }
-  })
-}
-const refuseModal = function (callback) { //用户拒绝授权弹框处理
-  wx.showModal({
-    title: '提示',
-    content: '您已拒绝授权，无法正常使用FirstTutor，是否重新授权？',
-    complete: (res) => {
-      if (res.confirm) { //用户点击确认
-        wx.openSetting({ //调起设置授权界面
-          complete: (res) => {
-            if (res.authSetting['scope.userInfo']) { //用户已授权
-              //发请求
-              wxGetUserInfo(callback);
-            } else { //用户未授权
-              refuseModal(callback);
-            }
-          }
-        });
-      }
-    }
-  })
-}
+
+
 module.exports = {
   webStock: webStock,
   config: config,
@@ -351,30 +280,58 @@ module.exports = {
       }
     });
   },
-  //获取openid以及个人头像等信息
+  //获取openid
   getOpenid(callback) {
     callback = typeof (callback) === 'function' ? callback : function (res) { };
     let openid = wx.getStorageSync('openid');
     if (openid) return;
-    wx.getUserInfo({
+    wx.login({
       complete: (res) => {
-        // wx.authorize({ //事先向用户发起授权请求
-        //   scope: 'scope.userInfo',
-        //   complete: (res) => {
-        wx.getSetting({ //查看用户是否授权
-          complete: (res) => {
-            if (res.authSetting['scope.userInfo']) { //已授权
-              //调用获取用户信息的函数
-              wxGetUserInfo(callback);
-            } else { //未授权
-              refuseModal(callback);
+        if (res.code) {
+          let code = res.code;
+          wx.request({
+            url: config.GetSaveUserOpenId,
+            data: {
+              code: code,
+              userType: -1
+            },
+            header: { 'content-type': 'application/json' },
+            method: 'POST',
+            success: (res) => {
+              if (res.data.res) {
+                //保存openid
+                wx.setStorageSync('openid', res.data.openid);
+                //保存用户类型
+                let userType = res.data.userType && res.data.userType;
+                wx.setStorageSync('userType', res.data.userType);
+                callback();
+              }
             }
-          }
-        })
-        //   }
-        // })
+          });
+        }
       }
     })
+  },
+  //获取并更新用户头像等信息
+  getUserInfo(userInfo, callback) {
+    callback = typeof (callback) === 'function' ? callback : function (res) { };
+    wx.setStorageSync('userInfo', userInfo);
+    console.log(userInfo);
+    wx.request({
+      url: config.UpdateAvaUrlNick,
+      data: {
+        openId: wx.getStorageSync('openid'),
+        avaUrl: userInfo.avatarUrl,
+        nickName: userInfo.nickName,
+      },
+      header: { 'content-type': 'application/json' },
+      method: 'POST',
+      success: (res) => {
+        if (res.data.res) {
+          callback();
+        }
+      }
+    });
   },
   //学生注册
   studentRegister() {

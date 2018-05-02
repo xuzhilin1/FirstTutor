@@ -158,7 +158,7 @@ Page({
   getCourseAndTeacherInfo() { //获取课程和教师信息
     let openid = wx.getStorageSync('openid');
     if (!openid) {
-      $common.getOpenid(this.getOpenCallback);
+      $common.getOpenid(this.getOpenCallback.bind(this));
       return;
     }
     let text = '';

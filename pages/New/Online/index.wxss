@@ -9,6 +9,11 @@
 
 .outer {
   padding: 25rpx 30rpx;
+  border-radius: 0;
+}
+
+.outer::after {
+  border: none;
 }
 
 .din {

@@ -40,11 +40,6 @@ Page({
     })
   },
   teacherInfo(e) { //跳转外教信息
-    let openid = wx.getStorageSync('openid');
-    if (openid === null || openid === '') {
-      $common.getOpenid($common.studentRegister); //防止用户首页拒绝授权，本页面再次注册
-      return;
-    }
     let index = e.currentTarget.dataset.index,
       listData = this.data.listData;
     wx.navigateTo({

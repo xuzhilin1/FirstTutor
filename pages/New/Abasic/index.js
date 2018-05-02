@@ -103,7 +103,7 @@ Page({
     }
     let openid = wx.getStorageSync('openid');
     if (!openid) { //没有openid，获取
-      $common.getOpenid();
+      $common.getOpenid(this.submit.bind(this));
       return;
     }
     this.requestSaveData(userName, sex, age, weChat, school, nationality, synopsis);
@@ -172,7 +172,7 @@ Page({
     let openid = wx.getStorageSync('openid');
     if (!openid) {
       //判断并获取openId
-      $common.getOpenid(this.getForTeaStatus);
+      $common.getOpenid(this.getForTeaStatus.bind(this));
       return;
     }
     $common.request(

@@ -4,70 +4,27 @@
  * use: 全局切换中英文
  */
 const $common = require('../../utils/common.js');
-const getOpenid = (callback) => { //获取openid
-  callback = typeof callback === 'function' ? callback : () => { };
-  wx.login({
-    success: (res) => {
-      if (res.code) {
-        let code = res.code;
-        let userInfo = wx.getStorageSync('userInfo');
-        wx.request({
-          url: config.GetSaveUserOpenId,
-          data: {
-            code: code,
-            nickName: userInfo.nickName,
-            avaUrl: userInfo.avatarUrl,
-          },
-          header: { 'content-type': 'application/json' },
-          method: 'POST',
-          success: (res) => {
-            if (res.data.res) {
-              //保存openid
-              wx.setStorageSync('openid', res.data.openid);
-              //保存用户类型
-              wx.setStorageSync('userType', res.data.userType);
-              callback();
-            }
-          },
-          fail: (res) => {
-            wx.showModal({
-              title: '提示',
-              content: '亲~网络不给力哦，请稍后重试',
-              showCancel: false,
-            })
-          }
-        });
-      }
-    }
-  })
-}
 Component({
   properties: {
 
   },
-
-  /**
-   * 组件的初始数据
-   */
   data: {
     isEn: false,
     falg: true,
   },
-
-  /**
-   * 组件的方法列表
-   */
   methods: {
     userInfo(res) { //获取个人信息
-      wx.setStorageSync('userInfo', res.detail.userInfo);
+      let userInfo = res.detail.userInfo;
+      if (!userInfo) return;
       let falg = this.data.falg;
       if (!falg) return; //阻止连点
       this.data.falg = false;
       let openid = wx.getStorageSync('openid');
+      console.log(openid)
       if (!openid) { //没有openid
-        getOpenid(this.stuOrTea);
+        $common.getOpenid($common.getUserInfo.bind(this, userInfo, this.stuOrTea.bind(this)));
       } else { //有openid
-        this.stuOrTea();
+        $common.getUserInfo(userInfo, this.stuOrTea.bind(this));
       }
     },
     stuOrTea() { //判断是切换为老师或学生

@@ -60,7 +60,7 @@ Page({
   getPageInfo() { //获取页面信息
     let openid = wx.getStorageSync('openid');
     if (!openid) {
-      $common.getOpenid(this.getPageInfo);
+      $common.getOpenid(this.getPageInfo.bind(this));
       return;
     }
     let isEn = wx.getStorageSync('isEn');

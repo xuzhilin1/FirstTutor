@@ -26,7 +26,7 @@
         <view class='margin-r-10'>支付订金</view>
         <view class='fon-30 bold' style='color:#f09f4b;'> ¥ {{price}}</view>
       </view>
-      <view bindtap='submit' class='white fon-32 cs purple-bg footer-btn-r'>立即报名</view>
+      <button bindgetuserinfo='getUserInfo' open-type='getUserInfo' class='white fon-32 cs purple-bg footer-btn-r'>立即报名</button>
     </view>
   </view>
 </block>
@@ -58,7 +58,7 @@
         <view class='margin-r-10'>The deposit</view>
         <view class='fon-30 bold' style='color:#f09f4b;'> ¥ {{price}}</view>
       </view>
-      <view bindtap='submit' class='white fon-32 cs purple-bg footer-btn-r'>Sign up now</view>
+      <button bindgetuserinfo='getUserInfo' open-type='getUserInfo' class='white fon-32 cs purple-bg footer-btn-r'>Sign up now</button>
     </view>
   </view>
 </block>

@@ -19,6 +19,11 @@ Page({
   bindRemark(e) { //备注
     this.data.remark = e.detail.value;
   },
+  getUserInfo(e) { //获取用户头像等信息
+    let userInfo = e.detail.userInfo;
+    if (!userInfo) return;
+    $common.getUserInfo(userInfo, this.submit.bind(this));
+  },
   submit() { //立即报名
     let userName = this.data.userName,
       phone = this.data.phone,

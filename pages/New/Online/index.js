@@ -8,9 +8,14 @@ Page({
     pageSize: 10,
     pageIndex: 1,
   },
-  onlineChart(e) { //进入到聊天页面
-    let index = e.currentTarget.dataset.index,
-      infoList = this.data.infoList;
+  getUserInfo(e) { //获取用户头像等信息
+    let index = e.currentTarget.dataset.index;
+    let userInfo = e.detail.userInfo;
+    if (!userInfo) return;
+    $common.getUserInfo(userInfo, this.onlineChart.bind(this, index));
+  },
+  onlineChart(index) { //进入到聊天页面
+    let infoList = this.data.infoList;
     wx.navigateTo({
       url: `../onlineChart/index?userId=${infoList[index].UserId}`,
     })
@@ -40,6 +45,11 @@ Page({
     return newArr;
   },
   getPageList(isReach) { //获取页面数据
+    let openid = wx.getStorageSync('openid');
+    if (!openid) {
+      $common.getOpenid(this.getPageList.bind(this));
+      return;
+    }
     isReach = isReach ? true : false;
     let pageIndex = isReach ? this.data.pageIndex : 1,
       pageSize = this.data.pageSize;
