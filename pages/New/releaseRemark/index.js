@@ -15,6 +15,11 @@ Page({
       input: e.detail.value
     })
   },
+  getUserInfo(e) { //获取用户头像等信息
+    let userInfo = e.detail.userInfo;
+    if (!userInfo) return;
+    $common.getUserInfo(userInfo, this.submit.bind(this));
+  },
   submit() {
     let input = this.data.input,
       scoure = this.data.scoure;

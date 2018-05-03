@@ -8,4 +8,4 @@
   </view>
 </view>
 <textarea type='text' bindinput='bindInput' value='{{input}}' maxlength='1000' class='texteare bg-fff' placeholder-class='c9 fon-26' placeholder='请对外教做出相应的点评'></textarea>
-<button bindtap='submit' class='btn purple-bg margin-t-60 white'>提交点评</button>
+<button open-type='getUserInfo' bindgetuserinfo='getUserInfo' class='btn purple-bg margin-t-60 white'>提交点评</button>
