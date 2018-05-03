@@ -58,7 +58,6 @@
   font-size: 30rpx;
 }
 
-
 .touxiang-image-t {
   border: 6rpx solid #96add9;
 }
@@ -68,7 +67,6 @@
   margin-right: 10rpx;
 }
 
-
 .address {
   width: 26rpx;
   margin-right: 25rpx;
@@ -77,7 +75,6 @@
 /* page {
   height: 100%;
 } */
-
 
 .touxiang {
   width: 98rpx;
@@ -268,4 +265,18 @@
 
 .chat-tea image {
   margin-bottom: 10rpx;
+}
+
+.cour-area {
+  width: 74%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cour-area-e {
+  width: 62%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

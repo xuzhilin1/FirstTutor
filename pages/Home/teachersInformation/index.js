@@ -11,7 +11,6 @@ Page({
     srcVideo: $common.srcVideo,
     teaId: null,   //教师id
     teaInfo: {}, //教师信息
-    allAreaList: $static.areaShanghai,
     areaList: [],
     navbarList: [{
       id: '_course',
@@ -124,11 +123,12 @@ Page({
       f = date.getMinutes();
     h < 10 && (h = '0' + h);
     f < 10 && (f = '0' + f);
-    return `${m}月${d}日 ${h}:${f}`;
+    return `${m}-${d} ${h}:${f}`;
   },
   resetArea() { //重置上课区域
     let TeaClassArea = this.data.teaInfo.TeaClassArea.split(',');
-    let allAreaList = this.data.allAreaList;
+    let isEn = wx.getStorageSync('isEn');
+    let allAreaList = isEn ? $static.areaShanghaiEn : $static.areaShanghai;
     let arr = [];
     for (let i = 0, len = TeaClassArea.length; i < len; i++) {
       for (let j = 0, l = allAreaList.length; j < l; j++) {

@@ -108,11 +108,11 @@ Page({
                 )
               }
             })
+          } else { //免费
+            wx.navigateTo({ //跳转到报名成功页面
+              url: '/pages/Home/Success/index?status=1',
+            })
           }
-          return;
-          wx.navigateTo({ //跳转到报名成功页面
-            url: '/pages/Home/Success/index?status=1',
-          })
         } else {
           switch (res.data.errType) {
             case 3:

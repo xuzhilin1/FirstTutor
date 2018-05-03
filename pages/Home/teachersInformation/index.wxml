@@ -56,9 +56,12 @@
     <view class='padding-50  padding-tb-20 bg-fff flex aitems-center fon-24 '>
       <image mode='widthFix' class='address' src='/images/adddress_14.png'></image>
       <view class='c8 margin-r-20'>上课区域</view>
-      <black wx:for='{{areaList}}' wx:key='{{index}}'>
-        <text wx:if='{{index!=0}}'>、</text>{{item.area}}
-      </black>
+      <view class='cour-area'>
+        <black wx:for='{{areaList}}' wx:key='{{index}}'>
+          <text wx:if='{{index!=0}}'>、</text>{{item.area}}
+        </black>
+      </view>
+
     </view>
   </view>
   <!-- table  -->
@@ -190,9 +193,12 @@
     <view class='padding-50  padding-tb-20 bg-fff flex aitems-center fon-24 '>
       <image mode='widthFix' class='address' src='/images/adddress_14.png'></image>
       <view class='c8 margin-r-20'>Teaching Area</view>
-      <black wx:for='{{areaList}}' wx:key='{{index}}'>
-        <text wx:if='{{index!=0}}'>、</text>{{item.area}}
-      </black>
+      <view class='cour-area-e'>
+        <black wx:for='{{areaList}}' wx:key='{{index}}'>
+          <text wx:if='{{index!=0}}'>、</text>{{item.area}}
+        </black>
+      </view>
+
     </view>
   </view>
   <!-- table  -->

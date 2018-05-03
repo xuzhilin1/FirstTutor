@@ -17,6 +17,7 @@
       <view class='flex aitems-center'>
         <image mode='widthFix' style='width:44rpx; margin-right:20rpx' src='{{item.url}}'></image>
         {{item.title}}
+         <view wx:if='{{(index==4)&&(unReadC>0)}}' class='din'></view>
       </view>
       <image mode='widthFix' style='width:21rpx;' src='/images/jian_13.png'></image>
     </button>
