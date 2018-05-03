@@ -25,6 +25,11 @@ Page({
     $common.getUserInfo(userInfo, this.submit.bind(this));
   },
   submit() { //立即报名
+    let openid = wx.getStorageSync('openid');
+    if (!openid) {
+      $common.getOpenid(this.submit.bind(this));
+      return;
+    }
     let userName = this.data.userName,
       phone = this.data.phone,
       remark = this.data.remark;

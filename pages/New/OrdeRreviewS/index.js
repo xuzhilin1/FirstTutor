@@ -53,6 +53,11 @@ Page({
     })
   },
   init(isReach) {
+    let openid = wx.getStorageSync('openid');
+    if (!openid) {
+      $common.getOpenid(this.init.bind(this, isReach));
+      return;
+    }
     isReach = isReach ? true : false;
     let pageIndex = isReach ? this.data.pageIndex : 1,
       pageSize = this.data.pageSize;

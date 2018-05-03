@@ -28,6 +28,11 @@ Page({
     return data;
   },
   init() {
+    let openid = wx.getStorageSync('openid');
+    if (!openid) {
+      $common.getOpenid(this.init.bind(this));
+      return;
+    }
     wx.showLoading({ title: 'Loading...' });
     $common.request(
       'POST',

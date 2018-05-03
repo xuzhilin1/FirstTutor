@@ -9,16 +9,6 @@
  */
 
 /**
- * 课程信息
- * pages/Home/CourseInformation/index
- */
-
-/**
- * 确认订单
- * pages/Home/sureOrder/index
- */
-
-/**
  * 拼团
  * pages/Home/SpellGroup/index
  * （服务通知：付款成功通知-拼团）
@@ -26,7 +16,7 @@
 
 /**
  * 订单详情（模板消息专用）
- * pages/Home/SpellGroup/index
+ * pages/New/orderDetailsS/index
  * （服务通知：付款成功通知-单独购买）
  */
 

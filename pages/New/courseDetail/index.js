@@ -18,6 +18,11 @@ Page({
     })
   },
   getCourseAndTeacherInfo() { //获取课程和教师信息
+    let openid = wx.getStorageSync('openid');
+    if (!openid) {
+      $common.getOpenid(this.getCourseAndTeacherInfo.bind(this));
+      return;
+    }
     $common.request(
       "POST",
       $common.config.GetCourseInfo,

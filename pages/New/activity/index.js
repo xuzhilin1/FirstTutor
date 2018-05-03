@@ -47,6 +47,11 @@ Page({
     })
   },
   init(isReach) {
+    let openid = wx.getStorageSync('openid');
+    if (!openid) {
+      $common.getOpenid(this.init.bind(this, isReach));
+      return;
+    }
     isReach = isReach ? true : false;
     let isEn = wx.getStorageSync('isEn');
     let text = isEn ? 'Loading...' : '努力加载中...';

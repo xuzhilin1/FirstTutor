@@ -142,6 +142,11 @@ Page({
     })
   },
   getTeacherData() { //获取本页面教师信息
+    let openid = wx.getStorageSync('openid');
+    if (!openid) {
+      $common.getOpenid(this.getTeacherData.bind(this)); //获取用户信息及openid；
+      return;
+    }
     $common.request(
       "POST",
       $common.config.GetForeignTeaInfo,

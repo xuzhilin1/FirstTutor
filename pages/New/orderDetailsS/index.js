@@ -22,6 +22,11 @@ Page({
     $common.getAddress(address);
   },
   init() {
+    let openid = wx.getStorageSync('openid');
+    if (!openid) {
+      $common.getOpenid(this.init.bind(this));
+      return;
+    }
     let isEn = wx.getStorageSync('isEn');
     let text = '';
     if (isEn) {

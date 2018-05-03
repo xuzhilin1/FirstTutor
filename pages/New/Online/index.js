@@ -47,7 +47,7 @@ Page({
   getPageList(isReach) { //获取页面数据
     let openid = wx.getStorageSync('openid');
     if (!openid) {
-      $common.getOpenid(this.getPageList.bind(this));
+      $common.getOpenid(this.getPageList.bind(this, isReach));
       return;
     }
     isReach = isReach ? true : false;

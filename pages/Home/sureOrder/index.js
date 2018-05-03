@@ -223,7 +223,7 @@ Page({
               if (orderType == 1) {//订单类型类型：1. 团购  2. 单独购
                 pagePath = 'pages/Home/SpellGroup/index?cogId=' + cogId;
               } else if (orderType == 2) {
-                pagePath = 'pages/New/orderDetails/index?cogId=' + cogId;
+                pagePath = 'pages/New/orderDetailsS/index?cogId=' + cogId;
               }
               $common.request( //发送模板消息
                 'POST',

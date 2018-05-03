@@ -24,6 +24,11 @@ Page({
     return `${y}-${m}-${d} ${h}:${f}`;
   },
   init(isReach) {
+    let openid = wx.getStorageSync('openid');
+    if (!openid) {
+      $common.getOpenid(this.init.bind(this, isReach));
+      return;
+    }
     isReach = isReach ? true : false;
     let teaId = wx.getStorageSync('teacherStatusInfo').teaId;
     let pageIndex = isReach ? this.data.pageIndex : 1,

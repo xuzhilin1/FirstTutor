@@ -47,6 +47,11 @@ Page({
     return status;
   },
   init() {
+    let openid = wx.getStorageSync('openid');
+    if (!openid) {
+      $common.getOpenid(this.init.bind(this));
+      return;
+    }
     let isEn = wx.getStorageSync('isEn');
     let text = isEn ? 'Loading...' : '努力加载中...';
     wx.showLoading({ title: text });

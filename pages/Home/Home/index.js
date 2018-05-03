@@ -136,7 +136,7 @@ Page({
   getOpenId() { //获取openid
     let openid = wx.getStorageSync('openid');
     if (!openid) {
-      $common.getOpenid($common.studentRegister); //获取用户信息及openid；
+      $common.getOpenid($common.studentRegister.bind(this)); //获取用户信息及openid；
     } else {
       $common.studentRegister();
     }
