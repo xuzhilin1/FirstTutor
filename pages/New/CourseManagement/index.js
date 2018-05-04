@@ -47,6 +47,36 @@ Page({
       }
     }.bind(this), 'OK', 'Reminder', 'NO');
   },
+  openOrClose(e) { //课程上架或下架
+    let index = e.currentTarget.dataset.index,
+      courInfos = this.data.courInfos,
+      corId = courInfos[index].CorId,
+      corSwitch = courInfos[index].CorSwitch == 1 ? 0 : 1;
+    $common.request(
+      "POST",
+      $common.config.ChangeCorSwitch,
+      {
+        corId: corId,
+        corSwitch: corSwitch
+      },
+      (res) => {
+        if (res.data.res) {
+          courInfos[index].CorSwitch = corSwitch;
+          this.setData({
+            courInfos: courInfos
+          })
+        } else {
+          $common.showModal('Unknown Error', false, false, 'Ok', 'Reminder');
+        }
+      },
+      (res) => {
+        $common.showModal('Unknown Error', false, false, 'Ok', 'Reminder');
+      },
+      (res) => {
+        console.log(res);
+      }
+    )
+  },
   reviseReleaseCourse(e) { //修改课程
     let index = e.currentTarget.dataset.index,
       courInfos = this.data.courInfos;

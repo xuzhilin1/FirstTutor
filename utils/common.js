@@ -163,6 +163,8 @@ const config = {
   GetUserHelp: `${host}/LittleProgram/HelpAndFeedBack/GetUserHelp`,
   // 发表反馈信息（2018-04-24）
   PublishFeedBack: `${host}/LittleProgram/HelpAndFeedBack/PublishFeedBack`,
+  // 外教--我的课程--关闭/打开课程（2018-04-25）
+  ChangeCorSwitch: `${host}/LittleProgram/Course/ChangeCorSwitch`,
 }
 
 

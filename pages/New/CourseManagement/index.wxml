@@ -8,9 +8,10 @@
     </view>
     <tea-course bindtap='orderDetails' data-index='{{index}}' other='{{false}}' course='{{item}}'></tea-course>
     <view class='flex fon-24 border-t-1 border-b-1 padding-lr-30 aitems-center bg-fff j-right'>
-      <view bindtap='bindDelete' data-index='{{index}}' class='purple AnNiu border'>Delete Course</view>
+      <view bindtap='openOrClose' data-index='{{index}}' class='border AnNiu white purple-bg'>{{item.CorSwitch==0?"Close":"Open"}}</view>
+      <view bindtap='bindDelete' data-index='{{index}}' class='purple AnNiu border'>Delete</view>
       <view bindtap='groupList' data-index='{{index}}' wx:if='{{item.CorType!=1&&item.CorCanView==1}}' class='border AnNiu white purple-bg'>Group Buying Effective {{item.FGCount}}</view>
-      <view bindtap='orderDetails' data-index='{{index}}' wx:if='{{item.CorCanView==1&&item.CorType==1}}' class='border AnNiu white purple-bg'>Check Course</view>
+      <view bindtap='orderDetails' data-index='{{index}}' wx:if='{{item.CorCanView==1&&item.CorType==1}}' class='border AnNiu white purple-bg'>Check</view>
       <view bindtap='reviseReleaseCourse' data-index='{{index}}' wx:if='{{item.CorCanView==0}}' class='border AnNiu white purple-bg'>Modify Course</view>
     </view>
   </view>
