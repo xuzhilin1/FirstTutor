@@ -61,8 +61,9 @@ Page({
       titleText = "";
     switch (status) {
       case 0: //教师介绍
-        //美式发音/喜欢旅游/明星老师
-        placeholder = 'accent/hobby/advantage';
+        //例如：纯正美音 / 3年教龄/ 幼教英语 / 全职老师 / 亲和力强
+        //American accent/ 3 years teaching experience/ experience to teach preschool kids/ Full time English teacher/ Strong affinity
+        placeholder = 'American accent/3 years teaching experience/experience to teach preschool kids/Full time English teacher/Strong affinity';
         titleText = 'Tutor introduction';
         this.teacherIntroduceContext();
         break;
