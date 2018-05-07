@@ -1,11 +1,11 @@
 <!--component/changeType/changeType.wxml-->
 <view class='wrapper'>
   <button wx:if='{{!isEn}}' bindgetuserinfo='userInfo' class='box' open-type='getUserInfo'>
-    <view>外教</view>
-    <view>入口</view>
+    <view>Tutor</view>
+    <view>Entry</view>
   </button>
   <button wx:if='{{isEn}}' bindgetuserinfo='userInfo' class='box-en' open-type='getUserInfo'>
-    <view>I'm</view>
-    <view>stdnt</view>
+    <view>Student</view>
+    <view>Entry</view>
   </button>
 </view>

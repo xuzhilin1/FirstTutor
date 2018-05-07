@@ -1,8 +1,8 @@
 /* component/changeType/changeType.wxss */
 
 .wrapper {
-  width: 100rpx;
-  height: 100rpx;
+  width: 120rpx;
+  height: 120rpx;
   position: fixed;
   right: 20rpx;
   bottom: 50rpx;
