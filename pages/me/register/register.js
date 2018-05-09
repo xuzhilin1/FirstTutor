@@ -166,7 +166,7 @@ Page({
       $common.showModal('Please fill in the correct phone number.', false, false, 'Ok', 'Reminder');
       return;
     }
-    if (!$common.passportReg.test(passport)) {
+    if (passport.trim().length <= 0) {
       $common.showModal('Please fill in your passport.', false, false, 'Ok', 'Reminder');
       return;
     }
