@@ -174,18 +174,18 @@ Page({
       $common.showModal('Please fill in the correct email address.', false, false, 'Ok', 'Reminder');
       return;
     }
-    if (certificate.length <= 0) {
-      $common.showModal('Please upload the tutor certificate picture.', false, false, 'Ok', 'Reminder');
-      return;
-    }
+    // if (certificate.length <= 0) {
+    //   $common.showModal('Please upload the tutor certificate picture.', false, false, 'Ok', 'Reminder');
+    //   return;
+    // }
     if (!idPicture) {
       $common.showModal('Please upload the Head Shot.', false, false, 'Ok', 'Reminder');
       return;
     }
-    if (!video) {
-      $common.showModal('Please upload the tutor class video.', false, false, 'Ok', 'Reminder');
-      return;
-    }
+    // if (!video) {
+    //   $common.showModal('Please upload the tutor class video.', false, false, 'Ok', 'Reminder');
+    //   return;
+    // }
     if (weChat.trim().length <= 0) {
       $common.showModal('Please fill in your WeChat Account.', false, false, 'Ok', 'Prompt');
       return;

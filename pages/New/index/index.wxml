@@ -12,7 +12,7 @@
 <!--  列表出现条件，有openid  -->
 <block wx:if='{{openid}}'>
   <!--  学生  -->
-  <view wx:if='{{!isEn}}' class='fon-32 ffoter bg-fff '>
+  <view wx:if='{{!isEn}}' class='fon-28 ffoter bg-fff '>
     <button open-type='getUserInfo' bindgetuserinfo='getUserInfo' hover-class='none' wx:for="{{studentList}}" wx:key='{{index}}' data-url='{{item.luJin}}' class='flex lasta between height-102 padding-lr-30 border-t-1 aitems-center'>
       <view class='flex aitems-center'>
         <image mode='widthFix' style='width:44rpx; margin-right:20rpx' src='{{item.url}}'></image>
@@ -23,7 +23,7 @@
     </button>
   </view>
   <!--  导师  -->
-  <view wx:if='{{isEn}}' class='fon-32 ffoter bg-fff '>
+  <view wx:if='{{isEn}}' class='fon-28 ffoter bg-fff '>
     <button open-type='getUserInfo' wx:if='{{item.isShow}}' wx:for="{{teacherList}}" wx:key='{{index}}' data-url='{{item.luJin}}' bindgetuserinfo='getUserInfo' class='flex lasta between height-102 padding-lr-30 border-t-1 aitems-center'>
       <view class='flex  aitems-center'>
         <image mode='widthFix' style='width:44rpx; margin-right:20rpx' src='{{item.url}}'></image>

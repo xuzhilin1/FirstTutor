@@ -309,7 +309,7 @@ Page({
     });
     if (isEn) { //找学生
       wx.setNavigationBarTitle({
-        title: 'Lookup stdnt'
+        title: 'find student'
       })
       this.getListDataEn();
     } else { //找外教

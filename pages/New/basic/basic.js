@@ -55,14 +55,15 @@ Page({
       $common.showModal('Please fill in the tutor introduction.', false, false, 'OK', 'Reminder');
       return;
     }
-    if (teacherFor.TeaQualif.length < 0) {
-      $common.showModal('Please upload the tutor certificate picture.', false, false, 'OK', 'Reminder');
-      return;
-    }
-    // if (!teacherFor.TeaIdPhoto) {
-    //   $common.showModal('请上传证件照');
+    // if (teacherFor.TeaQualif.length < 0) {
+    //   $common.showModal('Please upload the tutor certificate picture.', false, false, 'OK', 'Reminder');
     //   return;
     // }
+    if (!teacherFor.TeaIdPhoto) {
+      // $common.showModal('请上传证件照');
+      $common.showModal('Please upload the Head Shot.', false, false, 'OK', 'Reminder');
+      return;
+    }
     // if (!teacherFor.TeaAudio) {
     //   $common.showModal('请上传上课视频');
     //   return;

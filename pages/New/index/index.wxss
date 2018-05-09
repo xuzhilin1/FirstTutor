@@ -6,7 +6,7 @@
 
 .lasta {
   background: #fff;
-  font-size: 32rpx;
+  font-size: 28rpx;
   border-radius: 0;
 }
 

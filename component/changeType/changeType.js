@@ -71,7 +71,7 @@ Component({
         });
         wx.setTabBarItem({
           index: 1,
-          text: 'Lookup stdnt',
+          text: 'find student',
         });
         wx.setTabBarItem({
           index: 2,

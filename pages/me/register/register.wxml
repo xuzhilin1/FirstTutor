@@ -1,6 +1,6 @@
 <!--  姓名  -->
 <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
-  <view class='flex1 aitems-center  fon-30 flex '>
+  <view class='flex1 aitems-center  fon-22 flex '>
     <view class='width-left'>Name</view>
     <input bindinput='bindUserName' class='ca input-width' value='{{userName}}' placeholder='To be Filled in'></input>
   </view>
@@ -9,7 +9,7 @@
 <view class='flex height-85 border-b-1 padding-lr-30  between aitems-center'>
   <picker class='flex1' range-key='sex' value="{{sexIndex}}" range="{{sexArray}}" bindchange="bindSexChange">
     <view class='flex picker aitems-center '>
-      <view class="fon-30 flex aitems-center yanse ">
+      <view class="fon-22 flex aitems-center yanse ">
         <view class='width-l'>Gender</view>
         <view class='ca'>{{sexArray[sexIndex].sex}}</view>
       </view>
@@ -19,21 +19,21 @@
 </view>
 <!--  手机号  -->
 <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
-  <view class='flex1 aitems-center  fon-30 flex '>
+  <view class='flex1 aitems-center  fon-22 flex '>
     <view class='width-left'>Phone</view>
     <input type='number' maxlength='11' bindinput='bindPhone' class='ca input-width' value='{{phone}}' placeholder='To be Filled in'></input>
   </view>
 </view>
 <!--  护照号  -->
 <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
-  <view class='flex1 aitems-center  fon-30 flex '>
+  <view class='flex1 aitems-center  fon-22 flex '>
     <view class='width-left'>Passport</view>
     <input bindinput='bindpassport' class='ca input-width' value='{{passport}}' placeholder='To be Filled in'></input>
   </view>
 </view>
 <!--  邮箱  -->
 <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
-  <view class='flex1 aitems-center  fon-30 flex '>
+  <view class='flex1 aitems-center  fon-22 flex '>
     <view class='width-left'>Email</view>
     <input bindinput='bindemail' class='ca input-width' value='{{email}}' placeholder='To be Filled in'></input>
   </view>
@@ -41,7 +41,7 @@
 <!--  上传证件照  -->
 <view bindtap='uploadidPicture' class='flex height-85 border-b-1 padding-lr-30  between aitems-center'>
   <view class='flex picker aitems-center '>
-    <view class="fon-30 flex aitems-center yanse ">
+    <view class="fon-22 flex aitems-center yanse ">
       <view class='width-l'>Head Shot</view>
       <view class='ca'>{{idPicture?"Uploaded":"Not Uploaded"}}</view>
     </view>
@@ -51,9 +51,9 @@
 <!--  上传资质  -->
 <view bindtap='uploadCertificate' class='flex height-85 border-b-1 padding-lr-30  between aitems-center'>
   <view class='flex picker aitems-center '>
-    <view class="fon-30 flex aitems-center yanse ">
+    <view class="fon-22 flex aitems-center yanse ">
       <view class='width-l'>Tutor Certificate</view>
-      <view class='ca'>{{certificate.length>0?"Uploaded":"Not Uploaded"}}</view>
+      <view class='ca'>{{certificate.length>0?"Uploaded":"optional"}}</view>
     </view>
   </view>
   <image mode='widthFix' style='width:20rpx;' src='/images/jian_13.png'></image>
@@ -61,9 +61,9 @@
 <!--  上传视频  -->
 <view bindtap='uploadVideo' class='flex height-85 border-b-1 padding-lr-30  between aitems-center'>
   <view class='flex picker aitems-center '>
-    <view class="fon-30 flex aitems-center yanse ">
+    <view class="fon-22 flex aitems-center yanse ">
       <view class='width-l'>Teaching Video</view>
-      <view class='ca'>{{video?"Uploaded":"Not Uploaded"}}</view>
+      <view class='ca'>{{video?"Uploaded":"optional"}}</view>
     </view>
   </view>
   <image mode='widthFix' style='width:20rpx;' src='/images/jian_13.png'></image>
@@ -72,7 +72,7 @@
 <view class='flex height-85 border-b-1 padding-lr-30  between aitems-center'>
   <picker class='flex1' value='1990-01-01' bindchange="bindAgeChange" mode="date">
     <view class='flex picker aitems-center '>
-      <view class="fon-30 flex aitems-center yanse ">
+      <view class="fon-22 flex aitems-center yanse ">
         <view class='width-l'>Age</view>
         <view class='ca'>{{age}}</view>
       </view>
@@ -82,7 +82,7 @@
 </view>
 <!--  微信  -->
 <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
-  <view class='flex1 aitems-center  fon-30 flex '>
+  <view class='flex1 aitems-center  fon-22 flex '>
     <view class='width-left'>WeChat</view>
     <input bindinput='bindWeChat' class='ca input-width' value='{{weChat}}' placeholder='To be Filled in'></input>
   </view>
@@ -91,7 +91,7 @@
 <view class='flex height-85 border-b-1 padding-lr-30  between aitems-center'>
   <picker class='flex1' range-key='NalName' value="{{nationalityIndex}}" range="{{nationalityArray}}" bindchange="bindNationalityChange">
     <view class='flex picker aitems-center '>
-      <view class="fon-30 flex aitems-center yanse ">
+      <view class="fon-22 flex aitems-center yanse ">
         <view class='width-l'>Nationality</view>
         <view class='ca'>{{nationalityArray[nationalityIndex].NalName}}</view>
       </view>
@@ -101,21 +101,21 @@
 </view>
 <!--  大学  -->
 <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
-  <view class='flex1 aitems-center  fon-30 flex '>
+  <view class='flex1 aitems-center  fon-22 flex '>
     <view class='width-left'>University</view>
     <input bindinput='bindSchool' class='ca input-width' value='{{school}}' placeholder='To be Filled in'></input>
   </view>
 </view>
 <!--  简介  -->
 <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
-  <view class='flex1 aitems-center  fon-30 flex '>
+  <view class='flex1 aitems-center  fon-22 flex '>
     <view class='width-left'>Brief Introduction</view>
     <input bindinput='bindSynopsis' class='ca input-width' placeholder='Maximum of 40 Characters' value='{{synopsis}}' maxlength='40'></input>
   </view>
 </view>
 <view class='tiaokuan'>
   <checkbox bindtap='bindcheckbox' checked='{{false}}' color='#22A415'></checkbox>
-  <text class='ca fon-30'>I have accepted and read <text class='tiaokuan-text'>Terms and conditions</text></text>
+  <text class='ca fon-22'>I have accepted and read <text class='tiaokuan-text'>Terms and conditions</text></text>
 </view>
 
 <button bindtap='submit' class='btn purple-bg white save-btn'>Submit</button>

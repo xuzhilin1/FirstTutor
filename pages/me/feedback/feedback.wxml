@@ -1,12 +1,12 @@
 <!--pages/New/Teachers/index.wxml-->
 <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between bg-fff'>
-  <view class='flex1 aitems-center  fon-30 flex '>
+  <view class='flex1 aitems-center  fon-26 flex '>
     <view class='{{isEn?"width-left":"width-l"}}'>{{isEn?"Name":"姓名"}}</view>
     <input bindinput='bindUserName' class='ca input-width' value='{{userName}}' placeholder=''></input>
   </view>
 </view>
 <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between bg-fff'>
-  <view class='flex1 aitems-center  fon-30 flex '>
+  <view class='flex1 aitems-center  fon-26 flex '>
     <view class='{{isEn?"width-left":"width-l"}}'>{{isEn?"Contact Number":"手机号"}}</view>
     <input type='number' maxlength='11' bindinput='bindPhone' class='ca input-width' value='{{phone}}' placeholder=''></input>
   </view>

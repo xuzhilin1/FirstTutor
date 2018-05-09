@@ -11,6 +11,10 @@ page {
   display: -webkit-flex;
 }
 
+.input-width {
+  width: 400rpx;
+}
+
 /*超出影藏  */
 
 .XianZhi {

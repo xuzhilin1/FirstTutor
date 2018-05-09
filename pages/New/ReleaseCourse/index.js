@@ -15,6 +15,7 @@ Page({
     duration: ['1', '1.5', '2'],
     courseDurationIndex: 0, //课程时长下标
     CorId: false, //课程id
+    saveFalg: true, //防止保存按钮连点
   },
   bindCourseType(e) { //课程类型
     let value = parseInt(e.detail.value);
@@ -66,6 +67,8 @@ Page({
     })
   },
   submit() {
+    if (!this.data.saveFalg) return;
+    this.data.saveFalg = false;
     let courseTypeIndex = this.data.courseTypeIndex,
       courseName = this.data.courseName,
       courseAllPrice = this.data.courseAllPrice,
@@ -144,6 +147,7 @@ Page({
             duration: 1500,
           })
           setTimeout(() => {
+            this.data.saveFalg = true;
             wx.navigateBack({
               delta: 1
             })
@@ -156,6 +160,7 @@ Page({
         $common.showModal('Unknown Error', false, false, 'OK', 'Reminder');
       },
       (res) => {
+        
       }
     )
   },
@@ -184,6 +189,7 @@ Page({
           })
           let status = this.data.status;
           setTimeout(() => {
+            this.data.saveFalg = true;
             if (status === 3) { //外教申请发布课程，进入
               wx.switchTab({
                 url: '/pages/Home/Home/index',
@@ -202,6 +208,7 @@ Page({
         $common.showModal('Unknown Error', false, false, 'OK', 'Reminder');
       },
       (res) => {
+        
       }
     )
   },
