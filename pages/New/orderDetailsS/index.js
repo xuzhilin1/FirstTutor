@@ -1,5 +1,6 @@
 // 订单详情，学生
 const $common = require('../../../utils/common.js');
+const translate = require('../../../utils/translate.js');
 Page({
   data: {
     srcForIdPhoto: $common.srcForIdPhoto,
@@ -67,6 +68,12 @@ Page({
           showMem.orderTime = this.timeStamp(showMem.OdrCreateOn);//下单时间;
           showMem.buyTime = this.timeStamp(showMem.OdrBuyDate); //支付时间
           showMem.groupSuccessTime = this.timeStamp(showMem.OdrFgtSuccessTime);//拼团成功时间
+          let TimStr = showMem.TimStr;
+          if(isEn){
+            showMem.timeStr = `${translate.translateWeekEn(TimStr[0])}/${translate.translateTimeEn(TimStr[1])}`;
+          }else{
+            showMem.timeStr = `${translate.translateWeek(TimStr[0])}/${translate.translateTime(TimStr[1])}`;
+          }
           course.CorPrice = course.CorPrice.toFixed(2) < 0.01 ? 0.01 : course.CorPrice.toFixed(2);
           let teacher = res.data.teacher;
           teacher.TeaName = teacher.TeaNickName;

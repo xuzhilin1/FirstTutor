@@ -21,7 +21,7 @@
       <view class='margin-b-20 '>下单时间：{{showMem.orderTime}}</view>
       <view class='margin-b-20 '>支付时间：{{showMem.buyTime}}</view>
       <view wx:if='{{course.CorType!=1}}' class='margin-b-20 '>拼团成功时间：{{showMem.groupSuccessTime}}</view>
-      <view class='margin-b-20 '>上课时间段：{{showMem.TimStr}}</view>
+      <view class='margin-b-20 '>上课时间段：{{showMem.timeStr}}</view>
       <view class='margin-b-20 '>课程时长：{{course.courseTimeLong}}小时</view>
       <view class='margin-b-20 '>上课时间：{{cog.StartTime}}</view>
     </view>

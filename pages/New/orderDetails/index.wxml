@@ -21,7 +21,7 @@
     <view class='margin-b-20 '>Start Time for Group Buying：{{cog.courseStartTime}}</view>
     <view class='margin-b-20 '>Ending Time for Group Buying：{{cog.courseEndTime}}</view>
   </block>
-  <view class='margin-b-20 '>Course Time Slot：{{MemList[0].TimStr}}</view>
-  <view class='margin-b-20 '>Course Duration：{{course.courseTimeLong}}小时</view>
+  <view class='margin-b-20 '>Course Time Slot：{{MemList[0].timeStr}}</view>
+  <view class='margin-b-20 '>Course Duration：{{course.courseTimeLong}}hour</view>
   <view class='margin-b-20 '>Course Time：{{cog.FgtStartTime}}</view>
 </view>

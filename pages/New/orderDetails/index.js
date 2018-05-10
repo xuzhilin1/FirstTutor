@@ -1,5 +1,6 @@
 //订单详情，外教
 const $common = require('../../../utils/common.js');
+const translate = require('../../../utils/translate.js');
 Page({
   data: {
     cogId: -1,
@@ -76,6 +77,8 @@ Page({
           }
           cog.courseStartTime = this.timeStamp(cog.FgtOpenTime);
           cog.courseEndTime = this.timeStamp(cog.FgtEndTime);
+          let timeArr = memData[0].TimStr;
+          memData[0].timeStr = `${translate.translateWeekEn(timeArr[0])}/${translate.translateTimeEn(timeArr[1])}`;
           this.setData({
             MemList: memData,
             cog: cog,
