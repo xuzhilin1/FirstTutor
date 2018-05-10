@@ -6,10 +6,12 @@
 const $common = require('../../utils/common.js');
 Component({
   properties: {
-
+    isEn:{
+      type:Boolean
+    }
   },
   data: {
-    isEn: false,
+    // isEn: wx.getStorageSync('isEn'),
     falg: true,
   },
   methods: {

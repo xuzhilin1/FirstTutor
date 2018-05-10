@@ -5,6 +5,7 @@
   "navigationBarTextStyle": "white",
   "navigationBarTitleText": "找外教",
   "usingComponents": {
-    "tutor-info": "/component/tutorInfo/tutorInfo"
+    "tutor-info": "/component/tutorInfo/tutorInfo",
+    "change-type": "/component/changeType/changeType"
   }
 }

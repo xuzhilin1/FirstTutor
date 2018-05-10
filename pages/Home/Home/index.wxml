@@ -26,4 +26,4 @@
 <view bindtap='teacherInfo' data-index='{{index}}' wx:for='{{listData}}' wx:key='{{index}}' class='border-t-1'>
   <tutor-info info-list='{{item}}' photo-url='{{srcForIdPhoto}}'></tutor-info>
 </view>
-<change-type bindisEnEvent='isEnEvent'></change-type>
+<change-type is-en='{{isEn}}' bindisEnEvent='isEnEvent'></change-type>

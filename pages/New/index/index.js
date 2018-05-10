@@ -107,6 +107,7 @@ Page({
     let text = isEn ? "Loading..." : "努力加载中...";
     return text;
   },
+
   getIsVip(callback) {//获取外教是否为vip
     $common.request(
       "POST",
@@ -259,7 +260,7 @@ Page({
   onReady: function () {
 
   },
-  onShow: function () {
+  isEnEvent(e) {
     let isEn = wx.getStorageSync('isEn');
     this.setData({
       openid: wx.getStorageSync('openid'),
@@ -270,6 +271,9 @@ Page({
     if (isEn) {
       this.getMsgOrderCount();
     }
+  },
+  onShow: function () {
+    this.isEnEvent();
   },
 
   /**

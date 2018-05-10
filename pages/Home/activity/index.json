@@ -3,5 +3,8 @@
   "backgroundTextStyle": "light",
   "navigationBarBackgroundColor": "#000",
   "navigationBarTextStyle": "white",
-  "navigationBarTitleText": "活动"
+  "navigationBarTitleText": "活动",
+  "usingComponents": {
+    "change-type": "/component/changeType/changeType"
+  }
 }
