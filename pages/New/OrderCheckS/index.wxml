@@ -12,8 +12,8 @@
   <stu-course course='{{item.CourseInfo}}'></stu-course>
   <view class='info'>
     <view class='info-name'>
-      <image class='info-image' src='{{item.UserInfo.UserAvaUrl}}'></image>
-      <text>{{item.UserInfo.UserNickName}}</text>
+      <image class='info-image' src='{{item.UserInfo.TeaIdPhoto ?srcForIdPhoto + item.UserInfo.TeaIdPhoto :item.UserInfo.UserAvaUrl}}'></image>
+      <text>{{item.UserInfo.TeaName || item.UserInfo.UserNickName}}</text>
     </view>
     <view>课程时长：{{item.CourseInfo.courseTimeLong}}小时</view>
   </view>

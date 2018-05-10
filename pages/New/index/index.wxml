@@ -2,7 +2,7 @@
   <view>
     <view class='avatarUrl-box'>
        <open-data wx:if='{{!TeaIdPhoto&&!UserAvaUrl}}' class='avatarUrl' type="userAvatarUrl"></open-data> 
-      <image mode='widthFix' wx:if='{{TeaIdPhoto||UserAvaUrl}}' class='avatarUrl' src='{{TeaIdPhoto&&srcForIdPhoto}}{{TeaIdPhoto||UserAvaUrl}}'></image>
+      <image wx:if='{{TeaIdPhoto||UserAvaUrl}}' class='avatarUrl' src='{{TeaIdPhoto&&srcForIdPhoto}}{{TeaIdPhoto||UserAvaUrl}}'></image>
     </view>
     <view class='flex aitems-center center'>
       <open-data wx:if='{{!UserNickName}}' class="userinfo-nickname" type="userNickName" lang="zh_CN"></open-data>

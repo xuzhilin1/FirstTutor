@@ -4,6 +4,7 @@ Page({
   data: {
     input: '',
     scoure: 0,
+    btnFalg: true
   },
   bindScoure(e) { //评分
     this.setData({
@@ -21,6 +22,8 @@ Page({
     $common.getUserInfo(userInfo, this.submit.bind(this));
   },
   submit() {
+    if (!this.data.btnFalg) return; //阻止连点
+    this.data.btnFalg = false;
     let input = this.data.input,
       scoure = this.data.scoure;
     if (scoure <= 0) {
@@ -49,6 +52,7 @@ Page({
             icon: 'success',
           })
           setTimeout(() => {
+            this.data.btnFalg = true;
             wx.navigateBack({
               delta: 1
             })
@@ -68,6 +72,9 @@ Page({
 
       },
       (res) => {
+        setTimeout(() => {
+          this.data.btnFalg = true;
+        }, 1500);
       }
     )
   },

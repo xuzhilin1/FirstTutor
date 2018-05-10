@@ -30,6 +30,7 @@ Page({
     }],
     sexIndex: 0,
     StuId: -1,
+    btnFalg: true,
   },
   bindName(e) { //姓名
     this.data.userName = e.detail.value;
@@ -86,6 +87,8 @@ Page({
     })
   },
   submit() { //提交需求
+    if (!this.data.btnFalg) return;
+    this.data.btnFalg = false;
     let area = this.data.areaList[this.data.areaIndex],
       week = parseInt(this.data.weekIndex) + 1,
       time = parseInt(this.data.timeIndex) + 1,
@@ -178,6 +181,9 @@ Page({
 
       },
       (res) => {
+        setTimeout(() => {
+          this.data.btnFalg = true;
+        }, 1500);
       }
     )
   },
@@ -231,6 +237,9 @@ Page({
 
       },
       (res) => {
+        setTimeout(() => {
+          this.data.btnFalg = true;
+        }, 1500);
       }
     )
   },

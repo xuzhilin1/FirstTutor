@@ -57,7 +57,7 @@ Page({
           index: i,
           time: timeList[i].timeName,
           TimId: timeList[i].TimId,
-          TimAfw : timeList[i].TimAfw, //周几
+          TimAfw: timeList[i].TimAfw, //周几
           TimClaTime: timeList[i].TimClaTime
         };
         flage = true;
@@ -196,7 +196,7 @@ Page({
           course.CorPrice = course.CorPrice.toFixed(2) < 0.01 ? 0.01 : course.CorPrice.toFixed(2);
           course.CorGroupPrice = course.CorGroupPrice.toFixed(2) < 0.01 ? 0.01 : course.CorGroupPrice.toFixed(2);
           let tea = res.data.tea;
-          tea.TeaName = tea.TeaNickName
+          // tea.TeaName = tea.TeaName ? tea.TeaName : tea.TeaNickName;
           this.setData({
             course: course,
             tea: tea,

@@ -108,7 +108,7 @@ Page({
           course.CorPrice = course.CorPrice.toFixed(2) < 0.01 ? 0.01 : course.CorPrice.toFixed(2);
           course.CorClaNum = course.CorType;
           let teacher = res.data.teacher;
-          teacher.TeaName = teacher.TeaNickName;
+          // teacher.TeaName = teacher.TeaNickName;
           this.setData({
             course: course,
             teacher: teacher,

@@ -4,7 +4,7 @@
     <image catchtap='lookYouImage' data-index='{{index}}' class='head-image' src='{{infoList.TeaIDPhoto ? photoUrl + infoList.TeaIDPhoto : infoList.TeaAvaUrl}}'></image>
     <view class='border-box box-content'>
       <view class='box-uername border-box'>
-        <text>{{infoList.TeaName}}</text>
+        <text>{{infoList.TeaName || infoList.TeaNickName}}</text>
         <view class='box-image'>
         <image wx:if='{{infoList.TeaAddV==1}}' class='vip' mode='widthFix' src='/images/guan_03.png'></image>
         <!--  星星  -->

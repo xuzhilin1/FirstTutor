@@ -147,7 +147,6 @@ Page({
             duration: 1500,
           })
           setTimeout(() => {
-            this.data.saveFalg = true;
             wx.navigateBack({
               delta: 1
             })
@@ -160,7 +159,9 @@ Page({
         $common.showModal('Unknown Error', false, false, 'OK', 'Reminder');
       },
       (res) => {
-        
+        setTimeout(() => {
+          this.data.btnFalg = true;
+        }, 1500);
       }
     )
   },
@@ -208,7 +209,9 @@ Page({
         $common.showModal('Unknown Error', false, false, 'OK', 'Reminder');
       },
       (res) => {
-        
+        setTimeout(() => {
+          this.data.btnFalg = true;
+        }, 1500);
       }
     )
   },

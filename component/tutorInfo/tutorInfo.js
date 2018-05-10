@@ -26,6 +26,8 @@ Component({
         RewScore: 5,
         TeaSortNum: 6,
         TeaIDPhoto: '20180419103902518411.jpg'
+      },
+      observer(res){
       }
     }
   },

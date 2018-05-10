@@ -8,7 +8,6 @@ Component({
     course: {
       type: Object,
       observer(res){
-        console.log(res);
       }
     }
   },

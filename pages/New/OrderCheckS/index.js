@@ -2,6 +2,7 @@
 const $common = require('../../../utils/common.js');
 Page({
   data: {
+    srcForIdPhoto: $common.srcForIdPhoto,
     pageIndex: 1,
     pageSize: 5,
     infoList: [], //页面数据
