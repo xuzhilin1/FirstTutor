@@ -12,7 +12,7 @@
       <view bindtap='bindDelete' data-index='{{index}}' class='purple AnNiu border'>Delete</view>
       <view bindtap='groupList' data-index='{{index}}' wx:if='{{item.CorType!=1&&item.CorCanView==1}}' class='border AnNiu white purple-bg'>Group Buying Effective {{item.FGCount}}</view>
       <view bindtap='orderDetails' data-index='{{index}}' wx:if='{{item.CorCanView==1&&item.CorType==1}}' class='border AnNiu white purple-bg'>Check</view>
-      <view bindtap='reviseReleaseCourse' data-index='{{index}}' wx:if='{{item.CorCanView==0}}' class='border AnNiu white purple-bg'>Modify Course</view>
+       <!-- <view bindtap='reviseReleaseCourse' data-index='{{index}}' wx:if='{{item.CorCanView==0}}' class='border AnNiu white purple-bg'>Modify Course</view>  -->
     </view>
   </view>
   <view wx:if='{{courInfos.length<=0}}' class='noData'>

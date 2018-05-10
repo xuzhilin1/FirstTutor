@@ -30,8 +30,8 @@ Page({
             } else {
               switch (res.data.errType) {
                 case 3:
-                  // $common.showModal('有人报名，不可删除');
-                  $common.showModal('Someone sign up, can not be deleted', false, false, 'Ok', 'Reminder');
+                  // $common.showModal('有人正在参加，不可删除');
+                  $common.showModal('Someone is participating and cannot be deleted.', false, false, 'Ok', 'Reminder');
                   break;
                 default:
                   $common.showModal('Unknown mistake', false, false, 'Ok', 'Reminder');

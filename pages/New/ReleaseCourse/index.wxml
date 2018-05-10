@@ -20,7 +20,7 @@
   <view class='flex1 aitems-center  fon-22 flex page-box'>
     <view class='width-left'>{{courseTypeIndex!=0?"Total Price of Course":"Course Price"}}</view>
     <!-- <text>¥</text> -->
-    <input type='digit' maxlength='10' placeholder='Recommended Price：￥200-500/hour' bindinput='bindCourseAllPrice' class='ca input-width' value='{{courseAllPrice}}' placeholder-class='fon-22'></input>
+    <input type='digit' maxlength='10' placeholder='Recommended Price:￥200-500/hour' bindinput='bindCourseAllPrice' class='ca input-width' value='{{courseAllPrice}}' placeholder-class='fon-22'></input>
   </view>
 </view>
 

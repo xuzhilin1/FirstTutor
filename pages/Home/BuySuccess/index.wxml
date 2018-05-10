@@ -1,7 +1,7 @@
 <!--  
   中文版
   -->
-<block>
+<block wx:if='{{!isEn}}'>
   <view class='bg-fff header border-b-1'>
     <image class='imgas' mode='widthFix' src='/images/lian_03.jpg'></image>
     <view class='fon-42 t-center bold'>恭喜您，购买成功！</view>
@@ -40,7 +40,7 @@
 <!--  
   英文版
   -->
-<block>
+<block wx:if='{{isEn}}'>
   <view class='bg-fff header border-b-1'>
     <image class='imgas' mode='widthFix' src='/images/lian_03.jpg'></image>
     <view class='fon-42 t-center bold'>Congratulations on your success!</view>
