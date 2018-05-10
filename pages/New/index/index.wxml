@@ -1,10 +1,12 @@
 <view class='top bg-fff flex center  aitems-center margin-b-20 border-b-1'>
   <view>
     <view class='avatarUrl-box'>
-      <open-data class='avatarUrl' type="userAvatarUrl"></open-data>
+      <open-data wx:if='{{!UserAvaUrl}}' class='avatarUrl' type="userAvatarUrl"></open-data>
+      <image mode='widthFix' wx:if='{{UserAvaUrl}}' class='avatarUrl' src='{{UserAvaUrl}}'></image>
     </view>
     <view class='flex aitems-center center'>
-      <open-data class="userinfo-nickname" type="userNickName" lang="zh_CN"></open-data>
+      <open-data wx:if='{{!UserNickName}}' class="userinfo-nickname" type="userNickName" lang="zh_CN"></open-data>
+      <view wx:if='{{UserNickName}}' class="userinfo-nickname">{{UserNickName}}</view>
       <image wx:if='{{vip&&isEn}}' mode='widthFix' class='Guan' src='/images/guan_03.png'></image>
     </view>
   </view>

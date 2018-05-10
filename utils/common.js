@@ -165,6 +165,8 @@ const config = {
   PublishFeedBack: `${host}/LittleProgram/HelpAndFeedBack/PublishFeedBack`,
   // 外教--我的课程--关闭/打开课程（2018-04-25）
   ChangeCorSwitch: `${host}/LittleProgram/Course/ChangeCorSwitch`,
+  //  获取用户头像与昵称 （2018-05-10）
+  GetMyAvaName: `${host}/LittleProgram/UserInfo/GetMyAvaName`,
 }
 
 

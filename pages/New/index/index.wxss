@@ -30,6 +30,7 @@
   margin: 0 auto;
   box-sizing: border-box;
   overflow: hidden;
+  margin-bottom: 20rpx;
 }
 
 .avatarUrl {

@@ -101,6 +101,8 @@ Page({
       title: "帮助与反馈",
       luJin: '/pages/me/help/help'
     }],
+    UserAvaUrl: '',
+    UserNickName: ''
   },
   loading() {
     let isEn = wx.getStorageSync('isEn');
@@ -254,6 +256,32 @@ Page({
       }
     )
   },
+  getImgAndName() {
+    let openid = wx.getStorageSync('openid');
+    if (!openid) {
+      $common.getOpenid(this.getImgAndName.bind(this));
+      return;
+    }
+    $common.request(
+      "POST",
+      $common.config.GetMyAvaName,
+      {
+        openId: openid
+      },
+      (res) => {
+        if (res.data.res) {
+          console.log(res);
+          let data = res.data;
+          this.setData({
+            UserAvaUrl: data.UserAvaUrl,
+            UserNickName: data.UserNickName
+          })
+        }
+      },
+      (res) => { },
+      (res) => { }
+    )
+  },
   onLoad: function (options) {
 
   },
@@ -266,6 +294,7 @@ Page({
       openid: wx.getStorageSync('openid'),
       isEn: isEn
     })
+    this.getImgAndName();
     this.init();
     this.getMsgCount();
     if (isEn) {
