@@ -320,7 +320,6 @@ module.exports = {
   getUserInfo(userInfo, callback) {
     callback = typeof (callback) === 'function' ? callback : function (res) { };
     wx.setStorageSync('userInfo', userInfo);
-    console.log(userInfo);
     wx.request({
       url: config.UpdateAvaUrlNick,
       data: {

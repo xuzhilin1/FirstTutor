@@ -5,6 +5,7 @@ const $common = require('../../../utils/common.js');
 let SocketTask;
 Page({
   data: {
+    srcForIdPhoto: $common.srcForIdPhoto,
     value: '', //聊天框的初始内容
     myImage: '',
     youImage: '',
@@ -96,7 +97,9 @@ Page({
         if (res.data.res) {
           this.setData({
             myImage: res.data.curAvaUrl,
-            youImage: res.data.tarAvaUrl
+            myType: res.data.curUserType,
+            youImage: res.data.tarAvaUrl,
+            youType: res.data.tarUserType
           })
         } else {
           // switch (res.data.errType) {

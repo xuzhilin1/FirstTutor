@@ -22,7 +22,6 @@ Component({
       if (!falg) return; //阻止连点
       this.data.falg = false;
       let openid = wx.getStorageSync('openid');
-      console.log(openid)
       if (!openid) { //没有openid
         $common.getOpenid($common.getUserInfo.bind(this, userInfo, this.stuOrTea.bind(this)));
       } else { //有openid

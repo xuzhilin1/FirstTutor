@@ -3,6 +3,7 @@ const app = getApp();
 const $common = require('../../../utils/common.js');
 Page({
   data: {
+    srcForIdPhoto: $common.srcForIdPhoto,
     notCNum: 0, //订单未读
     unReadC: 0, //未读消息，大于0，有
     userInfo: {},
@@ -102,6 +103,7 @@ Page({
       luJin: '/pages/me/help/help'
     }],
     UserAvaUrl: '',
+    TeaIdPhoto: '',
     UserNickName: ''
   },
   loading() {
@@ -270,10 +272,10 @@ Page({
       },
       (res) => {
         if (res.data.res) {
-          console.log(res);
           let data = res.data;
           this.setData({
-            UserAvaUrl: data.UserAvaUrl,
+            UserAvaUrl: data.UserAvaUrl ? data.UserAvaUrl : '',
+            TeaIdPhoto: data.TeaIdPhoto ? data.TeaIdPhoto : '',
             UserNickName: data.UserNickName
           })
         }

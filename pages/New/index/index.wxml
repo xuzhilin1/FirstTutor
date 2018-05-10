@@ -1,8 +1,8 @@
 <view class='top bg-fff flex center  aitems-center margin-b-20 border-b-1'>
   <view>
     <view class='avatarUrl-box'>
-      <open-data wx:if='{{!UserAvaUrl}}' class='avatarUrl' type="userAvatarUrl"></open-data>
-      <image mode='widthFix' wx:if='{{UserAvaUrl}}' class='avatarUrl' src='{{UserAvaUrl}}'></image>
+       <open-data wx:if='{{!TeaIdPhoto&&!UserAvaUrl}}' class='avatarUrl' type="userAvatarUrl"></open-data> 
+      <image mode='widthFix' wx:if='{{TeaIdPhoto||UserAvaUrl}}' class='avatarUrl' src='{{TeaIdPhoto&&srcForIdPhoto}}{{TeaIdPhoto||UserAvaUrl}}'></image>
     </view>
     <view class='flex aitems-center center'>
       <open-data wx:if='{{!UserNickName}}' class="userinfo-nickname" type="userNickName" lang="zh_CN"></open-data>
