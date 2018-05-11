@@ -16,7 +16,7 @@ view {
   width: 100%;
   padding: 0 30rpx;
   margin-bottom: 50rpx;
-   margin-top: 50rpx; 
+  margin-top: 50rpx;
 }
 
 .core-time {
@@ -37,13 +37,13 @@ view {
 .core-box-me {
   display: flex;
   justify-content: flex-end;
-  width: 100%;
+  width: 80%;
 }
 
 .core-box-you {
   display: flex;
   justify-content: flex-start;
-  width: 100%;
+  width: 80%;
 }
 
 .core-image {

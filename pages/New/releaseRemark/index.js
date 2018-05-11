@@ -28,10 +28,12 @@ Page({
       scoure = this.data.scoure;
     if (scoure <= 0) {
       $common.showModal('请给该外教打分');
+      this.data.btnFalg = true;
       return;
     }
     if (input.trim().length <= 0) {
       $common.showModal('请填写外教介绍');
+      this.data.btnFalg = true;
       return;
     }
     $common.request(

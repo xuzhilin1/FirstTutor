@@ -79,26 +79,31 @@ Page({
     if (courseName.trim().length <= 0) {
       // $common.showModal('请填写课程名称');
       $common.showModal('Please fill in the course name.', false, false, 'OK', 'Reminder');
+      this.data.btnFalg = true;
       return;
     }
     if (!courseAllPrice) {
       // $common.showModal('请填写课程价格');
       $common.showModal('Please fill in the course price', false, false, 'OK', 'Reminder');
+      this.data.btnFalg = true;
       return;
     }
     if (isNaN(courseAllPrice) && Number(courseAllPrice).toFixed(2) < 0) {
       // $common.showModal('请填写有效的价格');
       $common.showModal('Please fill in a valid price', false, false, 'OK', 'Reminder');
+      this.data.btnFalg = true;
       return;
     }
     if (courseTime.length <= 0) {
       // $common.showModal('请选择时间段');
       $common.showModal('Please select time period', false, false, 'OK', 'Reminder');
+      this.data.btnFalg = true;
       return;
     }
     if (!isCourseIntroduce) {
       // $common.showModal('请填写课程介绍');
       $common.showModal('Please fill in the course description', false, false, 'OK', 'Reminder');
+      this.data.btnFalg = true;
       return;
     }
     if (this.data.status === 0 || this.data.status === 3) {
@@ -192,6 +197,7 @@ Page({
           setTimeout(() => {
             this.data.saveFalg = true;
             if (status === 3) { //外教申请发布课程，进入
+              wx.setStorageSync('isEn', true);
               wx.switchTab({
                 url: '/pages/Home/Home/index',
               });

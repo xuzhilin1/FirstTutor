@@ -18,7 +18,7 @@ Page({
   onlineChart() { //立即沟通
     let TeaUserId = this.data.tea.TeaUserId;
     wx.navigateTo({
-      url: `../../New/onlineChart/index?userId=${TeaUserId}`,
+      url: `../../New/onlineChart/index?userId=${TeaUserId}&returnPage=2`,
     })
   },
   SonTime(e) { //子组件选择时间触发该事件

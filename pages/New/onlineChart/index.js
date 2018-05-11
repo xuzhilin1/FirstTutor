@@ -14,12 +14,21 @@ Page({
     listData: [],
     userId: -1,
     newDataCount: 0, //自己发送与接收数据之和
+    tarTeaId: '',
   },
   courseInfo() { //跳转到课程信息
-    let teaId = this.data.userId;
-    wx.navigateTo({
-      url: `/pages/Home/teachersInformation/index?data=${teaId}`,
-    })
+    let teaId = this.data.tarTeaId;
+    let returnPage = this.data.returnPage;
+    if (returnPage) { //由课程信息和支付页面跳过来的又要跳回去
+      wx.navigateBack({
+        delta: returnPage
+      })
+    } else {
+      if (tarTeaId <= 0) return; //对方不是老师
+      wx.navigateTo({
+        url: `/pages/Home/teachersInformation/index?data=${teaId}`,
+      })
+    }
   },
   removeDuplicate(thisArr, thisId) { //去重
     let hash = {};
@@ -99,7 +108,8 @@ Page({
             myImage: res.data.curAvaUrl,
             myType: res.data.curUserType,
             youImage: res.data.tarAvaUrl,
-            youType: res.data.tarUserType
+            youType: res.data.tarUserType,
+            tarTeaId: res.data.tarTeaId
           })
         } else {
           // switch (res.data.errType) {
@@ -211,8 +221,10 @@ Page({
    */
   onLoad: function (options) {
     let userId = options.userId;
+    let returnPage = options.returnPage ? parseInt(options.returnPage) : false;
     this.setData({
-      userId: userId
+      userId: userId,
+      returnPage: returnPage
     });
     let openid = wx.getStorageSync('openid');
     //建立连接

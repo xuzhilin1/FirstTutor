@@ -51,3 +51,36 @@
   background-color: #f00;
   margin-left: 15rpx;
 }
+
+.this-flex {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.header {
+  box-sizing: border-box;
+  padding: 30rpx;
+  background: #fff;
+  border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.header-box {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  box-sizing: border-box;
+  overflow: hidden;
+  margin-right: 20rpx;
+}
+
+.header-context {
+  max-width: 70%;
+  font-size: 28rpx;
+  word-wrap: break-word;
+  word-break: break-all;
+}

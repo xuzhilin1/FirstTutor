@@ -206,9 +206,9 @@ Page({
     for (let i = 0, len = certificate.length; i < len; i++) {
       arr.push(certificate[i].QfsPicName);
     }
-    this.requestSaveData(userName, sex, age, weChat, school, nationality, synopsis, phone, passport, email, arr, video);
+    this.requestSaveData(userName, sex, age, weChat, school, nationality, synopsis, phone, passport, email, arr, video, idPicture);
   },
-  requestSaveData(TeaName, TeaGender, TeaAge, TeaWeChat, TeaUniversity, TeaNaLityId, TeaAbstract, TeaPhone, TeaPassPort, TeaMail, TeaQualif, TeaAudio) { //发送请求
+  requestSaveData(TeaName, TeaGender, TeaAge, TeaWeChat, TeaUniversity, TeaNaLityId, TeaAbstract, TeaPhone, TeaPassPort, TeaMail, TeaQualif, TeaAudio, TeaIDPhoto) { //发送请求
     $common.request(
       "POST",
       $common.config.ApplyForForeEdu,
@@ -225,7 +225,8 @@ Page({
           TeaPhone: TeaPhone,
           TeaPassPort: TeaPassPort,
           TeaMail: TeaMail,
-          TeaAudio: TeaAudio
+          TeaAudio: TeaAudio,
+          TeaIDPhoto: TeaIDPhoto
         },
         Qualifs: TeaQualif,
       },

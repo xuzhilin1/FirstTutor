@@ -166,7 +166,8 @@ Page({
       school: teacherFor.TeaUniversity,
       synopsis: teacherFor.TeaAbstract
     });
-    this.setTeaNaLityId();
+    this.getCountryInfo();
+    // this.setTeaNaLityId();
   },
   getForTeaStatus() { //外教申请，获取外教信息
     let openid = wx.getStorageSync('openid');
@@ -227,13 +228,27 @@ Page({
       null,
       (res) => {
         if (res.data.res) {
+          console.log(res);
           let data = res.data.nationList;
+          let TeaNaLityId = this.data.TeaNaLityId;
+          let nationalityIndex = 0;
+          for (let i = 0, len = data.length; i < len; i++) {
+            if (data[i].NalId == TeaNaLityId) {
+              nationalityIndex = i;
+              break;
+            }
+          }
+          this.setData({
+            nationalityIndex: nationalityIndex,
+            nationalityArray: data
+          })
           //翻译
           let translate = data.reduce(function (item, target, index) {
             item.push(target.NalName);
             return item;
           }, []);
           $common.translate(translate.join('\n'), (res) => {
+            console.log(res);
             let trans_result = res.data.trans_result;
             if (trans_result && trans_result.length > 0) { //翻译成功了
               for (let i = 0, len = data.length; i < len; i++) {
@@ -245,7 +260,7 @@ Page({
               nationalityArray: data
             })
           });
-          this.setTeaNaLityId();
+          // this.setTeaNaLityId();
         } else {
           $common.showModal('Failed to obtain nationality information. Please regain', true, (res) => {
             if (res.confirm) {
@@ -264,7 +279,6 @@ Page({
     });
   },
   onReady: function () {
-    this.getCountryInfo();
     this.init();
   },
 

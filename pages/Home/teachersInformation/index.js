@@ -44,7 +44,7 @@ Page({
   onlineChart() { //进入聊天界面
     let userId = this.data.teaInfo.TeaUserId;
     wx.navigateTo({
-      url: `../../New/onlineChart/index?userId=${userId}`,
+      url: `../../New/onlineChart/index?userId=${userId}&returnPage=1`,
     })
   },
   lookqualifImage(e) { //查看外教资质
@@ -126,6 +126,7 @@ Page({
     return `${m}-${d} ${h}:${f}`;
   },
   resetArea() { //重置上课区域
+    console.log(this.data.teaInfo);
     let TeaClassArea = this.data.teaInfo.TeaClassArea.split(',');
     let isEn = wx.getStorageSync('isEn');
     let allAreaList = isEn ? $static.areaShanghaiEn : $static.areaShanghai;

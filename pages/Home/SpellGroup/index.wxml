@@ -163,7 +163,7 @@
   <block wx:if='{{isEn}}'>
     <view class='flex aitems-center height-85  padding-lr-30 bg-fff border-t-1 fon-30 c2b '>
       Course Duration
-      <view class='c2b margin-l-20'>{{course.courseTimeLong}}小时</view>
+      <view class='c2b margin-l-20'>{{course.courseTimeLong}}hour</view>
     </view>
     <view class='flex aitems-center height-85 padding-lr-30 bg-fff border-t-1 fon-30 c2b '>
       Course Time

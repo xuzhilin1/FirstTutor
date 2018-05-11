@@ -104,23 +104,28 @@ Page({
       age = this.data.age;
     if (userName.trim().length <= 0) {
       $common.showModal('请填写姓名');
+      this.data.btnFalg = true;
       return;
     }
     if (!$common.phoneReg.test(phone)) {
       $common.showModal('请填写正确的手机号');
+      this.data.btnFalg = true;
       return;
     }
     if (address.trim().length <= 0) {
       $common.showModal('请填写上课地址');
+      this.data.btnFalg = true;
       return;
     }
 
     if (isNaN(parseInt(age)) || parseInt(age) < 0) {
       $common.showModal('请填写正确的年龄');
+      this.data.btnFalg = true;
       return;
     }
     if (course.trim().length <= 0) {
       $common.showModal('请填写学习课程');
+      this.data.btnFalg = true;
       return;
     }
     let status = this.data.status;

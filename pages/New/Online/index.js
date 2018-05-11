@@ -4,6 +4,7 @@
 const $common = require('../../../utils/common.js');
 Page({
   data: {
+    srcForIdPhoto: $common.srcForIdPhoto,
     infoList: [],
     pageSize: 10,
     pageIndex: 1,
