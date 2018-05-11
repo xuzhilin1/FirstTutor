@@ -20,6 +20,7 @@ const srcActivityVideo = `${host}/ActVideos/`; //活动视频
 const srcBanner = `${host}/BannerImgs/`; //轮播图
 const srcPoster = `${host}/Content/Images/`; //海报
 const srcForIdPhoto = `${host}/ForIdPhoto/`;//证件照
+const srcShar = `${host}/Content/SharePic/`; //分享图片
 const config = {
   /*
     首页
@@ -60,6 +61,8 @@ const config = {
   GetTeaAddressPhone: `${host}/LittleProgram/CorOpenGroup/GetTeaAddressPhone`,
   // 用户--更改用户类型（2018-04-23）
   ChangeUserType: `${host}/LittleProgram/UserInfo/ChangeUserType`,
+  // 获取分享的图片
+  GetSharePicName: `${host}/LittleProgram/SystemSetup/GetSharePicName`,
   /*
     找外教
    */
@@ -184,6 +187,7 @@ module.exports = {
   srcPoster: srcPoster,
   srcForIdPhoto: srcForIdPhoto,
   srcActivityVideo: srcActivityVideo,
+  srcShar: srcShar,
   //翻译
   translate(query, complete) {
     // let appid = '2015063000000001', //官方示例，次数不限估计

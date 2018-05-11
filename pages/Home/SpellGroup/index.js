@@ -15,6 +15,9 @@ Page({
     mem: [], //团成员信息
     teaAddress: '', //外教地址
     teaPhone: '', //外教联系方式
+    sharePic: '', //要分享的图片链接
+    picIntro: '', //要分享的文案
+    srcShar: $common.srcShar,
   },
   callPhone(e) { //打电话
     let phone = e.currentTarget.dataset.phone;
@@ -187,6 +190,27 @@ Page({
     this.getPageInfo();
     this.getTeacherPhone();
   },
+  getSharePicName() { //获取要分享的图片
+    $common.request(
+      "POST",
+      $common.config.GetSharePicName,
+      {},
+      (res) => {
+        if (res.data.res) {
+          this.setData({
+            sharePic: res.data.sharePic,
+            picIntro: res.data.picIntro
+          })
+        }
+      },
+      (res) => {
+
+      },
+      (res) => {
+        console.log(res);
+      }
+    )
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -196,6 +220,7 @@ Page({
       cogId: cogId, //65测试
     })
     this.init();
+    this.getSharePicName();
   },
 
   /**
@@ -250,8 +275,21 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+    let OdrName = this.data.mem[0].OdrName;
+    let srcShar = $common.srcShar;
+    let sharePic = this.data.sharePic;
+    let picIntro = this.data.picIntro;
+    let title;
+    if (OdrName) {
+      title = `${OdrName}${picIntro ? picIntro : '邀请你去拼团!'}`;
+    } else {
+      title = `你的小伙伴${picIntro ? picIntro : '邀请你去拼团!'}`;
+    }
+    let imageUrl = '';
+    sharePic && (imageUrl = `${srcShar}${sharePic}`);
     return {
-      title: 'FirstTutor',
+      title: title,
+      imageUrl: imageUrl,
       path: '/pages/Home/SpellGroup/index?cogId=' + this.data.cogId
     }
   }
