@@ -53,7 +53,7 @@
       <view wx:if='{{orderType==2||groupType==1}}' class='flex bg-fff  height-85 padding-lr-30 aitems-center border-b-1 between'>
         <view class='flex1 aitems-center  fon-30 flex list-box'>
           <view class='width-150'>上课地址</view>
-          <input bindinput='bindCourseAddress' value='{{courseAddress}}' type='text' class='ca list-input' placeholder-class='ca' placeholder='（建议英文填写，默认线下协商）'></input>
+          <input bindinput='bindCourseAddress' value='{{courseAddress}}' type='text' class='ca list-input' placeholder-class='ca' placeholder='（建议英文填写）'></input>
         </view>
       </view>
       <!--  定金说明   -->

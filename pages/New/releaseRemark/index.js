@@ -60,6 +60,7 @@ Page({
             })
           }, 1500);
         } else {
+          this.data.btnFalg = true;
           switch (res.data.errType) {
             case 1:
               $common.showModal('参数错误');
@@ -71,12 +72,9 @@ Page({
         }
       },
       (res) => {
-
+        this.data.btnFalg = true;
       },
       (res) => {
-        setTimeout(() => {
-          this.data.btnFalg = true;
-        }, 1500);
       }
     )
   },

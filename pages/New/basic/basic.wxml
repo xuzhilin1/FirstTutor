@@ -1,6 +1,6 @@
 <!--pages/New/basic/basic.wxml-->
 <view wx:for="{{pagesList}}" wx:key='{{index}}' bindtap='jump' data-index='{{index}}' data-url='{{item.url}}' class='list-box'>
-  <view class='list-box-item fon-22'>
+  <view class='list-box-item fon-28'>
     <view class='list-left'>{{item.ZiLiao}}</view>
     <view class='zxx_text_overflow'>{{item.Types}}</view>
   </view>
@@ -9,8 +9,8 @@
 
 <!--  -->
 <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
-  <view class='flex1 aitems-center  fon-22 flex '>
-    <view style='width:220rpx;'>Contact Number</view>
+  <view class='flex1 aitems-center  fon-28 flex '>
+    <view style='width:320rpx;'>Contact Number</view>
     <input style='width:75%;' bindinput='bindPhone' class='ca' type='number' maxlength='11' value='{{phone}}' placeholder='unfilled'></input>
   </view>
 </view>

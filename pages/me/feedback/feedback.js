@@ -6,7 +6,8 @@ Page({
   data: {
     input: '',
     userName: '',
-    phone: ''
+    phone: '',
+    btnFalg: true,
   },
   bindUserName(e) { //姓名
     this.data.userName = e.detail.value;
@@ -18,6 +19,8 @@ Page({
     this.data.input = e.detail.value;
   },
   submit() {
+    if (!this.data.btnFalg) return;
+    this.data.btnFalg = false;
     let input = this.data.input,
       userName = this.data.userName,
       phone = this.data.phone;
@@ -28,6 +31,7 @@ Page({
       } else {
         $common.showModal('请填写您的姓名');
       }
+      this.data.btnFalg = true;
       return;
     }
     if (!$common.phoneReg.test(phone)) {
@@ -36,6 +40,7 @@ Page({
       } else {
         $common.showModal('请填写正确的手机号');
       }
+      this.data.btnFalg = true;
       return;
     }
     if (input.trim().length <= 0) {
@@ -44,6 +49,7 @@ Page({
       } else {
         $common.showModal('请填写您的反馈意见');
       }
+      this.data.btnFalg = true;
       return;
     }
     $common.request(
@@ -64,11 +70,13 @@ Page({
             icon: 'success',
           })
           setTimeout(() => {
+            this.data.btnFalg = true;
             wx.navigateBack({
               delta: 1
             })
           }, 1500)
         } else {
+          this.data.btnFalg = true;
           //1 参数不正确 2 未知错误
           if (isEn) {
             $common.showModal('Unknown Error', false, false, 'Ok', 'Reminder');
@@ -78,7 +86,7 @@ Page({
         }
       },
       (res) => {
-
+        this.data.btnFalg = true;
       },
       (res) => {
       }

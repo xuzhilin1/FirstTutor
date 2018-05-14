@@ -10,9 +10,9 @@ page {
 }
 
 .width-left {
-  width: 236rpx;
+  width: 350rpx;
 }
 
 .width-l {
-  width: 190rpx;
+  width: 250rpx;
 }

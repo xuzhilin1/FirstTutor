@@ -35,6 +35,7 @@ Page({
       }
     ],
     phone: '',
+    btnFalg: true, //防止保存按钮连点
   },
   bindPhone(e) { //电话
     let phone = e.detail.value;
@@ -44,15 +45,19 @@ Page({
     app.globalData.teacherFor.TeaPhone = phone;
   },
   submit() { //点击保存按钮
+    if (!this.data.btnFalg) return;
+    this.data.btnFalg = false;
     let teacherFor = app.globalData.teacherFor;
     let qualifs = [];
     let phone = this.data.phone;
     if (!teacherFor.TeaName) {
       $common.showModal('Please fill in your brief introduction.', false, false, 'OK', 'Reminder');
+      this.data.btnFalg = true;
       return;
     }
     if (!teacherFor.TeaDescript) {
       $common.showModal('Please fill in the tutor introduction.', false, false, 'OK', 'Reminder');
+      this.data.btnFalg = true;
       return;
     }
     // if (teacherFor.TeaQualif.length < 0) {
@@ -62,6 +67,7 @@ Page({
     if (!teacherFor.TeaIdPhoto) {
       // $common.showModal('请上传证件照');
       $common.showModal('Please upload the Head Shot.', false, false, 'OK', 'Reminder');
+      this.data.btnFalg = true;
       return;
     }
     // if (!teacherFor.TeaAudio) {
@@ -70,10 +76,12 @@ Page({
     // }
     if (!teacherFor.TeaClaArea) {
       $common.showModal('Please select the acceptable teaching area.', false, false, 'OK', 'Reminder');
+      this.data.btnFalg = true;
       return;
     }
     if (!$common.phoneReg.test(phone)) {
       $common.showModal('Please fill in the correct phone number.', false, false, 'OK', 'Reminder');
+      this.data.btnFalg = true;
       return;
     }
     for (let i = 0, len = teacherFor.TeaQualif.length; i < len; i++) {
@@ -88,6 +96,7 @@ Page({
           TeaName: teacherFor.TeaName,
           TeaGender: teacherFor.TeaGender,
           TeaAge: teacherFor.TeaAge,
+          TeaPassPort: teacherFor.TeaPassPort,
           TeaWeChat: teacherFor.TeaWeChat,
           TeaUniversity: teacherFor.TeaUniversity,
           TeaNaLityId: teacherFor.TeaNaLityId,
@@ -107,13 +116,15 @@ Page({
             data[i].QfsCreateOn = true;
           }
           app.globalData.teacherFor.TeaQualif = data;
+          this.data.btnFalg = true;
           $common.showModal('Successfully Saved', false, false, 'OK', 'Reminder');
         } else {
+          this.data.btnFalg = true;
           $common.showModal('Not Saved', false, false, 'OK', 'Reminder');
         }
       },
       (res) => {
-
+        this.data.btnFalg = true;
       },
       (res) => {
       }

@@ -108,6 +108,7 @@ Component({
           timeList = timeListData();
           weekList = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
         }
+        console.log(weekList);
         let n = 0;
         for (let i = 0, len = timeTables.length; i < len; i++) {
           //该时间段已被购买，或不向学生展示
@@ -144,6 +145,7 @@ Component({
           timeList = timeListData();
           weekList = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
         }
+        console.log(weekList);
         for (let j = 0, l = timeList.length; j < l; j++) {
           timeList[j].timeType = 1;
         }
@@ -164,7 +166,9 @@ Component({
           }
         }
         this.setData({
-          timeList: timeList
+          timeList: timeList,
+          weekList: weekList,
+          isEn: isEn
         })
         this.triggerEvent('SonTime', { timeList: timeList });//将数据返回给父组件
       }

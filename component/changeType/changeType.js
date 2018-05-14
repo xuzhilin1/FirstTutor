@@ -72,7 +72,7 @@ Component({
         });
         wx.setTabBarItem({
           index: 1,
-          text: 'find student',
+          text: 'Find Student',
         });
         wx.setTabBarItem({
           index: 2,

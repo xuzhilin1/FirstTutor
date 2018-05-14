@@ -9,7 +9,7 @@ Page({
     remark: '',
     atyId: -1, //活动id
     price: 0.01,
-    buyfalg: true
+    btnFalg: true
   },
   bindUserName(e) { //姓名
     this.data.userName = e.detail.value;
@@ -31,9 +31,9 @@ Page({
       $common.getOpenid(this.submit.bind(this));
       return;
     }
-    let buyfalg = this.data.buyfalg;
-    if (!buyfalg) return;
-    this.data.buyfalg = false;
+    let btnFalg = this.data.btnFalg;
+    if (!btnFalg) return;
+    this.data.btnFalg = false;
     let userName = this.data.userName,
       phone = this.data.phone,
       remark = this.data.remark;
@@ -44,7 +44,7 @@ Page({
       } else {
         $common.showModal('请输入姓名');
       }
-      this.data.buyfalg = true;
+      this.data.btnFalg = true;
       return;
     }
     if (!$common.phoneReg.test(phone)) {
@@ -53,7 +53,7 @@ Page({
       } else {
         $common.showModal('请输入正确的手机号');
       }
-      this.data.buyfalg = true;
+      this.data.btnFalg = true;
       return;
     }
     $common.request(
@@ -94,7 +94,7 @@ Page({
 
                   },
                   (res) => {
-                    this.data.buyfalg = true;
+                    this.data.btnFalg = true;
                     wx.navigateTo({ //跳转到报名成功页面
                       url: '/pages/Home/Success/index?status=1',
                     })
@@ -113,19 +113,19 @@ Page({
                   (res) => { },
                   (res) => { },
                   (res) => {
-                    this.data.buyfalg = true;
+                    this.data.btnFalg = true;
                   }
                 )
               }
             })
           } else { //免费
-            this.data.buyfalg = true;
+            this.data.btnFalg = true;
             wx.navigateTo({ //跳转到报名成功页面
               url: '/pages/Home/Success/index?status=1',
             })
           }
         } else {
-          this.data.buyfalg = true;
+          this.data.btnFalg = true;
           switch (res.data.errType) {
             case 3:
               if (isEn) {
@@ -149,7 +149,7 @@ Page({
         } else {
           $common.showModal('未知错误');
         }
-        this.data.buyfalg = true;
+        this.data.btnFalg = true;
       },
       (res) => {
         wx.hideLoading();

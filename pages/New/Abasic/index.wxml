@@ -1,5 +1,5 @@
 <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
-  <view class='flex1 aitems-center  fon-22 flex '>
+  <view class='flex1 aitems-center  fon-28 flex '>
     <view class='width-left'>Name</view>
     <input bindinput='bindUserName' class='ca input-width' value='{{userName}}' placeholder='To be Filled in'></input>
   </view>
@@ -8,7 +8,7 @@
 <view class='flex height-85 border-b-1 padding-lr-30  between aitems-center'>
   <picker class='flex1' range-key='sex' value="{{sexIndex}}" range="{{sexArray}}" bindchange="bindSexChange">
     <view class='flex picker aitems-center '>
-      <view class="fon-22 flex aitems-center yanse ">
+      <view class="fon-28 flex aitems-center yanse ">
         <view class='width-l'>Gender</view>
         <view class='ca'>{{sexArray[sexIndex].sex}}</view>
       </view>
@@ -20,7 +20,7 @@
 <view class='flex height-85 border-b-1 padding-lr-30  between aitems-center'>
   <picker class='flex1' value='1990-01-01' bindchange="bindAgeChange" mode="date">
     <view class='flex picker aitems-center '>
-      <view class="fon-22 flex aitems-center yanse ">
+      <view class="fon-28 flex aitems-center yanse ">
         <view class='width-l'>Age</view>
         <view class='ca'>{{age}}</view>
       </view>
@@ -29,9 +29,15 @@
   <image mode='widthFix' style='width:20rpx;' src='/images/jian_13.png'></image>
 </view>
 
+<view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
+  <view class='flex1 aitems-center  fon-28 flex '>
+    <view class='width-left'>Passport</view>
+    <input bindinput='bindPassport' class='ca input-width' value='{{passport}}' placeholder='To be Filled in'></input>
+  </view>
+</view>
 
 <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
-  <view class='flex1 aitems-center  fon-22 flex '>
+  <view class='flex1 aitems-center  fon-28 flex '>
     <view class='width-left'>WeChat</view>
     <input bindinput='bindWeChat' class='ca input-width' value='{{weChat}}' placeholder='To be Filled in'></input>
   </view>
@@ -40,7 +46,7 @@
 <view class='flex height-85 border-b-1 padding-lr-30  between aitems-center'>
   <picker class='flex1' range-key='NalName' value="{{nationalityIndex}}" range="{{nationalityArray}}" bindchange="bindNationalityChange">
     <view class='flex picker aitems-center '>
-      <view class="fon-22 flex aitems-center yanse ">
+      <view class="fon-28 flex aitems-center yanse ">
         <view class='width-l'>Nationality</view>
         <view class='ca'>{{nationalityArray[nationalityIndex].NalName}}</view>
       </view>
@@ -50,14 +56,14 @@
 </view>
 
 <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
-  <view class='flex1 aitems-center  fon-22 flex '>
+  <view class='flex1 aitems-center  fon-28 flex '>
     <view class='width-left'>University</view>
     <input bindinput='bindSchool' class='ca input-width' value='{{school}}' placeholder='To be Filled in'></input>
   </view>
 </view>
 
 <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
-  <view class='flex1 aitems-center  fon-22 flex '>
+  <view class='flex1 aitems-center  fon-28 flex '>
     <view class='width-left'>Brief Introduction</view>
     <input bindinput='bindSynopsis' class='ca input-width' placeholder='Maximum of 40 Characters' value='{{synopsis}}' maxlength='40'></input>
   </view>

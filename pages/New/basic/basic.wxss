@@ -27,8 +27,7 @@ view {
 }
 
 .list-left {
-  /* width: 135rpx; */
-  width: 236rpx;
+  width: 350rpx;
 }
 
 .zxx_text_overflow {

@@ -15,7 +15,7 @@ Page({
     duration: ['1', '1.5', '2'],
     courseDurationIndex: 0, //课程时长下标
     CorId: false, //课程id
-    saveFalg: true, //防止保存按钮连点
+    btnFalg: true, //防止保存按钮连点
   },
   bindCourseType(e) { //课程类型
     let value = parseInt(e.detail.value);
@@ -67,8 +67,8 @@ Page({
     })
   },
   submit() {
-    if (!this.data.saveFalg) return;
-    this.data.saveFalg = false;
+    if (!this.data.btnFalg) return;
+    this.data.btnFalg = false;
     let courseTypeIndex = this.data.courseTypeIndex,
       courseName = this.data.courseName,
       courseAllPrice = this.data.courseAllPrice,
@@ -152,21 +152,21 @@ Page({
             duration: 1500,
           })
           setTimeout(() => {
+            this.data.btnFalg = true;
             wx.navigateBack({
               delta: 1
             })
           }, 1500);
         } else {
+          this.data.btnFalg = true;
           $common.showModal('Unknown Error', false, false, 'OK', 'Reminder');
         }
       },
       (res) => {
+        this.data.btnFalg = true;
         $common.showModal('Unknown Error', false, false, 'OK', 'Reminder');
       },
       (res) => {
-        setTimeout(() => {
-          this.data.btnFalg = true;
-        }, 1500);
       }
     )
   },
@@ -195,7 +195,7 @@ Page({
           })
           let status = this.data.status;
           setTimeout(() => {
-            this.data.saveFalg = true;
+            this.data.btnFalg = true;
             if (status === 3) { //外教申请发布课程，进入
               wx.setStorageSync('isEn', true);
               wx.switchTab({
@@ -208,16 +208,15 @@ Page({
             }
           }, 1500);
         } else {
+          this.data.btnFalg = true;
           $common.showModal('Unknown Error', false, false, 'OK', 'Reminder');
         }
       },
       (res) => {
+        this.data.btnFalg = true;
         $common.showModal('Unknown Error', false, false, 'OK', 'Reminder');
       },
       (res) => {
-        setTimeout(() => {
-          this.data.btnFalg = true;
-        }, 1500);
       }
     )
   },

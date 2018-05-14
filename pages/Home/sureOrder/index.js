@@ -23,7 +23,7 @@ Page({
     weekTime: '', //上课时间段
     weekTimeData: {}, //上课时间段数据
     isCheck: false,
-    buyFalg: true,
+    btnFalg: true,
   },
   checkChange() { //协议选中
     this.data.isCheck = !this.data.isCheck;
@@ -147,9 +147,9 @@ Page({
     $common.getUserInfo(userInfo, this.submitOrder.bind(this));
   },
   submitOrder() { //提交订单
-    let buyFalg = this.data.buyFalg;
-    if (!buyFalg) return;
-    this.data.buyFalg = false;
+    let btnFalg = this.data.btnFalg;
+    if (!btnFalg) return;
+    this.data.btnFalg = false;
     let studentName = this.data.studentName,
       studentPhone = this.data.studentPhone,
       startCourseTime = this.data.startCourseTime,
@@ -161,7 +161,7 @@ Page({
       } else {
         $common.showModal('请输入姓名');
       }
-      this.data.buyFalg = true;
+      this.data.btnFalg = true;
       return;
     }
     if (!$common.phoneReg.test(studentPhone)) {
@@ -170,7 +170,7 @@ Page({
       } else {
         $common.showModal('请输入正确的手机号');
       }
-      this.data.buyFalg = true;
+      this.data.btnFalg = true;
       return;
     }
     if (!startCourseTime) {
@@ -179,7 +179,7 @@ Page({
       } else {
         $common.showModal('请选择上课时间');
       }
-      this.data.buyFalg = true;
+      this.data.btnFalg = true;
       return;
     }
     if (!this.data.isCheck) {
@@ -188,7 +188,7 @@ Page({
       } else {
         $common.showModal('请阅读并同意《FirstTutor服务协议》');
       }
-      this.data.buyFalg = true;
+      this.data.btnFalg = true;
       return;
     }
     let orderType = this.data.orderType,
@@ -262,7 +262,7 @@ Page({
 
                 },
                 (res) => {
-                  this.data.buyFalg = true;
+                  this.data.btnFalg = true;
                   console.log(res);
                   console.log(1212);
                 },
@@ -297,13 +297,13 @@ Page({
 
                 },
                 (res) => {
-                  this.data.buyFalg = true;
+                  this.data.btnFalg = true;
                 },
               )
             }
           })
         } else {
-          this.data.buyFalg = true;
+          this.data.btnFalg = true;
           let isEn = wx.getStorageSync('isEn');
           switch (res.data.errType) {
             case 3:
@@ -336,7 +336,7 @@ Page({
         } else {
           $common.showModal('未知错误');
         }
-        this.data.buyFalg = true;
+        this.data.btnFalg = true;
       },
       (res) => {
       }

@@ -1,47 +1,47 @@
 <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
-  <view class='flex1 aitems-center  fon-30 flex '>
+  <view class='flex1 aitems-center  fon-26 flex '>
     <view class='width-l ca'>Location</view>
     <view class='c2b'>{{lnd.address}}</view>
   </view>
 </view>
 
 <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
-  <view class='flex1 aitems-center  fon-30 flex '>
+  <view class='flex1 aitems-center  fon-26 flex '>
     <view class='width-l ca'>Course Time</view>
     <view class='c2b'>{{lnd.week}}</view>
   </view>
 </view>
 
 <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
-  <view class='flex1 aitems-center  fon-30 flex '>
+  <view class='flex1 aitems-center  fon-26 flex '>
     <view class='width-l ca'>Time Period</view>
     <view class='c2b'>{{lnd.time}}</view>
   </view>
 </view>
 
 <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
-  <view class='flex1 aitems-center  fon-30 flex '>
+  <view class='flex1 aitems-center  fon-26 flex '>
     <view class='width-l ca'>Acceptable Price Range</view>
     <view class='c2b'>¥{{lnd.NedMinPrice}} - ¥{{lnd.NedMaxPrice}}</view>
   </view>
 </view>
 
 <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
-  <view class='flex1 aitems-center  fon-30 flex '>
+  <view class='flex1 aitems-center  fon-26 flex '>
     <view class='width-l ca'>Course Address</view>
     <view class='c2b'>{{lnd.NedAddress}}</view>
   </view>
 </view>
 
 <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
-  <view class='flex1 aitems-center  fon-30 flex '>
+  <view class='flex1 aitems-center  fon-26 flex '>
     <view class='width-l ca'>Course</view>
     <view class='c2b'>{{lnd.NedCorName}}</view>
   </view>
 </view>
 
 <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
-  <view class='flex1 aitems-center  fon-30 flex '>
+  <view class='flex1 aitems-center  fon-26 flex '>
     <view class='width-l ca'>Other Requirement</view>
     <view class='c2b'>{{lnd.NedOther}}</view>
   </view>

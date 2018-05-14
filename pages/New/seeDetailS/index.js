@@ -167,11 +167,13 @@ Page({
             icon: 'success',
           })
           setTimeout(() => {
+            this.data.btnFalg = true;
             wx.navigateBack({
               delta: 1
             })
           }, 1500);
         } else {
+          this.data.btnFalg = true;
           switch (res.data.errType) {
             case 1:
               $common.showModal('参数不正确');
@@ -183,12 +185,9 @@ Page({
         }
       },
       (res) => {
-
+        this.data.btnFalg = true;
       },
       (res) => {
-        setTimeout(() => {
-          this.data.btnFalg = true;
-        }, 1500);
       }
     )
   },
@@ -217,11 +216,13 @@ Page({
             icon: 'success',
           })
           setTimeout(() => {
+            this.data.btnFalg = true;
             wx.navigateBack({
               delta: 1
             })
           }, 1500);
         } else {
+          this.data.btnFalg = true;
           switch (res.data.errType) {
             case 1:
               $common.showModal('参数不正确');
@@ -239,12 +240,10 @@ Page({
         }
       },
       (res) => {
-
+        this.data.btnFalg = true;
       },
       (res) => {
-        setTimeout(() => {
-          this.data.btnFalg = true;
-        }, 1500);
+
       }
     )
   },

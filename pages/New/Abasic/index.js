@@ -23,6 +23,7 @@ Page({
     synopsis: '',
     teacherFor: {}, //教师基本资料
     TeaNaLityId: -1, //国籍id
+    passport: '', //护照
   },
   bindUserName(e) { //姓名
     this.setData({
@@ -38,6 +39,9 @@ Page({
     this.setData({
       age: this.countAge(e.detail.value)
     })
+  },
+  bindPassport(e) {
+    this.data.passport = e.detail.value
   },
   bindWeChat(e) { //微信
     this.setData({
@@ -63,6 +67,7 @@ Page({
     let userName = this.data.userName,
       sex = this.data.sexArray[this.data.sexIndex].id,
       age = this.data.age,
+      passport = this.data.passport,
       weChat = this.data.weChat,
       nationality = this.data.nationalityArray[this.data.nationalityIndex].NalId,
       TeaNation = this.data.nationalityArray[this.data.nationalityIndex].NalName,
@@ -70,6 +75,10 @@ Page({
       synopsis = this.data.synopsis;
     if (userName.trim().length <= 0) {
       $common.showModal('Please fill in your name.', false, false, 'OK', 'Reminder');
+      return;
+    }
+    if (passport.trim().length <= 0) {
+      $common.showModal('Please fill in your passport.', false, false, 'Ok', 'Reminder');
       return;
     }
     if (weChat.trim().length <= 0) {
@@ -90,6 +99,7 @@ Page({
       teacherFor.TeaName = userName;
       teacherFor.TeaGender = sex;
       teacherFor.TeaAge = age;
+      teacherFor.TeaPassPort = passport;
       teacherFor.TeaWeChat = weChat;
       teacherFor.TeaNaLityId = nationality;
       teacherFor.TeaNation = TeaNation,
@@ -161,6 +171,7 @@ Page({
       userName: teacherFor.TeaName,
       sexIndex: teacherFor.TeaGender,
       age: teacherFor.TeaAge,
+      passport: teacherFor.TeaPassPort,
       weChat: teacherFor.TeaWeChat,
       TeaNaLityId: teacherFor.TeaNaLityId,
       school: teacherFor.TeaUniversity,

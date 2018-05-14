@@ -29,6 +29,7 @@ Page({
     checkbox: false,
     teacherFor: {}, //教师基本资料
     TeaNaLityId: -1, //国籍id
+    btnFalg: true, //防止保存按钮连点
   },
   bindUserName(e) { //姓名
     this.setData({
@@ -143,6 +144,9 @@ Page({
     this.data.checkbox = !this.data.checkbox;
   },
   submit() { //保存按钮
+    let btnFalg = this.data.btnFalg;
+    if (!btnFalg) return;
+    this.data.btnFalg = false;
     let userName = this.data.userName,
       sex = this.data.sexArray[this.data.sexIndex].id,
       phone = this.data.phone,
@@ -160,18 +164,22 @@ Page({
       checkbox = this.data.checkbox; //是否阅读条款
     if (userName.trim().length <= 0) {
       $common.showModal('Please fill in your name.', false, false, 'Ok', 'Reminder');
+      this.data.btnFalg = true;
       return;
     }
     if (!$common.phoneReg.test(phone)) {
       $common.showModal('Please fill in the correct phone number.', false, false, 'Ok', 'Reminder');
+      this.data.btnFalg = true;
       return;
     }
     if (passport.trim().length <= 0) {
       $common.showModal('Please fill in your passport.', false, false, 'Ok', 'Reminder');
+      this.data.btnFalg = true;
       return;
     }
     if (!$common.emailReg.test(email)) {
       $common.showModal('Please fill in the correct email address.', false, false, 'Ok', 'Reminder');
+      this.data.btnFalg = true;
       return;
     }
     // if (certificate.length <= 0) {
@@ -180,6 +188,7 @@ Page({
     // }
     if (!idPicture) {
       $common.showModal('Please upload the Head Shot.', false, false, 'Ok', 'Reminder');
+      this.data.btnFalg = true;
       return;
     }
     // if (!video) {
@@ -188,18 +197,22 @@ Page({
     // }
     if (weChat.trim().length <= 0) {
       $common.showModal('Please fill in your WeChat Account.', false, false, 'Ok', 'Prompt');
+      this.data.btnFalg = true;
       return;
     }
     if (school.trim().length <= 0) {
       $common.showModal('Please fill in your University.', false, false, 'Ok', 'Prompt');
+      this.data.btnFalg = true;
       return;
     }
     if (synopsis.trim().length <= 0) {
       $common.showModal('Please fill in your brief introduction.', false, false, 'Ok', 'Prompt');
+      this.data.btnFalg = true;
       return;
     }
     if (!checkbox) {
       $common.showModal('Please read and agree to the "Terms and conditions.', false, false, 'Ok', 'Prompt');
+      this.data.btnFalg = true;
       return;
     }
     let arr = [];
@@ -233,10 +246,12 @@ Page({
       (res) => {
         if (res.data.res) {
           if (res.data.resType == 5) {//注册成功，发布课程
+            this.data.btnFalg = true;
             wx.redirectTo({
               url: '/pages/me/registerSuccess/registerSuccess',
             })
           } else if (res.data.resType == 6) { //注册成功，有发布过课程，回首页
+            this.data.btnFalg = true;
             wx.switchTab({
               url: '/pages/Home/Home/index',
             })
@@ -250,10 +265,12 @@ Page({
           } else { //注册失败
             $common.showModal('Registration failed', false, false, 'Ok', 'Reminder');
           }
+          this.data.btnFalg = true;
         }
       },
       (res) => {
         $common.showModal('Unknown Error', false, false, 'Ok', 'Reminder');
+        this.data.btnFalg = true;
       }
     )
   },
