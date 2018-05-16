@@ -285,11 +285,19 @@ Page({
       }
     )
   },
-  seeDetail(e) { //立即沟通
+  seeDetail(e) { //立即沟通详情
     let index = e.currentTarget.dataset.index,
       lnList = this.data.pageListEn;
     wx.navigateTo({
       url: `/pages/New/seeDetail/index?nedId=${lnList[index].NedId}`,
+    })
+  },
+  onlineChart(e) { //立即沟通
+    let index = e.currentTarget.dataset.index,
+      lnList = this.data.pageListEn,
+      userId = lnList[index].StuUserId;
+    wx.navigateTo({
+      url: `../../New/onlineChart/index?userId=${userId}`,
     })
   },
   /**

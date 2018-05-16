@@ -72,7 +72,7 @@ Page({
     this.setData({
       isEn: isEn
     })
-    let text = isEn ? "Help and feedback" : "帮助与反馈";
+    let text = isEn ? "Help and Feedback" : "帮助与反馈";
     wx.setNavigationBarTitle({
       title: text
     })

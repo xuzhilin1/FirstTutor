@@ -42,7 +42,7 @@ Page({
       id: 5,
       isShow: true,
       url: '/images/LI_12.png',
-      title: "Comment Management",
+      title: "Comment Review",
       luJin: '../OrdeRreview/index'
     },
     {
@@ -63,13 +63,13 @@ Page({
       id: 8,
       isShow: true,
       url: '/images/problem.png',
-      title: "Help and feedback",
+      title: "Help and Feedback",
       luJin: '/pages/me/help/help'
     }, {
       id: 9,
       isShow: true,
       url: '/images/message.png',
-      title: "Set template message",
+      title: "Set WeChat Reminder Message",
       luJin: '/pages/static/templateMessage/templateMessage'
     }],
     //学生
