@@ -10,14 +10,14 @@ Page({
     myImage: '',
     youImage: '',
     pageIndex: 1,
-    pageSize: 10,
+    pageSize: 7,
     listData: [],
     userId: -1,
     newDataCount: 0, //自己发送与接收数据之和
     tarTeaId: '',
   },
   courseInfo() { //跳转到课程信息
-    let teaId = this.data.tarTeaId;
+    let tarTeaId = this.data.tarTeaId;
     let returnPage = this.data.returnPage;
     if (returnPage) { //由课程信息和支付页面跳过来的又要跳回去
       wx.navigateBack({
@@ -26,7 +26,7 @@ Page({
     } else {
       if (tarTeaId <= 0) return; //对方不是老师
       wx.navigateTo({
-        url: `/pages/Home/teachersInformation/index?data=${teaId}`,
+        url: `/pages/Home/teachersInformation/index?data=${tarTeaId}`,
       })
     }
   },
@@ -106,9 +106,11 @@ Page({
         if (res.data.res) {
           this.setData({
             myImage: res.data.curAvaUrl,
-            myType: res.data.curUserType,
+            // myType: res.data.curUserType,
+            myType: res.data.curAvaUrl.indexOf('http') !== -1 ? 1 : 2,
             youImage: res.data.tarAvaUrl,
-            youType: res.data.tarUserType,
+            // youType: res.data.tarUserType,
+            youType: res.data.tarAvaUrl.indexOf('http') !== -1 ? 1 : 2,
             tarTeaId: res.data.tarTeaId
           })
         } else {
