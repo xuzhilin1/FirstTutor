@@ -25,6 +25,12 @@ Page({
     isCheck: false,
     btnFalg: true,
   },
+  terms() { //查看协议
+    console.log(323232);
+    wx.navigateTo({
+      url: '/pages/static/terms/terms?isEn=0',
+    })
+  },
   checkChange() { //协议选中
     this.data.isCheck = !this.data.isCheck;
   },

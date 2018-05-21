@@ -94,11 +94,13 @@ const timeListDataEn = function () {
 Component({
   properties: {
     timeTables: {
-      type: Array,
+      type: null,
       observer(res) { //页面把数据传过来触发，哪些课程可以选
-        let timeTables = res;
+        console.log(res);
+        let timeTables = res[0];
+        console.log(timeTables)
         if (timeTables.length <= 0) return; //第一次或没有值，不管他
-        let isEn = wx.getStorageSync('isEn');
+        let isEn = res[1];
         let timeList = [],
           weekList = [];
         if (isEn) { //显示英文
@@ -108,7 +110,6 @@ Component({
           timeList = timeListData();
           weekList = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
         }
-        console.log(weekList);
         let n = 0;
         for (let i = 0, len = timeTables.length; i < len; i++) {
           //该时间段已被购买，或不向学生展示
@@ -133,9 +134,9 @@ Component({
     timeNoTables: {
       type: null,
       observer(res) {//页面把数据传过来触发，哪些课程不能选
-        let timeNoTables = res;
+        let timeNoTables = res[0];
         if (timeNoTables === -1) return; //第一次传的默认值，不管他
-        let isEn = wx.getStorageSync('isEn');
+        let isEn = res[1];
         let timeList = [],
           weekList = [];
         if (isEn) { //显示英文
@@ -145,7 +146,6 @@ Component({
           timeList = timeListData();
           weekList = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
         }
-        console.log(weekList);
         for (let j = 0, l = timeList.length; j < l; j++) {
           timeList[j].timeType = 1;
         }
@@ -176,7 +176,7 @@ Component({
     isRadio: { //是否为单选
       type: Boolean,
       value: false,
-    }
+    },
   },
   data: {
     weekList: [],
@@ -207,4 +207,7 @@ Component({
       this.triggerEvent('SonTime', { timeList: timeList });//将数据返回给父组件
     },
   },
+  ready() {
+    console.log(this);
+  }
 })

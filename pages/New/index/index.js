@@ -101,6 +101,10 @@ Page({
       url: '/images/problem.png',
       title: "帮助与反馈",
       luJin: '/pages/me/help/help'
+    }, {
+      url: '/images/message.png',
+      title: "模板消息设置",
+      luJin: '/pages/me/stuTemplateMessage/stuTemplateMessage'
     }],
     UserAvaUrl: '',
     TeaIdPhoto: '',
@@ -123,8 +127,10 @@ Page({
           let vip = res.data.teaAddV ? res.data.teaAddV : false; //vip才能查看需求
           let teacherList = this.data.teacherList;
           teacherList[2].isShow = vip ? true : false;
+          let teaToe = res.data.teaToe === 1 ? true : false;
           this.setData({
             vip: vip,
+            teaToe: teaToe,
             teacherList: teacherList,
             teaId: res.data.teaId
           });

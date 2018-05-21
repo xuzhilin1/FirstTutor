@@ -31,6 +31,11 @@ Page({
     TeaNaLityId: -1, //国籍id
     btnFalg: true, //防止保存按钮连点
   },
+  terms() { //查看协议
+    wx.navigateTo({
+      url: '/pages/static/terms/terms?isEn=1',
+    })
+  },
   bindUserName(e) { //姓名
     this.setData({
       userName: e.detail.value

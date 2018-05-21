@@ -27,7 +27,7 @@
         <view wx:if='{{index<3}}' wx:for='{{fgtList}}' wx:key='{{index}}' class='flex ssea aitems-center between margin-b-20'>
           <view class='flex between flex1 aitems-center'>
             <image class='xiaoTou' src='{{item.StuAvaUrl}}'></image>
-            <view class='fon-30'>{{item.StuNickName}}</view>
+            <view class='fon-30 join-name'>{{item.StuNickName}}</view>
             <view class='fon-26 Cans flex1 purple'>
               <view class='Cans'>还剩{{item.NedCount}}人成团</view>
               <view class='ca Cans'>截止{{item.countDown}}</view>
@@ -43,7 +43,7 @@
       <modular-title title-context='选择时间段'></modular-title>
     </view>
     <!--  时间段选择组件  -->
-    <time-slot time-tables='{{timeTables}}' bindSonTime='SonTime' is-radio='{{true}}'></time-slot>
+    <time-slot time-tables='{{[timeTables, isEn]}}' bindSonTime='SonTime' is-radio='{{true}}'></time-slot>
     <!--  课程介绍  -->
     <view class='border-b-1 margin-t-20'>
       <modular-title title-context='课程介绍'></modular-title>
@@ -115,7 +115,7 @@
       <view class='height-85 fon-26 border-b-1 flex between aitems-center'>
         <view class='flex c2b aitems-center group-little'>
           <text>Invite {{course.CorClaNum}} person to join a group, the number is insufficient automatic refund.</text>
-          <view bindtap='spellingRules' class='ca margin-l-20'>Detailed rules</view>
+          <view bindtap='spellingRules' class='ca margin-l-20'>Group Rules</view>
         </view>
         <image class='Jian' mode='widthFix' src='/images/jos_03.jpg'></image>
       </view>
@@ -124,13 +124,13 @@
         <view wx:if='{{index<3}}' wx:for='{{fgtList}}' wx:key='{{index}}' class='flex ssea aitems-center between margin-b-20'>
           <view class='flex between flex1 aitems-center'>
             <image class='xiaoTou' src='{{item.StuAvaUrl}}'></image>
-            <view class='fon-30'>{{item.StuNickName}}</view>
+            <view class='fon-30 join-name'>{{item.StuNickName}}</view>
             <view class='fon-26 Cans flex1 purple'>
               <view class='Cans'>Lack of {{item.NedCount}} person</view>
               <view class='ca Cans'>As of{{item.countDown}}</view>
             </view>
           </view>
-          <view bindtap='goJoinGroup' data-index='{{index}}' class='white purple-bg CanRu fon-30'>Participate group</view>
+          <view bindtap='goJoinGroup' data-index='{{index}}' class='white purple-bg CanRu fon-30'>join</view>
         </view>
       </view>
     </view>
@@ -140,7 +140,7 @@
       <modular-title title-context='Please select time slot'></modular-title>
     </view>
     <!--  时间段选择组件  -->
-    <time-slot time-tables='{{timeTables}}' bindSonTime='SonTime' is-radio='{{true}}'></time-slot>
+    <time-slot time-tables='{{[timeTables, isEn]}}' bindSonTime='SonTime' is-radio='{{true}}'></time-slot>
     <!--  课程介绍  -->
     <view class='border-b-1 margin-t-20'>
       <modular-title title-context='Course Introduction'></modular-title>

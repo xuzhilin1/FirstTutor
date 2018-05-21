@@ -1,11 +1,13 @@
 {
   "pages": [
     "pages/Home/Home/index",
+    "pages/static/SpellingRules/index",
     "pages/me/register/register",
+    "pages/static/terms/terms",
     "pages/me/registerSuccess/registerSuccess",
+    "pages/me/stuTemplateMessage/stuTemplateMessage",
     "pages/Home/activitySign/index",
     "pages/static/templateMessage/templateMessage",
-    "pages/static/SpellingRules/index",
     "pages/Home/foreignTeacher/index",
     "pages/New/index/index",
     "pages/me/commonProblem/commonProblem",

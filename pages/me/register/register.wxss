@@ -21,6 +21,8 @@ page {
   padding: 20rpx 40rpx;
   box-sizing: border-box;
   width: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .tiaokuan checkbox {

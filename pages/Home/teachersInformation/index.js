@@ -126,7 +126,6 @@ Page({
     return `${m}-${d} ${h}:${f}`;
   },
   resetArea() { //重置上课区域
-    console.log(this.data.teaInfo);
     let TeaClassArea = this.data.teaInfo.TeaClassArea.split(',');
     let isEn = wx.getStorageSync('isEn');
     let allAreaList = isEn ? $static.areaShanghaiEn : $static.areaShanghai;

@@ -115,7 +115,7 @@
 </view>
 <view class='tiaokuan'>
   <checkbox bindtap='bindcheckbox' checked='{{false}}' color='#22A415'></checkbox>
-  <text class='ca fon-22'>I have accepted and read <text class='tiaokuan-text'>Terms and conditions</text></text>
+  <view class='ca fon-22'>I have accepted and read <text bindtap='terms' class='tiaokuan-text'>Terms and conditions</text></view>
 </view>
 
 <button bindtap='submit' class='btn purple-bg white save-btn'>Submit</button>

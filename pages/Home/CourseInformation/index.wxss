@@ -17,14 +17,14 @@
   line-height: 42rpx;
   text-align: center;
 }
+
 .purplea-en {
   background-color: #e8f0ff;
   height: 42rpx;
   line-height: 42rpx;
   text-align: center;
-  padding: 0 6rpx
+  padding: 0 6rpx;
 }
-
 
 .footer {
   position: fixed;
@@ -58,11 +58,23 @@
 
 .ssea {
   background-color: #f9f9f9;
-  height: 100rpx;
+  /* height: 100rpx; */
+}
+
+.join-left {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.join-left-max {
+  width: 270rpx;
+  display: flex;
+  align-items: center;
 }
 
 .CanRu {
-  height: 100%;
+  height: 100rpx;
   width: 142rpx;
   line-height: 102rpx;
   text-align: center;
@@ -118,9 +130,24 @@
 .join-group {
   padding-bottom: 1rpx;
 }
-.gaoDU{
+
+.gaoDU {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+.join-name {
+  width: 180rpx;
+  overflow: hidden;
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+.ff {
+  width: 160rpx;
+  overflow: hidden;
+  white-space: normal;
+  word-wrap: break-word;
 }

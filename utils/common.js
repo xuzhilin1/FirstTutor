@@ -170,6 +170,8 @@ const config = {
   ChangeCorSwitch: `${host}/LittleProgram/Course/ChangeCorSwitch`,
   //  获取用户头像与昵称 （2018-05-10）
   GetMyAvaName: `${host}/LittleProgram/UserInfo/GetMyAvaName`,
+  //  模板消息绑定手机号
+  PutStuPhoneNum: `${host}/LittleProgram/Student/PutStuPhoneNum`,
 }
 
 

@@ -317,7 +317,7 @@ Page({
     });
     if (isEn) { //找学生
       wx.setNavigationBarTitle({
-        title: 'find student'
+        title: 'Find Student'
       })
       this.getListDataEn();
     } else { //找外教

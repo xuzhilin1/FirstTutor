@@ -65,7 +65,9 @@
       </view>
       <view class='agreement c88'>
         <checkbox bindtap='checkChange' checked='{{false}}' color='green'></checkbox>
-        <text>我已接受并阅读 <text class='purple'>《FirstTutor服务协议》</text></text>
+        <view>我已接受并阅读
+          <text bindtap='terms' class='purple'>《FirstTutor服务协议》</text>
+        </view>
       </view>
       <!-- footer -->
       <view class='footer flex border-t-1 between'>
@@ -143,7 +145,9 @@
       </view>
       <view class='agreement c88'>
         <checkbox bindtap='checkChange' checked='{{false}}' color='#22A415'></checkbox>
-        <text>I have accepted and read <text class='agreement-text'>The FirstTutor service agreement</text></text>
+        <view>I have accepted and read
+          <text bindtap='terms' class='agreement-text'>The FirstTutor service agreement</text>
+        </view>
       </view>
       <!-- footer -->
       <view class='footer flex border-t-1 between'>

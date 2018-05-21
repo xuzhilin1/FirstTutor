@@ -13,7 +13,7 @@
     <modular-title title-context='Select Time Slot'></modular-title>
   </view>
   <!--  时间段选择组件  -->
-  <time-slot time-tables='{{timeTables}}' is-radio='{{true}}'></time-slot>
+  <time-slot time-tables='{{[timeTables, true]}}' is-radio='{{true}}'></time-slot>
   <!--  课程介绍  -->
   <view class='border-b-1 margin-t-20'>
     <modular-title title-context='Course Introduction'></modular-title>
