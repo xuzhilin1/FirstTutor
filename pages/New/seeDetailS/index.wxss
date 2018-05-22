@@ -23,3 +23,19 @@ page {
 button {
   border-radius: 0;
 }
+
+.fujia {
+  padding: 30rpx;
+  font-size: 26rpx;
+}
+
+.btn-k {
+  background: #fff;
+  border: 1px solid #7c99d0;
+  margin-bottom: 20rpx;
+  color: #7c99d0;
+}
+
+.margin-b-30 {
+  margin-bottom: 30rpx;
+}

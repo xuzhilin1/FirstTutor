@@ -32,6 +32,11 @@ Page({
     StuId: -1,
     btnFalg: true,
   },
+  stuTemplateMessage() { //模板消息
+    wx.navigateTo({
+      url: '/pages/me/stuTemplateMessage/stuTemplateMessage',
+    })
+  },
   bindName(e) { //姓名
     this.data.userName = e.detail.value;
   },

@@ -91,6 +91,8 @@
     <input type='text' bindinput='bindOther' value='{{other}}' class='c2b list-textArea' placeholder='建议填写英文' placeholder-class='ca'></input>
   </view>
 </view>
-
-
-<button bindtap='submit' class='btn purple-bg margin-t-60 white'>{{status===1?"提交需求":"修改需求"}}</button>
+<view class='fujia ca'>
+  发布需求前，请先设置模板消息，以便外教发起与你沟通时，激活留言消息的提醒功能
+</view>
+<button bindtap='stuTemplateMessage' class='btn btn-k'>设置模板消息</button>
+<button bindtap='submit' class='btn purple-bg margin-t-30 white margin-b-30'>{{status===1?"提交需求":"修改需求"}}</button>

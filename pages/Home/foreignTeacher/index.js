@@ -196,7 +196,27 @@ Page({
       priceIndex: [-1, -1],
     })
   },
+  getIsVip(callback) {//获取外教是否为vip
+    $common.request(
+      "POST",
+      $common.config.GetForTeaStatus,
+      { openId: wx.getStorageSync('openid') },
+      (res) => {
+        if (res.data.res) {
+          let teaToe = res.data.teaToe === 1 ? true : false; //1审核通过
+          this.setData({
+            teaToe: teaToe
+          });
+          callback();
+        }
+      },
+      (res) => { },
+      (res) => {
+      }
+    );
+  },
   getListDataEn(isReach) { //获取找学生页面list
+    if (!this.data.teaToe) return; //该外教审核不通过
     isReach = isReach ? true : false;
     let teaId = wx.getStorageSync('teacherStatusInfo').teaId;
     let pageIndexEn = isReach ? this.data.pageIndexEn : 1,
@@ -319,7 +339,7 @@ Page({
       wx.setNavigationBarTitle({
         title: 'Find Student'
       })
-      this.getListDataEn();
+      this.getIsVip(this.getListDataEn);
     } else { //找外教
       wx.setNavigationBarTitle({
         title: '找外教'
