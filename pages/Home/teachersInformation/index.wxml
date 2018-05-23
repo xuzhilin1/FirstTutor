@@ -90,7 +90,7 @@
         <modular-title title-context='外教介绍'></modular-title>
       </view>
       <view wx:if='{{teaInfo.TeaDescript}}' class='padding-lr-30 bg-fff fon-24 padding-tb-20'>
-        <view class='c72'>{{teaInfo.TeaDescript}}</view>
+        <text class='c72'>{{teaInfo.TeaDescript}}</text>
       </view>
     </block>
     <!-- 外教视频 -->
@@ -227,7 +227,7 @@
         <modular-title title-context='Tutor introduce'></modular-title>
       </view>
       <view wx:if='{{teaInfo.TeaDescript}}' class='padding-lr-30 bg-fff fon-24 padding-tb-20'>
-        <view class='c72'>{{teaInfo.TeaDescript}}</view>
+        <text class='c72'>{{teaInfo.TeaDescript}}</text>
       </view>
     </block>
     <!-- 外教视频 -->

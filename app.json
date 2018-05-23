@@ -1,9 +1,9 @@
 {
   "pages": [
     "pages/Home/Home/index",
-    "pages/static/SpellingRules/index",
     "pages/me/register/register",
     "pages/static/terms/terms",
+    "pages/static/SpellingRules/index",
     "pages/me/registerSuccess/registerSuccess",
     "pages/me/stuTemplateMessage/stuTemplateMessage",
     "pages/Home/activitySign/index",

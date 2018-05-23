@@ -49,7 +49,7 @@
       <modular-title title-context='课程介绍'></modular-title>
     </view>
     <view class='padding-lr-30 bg-fff fon-24 padding-tb-20'>
-      <view class='c72'>{{course.CorDescript}}</view>
+      <text class='c72'>{{course.CorDescript}}</text>
     </view>
     <!-- 定金说明 -->
     <view class='border-b-1 margin-t-20'>
@@ -146,7 +146,7 @@
       <modular-title title-context='Course Introduction'></modular-title>
     </view>
     <view class='padding-lr-30 bg-fff fon-24 padding-tb-20'>
-      <view class='c72'>{{course.CorDescript}}</view>
+      <text class='c72'>{{course.CorDescript}}</text>
     </view>
     <!-- 定金说明 -->
     <view class='border-b-1 margin-t-20'>

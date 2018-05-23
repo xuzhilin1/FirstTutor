@@ -19,12 +19,13 @@ Page({
   courseInfo() { //跳转到课程信息
     let tarTeaId = this.data.tarTeaId;
     let returnPage = this.data.returnPage;
+    let tarUserType = this.data.tarUserType;
     if (returnPage) { //由课程信息和支付页面跳过来的又要跳回去
       wx.navigateBack({
         delta: returnPage
       })
     } else {
-      if (tarTeaId <= 0) return; //对方不是老师
+      if (tarTeaId <= 0 || tarUserType == 1) return; //对方不是老师
       wx.navigateTo({
         url: `/pages/Home/teachersInformation/index?data=${tarTeaId}`,
       })
@@ -111,7 +112,8 @@ Page({
             youImage: res.data.tarAvaUrl,
             // youType: res.data.tarUserType,
             youType: res.data.tarAvaUrl.indexOf('http') !== -1 ? 1 : 2,
-            tarTeaId: res.data.tarTeaId
+            tarTeaId: res.data.tarTeaId,
+            tarUserType: res.data.tarUserType
           })
         } else {
           // switch (res.data.errType) {

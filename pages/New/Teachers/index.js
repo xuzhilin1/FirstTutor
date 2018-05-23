@@ -7,9 +7,8 @@ Page({
     status: 0,
   },
   bindInput(e) {
-    this.setData({
-      input: e.detail.value
-    })
+    let input = e.detail.value;
+    this.data.input = input;
   },
   submit() {
     let input = this.data.input;
@@ -63,7 +62,7 @@ Page({
       case 0: //教师介绍
         //例如：纯正美音 / 3年教龄/ 幼教英语 / 全职老师 / 亲和力强
         //American accent/ 3 years teaching experience/ experience to teach preschool kids/ Full time English teacher/ Strong affinity
-        placeholder = 'American accent/3 years teaching experience/experience to teach preschool kids/Full time English teacher/Strong affinity';
+        placeholder = 'brief introduction on your background and tutoring experience.';
         titleText = 'Tutor introduction';
         this.teacherIntroduceContext();
         break;

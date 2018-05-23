@@ -65,7 +65,7 @@
 <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
   <view class='flex1 aitems-center  fon-28 flex '>
     <view class='width-left'>Brief Introduction</view>
-    <input bindinput='bindSynopsis' class='ca input-width' placeholder='Maximum of 40 Characters' value='{{synopsis}}' maxlength='40'></input>
+    <input bindinput='bindSynopsis' class='ca input-width' placeholder='American accent/3 years teaching experience/...' value='{{synopsis}}' maxlength='40'></input>
   </view>
 </view>
 

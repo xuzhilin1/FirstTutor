@@ -270,7 +270,6 @@ Page({
                 (res) => {
                   this.data.btnFalg = true;
                   console.log(res);
-                  console.log(1212);
                 },
               )
             },
