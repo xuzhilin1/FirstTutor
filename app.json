@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/Home/Home/index",
+    "pages/New/Abasic/index",
     "pages/me/register/register",
     "pages/static/terms/terms",
     "pages/static/SpellingRules/index",
@@ -13,7 +14,6 @@
     "pages/me/commonProblem/commonProblem",
     "pages/me/feedback/feedback",
     "pages/me/help/help",
-    "pages/New/Abasic/index",
     "pages/Home/BuySuccess/index",
     "pages/New/NeedSeeS/index",
     "pages/New/OrdeRreviewS/index",
