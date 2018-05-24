@@ -160,6 +160,7 @@ Page({
       certificate = this.data.certificate,
       idPicture = this.data.idPicture,
       video = this.data.video,
+      TeaClaArea = this.data.TeaClaArea,
       age = this.data.age,
       weChat = this.data.weChat,
       nationality = this.data.nationalityArray[this.data.nationalityIndex].NalId,
@@ -196,6 +197,11 @@ Page({
       this.data.btnFalg = true;
       return;
     }
+    if (!TeaClaArea) {
+      $common.showModal('Please select the acceptable teaching area.', false, false, 'OK', 'Reminder');
+      this.data.btnFalg = true;
+      return;
+    }
     // if (!video) {
     //   $common.showModal('Please upload the tutor class video.', false, false, 'Ok', 'Reminder');
     //   return;
@@ -224,9 +230,9 @@ Page({
     for (let i = 0, len = certificate.length; i < len; i++) {
       arr.push(certificate[i].QfsPicName);
     }
-    this.requestSaveData(userName, sex, age, weChat, school, nationality, synopsis, phone, passport, email, arr, video, idPicture);
+    this.requestSaveData(userName, sex, age, weChat, school, nationality, synopsis, phone, passport, email, arr, video, idPicture, TeaClaArea);
   },
-  requestSaveData(TeaName, TeaGender, TeaAge, TeaWeChat, TeaUniversity, TeaNaLityId, TeaAbstract, TeaPhone, TeaPassPort, TeaMail, TeaQualif, TeaAudio, TeaIDPhoto) { //发送请求
+  requestSaveData(TeaName, TeaGender, TeaAge, TeaWeChat, TeaUniversity, TeaNaLityId, TeaAbstract, TeaPhone, TeaPassPort, TeaMail, TeaQualif, TeaAudio, TeaIDPhoto, TeaClaArea) { //发送请求
     $common.request(
       "POST",
       $common.config.ApplyForForeEdu,
@@ -244,7 +250,8 @@ Page({
           TeaPassPort: TeaPassPort,
           TeaMail: TeaMail,
           TeaAudio: TeaAudio,
-          TeaIDPhoto: TeaIDPhoto
+          TeaIDPhoto: TeaIDPhoto,
+          TeaClassArea: TeaClaArea
         },
         Qualifs: TeaQualif,
       },
@@ -300,6 +307,11 @@ Page({
       nationalityIndex: nationalityIndex
     })
   },
+  TeaClaArea() {
+    wx.navigateTo({
+      url: '/pages/New/area/index',
+    })
+  },
   getCountryInfo() { //获取国籍信息
     $common.request("POST",
       $common.config.GetCountryInfos,
@@ -336,10 +348,11 @@ Page({
       });
   },
   init() {
-    if (!app.globalData.teacherFor.TeaQualif) return;
+    if (!app.globalData.teacherFor.TeaQualif || !app.globalData.teacherFor.TeaClaArea) return;
     let teacherFor = app.globalData.teacherFor;
     this.setData({
       certificate: teacherFor.TeaQualif,//教师资质
+      TeaClaArea: teacherFor.TeaClaArea, //教师上课地址
     })
   },
   onLoad: function (options) {

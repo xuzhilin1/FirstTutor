@@ -68,6 +68,15 @@
   </view>
   <image mode='widthFix' style='width:20rpx;' src='/images/jian_13.png'></image>
 </view>
+<view bindtap='TeaClaArea' class='flex height-85 border-b-1 padding-lr-30  between aitems-center'>
+  <view class='flex picker aitems-center '>
+    <view class="fon-22 flex aitems-center yanse ">
+      <view class='width-l'>Teaching Area</view>
+      <view class='ca'>{{TeaClaArea?"selected":"optional"}}</view>
+    </view>
+  </view>
+  <image mode='widthFix' style='width:20rpx;' src='/images/jian_13.png'></image>
+</view>
 <!--  年龄  -->
 <view class='flex height-85 border-b-1 padding-lr-30  between aitems-center'>
   <picker class='flex1' value='1990-01-01' bindchange="bindAgeChange" mode="date">
@@ -115,7 +124,9 @@
 </view>
 <view class='tiaokuan'>
   <checkbox bindtap='bindcheckbox' checked='{{false}}' color='#22A415'></checkbox>
-  <view class='ca fon-22'>I have accepted and read <text bindtap='terms' class='tiaokuan-text'>Terms and conditions</text></view>
+  <view class='ca fon-22'>I have accepted and read
+    <text bindtap='terms' class='tiaokuan-text'>Terms and conditions</text>
+  </view>
 </view>
 
 <button bindtap='submit' class='btn purple-bg white save-btn'>Submit</button>
