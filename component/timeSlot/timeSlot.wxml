@@ -22,7 +22,7 @@
       <view class='pour-context-en border-box'>
         <view class='pour-list border-box'>AM：Course time slot: 9:00-12:00；</view>
         <view class='pour-list border-box'>PM1：Course time slot: 12:00-15:00；</view>
-        <view class='pour-list border-box'>PM2:Course time slot: 15:00-18:00；</view>
+        <view class='pour-list border-box'>PM2: Course time slot: 15:00-18:00；</view>
         <view class='pour-list border-box'>PM3：Course time slot: 18:00-21:00；</view>
         <view class='pour-list border-box'>Please confirm the exact course time slot through offline discussion.</view>
       </view>

@@ -64,7 +64,7 @@
 
 <view class='flex height-85 padding-lr-30 aitems-center border-b-1 between'>
   <view class='flex1 aitems-center  fon-28 flex '>
-    <view class='width-left'>Key words</view>
+    <view class='width-left'>Key Words</view>
     <input bindinput='bindSynopsis' class='ca input-width' placeholder='American accent/3 years teaching experience/...' value='{{synopsis}}' maxlength='40' placeholder-class='fon-28'></input>
   </view>
 </view>

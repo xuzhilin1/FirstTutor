@@ -97,6 +97,6 @@ module.exports = {
     area: 'Fengxian District',
   }, {
     id: 16,
-    area: 'Other',
+    area: 'Other Cities',
   }]
 }

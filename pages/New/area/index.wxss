@@ -1,12 +1,22 @@
 /* pages/New/area/index.wxss */
-page{
+
+page {
   background-color: #fff;
 }
-.QuKuai{
+
+.QuKuai {
   width: 300rpx;
   height: 57rpx;
   text-align: center;
   line-height: 57rpx;
   margin-top: 37rpx;
-  border:1px solid #e0e0e0;
+  border: 1px solid #e0e0e0;
+}
+
+.tishi {
+  background: #7c99d0;
+  color: #fff;
+  font-size: 24rpx;
+  padding: 20rpx 30rpx;
+  box-sizing: border-box;
 }
