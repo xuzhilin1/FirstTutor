@@ -1,7 +1,7 @@
 <!--pages/New/area/index.wxml-->
 
 <view class='border-b-1'>
-  <modular-title title-context='Choose teaching area'></modular-title>
+  <modular-title title-context='Choose teaching area（multiple choice）'></modular-title>
 </view>
 <view class='tishi'>
   <text>Please select the following teaching area in Shanghai. (If you select "Other Cities", please remember to mark your city in your "Key Words")</text>
