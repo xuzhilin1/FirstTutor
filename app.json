@@ -1,8 +1,7 @@
 {
   "pages": [
-      "pages/me/register/register",
     "pages/Home/Home/index",
-  
+    "pages/me/register/register",
     "pages/New/Abasic/index",
     "pages/static/terms/terms",
     "pages/static/SpellingRules/index",
