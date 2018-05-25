@@ -48,7 +48,7 @@ module.exports = {
     area: '奉贤区',
   }, {
     id: 16,
-    area: '崇明区',
+    area: '其他',
   }],
   areaShanghaiEn: [{
     id: 1,
@@ -97,6 +97,6 @@ module.exports = {
     area: 'Fengxian District',
   }, {
     id: 16,
-    area: 'Chongming District',
+    area: 'Other',
   }]
 }
