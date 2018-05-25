@@ -48,7 +48,7 @@ module.exports = {
     area: '奉贤区',
   }, {
     id: 16,
-    area: '其他',
+    area: '其它',
   }],
   areaShanghaiEn: [{
     id: 1,
