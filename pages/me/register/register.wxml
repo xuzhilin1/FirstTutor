@@ -72,7 +72,7 @@
   <view class='flex picker aitems-center '>
     <view class="fon-22 flex aitems-center yanse ">
       <view class='width-l'>Teaching Area</view>
-      <view class='ca'>{{TeaClaArea?"selected":"optional"}}</view>
+      <view class='ca'>{{TeaClaArea?"selected":"Not Selected"}}</view>
     </view>
   </view>
   <image mode='widthFix' style='width:20rpx;' src='/images/jian_13.png'></image>
