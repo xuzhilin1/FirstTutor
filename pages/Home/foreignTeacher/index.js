@@ -130,7 +130,7 @@ Page({
       pageSize = this.data.pageSize;
     let timeCla = this.data.timeIndex === 0 ? -1 : parseInt(this.data.timeIndex), //时间段（1-4）
       areaId = this.data.areaIndex === 0 ? -1 : this.data.areaList[this.data.areaIndex].id, // 区域ID（1-16）
-      taAreaId = this.data.tradIndex === 0 ? -1 : this.data.tradList[this.data.tradIndex].TaId, //商圈区域ID（1-16）
+      taAreaId = this.data.tradIndex === 0 ? -1 : this.data.tradList[this.data.tradIndex].TaArea, //商圈区域ID（1-16）
       minPrice = this.data.priceList[0][this.data.priceIndex[0]], //价格区间
       maxPrice = this.data.priceList[1][this.data.priceIndex[1]],
       corName = this.data.input ? this.data.input : null; //课程名
