@@ -26,9 +26,7 @@ Page({
     passport: '', //护照
   },
   bindUserName(e) { //姓名
-    this.setData({
-      userName: e.detail.value
-    })
+    this.data.userName = e.detail.value;
   },
   bindSexChange(e) { //性别
     this.setData({
@@ -44,9 +42,7 @@ Page({
     this.data.passport = e.detail.value
   },
   bindWeChat(e) { //微信
-    this.setData({
-      weChat: e.detail.value
-    })
+    this.data.weChat = e.detail.value;
   },
   bindNationalityChange(e) { //国籍
     this.setData({
@@ -54,24 +50,20 @@ Page({
     })
   },
   bindSchool(e) { //大学
-    this.setData({
-      school: e.detail.value
-    })
+    this.data.school = e.detail.value;
   },
   bindSynopsis(e) { //简介
-    this.setData({
-      synopsis: e.detail.value
-    })
+    this.data.synopsis = e.detail.value;
   },
   submit() { //保存按钮
-    let userName = this.data.userName,
+    let userName = this.data.userName.trim(),
       sex = this.data.sexArray[this.data.sexIndex].id,
       age = this.data.age,
-      passport = this.data.passport,
-      weChat = this.data.weChat,
+      passport = this.data.passport.trim(),
+      weChat = this.data.weChat.trim(),
       nationality = this.data.nationalityArray[this.data.nationalityIndex].NalId,
       TeaNation = this.data.nationalityArray[this.data.nationalityIndex].NalName,
-      school = this.data.school,
+      school = this.data.school.trim(),
       synopsis = this.data.synopsis;
     if (userName.trim().length <= 0) {
       $common.showModal('Please fill in your name.', false, false, 'OK', 'Reminder');

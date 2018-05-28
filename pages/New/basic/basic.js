@@ -39,9 +39,7 @@ Page({
   },
   bindPhone(e) { //电话
     let phone = e.detail.value;
-    this.setData({
-      phone: phone
-    });
+    this.data.phone = phone;
     app.globalData.teacherFor.TeaPhone = phone;
   },
   submit() { //点击保存按钮

@@ -37,9 +37,7 @@ Page({
     })
   },
   bindUserName(e) { //姓名
-    this.setData({
-      userName: e.detail.value
-    })
+    this.data.userName = e.detail.value;
   },
   bindSexChange(e) { //性别
     this.setData({
@@ -126,9 +124,7 @@ Page({
     })
   },
   bindWeChat(e) { //微信
-    this.setData({
-      weChat: e.detail.value
-    })
+    this.data.weChat = e.detail.value;
   },
   bindNationalityChange(e) { //国籍
     this.setData({
@@ -136,14 +132,10 @@ Page({
     })
   },
   bindSchool(e) { //大学
-    this.setData({
-      school: e.detail.value
-    })
+    this.data.school = e.detail.value;
   },
   bindSynopsis(e) { //简介
-    this.setData({
-      synopsis: e.detail.value
-    })
+    this.data.synopsis = e.detail.value;
   },
   bindcheckbox() {  //阅读条款
     this.data.checkbox = !this.data.checkbox;
@@ -152,20 +144,20 @@ Page({
     let btnFalg = this.data.btnFalg;
     if (!btnFalg) return;
     this.data.btnFalg = false;
-    let userName = this.data.userName,
+    let userName = this.data.userName.trim(),
       sex = this.data.sexArray[this.data.sexIndex].id,
       phone = this.data.phone,
-      passport = this.data.passport,
-      email = this.data.email,
+      passport = this.data.passport.trim(),
+      email = this.data.email.trim(),
       certificate = this.data.certificate,
       idPicture = this.data.idPicture,
       video = this.data.video,
       TeaClaArea = this.data.TeaClaArea,
       age = this.data.age,
-      weChat = this.data.weChat,
+      weChat = this.data.weChat.trim(),
       nationality = this.data.nationalityArray[this.data.nationalityIndex].NalId,
       TeaNation = this.data.nationalityArray[this.data.nationalityIndex].NalName,
-      school = this.data.school,
+      school = this.data.school.trim(),
       synopsis = this.data.synopsis,
       checkbox = this.data.checkbox; //是否阅读条款
     if (userName.trim().length <= 0) {
