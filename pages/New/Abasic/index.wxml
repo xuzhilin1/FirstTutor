@@ -44,11 +44,11 @@
 </view>
 
 <view class='flex height-85 border-b-1 padding-lr-30  between aitems-center'>
-  <picker class='flex1' range-key='NalName' value="{{nationalityIndex}}" range="{{nationalityArray}}" bindchange="bindNationalityChange">
+  <picker class='flex1' range-key='NalEngName' value="{{nationalityIndex}}" range="{{nationalityArray}}" bindchange="bindNationalityChange">
     <view class='flex picker aitems-center '>
       <view class="fon-28 flex aitems-center yanse ">
         <view class='width-l'>Nationality</view>
-        <view class='ca'>{{nationalityArray[nationalityIndex].NalName}}</view>
+        <view class='ca'>{{nationalityArray[nationalityIndex].NalEngName}}</view>
       </view>
     </view>
   </picker>

@@ -156,8 +156,10 @@ Page({
       },
       (res) => {
         if (res.data.res) {
+          let teaInfo = res.data.teaInfo;
+          teaInfo.NalEngName = teaInfo.NalEngName.replace(/\n/g,'');
           this.setData({
-            teaInfo: res.data.teaInfo,
+            teaInfo: teaInfo,
             qualifInfo: res.data.qualifInfo
           });
           this.resetArea();

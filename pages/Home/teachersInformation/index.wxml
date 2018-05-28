@@ -32,7 +32,7 @@
             </view>
           </view>
           <view class='fon-24  white margin-t-10 margin-b-10'>
-            <text>{{teaInfo.TeaNation}}/{{teaInfo.TeaUniversity}}</text>
+            <text>{{teaInfo.NalEngName}}/{{teaInfo.TeaUniversity}}</text>
           </view>
           <view class='fon-24  white'>
             <text>{{teaInfo.TeaAbstract}}</text>
@@ -169,7 +169,7 @@
             </view>
           </view>
           <view class='fon-24  white margin-t-10 margin-b-10'>
-            <text>{{teaInfo.TeaNation}}/{{teaInfo.TeaUniversity}}</text>
+            <text>{{teaInfo.NalEngName}}/{{teaInfo.TeaUniversity}}</text>
           </view>
           <view class='fon-24  white'>
             <text>{{teaInfo.TeaAbstract}}</text>

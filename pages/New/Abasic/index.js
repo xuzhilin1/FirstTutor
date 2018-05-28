@@ -245,32 +245,32 @@ Page({
             nationalityIndex: nationalityIndex,
             nationalityArray: data
           })
-          //翻译
-          let translate = data.reduce(function (item, target, index) {
-            item.push(target.NalName);
-            return item;
-          }, []);
-          $common.translate(translate.join('\n'), (res) => {
-            console.log(res);
-            let trans_result = res.data.trans_result;
-            if (trans_result && trans_result.length > 0) { //翻译成功了
-              for (let i = 0, len = data.length; i < len; i++) {
-                data[i].NalName = trans_result[i].dst;
-              }
-            } else {//没有返回东西，报错了,显示原文
-            }
-            this.setData({
-              nationalityArray: data
-            })
-          });
-          // this.setTeaNaLityId();
-        } else {
-          $common.showModal('Failed to obtain nationality information. Please regain', true, (res) => {
-            if (res.confirm) {
-              //用户点击确定，重新请求国籍信息
-              this.getCountryInfo();
-            }
-          }, 'OK', 'Reminder', 'NO');
+        //   //翻译
+        //   let translate = data.reduce(function (item, target, index) {
+        //     item.push(target.NalName);
+        //     return item;
+        //   }, []);
+        //   $common.translate(translate.join('\n'), (res) => {
+        //     console.log(res);
+        //     let trans_result = res.data.trans_result;
+        //     if (trans_result && trans_result.length > 0) { //翻译成功了
+        //       for (let i = 0, len = data.length; i < len; i++) {
+        //         data[i].NalName = trans_result[i].dst;
+        //       }
+        //     } else {//没有返回东西，报错了,显示原文
+        //     }
+        //     this.setData({
+        //       nationalityArray: data
+        //     })
+        //   // });
+        //   // this.setTeaNaLityId();
+        // } else {
+        //   $common.showModal('Failed to obtain nationality information. Please regain', true, (res) => {
+        //     if (res.confirm) {
+        //       //用户点击确定，重新请求国籍信息
+        //       this.getCountryInfo();
+        //     }
+        //   }, 'OK', 'Reminder', 'NO');
         }
       });
   },
