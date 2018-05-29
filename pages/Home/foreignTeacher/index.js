@@ -25,6 +25,7 @@ Page({
     pageIndexEn: 1,
     pageSizeEn: 10,
     pageListEn: [],
+    stop: null,//函数防抖
   },
   initArea() { //初始化区域
     let data = [{
@@ -47,15 +48,16 @@ Page({
     })
   },
   bindInput(e) { //课程名称
-    this.setData({
-      input: e.detail.value.trim()
-    })
-    let isEn = this.data.isEn;
-    if (isEn) {
-      this.getListDataEn();
-    } else {
-      this.getListData();
-    }
+    this.data.input = e.detail.value.trim();
+    clearTimeout(this.data.stop);
+    this.data.stop = setTimeout(() => {
+      let isEn = this.data.isEn;
+      if (isEn) {
+        this.getListDataEn();
+      } else {
+        this.getListData();
+      }
+    }, 500);
   },
   bindAreaChange(e) { //区域
     this.setData({
