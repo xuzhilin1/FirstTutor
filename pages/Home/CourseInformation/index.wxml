@@ -56,7 +56,7 @@
       <modular-title title-context='订金说明'></modular-title>
     </view>
     <view class='padding-lr-30 fon-24  c88 bg-fff padding-tb-40'>
-      <text>平台预收课程费用{{tea.TeaDepositPer}}%作为订金，剩余费用学生扣除订金后支付给外教。</text>
+      <text>平台预收首次课程费用{{tea.TeaDepositPer}}%作为订金，剩余费用学生扣除订金后支付给外教。</text>
     </view>
     <!--  footer    一对一  -->
     <view wx:if='{{course.CorType==1}}' class='footer flex border-t-1 between'>

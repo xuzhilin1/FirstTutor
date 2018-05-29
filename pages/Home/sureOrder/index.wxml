@@ -61,7 +61,7 @@
         <modular-title title-context='订金说明'></modular-title>
       </view>
       <view class='padding-lr-30 fon-24 border-b-1 c88 bg-fff padding-tb-40'>
-        <text>平台预收课程费用{{teacher.TeaDepositPer}}%作为订金，剩余费用学生扣除订金后支付 给外教。</text>
+        <text>平台预收首次课程费用{{teacher.TeaDepositPer}}%作为订金，剩余费用学生扣除订金后支付 给外教。</text>
       </view>
       <view class='agreement c88'>
         <checkbox bindtap='checkChange' checked='{{false}}' color='green'></checkbox>

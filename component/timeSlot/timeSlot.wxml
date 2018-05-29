@@ -11,7 +11,7 @@
       <view class='pour-title'>注</view>
       <view class='pour-context border-box'>
         <view class='pour-list border-box'>上午：课程区间9-12点；下午1：课程区间12-15点；</view>
-        <view class='pour-list border-box'>下午2:课程区间15-18点；晚上：课程区间18-21点；</view>
+        <view class='pour-list border-box'>下午2：课程区间15-18点；晚上：课程区间18-21点；</view>
         <view class='pour-list border-box'>具体时间自行商量，时间表仅供参考</view>
       </view>
     </view>
@@ -22,7 +22,7 @@
       <view class='pour-context-en border-box'>
         <view class='pour-list border-box'>AM：Course time slot: 9:00-12:00；</view>
         <view class='pour-list border-box'>PM1：Course time slot: 12:00-15:00；</view>
-        <view class='pour-list border-box'>PM2: Course time slot: 15:00-18:00；</view>
+        <view class='pour-list border-box'>PM2： Course time slot: 15:00-18:00；</view>
         <view class='pour-list border-box'>PM3：Course time slot: 18:00-21:00；</view>
         <view class='pour-list border-box'>Please confirm the exact course time slot through offline discussion.</view>
       </view>
