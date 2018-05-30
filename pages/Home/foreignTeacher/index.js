@@ -21,9 +21,9 @@ Page({
     isPrice: false,
     isPriceAll: false,
     pageIndex: 1, //分页
-    pageSize: 10, //每页多少数据
+    pageSize: 20, //每页多少数据
     pageIndexEn: 1,
-    pageSizeEn: 10,
+    pageSizeEn: 20,
     pageListEn: [],
     stop: null,//函数防抖
   },

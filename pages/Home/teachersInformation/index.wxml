@@ -31,10 +31,10 @@
               </view>
             </view>
           </view>
-          <view class='fon-24  white margin-t-10 margin-b-10'>
+          <view class='overflo fon-24  white margin-t-10 margin-b-10'>
             <text>{{teaInfo.NalEngName}}/{{teaInfo.TeaUniversity}}</text>
           </view>
-          <view class='fon-24  white'>
+          <view class='overflo fon-24  white'>
             <text>{{teaInfo.TeaAbstract}}</text>
           </view>
         </view>
@@ -168,10 +168,10 @@
               </view>
             </view>
           </view>
-          <view class='fon-24  white margin-t-10 margin-b-10'>
+          <view class='overflo fon-24  white margin-t-10 margin-b-10'>
             <text>{{teaInfo.NalEngName}}/{{teaInfo.TeaUniversity}}</text>
           </view>
-          <view class='fon-24  white'>
+          <view class='overflo fon-24  white'>
             <text>{{teaInfo.TeaAbstract}}</text>
           </view>
         </view>

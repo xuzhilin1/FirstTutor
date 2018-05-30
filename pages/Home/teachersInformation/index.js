@@ -10,7 +10,7 @@ Page({
     srcImg: $common.srcImg,
     srcVideo: $common.srcVideo,
     teaId: null,   //教师id
-    teaInfo: {}, //教师信息
+    // teaInfo: {}, //教师信息
     areaList: [],
     navbarList: [{
       id: '_course',
