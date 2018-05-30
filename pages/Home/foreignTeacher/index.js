@@ -21,11 +21,12 @@ Page({
     isPrice: false,
     isPriceAll: false,
     pageIndex: 1, //分页
-    pageSize: 20, //每页多少数据
+    pageSize: 10, //每页多少数据
     pageIndexEn: 1,
-    pageSizeEn: 20,
+    pageSizeEn: 10,
     pageListEn: [],
     stop: null,//函数防抖
+    flage: true, //函数节流
   },
   initArea() { //初始化区域
     let data = [{
@@ -180,6 +181,7 @@ Page({
         $common.showModal('亲~网络不给力哦，请稍后重试');
       },
       (res) => {
+        this.data.flage = true;
         wx.hideLoading();
         wx.stopPullDownRefresh();
       },
@@ -302,6 +304,7 @@ Page({
         $common.showModal('Unknown Error', false, false, 'OK', 'Prompt');
       },
       (res) => {
+        this.data.flage = true;
         wx.hideLoading();
         wx.stopPullDownRefresh();
       }
@@ -393,6 +396,8 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
+    if (!this.data.flage) return;
+    this.data.flage = false;
     let isEn = this.data.isEn;
     if (isEn) { //找学生
       this.getListDataEn(true);
