@@ -60,6 +60,8 @@ view {
   padding: 20rpx 40rpx;
   color: #4f4f4f;
   max-width: 90%;
+  word-wrap : break-word;
+  /* word-break: break-all; */
 }
 
 .core-right {
