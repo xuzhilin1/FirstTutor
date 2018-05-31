@@ -115,7 +115,6 @@ Page({
     let text = isEn ? "Loading..." : "努力加载中...";
     return text;
   },
-
   getIsVip(callback) {//获取外教是否为vip
     $common.request(
       "POST",

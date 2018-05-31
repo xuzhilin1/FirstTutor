@@ -44,7 +44,7 @@ Page({
     let arrEn = {
       title: 'TERMS AND CONDITIONS',
       context: [{
-        item: 'This document ("Terms") sets out the terms and conditions on which we (Shanghai FirstTutor Education Science & Technology Co., Ltd., 上海翌师教育科技有限公司 in Chinese, hereinafter as "FirstTutor") provide our FirstTutorWeChat Mini Program ("Program") and the services available through the Program ("Services") to you as a Tutor of FirstTutor ("Tutor", "you" or "your"). By using of our Services or registering with FirstTutor, you have confirmed that you agree to these Terms, thus please carefully read and understand them.'
+        item: 'This document ("Terms") sets out the terms and conditions on which we (Shanghai FirstTutor Education Science & Technology Co., Ltd., 上海翌师教育科技有限公司 in Chinese, hereinafter as "FirstTutor") provide our FirstTutor WeChat Mini Program ("Program") and the services available through the Program ("Services") to you as a Tutor of FirstTutor ("Tutor", "you" or "your"). By using of our Services or registering with FirstTutor, you have confirmed that you agree to these Terms, thus please carefully read and understand them.'
       }, {
         item: 'You promise to us that you are at least sixteen years of age and can (and will on request) provide electronic scanned copies of any references, or proof of qualifications and experience, as claimed in your profile.'
       }, {
@@ -77,8 +77,8 @@ Page({
       ]
     };
     this.setData({
-      pagesData: arrEn
-      // pagesData: this.data.isEn ? arrEn : arr
+      // pagesData: arrEn
+      pagesData: this.data.isEn ? arrEn : arr
     })
   },
 

@@ -141,8 +141,7 @@ Page({
     this.data.checkbox = !this.data.checkbox;
   },
   submit() { //保存按钮
-    let btnFalg = this.data.btnFalg;
-    if (!btnFalg) return;
+    if (!this.data.btnFalg) return;
     this.data.btnFalg = false;
     let userName = this.data.userName.trim(),
       sex = this.data.sexArray[this.data.sexIndex].id,
@@ -160,11 +159,13 @@ Page({
       school = this.data.school.trim(),
       synopsis = this.data.synopsis,
       checkbox = this.data.checkbox; //是否阅读条款
+    console.log(userName);
     if (userName.trim().length <= 0) {
       $common.showModal('Please fill in your name.', false, false, 'Ok', 'Reminder');
       this.data.btnFalg = true;
       return;
     }
+    return;
     if (!$common.phoneReg.test(phone)) {
       $common.showModal('Please fill in the correct phone number.', false, false, 'Ok', 'Reminder');
       this.data.btnFalg = true;
@@ -325,9 +326,9 @@ Page({
           //     }
           //   } else {//没有返回东西，报错了,显示原文
           //   }
-            this.setData({
-              nationalityArray: data
-            })
+          this.setData({
+            nationalityArray: data
+          })
           // });
           this.setTeaNaLityId();
         } else {

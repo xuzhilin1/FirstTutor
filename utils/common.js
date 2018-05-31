@@ -332,6 +332,7 @@ module.exports = {
         openId: wx.getStorageSync('openid'),
         avaUrl: userInfo.avatarUrl,
         nickName: userInfo.nickName,
+        gender: userInfo.gender == 1 ? 1 : 0 //1男0女
       },
       header: { 'content-type': 'application/json' },
       method: 'POST',
