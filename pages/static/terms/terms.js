@@ -44,11 +44,11 @@ Page({
     let arrEn = {
       title: 'TERMS AND CONDITIONS',
       context: [{
-        item: 'This document (“Terms”) sets out the terms and conditions on which we (Shanghai FirstTutor Education Science &Technology Co., Ltd.,上海翌师教育科技有限公司in Chinese, hereinafter as “FirstTutor”) provide our FirstTutorWeChat Mini Program (“Program”) and the services available through the Program (“Services”) to you as a Tutor of FirstTutor (“Tutor”,“you”or“your”). By using of our Services or registering with FirstTutor, you have confirmed that you agree to these Terms,thus please carefully read and understand them.'
+        item: 'This document ("Terms") sets out the terms and conditions on which we (Shanghai FirstTutor Education Science & Technology Co., Ltd., 上海翌师教育科技有限公司 in Chinese, hereinafter as "FirstTutor") provide our FirstTutorWeChat Mini Program ("Program") and the services available through the Program ("Services") to you as a Tutor of FirstTutor ("Tutor", "you" or "your"). By using of our Services or registering with FirstTutor, you have confirmed that you agree to these Terms, thus please carefully read and understand them.'
       }, {
         item: 'You promise to us that you are at least sixteen years of age and can (and will on request) provide electronic scanned copies of any references, or proof of qualifications and experience, as claimed in your profile.'
       }, {
-        item: 'You shall respond to all enquiries from the learners who communicate or order in the Program (“Learners”) within 2 days, hence you recommend you check your messages in or delivered by FirstTutor on a regular basis. We may switch off the profiles of tutors who do not reply to enquiries in a timely manner.'
+        item: 'You shall respond to all enquiries from the learners who communicate or order in the Program ("Learners") within 2 days, hence you recommend you check your messages in or delivered by FirstTutor on a regular basis. We may switch off the profiles of tutors who do not reply to enquiries in a timely manner.'
       }, {
         item: 'For the tuition, Learner pays the tutor course fees offline, less the deposit (i.e. 20% of the total fee for the first course paid by Learnerto FirstTutor online) from the payable for the first course to tutor. The deposit is the one-off lump sum fee charged by FirstTutor for its platform service to you.'
       }, {
@@ -56,28 +56,29 @@ Page({
       }, {
         item: 'You acknowledge that Learners are entitled to submit feedback on you, your profile and your tutoring services. Learners can submit scores out of five and written comments, and FirstTutor has the right to make adjustment per reasonable assessment. In responding to feedback from Learners posted on the Program, you shall not be personally abusive about a Learner or anyone else.',
       }, {
-        item: 'You warrant that at no time shall you directly or indirectly suggest to a Learner that he or she apply for a refund that a Learner has made through the Program,nor shall you facilitate, or provide, the continuation of tutoring (where the tutoring is not via FirstTutor) to a Learner who has applied for (or received) a refund from The Program. In the event of your breach of this paragraph, we reserve the right to charge you for the relevant refunded booking as well as for any costs that we have reasonably incurred as a consequence of your breach of this paragraph. '
+        item: 'You warrant that at no time shall you directly or indirectly suggest to a Learner that he or she apply for a refund that a Learner has made through the Program, nor shall you facilitate, or provide, the continuation of tutoring (where the tutoring is not via FirstTutor) to a Learner who has applied for (or received) a refund from The Program. In the event of your breach of this paragraph, we reserve the right to charge you for the relevant refunded booking as well as for any costs that we have reasonably incurred as a consequence of your breach of this paragraph.'
       }, {
         item: 'You promise that your phone number and other contact information provided to us are accurate and that you will update us with any changes to your contact information. Your further promise that your feedbacks to or communication with FirstTutor or Learners are always consistent with the facts. In the event that you provide inaccurate or malicious feedback about FirstTutor (including for example through a web based review site or on social media), we reserve the right to terminate our arrangement with you without notice and without liability.'
       }, {
         item: 'You warrant that you will provide your services to Learners as an independent tutor and not as a Company. You shall at all times conduct yourself in a legal and professional manner fitting of a teacher both in your dealings with your Learners.'
       }, {
-        item: 'Your use of the Program and its contents grants no rights to you in relation to anyintellectual property rights (“IP Rights”, in particular, trademarks and logos) byFirstTutor, whether owned by us or by third parties.'
+        item: 'Your use of the Program and its contents grants no rights to you in relation to anyintellectual property rights ("IP Rights", in particular, trademarks and logos)  byFirstTutor, whether owned by us or by third parties.'
       }, {
         item: 'You agree and acknowledge that FirstTutoror the Program merely serves a platform through which Tutorand Learner is able to make preliminary communications and get each other’s contact information, andunder no circumstances willFirstTutor be liable to you for your use of the Program or our provisions of the Services. We are not a party to the tutoring agreement or arrangement between the Tutor and the Learner, and we shall not be liable for any actions of Learners/Tutors or other third parties.'
       }, {
         item: 'You acknowledge that (i) you are not an employee of ours, (ii) you accept full responsibility for all income tax and other taxation, as well as liabilities arising from your tutoring activities. You will  compensate us for all (if any) claims, liabilities, costs and expenses that we may suffer, which arise out of or in connection with your use of the Program, including, in particular, your breach of the Terms or the agreement with Learners, any claim raised by Learner or third-party due to your reason, or your illegal or inappropriate behaviors.',
       }, {
-        item: 'The information contained in the Programis for general information purposes only and we endeavour to keep the information up-to-date and correct, but we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliabilityor availability with respect to the Programor the information, products or servicescontained or referred to inthe Program for any purpose. Effort is made to keep the Program running smoothly. However, FirstTutor takes no responsibility for and will not be liable for theProgram being temporarily unavailable due to technical or other issues beyond our control.Any reliance you place on such information is therefore strictly at your own risk.'
+        item: 'The information contained in the Programis for general information purposes only and we endeavour to keep the information up-to-date and correct, but we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliabilityor availability with respect to the Programor the information, products or servicescontained or referred to inthe Program for any purpose. Effort is made to keep the Program running smoothly. However, FirstTutor takes no responsibility for and will not be liable for theProgram being temporarily unavailable due to technical or other issues beyond our control. Any reliance you place on such information is therefore strictly at your own risk.'
       }, {
         item: 'FirstTutor is committed to ensuring that your privacy is protected. Should we ask you to provide certain information by which you can be identified (including but not limited to, your name, passport number, contact number and address, locationand other information reasonably required by our operation of the Program) when using the Program, you can be assured that it will only be used in accordance with these Terms.'
       }, {
-        item: 'We might use such information for the purposes of maintaining or improving our products and services to Tutors or Learners or market research purposes.We may contact you by e-mail, phone, fax or mailusing the contact information which you have provided serving the purposes of operating theProgram or other information which we think you may find interesting.We might share such information with our affiliates or business partners serving the above purposes. Nevertheless, we are committed to use reasonable efforts to ensure that your information uploaded in the Program is secure.'
+        item: 'We might use such information for the purposes of maintaining or improving our products and services to Tutors or Learners or market research purposes. We may contact you by e-mail, phone, fax or mailusing the contact information which you have provided serving the purposes of operating theProgram or other information which we think you may find interesting. We might share such information with our affiliates or business partners serving the above purposes. Nevertheless, we are committed to use reasonable efforts to ensure that your information uploaded in the Program is secure.'
       }
       ]
     };
     this.setData({
-      pagesData: this.data.isEn ? arrEn : arr
+      pagesData: arrEn
+      // pagesData: this.data.isEn ? arrEn : arr
     })
   },
 

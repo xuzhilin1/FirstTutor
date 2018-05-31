@@ -209,7 +209,7 @@ Page({
       return;
     }
     if (synopsis.trim().length <= 0) {
-      $common.showModal('Please fill in your brief introduction.', false, false, 'Ok', 'Prompt');
+      $common.showModal('Please fill in your Key Words.', false, false, 'Ok', 'Prompt');
       this.data.btnFalg = true;
       return;
     }

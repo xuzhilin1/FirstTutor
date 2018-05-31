@@ -82,7 +82,7 @@ Page({
       return;
     }
     if (synopsis.trim().length <= 0) {
-      $common.showModal('Please fill in your brief introduction.', false, false, 'OK', 'Reminder');
+      $common.showModal('Please fill in your Key Words.', false, false, 'OK', 'Reminder');
       return;
     }
     let status = this.data.status;
