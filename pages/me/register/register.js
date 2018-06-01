@@ -159,13 +159,11 @@ Page({
       school = this.data.school.trim(),
       synopsis = this.data.synopsis,
       checkbox = this.data.checkbox; //是否阅读条款
-    console.log(userName);
     if (userName.trim().length <= 0) {
       $common.showModal('Please fill in your name.', false, false, 'Ok', 'Reminder');
       this.data.btnFalg = true;
       return;
     }
-    return;
     if (!$common.phoneReg.test(phone)) {
       $common.showModal('Please fill in the correct phone number.', false, false, 'Ok', 'Reminder');
       this.data.btnFalg = true;
@@ -215,7 +213,7 @@ Page({
       return;
     }
     if (!checkbox) {
-      $common.showModal('Please read and agree to the "Terms and conditions.', false, false, 'Ok', 'Prompt');
+      $common.showModal('Please read and agree to the "Terms and conditions".', false, false, 'Ok', 'Prompt');
       this.data.btnFalg = true;
       return;
     }
@@ -249,14 +247,13 @@ Page({
         Qualifs: TeaQualif,
       },
       (res) => {
+        this.data.btnFalg = true;
         if (res.data.res) {
           if (res.data.resType == 5) {//注册成功，发布课程
-            this.data.btnFalg = true;
             wx.redirectTo({
               url: '/pages/me/registerSuccess/registerSuccess',
             })
           } else if (res.data.resType == 6) { //注册成功，有发布过课程，回首页
-            this.data.btnFalg = true;
             wx.switchTab({
               url: '/pages/Home/Home/index',
             })
@@ -270,11 +267,13 @@ Page({
           } else { //注册失败
             $common.showModal('Registration failed', false, false, 'Ok', 'Reminder');
           }
-          this.data.btnFalg = true;
         }
       },
       (res) => {
+        this.data.btnFalg = true;
         $common.showModal('Unknown Error', false, false, 'Ok', 'Reminder');
+      },
+      (res) => {
         this.data.btnFalg = true;
       }
     )

@@ -126,21 +126,29 @@ Page({
       }
     );
   },
-  getListData(isRefresh) { //获取找外教页面list
-    isRefresh = isRefresh ? true : false; //true 上拉， false重新加载
-    wx.showLoading({ title: '努力加载中...' });
-    let pageIndex = isRefresh ? this.data.pageIndex : 1,
+  getListData(isReach) { //获取找外教页面list
+    let pageIndex = 1,
       pageSize = this.data.pageSize;
-    let timeCla = this.data.timeIndex === 0 ? -1 : parseInt(this.data.timeIndex), //时间段（1-4）
-      areaId = this.data.areaIndex === 0 ? -1 : this.data.areaList[this.data.areaIndex].id, // 区域ID（1-16）
-      taAreaId = this.data.tradIndex === 0 ? -1 : this.data.tradList[this.data.tradIndex].TaArea, //商圈区域ID（1-16）
-      minPrice = this.data.priceList[0][this.data.priceIndex[0]], //价格区间
-      maxPrice = this.data.priceList[1][this.data.priceIndex[1]],
-      corName = this.data.input ? this.data.input : null; //课程名
+    isReach && (pageIndex = this.data.pageIndex);
+    let timeIndex = +this.data.timeIndex,
+      areaList = this.data.areaList,
+      areaIndex = +this.data.areaIndex,
+      tradList = this.data.tradList,
+      tradIndex = +this.data.tradIndex,
+      priceList = this.data.priceList,
+      priceIndex = this.data.priceIndex,
+      input = this.data.input;
+    let timeCla = timeIndex === 0 ? -1 : timeIndex, //时间段（1-4）
+      areaId = areaIndex === 0 ? -1 : areaList[areaIndex].id, // 区域ID（1-16）
+      taAreaId = tradIndex === 0 ? -1 : tradList[tradIndex].TaArea, //商圈区域ID（1-16）
+      minPrice = priceList[0][priceIndex[0]], //价格区间
+      maxPrice = priceList[1][priceIndex[1]],
+      corName = input ? input : null; //课程名
     if (minPrice == 0 && maxPrice == 0) {
       maxPrice = -1;
       minPrice = -1;
     }
+    wx.showLoading({ title: '努力加载中...' });
     $common.request(
       "POST",
       $common.config.FindForeignTea,
@@ -157,10 +165,8 @@ Page({
       (res) => {
         if (res.data.res) {
           let data = res.data.teaList;
-          if (data.length >= pageSize) { //后续有数据，下标累加
-            pageIndex++;
-          }
-          let listData = isRefresh ? this.data.listData : []; //上拉加载push，否则重新 开始
+          let listData = [];
+          isReach && (listData = this.data.listData);
           for (let i = 0, len = data.length; i < len; i++) {
             listData.push(data[i]);
           }
@@ -169,9 +175,9 @@ Page({
             hash[next.TeaId] ? '' : hash[next.TeaId] = true && item.push(next);
             return item
           }, []);
+          data.length >= pageSize && (this.data.pageIndex++);
           this.setData({
             listData: newArr,
-            pageIndex: pageIndex,
           })
         } else {
           $common.showModal('未知错误，请稍后重试');
@@ -183,7 +189,6 @@ Page({
       (res) => {
         this.data.flage = true;
         wx.hideLoading();
-        wx.stopPullDownRefresh();
       },
     )
   },
@@ -221,11 +226,9 @@ Page({
   },
   getListDataEn(isReach) { //获取找学生页面list
     if (!this.data.teaToe) return; //该外教审核不通过
-    isReach = isReach ? true : false;
-    let teaId = wx.getStorageSync('teacherStatusInfo').teaId;
-    let pageIndexEn = isReach ? this.data.pageIndexEn : 1,
+    let pageIndexEn = 1,
       pageSizeEn = this.data.pageSizeEn;
-    let pageListEn = isReach ? this.data.pageListEn : [];//上拉加载push，下拉刷新，重新获取
+    isReach && (pageIndexEn = this.data.pageIndexEn);
     wx.showLoading({ title: 'Loading...' });
     $common.request(
       "POST",
@@ -239,9 +242,8 @@ Page({
         if (res.data.res) {
           let data = res.data.lnList;
           let addressData = this.data.addressData;
-          if (data.length >= pageSizeEn) {
-            pageIndexEn++;
-          }
+          let pageListEn = [];
+          isReach && (pageListEn = this.data.pageListEn);
           for (let i = 0, len = data.length; i < len; i++) {
             switch (data[i].NedClaTime) {
               case 1:
@@ -282,7 +284,7 @@ Page({
             }
             for (let j = 0, l = addressData.length; j < l; j++) {
               if (addressData[j].id === data[i].NedClaArea) {
-                data[i].address = addressData[j].area
+                data[i].address = addressData[j].area;
               }
             }
             pageListEn.push(data[i]);
@@ -292,9 +294,9 @@ Page({
             hash[next.NedId] ? '' : hash[next.NedId] = true && item.push(next);
             return item
           }, []);
+          data.length >= pageSizeEn && (this.data.pageIndexEn++);
           this.setData({
             pageListEn: newArr,
-            pageIndexEn: pageIndexEn,
           })
         } else {
           $common.showModal('Unknown Error', false, false, 'OK', 'Prompt');
@@ -306,7 +308,6 @@ Page({
       (res) => {
         this.data.flage = true;
         wx.hideLoading();
-        wx.stopPullDownRefresh();
       }
     )
   },
