@@ -354,6 +354,8 @@ Page({
     }
   },
   onShow: function () {
+    this.data.pageIndex = 1;
+    this.data.pageIndexEn = 1;
     this.isEnEvent();
     this.getTradData();
   },
