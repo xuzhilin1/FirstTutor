@@ -294,7 +294,10 @@ module.exports = {
   getOpenid(callback) {
     callback = typeof (callback) === 'function' ? callback : function (res) { };
     let openid = wx.getStorageSync('openid');
-    if (openid) return;
+    if (openid) {
+      callback();
+      return;
+    }
     wx.login({
       complete: (res) => {
         if (res.code) {
@@ -380,5 +383,11 @@ module.exports = {
       }
     });
   },
+  newUnique(array, arr, id, hash) { //数组去重
+    arr.forEach(function (target) {
+      !hash[target[id]] && (array.push(target)) && (hash[target[id]] = true);
+    }, []);
+    return array;
+  }
 
 }

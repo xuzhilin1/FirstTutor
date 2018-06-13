@@ -22,6 +22,8 @@ Page({
     isPriceAll: false,
     pageIndex: 1, //分页
     pageSize: 10, //每页多少数据
+    hash: {},
+    hashEn: {},
     pageIndexEn: 1,
     pageSizeEn: 10,
     pageListEn: [],
@@ -128,8 +130,12 @@ Page({
   },
   getListData(isReach) { //获取找外教页面list
     let pageIndex = 1,
-      pageSize = this.data.pageSize;
-    isReach && (pageIndex = this.data.pageIndex);
+      pageSize = this.data.pageSize,
+      hash = {};
+    if (isReach) {
+      pageIndex = this.data.pageIndex;
+      hash = this.data.hash;
+    }
     let timeIndex = +this.data.timeIndex,
       areaList = this.data.areaList,
       areaIndex = +this.data.areaIndex,
@@ -165,19 +171,14 @@ Page({
       (res) => {
         if (res.data.res) {
           let data = res.data.teaList;
+          if (data.length <= 0) return;
           let listData = [];
           isReach && (listData = this.data.listData);
-          for (let i = 0, len = data.length; i < len; i++) {
-            listData.push(data[i]);
-          }
-          let hash = {};
-          let newArr = listData.reduce(function (item, next) {//数组依据TeaId去重
-            hash[next.TeaId] ? '' : hash[next.TeaId] = true && item.push(next);
-            return item
-          }, []);
+          $common.newUnique(listData, data, 'TeaId', hash); //去重
+          this.data.hash = hash; //hash第一次为什么不能直接同步到this里
           data.length >= pageSize && (this.data.pageIndex++);
           this.setData({
-            listData: newArr,
+            listData: listData,
           })
         } else {
           $common.showModal('未知错误，请稍后重试');
@@ -227,8 +228,12 @@ Page({
   getListDataEn(isReach) { //获取找学生页面list
     if (!this.data.teaToe) return; //该外教审核不通过
     let pageIndexEn = 1,
-      pageSizeEn = this.data.pageSizeEn;
-    isReach && (pageIndexEn = this.data.pageIndexEn);
+      pageSizeEn = this.data.pageSizeEn,
+      hashEn = {};
+    if (isReach) {
+      pageIndexEn = this.data.pageIndexEn;
+      hashEn = this.data.hashEn;
+    }
     wx.showLoading({ title: 'Loading...' });
     $common.request(
       "POST",
@@ -287,16 +292,12 @@ Page({
                 data[i].address = addressData[j].area;
               }
             }
-            pageListEn.push(data[i]);
           }
-          let hash = {};
-          let newArr = pageListEn.reduce(function (item, next) {//数组依据NedId去重
-            hash[next.NedId] ? '' : hash[next.NedId] = true && item.push(next);
-            return item
-          }, []);
+          $common.newUnique(pageListEn, data, 'NedId', hashEn);
+          this.data.hashEn = hashEn;
           data.length >= pageSizeEn && (this.data.pageIndexEn++);
           this.setData({
-            pageListEn: newArr,
+            pageListEn: pageListEn,
           })
         } else {
           $common.showModal('Unknown Error', false, false, 'OK', 'Prompt');

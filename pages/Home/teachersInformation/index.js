@@ -290,15 +290,13 @@ Page({
     this.getCommentData();
   },
   onLoad: function (options) {
-    this.setData({
-      teaId: options.data
-    });
-    this.init();
+    this.data.teaId = options.data;
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+    $common.getOpenid(this.init.bind(this));
   },
   isEnEvent(res) { //判断当前显示中英文
     let isEn = wx.getStorageSync('isEn');
@@ -357,7 +355,7 @@ Page({
   onShareAppMessage: function () {
     return {
       title: 'FirstTutor',
-      path: '/pages/Home/Home/index'
+      path: `/pages/Home/teachersInformation/index?data=${this.data.teaId}`
     }
   }
 })

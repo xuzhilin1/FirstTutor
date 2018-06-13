@@ -10,30 +10,25 @@ Page({
     pageIndex: 1, // 第几页
     pageSize: 10, // 本页面默认给十条
     listData: [],
-    listenCallbackNum: 0, //本页面三个接口，监听请求全部完成
   },
   getBannerData() { //获取轮播图数据
     $common.request(
       "POST",
       $common.config.GetBannerImgs,
       null,
-      function (res) {
+      (res) => {
         if (res.data.res) {
           let banList = res.data.banList;
           this.setData({
             banList: banList
           })
         } else {
-          // $common.showModal('未知错误，请稍后重试');
         }
-      }.bind(this),
-      function (res) {
-        // $common.showModal('亲~网络不给力哦，请稍后重试');
       },
-      function (res) {
-        this.addListenCallbackNum();
-        this.stopModal();
-      }.bind(this)
+      (res) => {
+      },
+      (res) => {
+      }
     );
   },
   getActivity() { //获取最新活动
@@ -41,28 +36,22 @@ Page({
       "POST",
       $common.config.GetLastestAtyInfo,
       null,
-      function (res) {
+      (res) => {
         if (res.data.res) {
           this.setData({
             activity: res.data.activity
           })
         } else {
-          // $common.showModal('未知错误，请稍后重试');
         }
-      }.bind(this),
-      (res) => {
-        // $common.showModal('亲~网络不给力哦，请稍后重试');
       },
-      function (res) {
-        this.addListenCallbackNum();
-        this.stopModal();
-      }.bind(this)
+      (res) => {
+      },
+      (res) => {
+      }
     );
   },
-  getListData(isReach, callback) { //推荐外教
-    isReach = isReach ? true : false;
-    callback = typeof callback === 'function' ? callback : function () { };
-    let pageIndex = isReach ? this.data.pageIndex : 1,
+  getListData() { //推荐外教
+    let pageIndex = this.data.pageIndex,
       pageSize = this.data.pageSize;
     $common.request(
       "POST",
@@ -73,36 +62,16 @@ Page({
       },
       (res) => {
         if (res.data.res) {
-          let pageIndex = parseInt(this.data.pageIndex),
-            pageSize = parseInt(this.data.pageSize);
-          let data = res.data.teaList;
-          if (data.length >= pageSize) { //获取的数据个数等于请求的数据的个数，下标累加
-            pageIndex++;
-          }
-          let listData = isReach ? this.data.listData : [];
-          for (let i = 0, len = data.length; i < len; i++) {
-            listData.push(data[i]);
-          }
-          let hash = {};
-          let newArr = listData.reduce(function (item, next) {//数组依据TeaId去重
-            hash[next.TeaId] ? '' : hash[next.TeaId] = true && item.push(next);
-            return item
-          }, []);
           this.setData({
-            pageIndex: pageIndex,
-            listData: newArr
-          })
+            listData: res.data.teaList
+          });
         } else {
-          // $common.showModal('未知错误，请稍后重试');
         }
       },
       (res) => {
-        // $common.showModal('亲~网络不给力哦，请稍后重试');
       },
       (res) => {
-        this.addListenCallbackNum();
-        this.stopModal();
-        callback();
+        wx.hideLoading();
       }
     );
   },
@@ -133,36 +102,12 @@ Page({
     this.getActivity();
     this.getListData();
   },
-  getOpenId() { //获取openid
-    let openid = wx.getStorageSync('openid');
-    if (!openid) {
-      $common.getOpenid($common.studentRegister.bind(this)); //获取用户信息及openid；
-    } else {
-      $common.studentRegister();
-    }
-  },
-  addListenCallbackNum() {
-    let num = parseInt(this.data.listenCallbackNum);
-    num++;
-    this.setData({
-      listenCallbackNum: num
-    })
-  },
-  stopModal() { //停止页面的各种加载状态
-    let num = parseInt(this.data.listenCallbackNum);
-    if (num >= 3) { //本页面有三个接口
-      wx.hideLoading();
-      this.setData({
-        listenCallbackNum: 0
-      })
-    }
-  },
   onLoad(options) {
-    this.init();
-    this.getOpenId();
+
   },
   onReady() {
-
+    this.init();
+    $common.getOpenid($common.studentRegister); //获取openid并注册
   },
   isEnEvent(res) { //判断当前显示中英文
     this.setData({

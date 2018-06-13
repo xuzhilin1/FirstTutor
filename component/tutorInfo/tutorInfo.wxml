@@ -1,4 +1,3 @@
-<!--component/tutorInfo/tutorInfo.wxml-->
 <view class='wrapper border-box'>
   <view class='box-left border-box'>
     <image catchtap='lookYouImage' data-index='{{index}}' class='head-image' src='{{infoList.TeaIDPhoto ? photoUrl + infoList.TeaIDPhoto : infoList.TeaAvaUrl}}'></image>
