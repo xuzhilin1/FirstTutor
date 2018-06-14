@@ -5,6 +5,7 @@ const $common = require('../../../utils/common.js');
 let SocketTask;
 Page({
   data: {
+    paddingTop: 0,
     srcForIdPhoto: $common.srcForIdPhoto,
     value: '', //聊天框的初始内容
     myImage: '',
@@ -282,13 +283,34 @@ Page({
   onReady: function () {
 
   },
-
   isEnEvent(res) { //判断当前显示中英文
     let isEn = wx.getStorageSync('isEn');
+    let paddingTop = 0;
+    let text;
+    let query = wx.createSelectorQuery();
+    if (isEn) {
+      text = "Your Messages";
+      query.select('#warnE').fields({
+        size: true,
+      }, (res) => {
+        this.setData({
+          paddingTop: res.height
+        })
+      }).exec()
+    } else {
+      text = "Your 在线沟通";
+      query.select('#warnZ').fields({
+        size: true,
+      }, (res) => {
+        this.setData({
+          paddingTop: res.height
+        })
+      }).exec()
+    }
+    console.log(paddingTop);
     this.setData({
       isEn: isEn
     });
-    let text = isEn ? "Your Messages" : "在线沟通";
     wx.setNavigationBarTitle({
       title: text
     })

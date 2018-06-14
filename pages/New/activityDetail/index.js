@@ -168,7 +168,7 @@ Page({
   onShareAppMessage: function () {
     return {
       title: 'FirstTutor',
-      path: '/pages/Home/Home/index'
+      path: `/pages/New/activityDetail/index?atyId=${this.data.atyId}&isSign=${this.data.isSign}`
     }
   }
 })

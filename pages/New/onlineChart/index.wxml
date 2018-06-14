@@ -1,5 +1,4 @@
-<!--pages/New/onlineChart/index.wxml-->
-<view class='wrapper'>
+<view class='wrapper' style='padding-top:{{paddingTop}}px'>
   <!-- 右边  start  -->
   <view class='core' wx:for='{{listData}}' wx:key='{{index}}'>
     <view wx:if='{{item.isTime}}' class='core-time'>
@@ -34,5 +33,18 @@
   <view id='wrap'></view>
   <view class='footer'>
     <input bindconfirm='confirm' value='{{value}}' confirm-hold='{{false}}' adjust-position='{{true}}' confirm-type='send' cursor-spacing='{{18}}' type='text' placeholder='{{isEn?"Please enter the...":"请输入..."}}' placeholder-class='placeholder' maxlength='1000'></input>
+  </view>
+</view>
+
+<view hidden='{{isEn}}' id='warnZ' class='warn'>
+  <image src='/images/bg-all_02.jpg'></image>
+  <view>
+    严禁学员与外教，在支付定金前，通过FirstTutor平台获取联系方式从而进行线下沟通（敏感字段将被系统屏蔽，并在订单下达后自动打开）。
+  </view>
+</view>
+<view hidden='{{!isEn}}' id='warnE' class='warn'>
+  <image src='/images/bg-all_02.jpg'></image>
+  <view>
+    It is not allowed to send contact information on app until the client pay the deposit. (All the numbers are blocked until the deposit get paid.)
   </view>
 </view>

@@ -12,6 +12,31 @@ view {
   box-sizing: border-box;
 }
 
+.warn {
+  width: 100%;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  font-size: 22rpx;
+  color: #f0f8ff;
+  overflow: hidden;
+}
+
+.warn>image {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.warn>view {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20rpx 30rpx;
+}
+
 .core {
   width: 100%;
   padding: 0 30rpx;
@@ -60,7 +85,7 @@ view {
   padding: 20rpx 40rpx;
   color: #4f4f4f;
   max-width: 90%;
-  word-wrap : break-word;
+  word-wrap: break-word;
   /* word-break: break-all; */
 }
 
