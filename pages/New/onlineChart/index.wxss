@@ -35,6 +35,7 @@ view {
   width: 100%;
   box-sizing: border-box;
   padding: 20rpx 30rpx;
+  padding-top: 0;
 }
 
 .core {

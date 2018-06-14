@@ -189,6 +189,9 @@ Page({
             listData: this.removeDuplicate(listData, 'CrdId'), //数组依据CrdId去重
             pageIndex: pageIndex
           })
+          setTimeout(() => {
+            this.myPageScroll();
+          }, 500);
         } else {
           // switch (res.data.errType) {
           //   case 1:
@@ -285,29 +288,31 @@ Page({
   },
   isEnEvent(res) { //判断当前显示中英文
     let isEn = wx.getStorageSync('isEn');
-    let paddingTop = 0;
     let text;
     let query = wx.createSelectorQuery();
     if (isEn) {
       text = "Your Messages";
-      query.select('#warnE').fields({
-        size: true,
-      }, (res) => {
-        this.setData({
-          paddingTop: res.height
-        })
-      }).exec()
+      setTimeout(() => { //直接执行竟然获取不到
+        query.select('#warnE').fields({
+          size: true,
+        }, (res) => {
+          this.setData({
+            paddingTop: res.height
+          })
+        }).exec()
+      }, 500);
     } else {
       text = "Your 在线沟通";
-      query.select('#warnZ').fields({
-        size: true,
-      }, (res) => {
-        this.setData({
-          paddingTop: res.height
-        })
-      }).exec()
+      setTimeout(() => {
+        query.select('#warnZ').fields({
+          size: true,
+        }, (res) => {
+          this.setData({
+            paddingTop: res.height
+          })
+        }).exec()
+      }, 500);
     }
-    console.log(paddingTop);
     this.setData({
       isEn: isEn
     });
