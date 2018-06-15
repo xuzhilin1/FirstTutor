@@ -75,12 +75,12 @@
           首页
         </view>
       </view>
-      <view bindtap='onlineChart' class='flex center aitems-center KuanDU'>
+      <button open-type='getUserInfo' bindgetuserinfo='getUserInfo' class='user-info flex center aitems-center KuanDU'>
         <view class='fon-20 c88 gaoDU'>
           <image class='fangZI' mode='widthFix' src='/images/zixun_09.png'></image>
           咨询
         </view>
-      </view>
+      </button>
       <view wx:if='{{course.BeBuyCour<=0}}' bindtap='alonePayment' class='DanDUMai  flex aitems-center center'>
         <view class='purple fon-26 t-center'>
           <view>¥{{course.CorBuyPrice}}</view>
@@ -172,12 +172,12 @@
           Home
         </view>
       </view>
-      <view bindtap='onlineChart' class='flex center aitems-center KuanDU'>
+      <button open-type='getUserInfo' bindgetuserinfo='getUserInfo' class='user-info flex center aitems-center KuanDU'>
         <view class='fon-20 c88 gaoDU'>
           <image class='fangZI' mode='widthFix' src='/images/zixun_09.png'></image>
           Consulte
         </view>
-      </view>
+      </button>
       <view wx:if='{{course.BeBuyCour<=0}}' bindtap='alonePayment' class='DanDUMai  flex aitems-center center'>
         <view class='purple fon-26 t-center'>
           <view>¥{{course.CorBuyPrice}}</view>

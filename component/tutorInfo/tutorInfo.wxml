@@ -5,21 +5,21 @@
       <view class='box-uername border-box'>
         <text>{{infoList.TeaName || infoList.TeaNickName}}</text>
         <view class='box-image'>
-        <image wx:if='{{infoList.TeaAddV==1}}' class='vip' mode='widthFix' src='/images/guan_03.png'></image>
-        <!--  星星  -->
-        <view class='score'>
-          <view class='score-all'>
-            <image wx:for="{{5}}" wx:key='{{index}}' class='score-list' mode='widthFix' src='/images/hui_07.png'></image>
-          </view>
-          <view class='score-score'>
-            <view class='score-list' wx:for="{{5}}" wx:for-item='value' wx:for-index='key' wx:key='{{index}}'>
-              <!--  整星  -->
-              <image wx:if="{{infoList.RewScore - 0.5 > key ? key <= infoList.RewScore : key < infoList.RewScore - 1}}" class='score-img' src='/images/xian_05.png'></image>
-              <!--  半星  -->
-              <image wx:if="{{infoList.RewScore - 0.5 > key ? false : key < infoList.RewScore }}" class='score-image' src='/images/BanXIn_03.png'></image>
+          <image wx:if='{{infoList.TeaAddV==1}}' class='vip' mode='widthFix' src='/images/guan_03.png'></image>
+          <!--  星星  -->
+          <view class='score'>
+            <view class='score-all'>
+              <image wx:for="{{5}}" wx:key='{{index}}' class='score-list' mode='widthFix' src='/images/hui_07.png'></image>
+            </view>
+            <view class='score-score'>
+              <view class='score-list' wx:for="{{5}}" wx:for-item='value' wx:for-index='key' wx:key='{{index}}'>
+                <!--  整星  -->
+                <image wx:if="{{infoList.RewScore - 0.5 > key ? key <= infoList.RewScore : key < infoList.RewScore - 1}}" class='score-img' src='/images/xian_05.png'></image>
+                <!--  半星  -->
+                <image wx:if="{{infoList.RewScore - 0.5 > key ? false : key < infoList.RewScore }}" class='score-image' src='/images/BanXIn_03.png'></image>
+              </view>
             </view>
           </view>
-        </view>
         </view>
       </view>
       <view class='box-context border-box'>
@@ -27,5 +27,8 @@
       </view>
     </view>
   </view>
-  <image catchtap='chat' mode='widthFix' wx:if='{{chatImage}}' class='chatImage' src='{{chatImage}}'></image>
+  <button class='user-info' wx:if='{{chatImage}}' open-type='getUserInfo' catchgetuserinfo='getUserInfo'>
+    <image mode='widthFix' class='chatImage' src='{{chatImage}}'></image>
+  </button>
+
 </view>

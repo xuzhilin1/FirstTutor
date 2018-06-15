@@ -288,3 +288,21 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+.user-info {
+  border-radius: 0;
+}
+.lianxi{
+  background: transparent;
+  color: #fff;
+  border: none;
+  margin: 0;
+  padding: 0;
+  line-height: normal;
+}
+.lianxi::after{
+  border: none;
+}
+.wi{
+  width: 90%;
+}

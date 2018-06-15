@@ -96,3 +96,12 @@
 .chatImage {
   width: 40rpx;
 }
+
+.user-info {
+  background: transparent;
+  border: none;
+}
+
+.user-info::after {
+  border: none;
+}

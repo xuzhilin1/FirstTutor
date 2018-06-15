@@ -39,10 +39,10 @@
           </view>
         </view>
       </view>
-      <view class='zuishang-right'>
+      <button open-type='getUserInfo' bindgetuserinfo='getUserInfo' class='lianxi user-info zuishang-right'>
         <image bindtap='onlineChart' mode='widthFix' class='catImage' src='/images/DuiHua_0.png'></image>
         <view>联系老师</view>
-      </view>
+      </button>
     </view>
   </view>
   <!--  phone and area  -->
@@ -75,7 +75,7 @@
       <view class='flex fon-36  c2b '>
         <image wx:if='{{item.CorType!=1}}' class='QiHao' mode='widthFix' src='/images/tuan_06.png'></image>
         <image wx:else class='QiHao' mode='widthFix' src='/images/qi_03.png'></image>
-        <view>
+        <view class='wi'>
           <text>{{item.CorTitle}}</text>
           <view class=' bg-fff c8 margin-t-10 fon-24 purple'>已有{{item.BuyCount}}人购买</view>
         </view>
@@ -133,7 +133,7 @@
       </view>
     </view>
   </view>
-  <view bindtap='onlineChart' class='footer fon-30 white purple-bg'>咨询老师</view>
+  <button open-type='getUserInfo' bindgetuserinfo='getUserInfo' class='user-info footer fon-30 white purple-bg'>咨询老师</button>
 </block>
 <!--
   英文版
@@ -176,10 +176,10 @@
           </view>
         </view>
       </view>
-      <view class='zuishang-right'>
+      <button open-type='getUserInfo' bindgetuserinfo='getUserInfo' class='lianxi user-info zuishang-right'>
         <image bindtap='onlineChart' mode='widthFix' class='catImage' src='/images/DuiHua_0.png'></image>
         <view>Contact Tutor</view>
-      </view>
+      </button>
     </view>
   </view>
   <!--  phone and area  -->
@@ -212,7 +212,7 @@
       <view class='flex fon-36  c2b '>
         <image wx:if='{{item.CorType!=1}}' class='QiHao' mode='widthFix' src='/images/tuan_06.png'></image>
         <image wx:else class='QiHao' mode='widthFix' src='/images/qi_03.png'></image>
-        <view>
+        <view class='wi'>
           <text>{{item.CorTitle}}</text>
           <view class=' bg-fff c8 margin-t-10 fon-24 purple'>{{item.BuyCount}} People buy</view>
         </view>
@@ -270,5 +270,5 @@
       </view>
     </view>
   </view>
-  <view bindtap='onlineChart' class='footer fon-30 white purple-bg'>Consulting Tutor</view>
+  <button open-type='getUserInfo' bindgetuserinfo='getUserInfo' class='user-info footer fon-30 white purple-bg'>Consulting Tutor</button>
 </block>

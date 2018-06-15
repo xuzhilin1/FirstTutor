@@ -151,3 +151,12 @@
   white-space: normal;
   word-wrap: break-word;
 }
+
+.user-info {
+  line-height: normal;
+  border-radius: 0;
+}
+
+.user-info::after {
+  border: 0;
+}

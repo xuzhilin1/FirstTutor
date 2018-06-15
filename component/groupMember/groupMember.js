@@ -3,6 +3,7 @@
  * date: 2018-4-27
  * use: 团成员信息展示
  */
+const $common = require('../../utils/common.js');
 Component({
   /**
    * 组件的属性列表
@@ -38,6 +39,11 @@ Component({
       wx.makePhoneCall({
         phoneNumber: phone
       })
+    },
+    getUserInfo(e) {
+      let userInfo = e.detail.userInfo;
+      if (!userInfo) return;
+      $common.getUserInfo(userInfo, this.callChat.bind(this));
     },
     callChat() { //在线沟通
       let userId = this.data.memberInfo.UserId;

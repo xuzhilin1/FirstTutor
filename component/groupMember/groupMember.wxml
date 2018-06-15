@@ -6,7 +6,9 @@
       <text class='float'>{{memberInfo.OdrName}}</text>
       <view wx:if='{{isHead&&!isEn}}' class='tuan float'>团长</view>
       <view wx:if='{{isHead&&isEn}}' class='tuan float'>Group leader</view>
-      <image bindtap='callChat' wx:if='{{isChat}}' mode='widthFix' class='chat float' src='/images/DuiHua_06.png'></image>
+      <button wx:if='{{isChat}}' open-type='getUserInfo' catchgetuserinfo='getUserInfo' class='user-info'>
+        <image mode='widthFix' class='chat float' src='/images/DuiHua_06.png'></image>
+      </button>
     </view>
   </view>
   <view bindtap='callPhone' class='box-right'>

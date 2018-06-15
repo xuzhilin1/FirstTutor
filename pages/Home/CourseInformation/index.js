@@ -3,7 +3,7 @@ const $common = require('../../../utils/common.js');
 Page({
   data: {
     srcForIdPhoto: $common.srcForIdPhoto,
-    isPage: false,//页面是否显示
+    isPage: false, //页面是否显示
     FgtType: 1, //1 拼团 2 单独购买
     courId: null, //课程id
     teaId: null, //教师id
@@ -14,6 +14,11 @@ Page({
     timeList: [], // 页面展示上课时间表
     fgtList: {}, //推荐
     orderBeDel: 0, //1 订单已删除  0 未删除
+  },
+  getUserInfo(e) {
+    let userInfo = e.detail.userInfo;
+    if (!userInfo) return;
+    $common.getUserInfo(userInfo, this.onlineChart.bind(this));
   },
   onlineChart() { //立即沟通
     let TeaUserId = this.data.tea.TeaUserId;
@@ -167,11 +172,12 @@ Page({
     } else {
       text = '努力加载中...';
     }
-    wx.showLoading({ title: text });
+    wx.showLoading({
+      title: text
+    });
     $common.request(
       "POST",
-      $common.config.GetCourseInfo,
-      {
+      $common.config.GetCourseInfo, {
         courId: this.data.courId,
         teaId: this.data.teaId,
         openId: wx.getStorageSync('openid')
@@ -192,7 +198,7 @@ Page({
               course.courseTimeLong = 2; //2小时
               break;
           }
-          course.CorBuyPrice = course.CorBuyPrice.toFixed(2) < 0.01 ? 0.01 : course.CorBuyPrice.toFixed(2);//保留两位小数
+          course.CorBuyPrice = course.CorBuyPrice.toFixed(2) < 0.01 ? 0.01 : course.CorBuyPrice.toFixed(2); //保留两位小数
           course.CorPrice = course.CorPrice.toFixed(2) < 0.01 ? 0.01 : course.CorPrice.toFixed(2);
           course.CorGroupPrice = course.CorGroupPrice.toFixed(2) < 0.01 ? 0.01 : course.CorGroupPrice.toFixed(2);
           let tea = res.data.tea;
@@ -207,8 +213,7 @@ Page({
           if (course.CorType != 1) { //一对多页面
             $common.request(
               "POST",
-              $common.config.GetCorGroupInfos,
-              {
+              $common.config.GetCorGroupInfos, {
                 corId: this.data.courId,
               },
               (res) => {
@@ -226,8 +231,7 @@ Page({
               (res) => {
 
               },
-              (res) => {
-              }
+              (res) => {}
             )
           }
         } else {
@@ -268,8 +272,7 @@ Page({
   getCourTime() { //根据课程ID获取课程的上课时间
     $common.request(
       "POST",
-      $common.config.GetTimeTableInfos,
-      {
+      $common.config.GetTimeTableInfos, {
         courId: this.data.courId,
         teaId: this.data.teaId
       },
@@ -294,15 +297,14 @@ Page({
           $common.showModal('未知错误，请稍后重试');
         }
       },
-      (res) => {
-      }
+      (res) => {}
     );
   },
   init() {
     this.getCourseAndTeacherInfo();
     this.getCourTime();
   },
-  onLoad: function (options) {
+  onLoad: function(options) {
     let courId = options.courId,
       teaId = options.teaId;
     this.setData({
@@ -313,7 +315,7 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
@@ -332,7 +334,7 @@ Page({
       title: text
     })
   },
-  onShow: function () {
+  onShow: function() {
     this.isEnEvent();
     this.init();
   },
@@ -340,21 +342,21 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
     wx.stopPullDownRefresh();
     this.init();
   },
@@ -362,14 +364,14 @@ Page({
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
     return {
       title: 'FirstTutor',
       path: '/pages/Home/Home/index'

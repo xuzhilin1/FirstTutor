@@ -1,3 +1,4 @@
+const $common = require('../../utils/common.js');
 Component({
   properties: {
     chatImage: { //聊天图片
@@ -21,7 +22,7 @@ Component({
         TeaSortNum: 6,
         TeaIDPhoto: '20180419103902518411.jpg'
       },
-      observer(res){
+      observer(res) {
       }
     }
   },
@@ -36,6 +37,11 @@ Component({
       wx.previewImage({
         urls: [image],
       })
+    },
+    getUserInfo(e) {
+      let userInfo = e.detail.userInfo;
+      if (!userInfo) return;
+      $common.getUserInfo(userInfo, this.chat.bind(this));
     },
     chat() { //进入聊天界面
       let userId = this.data.infoList.TeaUserId;

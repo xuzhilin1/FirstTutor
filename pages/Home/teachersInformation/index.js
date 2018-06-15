@@ -41,6 +41,11 @@ Page({
     allComment: false,
     listenCallbackNum: 0, //本页面三个接口，监听请求全部完成
   },
+  getUserInfo(e){
+    let userInfo = e.detail.userInfo;
+    if (!userInfo) return;
+    $common.getUserInfo(userInfo, this.onlineChart.bind(this));
+  },
   onlineChart() { //进入聊天界面
     let userId = this.data.teaInfo.TeaUserId;
     wx.navigateTo({
