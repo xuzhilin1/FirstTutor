@@ -54,9 +54,11 @@ Page({
     this.data.email = e.detail.value;
   },
   uploadidPicture() { //上传证件照
-    $common.chooseImage(function (res) {
+    $common.chooseImage(function(res) {
       let image = res.tempFilePaths[0];
-      wx.showLoading({ title: 'uploading...' });
+      wx.showLoading({
+        title: 'uploading...'
+      });
       wx.uploadFile({
         url: $common.config.UpLoadForTeaFile,
         filePath: image,
@@ -90,8 +92,10 @@ Page({
   },
   uploadVideo() { //上传视频
     $common.chooseVideo((res) => {
-      let url = res.tempFilePath;//文件路径
-      wx.showLoading({ title: 'uploading...' });
+      let url = res.tempFilePath; //文件路径
+      wx.showLoading({
+        title: 'uploading...'
+      });
       wx.uploadFile({
         url: $common.config.UpLoadForTeaFile,
         filePath: url,
@@ -137,8 +141,11 @@ Page({
   bindSynopsis(e) { //简介
     this.data.synopsis = e.detail.value;
   },
-  bindcheckbox() {  //阅读条款
+  bindcheckbox() { //阅读条款
     this.data.checkbox = !this.data.checkbox;
+  },
+  getOpenId() {
+    $common.getOpenid(this.submit.bind(this));
   },
   submit() { //保存按钮
     if (!this.data.btnFalg) return;
@@ -226,8 +233,7 @@ Page({
   requestSaveData(TeaName, TeaGender, TeaAge, TeaWeChat, TeaUniversity, TeaNaLityId, TeaAbstract, TeaPhone, TeaPassPort, TeaMail, TeaQualif, TeaAudio, TeaIDPhoto, TeaClaArea) { //发送请求
     $common.request(
       "POST",
-      $common.config.ApplyForForeEdu,
-      {
+      $common.config.ApplyForForeEdu, {
         newTea: {
           TeaOpenId: wx.getStorageSync('openid'),
           TeaName: TeaName,
@@ -249,7 +255,7 @@ Page({
       (res) => {
         this.data.btnFalg = true;
         if (res.data.res) {
-          if (res.data.resType == 5) {//注册成功，发布课程
+          if (res.data.resType == 5) { //注册成功，发布课程
             wx.redirectTo({
               url: '/pages/me/registerSuccess/registerSuccess',
             })
@@ -259,7 +265,7 @@ Page({
             })
           }
         } else {
-          if (res.data.resType == 3) {//已注册
+          if (res.data.resType == 3) { //已注册
             wx.switchTab({
               url: '/pages/Home/Home/index',
             })
@@ -344,56 +350,56 @@ Page({
     if (!app.globalData.teacherFor.TeaQualif || !app.globalData.teacherFor.TeaClaArea) return;
     let teacherFor = app.globalData.teacherFor;
     this.setData({
-      certificate: teacherFor.TeaQualif,//教师资质
+      certificate: teacherFor.TeaQualif, //教师资质
       TeaClaArea: teacherFor.TeaClaArea, //教师上课地址
     })
   },
-  onLoad: function (options) {
+  onLoad: function(options) {
     this.getCountryInfo();
   },
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     this.init();
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
     wx.stopPullDownRefresh();
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
     return {
       title: 'FirstTutor',
       path: '/pages/Home/Home/index'

@@ -118,7 +118,7 @@ Page({
     })
   },
   onShow: function () {
-    this.isEnEvent();
+    $common.getOpenid(this.isEnEvent.bind(this));
   },
 
   /**

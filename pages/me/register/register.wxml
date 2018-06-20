@@ -131,4 +131,4 @@
   </view>
 </view>
 
-<button bindtap='submit' class='btn purple-bg white save-btn'>Submit</button>
+<button bindtap='getOpenId' class='btn purple-bg white save-btn'>Submit</button>

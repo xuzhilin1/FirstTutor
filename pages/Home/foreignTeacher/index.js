@@ -27,7 +27,7 @@ Page({
     pageIndexEn: 1,
     pageSizeEn: 10,
     pageListEn: [],
-    stop: null,//函数防抖
+    stop: null, //函数防抖
     flage: true, //函数节流
   },
   initArea() { //初始化区域
@@ -154,11 +154,12 @@ Page({
       maxPrice = -1;
       minPrice = -1;
     }
-    wx.showLoading({ title: '努力加载中...' });
+    wx.showLoading({
+      title: '努力加载中...'
+    });
     $common.request(
       "POST",
-      $common.config.FindForeignTea,
-      {
+      $common.config.FindForeignTea, {
         areaId: areaId,
         taAreaId: taAreaId,
         timeCla: timeCla,
@@ -206,11 +207,12 @@ Page({
       priceIndex: [-1, -1],
     })
   },
-  getIsVip(callback) {//获取外教是否为vip
+  getIsVip(callback) { //获取外教是否为vip
     $common.request(
       "POST",
-      $common.config.GetForTeaStatus,
-      { openId: wx.getStorageSync('openid') },
+      $common.config.GetForTeaStatus, {
+        openId: wx.getStorageSync('openid')
+      },
       (res) => {
         if (res.data.res) {
           let teaToe = res.data.teaToe === 1 ? true : false; //1审核通过
@@ -220,9 +222,8 @@ Page({
           callback();
         }
       },
-      (res) => { },
-      (res) => {
-      }
+      (res) => {},
+      (res) => {}
     );
   },
   getListDataEn(isReach) { //获取找学生页面list
@@ -234,11 +235,12 @@ Page({
       pageIndexEn = this.data.pageIndexEn;
       hashEn = this.data.hashEn;
     }
-    wx.showLoading({ title: 'Loading...' });
+    wx.showLoading({
+      title: 'Loading...'
+    });
     $common.request(
       "POST",
-      $common.config.GetAllLearnNeeds,
-      {
+      $common.config.GetAllLearnNeeds, {
         pageIndex: pageIndexEn,
         pageSize: pageSizeEn,
         searchKey: this.data.input
@@ -330,11 +332,11 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     this.initArea();
     this.initPriceInterval();
   },
-  onReady: function () {
+  onReady: function() {
 
   },
   isEnEvent(res) { //判断当前显示中英文
@@ -354,30 +356,30 @@ Page({
       this.getListData();
     }
   },
-  onShow: function () {
+  onShow: function() {
     this.data.pageIndex = 1;
     this.data.pageIndexEn = 1;
-    this.isEnEvent();
+    $common.getOpenid(this.isEnEvent.bind(this));
     this.getTradData();
   },
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
     wx.stopPullDownRefresh();
     let isEn = this.data.isEn;
     if (isEn) { //找学生
@@ -399,7 +401,7 @@ Page({
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
     if (!this.data.flage) return;
     this.data.flage = false;
     let isEn = this.data.isEn;
@@ -413,7 +415,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
     return {
       title: 'FirstTutor',
       path: '/pages/Home/Home/index'
