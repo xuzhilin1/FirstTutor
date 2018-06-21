@@ -194,6 +194,7 @@ Page({
             listData: listData,
             pageIndex: pageIndex
           })
+          if(isReach) return;
           setTimeout(() => {
             this.myPageScroll();
           }, 500);
