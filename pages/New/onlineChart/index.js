@@ -5,6 +5,7 @@ const $common = require('../../../utils/common.js');
 let SocketTask;
 Page({
   data: {
+    intervalTime: 300000, //间隔时间 5分钟
     paddingTop: 0,
     srcForIdPhoto: $common.srcForIdPhoto,
     value: '', //聊天框的初始内容
@@ -34,7 +35,7 @@ Page({
   },
   removeDuplicate(thisArr, thisId) { //去重
     let hash = {};
-    let newArr = thisArr.reduce(function (item, target, index) {
+    let newArr = thisArr.reduce(function(item, target, index) {
       hash[target[thisId]] ? item[hash[target[thisId]].nowIndex] = target : hash[target[thisId]] = {
         nowIndex: item.push(target) && index
       }
@@ -74,7 +75,7 @@ Page({
           CrdChatMsg: value,
           timeStamp: timeStamp,
           showTime: showTime,
-          isTime: listData.length > 0 ? timeStamp - lastData.timeStamp >= 300000 ? true : false : false
+          isTime: listData.length > 0 ? timeStamp - lastData.timeStamp >= this.data.intervalTime ? true : false : false
         };
         listData.push(obj);
         this.setData({
@@ -88,7 +89,7 @@ Page({
 
   },
   myPageScroll() {
-    wx.createSelectorQuery().select('#wrap').boundingClientRect(function (rect) {
+    wx.createSelectorQuery().select('#wrap').boundingClientRect(function(rect) {
       // 使页面滚动到底部
       wx.pageScrollTo({
         scrollTop: rect.bottom
@@ -99,8 +100,7 @@ Page({
     let isEn = wx.getStorageSync('isEn');
     $common.request(
       'POST',
-      $common.config.GetUserInfo,
-      {
+      $common.config.GetUserInfo, {
         openId: wx.getStorageSync('openid'),
         userId: this.data.userId
       },
@@ -130,8 +130,7 @@ Page({
       (res) => {
 
       },
-      (res) => {
-      }
+      (res) => {}
     )
   },
   timeStamp(time) { //时间戳转换为日期
@@ -159,11 +158,12 @@ Page({
       newDataCount = this.data.newDataCount;
     let isEn = wx.getStorageSync('isEn');
     let text = isEn ? 'Loading...' : '努力加载中...';
-    wx.showLoading({ title: text });
+    wx.showLoading({
+      title: text
+    });
     $common.request(
       'POST',
-      $common.config.GetChatRecord,
-      {
+      $common.config.GetChatRecord, {
         openId: wx.getStorageSync('openid'),
         userId: this.data.userId,
         pageIndex: pageIndex,
@@ -181,12 +181,17 @@ Page({
             let date = this.timeStamp(data[i].CrdSendTime);
             data[i].showTime = date.timeWhile;
             data[i].timeStamp = date.msec;
-            //对话时距超过5分钟显示时间 
-            data[i].isTime = i > 0 ? data[i].timeStamp - data[i - 1].timeStamp >= 300000 ? true : false : false;
             listData.unshift(data[i]);
           }
+          listData = this.removeDuplicate(listData, 'CrdId'); //数组依据CrdId去重
+          for (let i = listData.length - 1; i >= 0; i--) {
+            let one = listData[i].timeStamp;
+            let two = listData[i - 1] ? listData[i - 1].timeStamp : 0;
+            //对话时距超过5分钟显示时间 
+            listData[i].isTime = one - two >= this.data.intervalTime ? true : false;
+          }
           this.setData({
-            listData: this.removeDuplicate(listData, 'CrdId'), //数组依据CrdId去重
+            listData: listData,
             pageIndex: pageIndex
           })
           setTimeout(() => {
@@ -227,7 +232,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     let userId = options.userId;
     let returnPage = options.returnPage ? parseInt(options.returnPage) : false;
     this.setData({
@@ -270,7 +275,7 @@ Page({
       obj.showTime = `${y}-${m}-${d} ${h}:${f}`;
       obj.timeStamp = data.CrdCreateOn;
       let lastData = listData[listData.length - 1];
-      obj.isTime = listData.length > 0 ? obj.timeStamp - lastData.timeStamp >= 300000 ? true : false : false;
+      obj.isTime = listData.length > 0 ? obj.timeStamp - lastData.timeStamp >= this.data.intervalTime ? true : false : false;
       listData.push(obj);
       this.setData({
         newDataCount: newDataCount,
@@ -283,7 +288,7 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
   isEnEvent(res) { //判断当前显示中英文
@@ -320,7 +325,7 @@ Page({
       title: text
     })
   },
-  onShow: function () {
+  onShow: function() {
     this.isEnEvent();
     this.init();
   },
@@ -328,35 +333,35 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
     wx.closeSocket();
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
     wx.closeSocket();
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
     this.getChat(true);
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
     return {
       title: 'FirstTutor',
       path: '/pages/Home/Home/index'
