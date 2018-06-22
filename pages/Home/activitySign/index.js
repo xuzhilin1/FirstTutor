@@ -134,6 +134,13 @@ Page({
                 $common.showModal('报名人数已满');
               }
               break;
+            case 6:
+              if (isEn) {
+                $common.showModal('Already signed up.', false, false, 'Ok', 'Reminder');
+              } else {
+                $common.showModal('已报名');
+              }
+              break;
             default:
               if (isEn) {
                 $common.showModal('Unknown Error', false, false, 'Ok', 'Reminder');
