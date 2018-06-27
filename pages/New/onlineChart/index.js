@@ -89,12 +89,14 @@ Page({
 
   },
   myPageScroll() {
-    wx.createSelectorQuery().select('#wrap').boundingClientRect(function(rect) {
-      // 使页面滚动到底部
-      wx.pageScrollTo({
-        scrollTop: rect.bottom
-      })
-    }).exec();
+    setTimeout(() => {
+      wx.createSelectorQuery().select('#wrap').boundingClientRect(function(rect) {
+        // 使页面滚动到底部
+        wx.pageScrollTo({
+          scrollTop: rect.bottom
+        })
+      }).exec();
+    }, 500);
   },
   getImage() { //获取头像
     let isEn = wx.getStorageSync('isEn');
@@ -194,10 +196,8 @@ Page({
             listData: listData,
             pageIndex: pageIndex
           })
-          if(isReach) return;
-          setTimeout(() => {
-            this.myPageScroll();
-          }, 500);
+          if (isReach) return;
+          this.myPageScroll();
         } else {
           // switch (res.data.errType) {
           //   case 1:
@@ -227,23 +227,9 @@ Page({
   init() {
     let openid = wx.getStorageSync('openid');
     this.getImage();
-    this.getChat();
-  },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function(options) {
-    let userId = options.userId;
-    let returnPage = options.returnPage ? parseInt(options.returnPage) : false;
-    this.setData({
-      userId: userId,
-      returnPage: returnPage
-    });
-    let openid = wx.getStorageSync('openid');
     //建立连接
     wx.connectSocket({
-      url: `${$common.webStock}?userId=${openid}&tarUserId=${userId}`,
+      url: `${$common.webStock}?userId=${openid}&tarUserId=${this.data.userId}`,
     });
     //连接成功
     wx.onSocketOpen(() => {
@@ -285,12 +271,12 @@ Page({
       this.myPageScroll();
     });
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
+  onLoad: function(options) {
+    this.data.userId = options.userId;
+    this.data.returnPage = options.returnPage ? parseInt(options.returnPage) : false;
+  },
   onReady: function() {
-
+    this.getChat();
   },
   isEnEvent(res) { //判断当前显示中英文
     let isEn = wx.getStorageSync('isEn');
